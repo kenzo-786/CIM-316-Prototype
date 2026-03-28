@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ae81616a4138b408c0c0b3b5a8751d, type: 3}
   m_Name: MeleeEnemyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  health: 0
-  damage: 0
-  moveSpeed: 0
+  health: 30
+  damage: 10
+  moveSpeed: 5
