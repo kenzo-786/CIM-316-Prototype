@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1760005218827975454}
   - component: {fileID: 6934306356637438722}
   - component: {fileID: 3590000133408762102}
-  - component: {fileID: 8916958235511978419}
+  - component: {fileID: -4614802110962666115}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &8916958235511978419
+--- !u!114 &-4614802110962666115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +166,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4147134688446935955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbcb826353f6854994d29122dbbb48d, type: 3}
+  m_Script: {fileID: 11500000, guid: abc8921f24a7f2c4886e9e1f6794a86b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  enemyPrefab: {fileID: 0}
-  spawnRate: 2
-  spawnDistanceOffset: 2
+  m_EditorClassIdentifier: Assembly-CSharp::UnitBrain2D
+  data: {fileID: 11400000, guid: f4849533653d55543a61861b2ad445c4, type: 2}
+  targetTag: Player
+  moveSpeed: 5
+  health: 30
+  damage: 10
+  attackCooldown: 1

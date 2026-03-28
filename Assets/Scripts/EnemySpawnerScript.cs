@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemySpawnerScript : MonoBehaviour
 {
     [Header("Spawn Settings")]
     public GameObject enemyPrefab;
