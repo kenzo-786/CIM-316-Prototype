@@ -3,59 +3,92 @@ using UnityEngine;
 public class EnemySpawnerScript : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject enemyPrefab;
+    public EnemyData[] enemyTypes;
     public float spawnRate = 2f;
-    public float spawnDistanceOffset = 2f;
+    public float spawnOffset = 3f;
+
+    [Header("Wave Intensity")]
+    public int minSpawnCount = 3;
+    public int maxSpawnCount = 6;
+
+    [Header("Difficulty Scaling")]
+    public float scalingInterval = 15f;
+    public float spawnRateReduction = 0.1f;
+    public float minSpawnRateLimit = 0.5f;
+
+    public int countIncreaseAmount = 1;
 
     private float nextSpawnTime;
-    private Camera mainCam;
+    private float scalingTimer;
+    private Camera cam;
 
     void Start()
     {
-        mainCam = Camera.main;
+        cam = Camera.main;
     }
 
     void Update()
     {
+        scalingTimer += Time.deltaTime;
+        if (scalingTimer >= scalingInterval)
+        {
+            scalingTimer = 0;
+            IncreaseDifficulty();
+        }
+
         if (Time.time >= nextSpawnTime)
         {
-            SpawnEnemy();
+            int amountToSpawn = Random.Range(minSpawnCount, maxSpawnCount + 1);
+
+            for (int i = 0; i < amountToSpawn; i++)
+            {
+                Spawn();
+            }
+
             nextSpawnTime = Time.time + spawnRate;
         }
     }
 
-    void SpawnEnemy()
+    void IncreaseDifficulty()
     {
-        if (enemyPrefab == null || mainCam == null) return;
+        spawnRate = Mathf.Max(minSpawnRateLimit, spawnRate - spawnRateReduction);
 
-        float screenHeight = 2f * mainCam.orthographicSize;
-        float screenWidth = screenHeight * mainCam.aspect;
+        maxSpawnCount += countIncreaseAmount;
 
-        int side = Random.Range(0, 4);
-        Vector3 spawnPos = Vector3.zero;
-
-        float halfWidth = screenWidth / 2f;
-        float halfHeight = screenHeight / 2f;
-
-        switch (side)
+        if (maxSpawnCount % 2 == 0)
         {
-            case 0: // Top
-                spawnPos = new Vector3(Random.Range(-halfWidth, halfWidth), halfHeight + spawnDistanceOffset, 0);
-                break;
-            case 1: // Bottom
-                spawnPos = new Vector3(Random.Range(-halfWidth, halfWidth), -halfHeight - spawnDistanceOffset, 0);
-                break;
-            case 2: // Left
-                spawnPos = new Vector3(-halfWidth - spawnDistanceOffset, Random.Range(-halfHeight, halfHeight), 0);
-                break;
-            case 3: // Right
-                spawnPos = new Vector3(halfWidth + spawnDistanceOffset, Random.Range(-halfHeight, halfHeight), 0);
-                break;
+            minSpawnCount++;
         }
+    }
 
-        spawnPos += mainCam.transform.position;
-        spawnPos.z = 0;
+    void Spawn()
+    {
+        if (enemyTypes == null || enemyTypes.Length == 0) return;
 
-        Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+        EnemyData randomData = enemyTypes[Random.Range(0, enemyTypes.Length)];
+        if (randomData == null || randomData.enemyPrefab == null) return;
+
+        float h = cam.orthographicSize * 2f;
+        float w = h * cam.aspect;
+        int side = Random.Range(0, 4);
+        Vector3 pos = cam.transform.position;
+
+        float xVariation = Random.Range(-1f, 1f);
+        float yVariation = Random.Range(-1f, 1f);
+
+        if (side == 0) pos += new Vector3(Random.Range(-w / 2, w / 2), h / 2 + spawnOffset + yVariation, 0);
+        else if (side == 1) pos += new Vector3(Random.Range(-w / 2, w / 2), -h / 2 - spawnOffset + yVariation, 0);
+        else if (side == 2) pos += new Vector3(-w / 2 - spawnOffset + xVariation, Random.Range(-h / 2, h / 2), 0);
+        else pos += new Vector3(w / 2 + spawnOffset + xVariation, Random.Range(-h / 2, h / 2), 0);
+
+        pos.z = 0;
+
+        GameObject newEnemy = Instantiate(randomData.enemyPrefab, pos, Quaternion.identity);
+
+        EnemyAI ai = newEnemy.GetComponent<EnemyAI>();
+        if (ai != null)
+        {
+            ai.data = randomData;
+        }
     }
 }

@@ -23,7 +23,7 @@ public class UnitBrain2D : MonoBehaviour
 
         if (data != null)
         {
-            health = data.health;
+           // health = data.health;
             damage = data.damage;
             moveSpeed = data.moveSpeed;
         }
