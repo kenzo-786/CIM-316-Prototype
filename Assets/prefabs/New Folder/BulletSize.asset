@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletSize
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: bullet size
-  description: 
+  description: Projectile size grows
   type: 7
-  value: 50
-  rarity: 2
+  value: 0.5
+  rarity: 0

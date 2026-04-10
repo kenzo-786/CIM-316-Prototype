@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireRate
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: Fire rate
-  description: 
+  description: 'Increases the rate of firing '
   type: 1
-  value: 5
+  value: 0.05
   rarity: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletLife
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: Bullet life
-  description: 
+  description: Bullets Last longer
   type: 8
-  value: 20
+  value: 1
   rarity: 1

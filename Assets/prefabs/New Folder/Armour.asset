@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ca18460a1ce6045b110b6db23c63b0, type: 3}
   m_Name: Armour
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  upgradeName: armor
-  description: 
+  upgradeName: Armor
+  description: A shield that acts as additional HP
   type: 9
-  value: 30
-  rarity: 2
+  value: 5
+  rarity: 0

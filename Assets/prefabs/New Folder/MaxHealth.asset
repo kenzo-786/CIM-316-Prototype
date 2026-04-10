@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MaxHealth
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: health
-  description: 
+  description: Increases the maximum health cap
   type: 4
-  value: 20
-  rarity: 1
+  value: 5
+  rarity: 0

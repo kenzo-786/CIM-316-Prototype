@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthRegen
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: 'Health regen '
-  description: 
+  description: Restore HP overtime
   type: 6
-  value: 1
-  rarity: 1
+  value: 0.5
+  rarity: 0

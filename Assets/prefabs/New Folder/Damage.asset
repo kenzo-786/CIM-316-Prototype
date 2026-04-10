@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Damage
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: Damage
-  description: 
+  description: Increase the damage you deal to enemies
   type: 2
-  value: 2
+  value: 10
   rarity: 0

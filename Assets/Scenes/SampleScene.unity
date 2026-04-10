@@ -1460,11 +1460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312786111991586439befb7edc99d26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 10
+  moveSpeed: 5
   bulletPrefab: {fileID: 8013516237016029515, guid: 23dd717f20147c842b127d6675109704, type: 3}
   firePoint: {fileID: 2046760191}
-  bulletSpeed: 15
-  fireRate: 0.2
+  bulletSpeed: 10
+  fireRate: 1
   bulletDamage: 10
   bulletSizeMultiplier: 1
   isAutoShooting: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   level: 1
   experience: 0
   expToLevelUp: 100
-  collectionRange: 3
+  collectionRange: 2
 --- !u!50 &1197753092
 Rigidbody2D:
   serializedVersion: 5

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoveSpeed 7
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: move speed
-  description: 
+  description: Additonal  0.5% movement speed
   type: 0
-  value: 4
-  rarity: 1
+  value: 0.5
+  rarity: 0
