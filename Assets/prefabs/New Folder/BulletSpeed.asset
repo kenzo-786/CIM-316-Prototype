@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletSpeed
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: bullet speed
-  description: 
+  description: Increases the speed of the bullet
   type: 5
   value: 0.3
   rarity: 0
