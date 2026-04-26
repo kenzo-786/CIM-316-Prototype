@@ -46,7 +46,6 @@ public class EnemyAI : MonoBehaviour
             case EnemyBehavior.Swarmer:
                 HandleStandardMovement();
                 break;
-
             case EnemyBehavior.Dasher:
                 HandleDasherLogic();
                 break;
@@ -63,11 +62,7 @@ public class EnemyAI : MonoBehaviour
     void HandleDasherLogic()
     {
         Vector2 dir = (Vector2)player.position - rb.position;
-
-        if (Time.time >= nextDashTime)
-        {
-            StartCoroutine(PerformDash(dir.normalized));
-        }
+        if (Time.time >= nextDashTime) StartCoroutine(PerformDash(dir.normalized));
         else
         {
             rb.linearVelocity = dir.normalized * (data.moveSpeed * 0.5f);
@@ -79,16 +74,12 @@ public class EnemyAI : MonoBehaviour
     {
         isDashing = true;
         nextDashTime = Time.time + data.dashCooldown;
-
         rb.linearVelocity = Vector2.zero;
         if (sr != null) sr.color = data.telegraphColor;
         yield return new WaitForSeconds(0.5f);
-
         if (sr != null) sr.color = originalColor;
         rb.linearVelocity = dashDir * data.dashSpeed;
-
         yield return new WaitForSeconds(data.dashDuration);
-
         rb.linearVelocity = Vector2.zero;
         isDashing = false;
     }
@@ -107,11 +98,19 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+
         if (expPrefab != null)
         {
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, 0);
             Instantiate(expPrefab, spawnPos, Quaternion.identity);
         }
+
+
+        if (WaveSpawner.Instance != null)
+        {
+            WaveSpawner.Instance.OnEnemyDeath();
+        }
+
         Destroy(gameObject);
     }
 

@@ -11,8 +11,14 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed = 15f;
     public float fireRate = 0.2f;
     public float bulletDamage = 10f;
-    public float bulletSizeMultiplier = 1f;
+    public float bulletSizeMultiplier = 0.01f;
+    public float bulletLife = 2f;
     public bool isAutoShooting = false;
+
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+    private Vector2 mousePos;
+    private float nextFireTime;
 
     [Header("Stats & Progression")]
     public float maxHealth = 100f;
@@ -22,17 +28,11 @@ public class PlayerController : MonoBehaviour
     public float expToLevelUp = 100f;
     public float collectionRange = 3f;
 
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private Vector2 mousePos;
-    private float nextFireTime;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         rb.freezeRotation = true;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
         currentHealth = maxHealth;
@@ -55,9 +55,8 @@ public class PlayerController : MonoBehaviour
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        bool shootInput = Input.GetMouseButton(0) || isAutoShooting;
-
-        if (shootInput && Time.time >= nextFireTime && Time.timeScale > 0)
+        bool shootInput = (Input.GetMouseButton(0) || isAutoShooting) && Time.timeScale > 0;
+        if (shootInput && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
@@ -75,15 +74,29 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        if (bulletPrefab == null || firePoint == null) return;
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.transform.localScale *= bulletSizeMultiplier;
+        if (BulletPool.Instance == null)
+        {
+            Debug.LogWarning("BulletPool Instance not found in the scene!");
+            return;
+        }
+
+        GameObject bullet = BulletPool.Instance.GetBullet();
+        if (bullet == null) return;
+
+        bullet.transform.SetParent(null);
+
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
+
+        bullet.transform.localScale = Vector3.one * bulletSizeMultiplier;
 
         Bullet bScript = bullet.GetComponent<Bullet>();
-        if (bScript != null) bScript.damage = bulletDamage;
+        if (bScript != null)
+        {
+            Vector2 velocity = firePoint.right * bulletSpeed;
+            bScript.Initialize(bulletLife, bulletDamage, velocity);
+        }
 
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        if (bulletRb != null) bulletRb.linearVelocity = firePoint.right * bulletSpeed;
     }
 
     public void AddExperience(float amount)
