@@ -119,6 +119,61 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13480978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13480980}
+  - component: {fileID: 13480979}
+  m_Layer: 0
+  m_Name: WaveSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &13480979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13480978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a0a0319410a84439b61135690df843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  enemyTypes:
+  - {fileID: 11400000, guid: 48a9f840c2f2c9843bafc580a77d9d5d, type: 2}
+  - {fileID: 11400000, guid: 5de35360344bde54b8ad8c2bab6748bc, type: 2}
+  - {fileID: 11400000, guid: 19621820c0e31ae48b6d728d6d95584e, type: 2}
+  - {fileID: 11400000, guid: 49ac76f9383dcda46aec3b6540502788, type: 2}
+  spawnOffset: 3
+  currentWave: 0
+  baseEnemies: 5
+  timeBetweenWaves: 3
+  enemiesRemainingToSpawn: 0
+  enemiesCurrentlyAlive: 0
+--- !u!4 &13480980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13480978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.22474, y: -2.16648, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &87821884
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,63 +309,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87821884}
   m_CullTransparentMesh: 1
---- !u!1 &164928109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 164928111}
-  - component: {fileID: 164928110}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &164928110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164928109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbcb826353f6854994d29122dbbb48d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  enemyTypes:
-  - {fileID: 11400000, guid: 48a9f840c2f2c9843bafc580a77d9d5d, type: 2}
-  - {fileID: 11400000, guid: 5de35360344bde54b8ad8c2bab6748bc, type: 2}
-  - {fileID: 11400000, guid: 19621820c0e31ae48b6d728d6d95584e, type: 2}
-  - {fileID: 11400000, guid: 49ac76f9383dcda46aec3b6540502788, type: 2}
-  spawnRate: 8
-  spawnOffset: 4
-  minSpawnCount: 3
-  maxSpawnCount: 6
-  scalingInterval: 15
-  spawnRateReduction: 0.1
-  minSpawnRateLimit: 0.5
-  countIncreaseAmount: 1
---- !u!4 &164928111
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164928109}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.22474, y: -2.16648, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &200356156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1611,7 @@ MonoBehaviour:
   fireRate: 1
   bulletDamage: 10
   bulletSizeMultiplier: 1
+  bulletLife: 2
   isAutoShooting: 0
   maxHealth: 100
   currentHealth: 0
@@ -2213,6 +2212,52 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1594964656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1594964658}
+  - component: {fileID: 1594964657}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1594964657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594964656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8acd3af76457447b0fe215b873d0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPool
+  bulletPrefab: {fileID: 8013516237016029515, guid: 23dd717f20147c842b127d6675109704, type: 3}
+  initialPoolSize: 50
+--- !u!4 &1594964658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594964656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602305203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,8 +3049,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1197753090}
-  - {fileID: 164928111}
   - {fileID: 1811316611}
   - {fileID: 1471499082}
   - {fileID: 1028138992}
   - {fileID: 1977866158}
+  - {fileID: 1594964658}
+  - {fileID: 13480980}
