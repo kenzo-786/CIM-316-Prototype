@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 
 public class UpgradeChoiceButton : MonoBehaviour
 {
-    [SerializeField] private Text nameText;
-    [SerializeField] private Text descriptionText;
-    [SerializeField] private Text rarityText;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text rarityText;
     [SerializeField] private Image iconImage;
 
     private Button button;

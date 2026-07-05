@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         IsMoving = moveInput.sqrMagnitude > 0.01f;
         UpdateMouseAim();
+        
     }
 
     private void FixedUpdate()

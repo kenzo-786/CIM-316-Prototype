@@ -16,12 +16,12 @@ TagManager:
   - UI
   - Enemy
   - Player
-  - PlayerBullet
-  - EnemyBullet
+  - PlayerProjectile
+  - EnemyProjectile
   - Wall
   - Obstacle
   - Door
-  - 
+  - Pickup
   - 
   - 
   - 
