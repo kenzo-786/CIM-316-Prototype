@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b0d3fb274682646889523819533497, type: 3}
+  m_Name: Chaser
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: Normal Chaser
+  prefab: {fileID: 7598343281122196896, guid: 4868bef4e656e18438522894577fc403, type: 3}
+  maxHealth: 30
+  moveSpeed: 3
+  contactDamage: 10
+  attackRange: 1.2
+  attackCooldown: 1
+  xpDropAmount: 1

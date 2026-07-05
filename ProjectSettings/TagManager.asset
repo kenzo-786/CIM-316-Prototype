@@ -14,13 +14,13 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - PlayerBullet
+  - EnemyBullet
+  - Wall
+  - Obstacle
+  - Door
   - 
   - 
   - 

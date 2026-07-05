@@ -3,11 +3,10 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private RoomData[] roomSequence;
+    [SerializeField] private int totalRooms = 30;
     [SerializeField] private Transform activeRoomRoot;
     [SerializeField] private Transform player;
-
-    [Header("Debug")]
-    [SerializeField] private KeyCode debugClearRoomKey = KeyCode.C;
+    [SerializeField] private RoomCombatController combatController;
 
     private RoomLayout currentLayout;
     private int currentRoomIndex = -1;
@@ -18,12 +17,6 @@ public class RoomManager : MonoBehaviour
         LoadRoom(0);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(debugClearRoomKey))
-            ClearCurrentRoom();
-    }
-
     public void LoadNextRoom()
     {
         LoadRoom(currentRoomIndex + 1);
@@ -31,7 +24,7 @@ public class RoomManager : MonoBehaviour
 
     public void LoadRoom(int index)
     {
-        if (index >= roomSequence.Length)
+        if (index >= totalRooms)
         {
             Debug.Log("Run complete. Later this opens the win screen.");
             return;
@@ -43,7 +36,7 @@ public class RoomManager : MonoBehaviour
         if (currentLayout != null)
             Destroy(currentLayout.gameObject);
 
-        RoomData roomData = roomSequence[currentRoomIndex];
+        RoomData roomData = GetRoomData(index);
 
         currentLayout = Instantiate(
             roomData.layoutPrefab,
@@ -60,6 +53,10 @@ public class RoomManager : MonoBehaviour
 
         if (player != null && currentLayout.PlayerSpawnPoint != null)
             player.position = currentLayout.PlayerSpawnPoint.position;
+
+        combatController.OnRoomCombatCleared -= ClearCurrentRoom;
+        combatController.OnRoomCombatCleared += ClearCurrentRoom;
+        combatController.StartRoomCombat(roomData, currentLayout, player);
     }
 
     public void ClearCurrentRoom()
@@ -68,5 +65,16 @@ public class RoomManager : MonoBehaviour
 
         roomCleared = true;
         currentLayout.OpenExit();
+    }
+
+    private RoomData GetRoomData(int index)
+    {
+        if (roomSequence.Length == 0)
+        {
+            Debug.LogError("No rooms assigned to RoomManager.");
+            return null;
+        }
+
+        return roomSequence[index % roomSequence.Length];
     }
 }

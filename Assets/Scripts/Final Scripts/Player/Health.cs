@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100f;
 
@@ -31,6 +31,11 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 
+    public void TakeDamage(DamageInfo damageInfo)
+    {
+        TakeDamage(damageInfo.damage);
+    }
+
     public void TakeDamage(float amount)
     {
         if (IsDead || amount <= 0f) return;
@@ -43,6 +48,12 @@ public class Health : MonoBehaviour
             IsDead = true;
             OnDied?.Invoke();
         }
+    }
+    public void Revive(float healthAmount)
+    {
+        IsDead = false;
+        CurrentHealth = Mathf.Clamp(healthAmount, 1f, maxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 
     public void Heal(float amount)

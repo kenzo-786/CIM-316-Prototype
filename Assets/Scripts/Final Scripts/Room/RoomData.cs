@@ -6,4 +6,5 @@ public class RoomData : ScriptableObject
     public string roomName;
     public RoomType roomType;
     public RoomLayout layoutPrefab;
+    public WaveData[] waves;
 }
