@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
-
+    public Vector2 MoveInput => moveInput;
     public bool IsMoving { get; private set; }
     public Vector2 AimDirection { get; private set; } = Vector2.right;
 
