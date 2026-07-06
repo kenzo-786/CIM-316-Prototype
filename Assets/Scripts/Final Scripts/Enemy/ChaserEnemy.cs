@@ -13,23 +13,13 @@ public class ChaserEnemy : EnemyBase
 
         if (distance > enemyData.attackRange)
         {
-            MoveTowardsPlayer(direction.normalized);
+            rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
         }
         else
         {
-            StopMoving();
+            rb.linearVelocity = Vector2.zero;
             TryAttackPlayer();
         }
-    }
-
-    private void MoveTowardsPlayer(Vector2 direction)
-    {
-        rb.linearVelocity = direction * enemyData.moveSpeed;
-    }
-
-    private void StopMoving()
-    {
-        rb.linearVelocity = Vector2.zero;
     }
 
     private void TryAttackPlayer()
@@ -38,15 +28,23 @@ public class ChaserEnemy : EnemyBase
 
         nextAttackTime = Time.time + enemyData.attackCooldown;
 
-        if (target.TryGetComponent(out IDamageable damageable))
-        {
-            DamageInfo damageInfo = new DamageInfo(
-                enemyData.contactDamage,
-                gameObject,
-                target.position
-            );
+        IDamageable damageable = target.GetComponent<IDamageable>();
 
-            damageable.TakeDamage(damageInfo);
+        if (damageable == null)
+            damageable = target.GetComponentInChildren<IDamageable>();
+
+        if (damageable == null)
+        {
+            Debug.LogWarning("Enemy could not find IDamageable/Health on player target.");
+            return;
         }
+
+        Debug.Log("Enemy damaged player.");
+
+        damageable.TakeDamage(new DamageInfo(
+            enemyData.contactDamage,
+            gameObject,
+            target.position
+        ));
     }
 }

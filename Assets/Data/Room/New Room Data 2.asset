@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   roomName: Level3
   roomType: 2
-  layoutPrefab: {fileID: 5119046204038611634, guid: 31302810704e3964a863fa94abd09896, type: 3}
+  layoutPrefab: {fileID: 6824032912967098769, guid: ee5ec76c918b5b8459718f27c2e9aa0a, type: 3}
   waves:
   - {fileID: 11400000, guid: a0496871e15f609428ad515f46be8dde, type: 2}
   - {fileID: 11400000, guid: 44d3354612346684ebe21589133f1f14, type: 2}

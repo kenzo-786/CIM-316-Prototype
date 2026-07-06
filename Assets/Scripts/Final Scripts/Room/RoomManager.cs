@@ -1,19 +1,28 @@
+using System;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private RoomData[] roomSequence;
-    [SerializeField] private int totalRooms = 30;
+    [SerializeField] private int totalRooms = 5;
     [SerializeField] private Transform activeRoomRoot;
     [SerializeField] private Transform player;
     [SerializeField] private RoomCombatController combatController;
 
+    public event Action<int, int> OnRoomChanged;
+    public event Action OnRunWon;
+
     private RoomLayout currentLayout;
     private int currentRoomIndex = -1;
     private bool roomCleared;
+    private bool runEnded;
+
+    public int CurrentRoomNumber => currentRoomIndex + 1;
+    public int TotalRooms => totalRooms;
 
     private void Start()
     {
+        Time.timeScale = 1f;
         LoadRoom(0);
     }
 
@@ -24,9 +33,14 @@ public class RoomManager : MonoBehaviour
 
     public void LoadRoom(int index)
     {
+        if (runEnded) return;
+
         if (index >= totalRooms)
         {
-            Debug.Log("Run complete. Later this opens the win screen.");
+            runEnded = true;
+            Time.timeScale = 0f;
+            OnRunWon?.Invoke();
+            Debug.Log("Run won.");
             return;
         }
 
@@ -37,6 +51,11 @@ public class RoomManager : MonoBehaviour
             Destroy(currentLayout.gameObject);
 
         RoomData roomData = GetRoomData(index);
+        if (roomData == null || roomData.layoutPrefab == null)
+        {
+            Debug.LogError("Room data or layout prefab missing.");
+            return;
+        }
 
         currentLayout = Instantiate(
             roomData.layoutPrefab,
@@ -57,6 +76,8 @@ public class RoomManager : MonoBehaviour
         combatController.OnRoomCombatCleared -= ClearCurrentRoom;
         combatController.OnRoomCombatCleared += ClearCurrentRoom;
         combatController.StartRoomCombat(roomData, currentLayout, player);
+
+        OnRoomChanged?.Invoke(CurrentRoomNumber, totalRooms);
     }
 
     public void ClearCurrentRoom()
@@ -69,11 +90,8 @@ public class RoomManager : MonoBehaviour
 
     private RoomData GetRoomData(int index)
     {
-        if (roomSequence.Length == 0)
-        {
-            Debug.LogError("No rooms assigned to RoomManager.");
+        if (roomSequence == null || roomSequence.Length == 0)
             return null;
-        }
 
         return roomSequence[index % roomSequence.Length];
     }

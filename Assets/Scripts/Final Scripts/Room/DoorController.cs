@@ -6,30 +6,56 @@ public class DoorController : MonoBehaviour
     [SerializeField] private Collider2D triggerCollider;
     [SerializeField] private SpriteRenderer visual;
 
-    [SerializeField] private Color closedColor = new Color(0.45f, 0.12f, 0.12f);
-    [SerializeField] private Color openColor = new Color(0.15f, 0.55f, 0.25f);
+    [SerializeField] private Color closedColor = Color.red;
+    [SerializeField] private Color openColor = Color.green;
 
     public bool IsOpen { get; private set; }
+
+    private void Awake()
+    {
+        if (visual == null)
+            visual = GetComponent<SpriteRenderer>();
+    }
 
     public void CloseAndLock()
     {
         IsOpen = false;
 
-        solidCollider.enabled = true;
-        triggerCollider.enabled = false;
+        if (solidCollider != null)
+            solidCollider.enabled = true;
+        else
+            Debug.LogError("Door missing Solid Collider.", this);
+
+        if (triggerCollider != null)
+            triggerCollider.enabled = false;
+        else
+            Debug.LogError("Door missing Trigger Collider.", this);
 
         if (visual != null)
             visual.color = closedColor;
+
+        Debug.Log("Door closed and locked.", this);
     }
 
     public void OpenAndUnlock()
     {
         IsOpen = true;
 
-        solidCollider.enabled = false;
-        triggerCollider.enabled = true;
+        if (solidCollider != null)
+            solidCollider.enabled = false;
+        else
+            Debug.LogError("Door missing Solid Collider.", this);
+
+        if (triggerCollider != null)
+            triggerCollider.enabled = true;
+        else
+            Debug.LogError("Door missing Trigger Collider.", this);
 
         if (visual != null)
             visual.color = openColor;
+        else
+            Debug.LogError("Door missing Visual SpriteRenderer.", this);
+
+        Debug.Log("Door opened and unlocked.", this);
     }
 }

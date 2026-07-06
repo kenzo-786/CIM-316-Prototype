@@ -21,12 +21,30 @@ public class UpgradeChoiceButton : MonoBehaviour
 
     public void Setup(UpgradeData upgradeData, Action<UpgradeData> clickedCallback)
     {
+        if (button == null)
+            button = GetComponent<Button>();
+
+        if (upgradeData == null)
+        {
+            Debug.LogError("UpgradeChoiceButton received null UpgradeData.", this);
+            return;
+        }
+
         upgrade = upgradeData;
         onClicked = clickedCallback;
 
-        nameText.text = upgrade.upgradeName;
-        descriptionText.text = upgrade.description;
-        rarityText.text = upgrade.rarity.ToString();
+        if (nameText != null)
+            nameText.text = upgrade.upgradeName;
+        else
+            Debug.LogError("UpgradeChoiceButton missing Name Text.", this);
+
+        if (descriptionText != null)
+            descriptionText.text = upgrade.description;
+        else
+            Debug.LogError("UpgradeChoiceButton missing Description Text.", this);
+
+        if (rarityText != null)
+            rarityText.text = upgrade.rarity.ToString();
 
         if (iconImage != null)
         {

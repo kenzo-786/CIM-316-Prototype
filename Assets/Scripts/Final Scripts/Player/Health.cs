@@ -41,6 +41,8 @@ public class Health : MonoBehaviour, IDamageable
         if (IsDead || amount <= 0f) return;
 
         CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
+
+        Debug.Log("Health after: " + CurrentHealth);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
 
         if (CurrentHealth <= 0f)
@@ -48,6 +50,8 @@ public class Health : MonoBehaviour, IDamageable
             IsDead = true;
             OnDied?.Invoke();
         }
+
+        Debug.Log("Health before: " + CurrentHealth + " damage: " + amount);
     }
     public void Revive(float healthAmount)
     {

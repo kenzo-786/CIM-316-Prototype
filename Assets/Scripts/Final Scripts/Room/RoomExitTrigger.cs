@@ -15,10 +15,33 @@ public class RoomExitTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (roomManager == null) return;
-        if (door == null || !door.IsOpen) return;
-        if (!other.CompareTag(playerTag)) return;
+        Debug.Log("Something entered exit trigger: " + other.name);
 
+        if (roomManager == null)
+        {
+            Debug.LogWarning("RoomExitTrigger has no RoomManager.");
+            return;
+        }
+
+        if (door == null)
+        {
+            Debug.LogWarning("RoomExitTrigger has no Door assigned.");
+            return;
+        }
+
+        if (!door.IsOpen)
+        {
+            Debug.Log("Door is still closed.");
+            return;
+        }
+
+        if (!other.CompareTag(playerTag))
+        {
+            Debug.Log("Object is not tagged Player.");
+            return;
+        }
+
+        Debug.Log("Player entered open door. Loading next room.");
         roomManager.LoadNextRoom();
     }
 }
