@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 248044248}
   - component: {fileID: 248044251}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 629123741}
   - component: {fileID: 629123744}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,9 +1216,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'e
+  m_text: 'q
 
-    x
+    u
 
     i
 
@@ -1859,7 +1859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba4bbdfbea54274ea1c006cb632f67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  gameScene: 
   creditsPanel: {fileID: 17852938}
 --- !u!1 &1736556970
 GameObject:
@@ -2206,7 +2205,7 @@ GameObject:
   - component: {fileID: 1975382057}
   - component: {fileID: 1975382060}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
