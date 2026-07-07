@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Mel's Scene.unity
-    guid: d43fc733fdc396844814666f56c12784
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 0c7f4f37a2bed40458d83b13f7697be0
