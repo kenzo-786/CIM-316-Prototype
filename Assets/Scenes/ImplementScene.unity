@@ -4471,7 +4471,7 @@ PrefabInstance:
       objectReference: {fileID: 815006646}
     - target: {fileID: 6815564233224503679, guid: f6f5dd06cea7a0d44a6eba938023de64, type: 3}
       propertyPath: allowAttackWhileMoving
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6815564233224503679, guid: f6f5dd06cea7a0d44a6eba938023de64, type: 3}
       propertyPath: autoFireWhenStationary
