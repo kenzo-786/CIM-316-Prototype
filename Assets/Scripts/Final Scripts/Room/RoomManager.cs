@@ -8,6 +8,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Transform activeRoomRoot;
     [SerializeField] private Transform player;
     [SerializeField] private RoomCombatController combatController;
+    [SerializeField] private bool autoLoadFirstRoom = true;
 
     public event Action<int, int> OnRoomChanged;
     public event Action OnRunWon;
@@ -23,12 +24,20 @@ public class RoomManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        LoadRoom(0);
+
+        if (autoLoadFirstRoom)
+            LoadRoom(0);
     }
 
     public void LoadNextRoom()
     {
         LoadRoom(currentRoomIndex + 1);
+    }
+
+    public void BeginRun()
+    {
+        if (currentRoomIndex >= 0) return;
+        LoadRoom(0);
     }
 
     public void LoadRoom(int index)

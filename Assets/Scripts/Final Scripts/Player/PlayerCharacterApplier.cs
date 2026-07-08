@@ -4,17 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class PlayerCharacterApplier : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacterData characterData;
+    [SerializeField] private PlayerCharacterData fallbackCharacter;
 
     private void Awake()
     {
-        if (characterData == null)
-        {
-            Debug.LogWarning("No character data assigned.");
-            return;
-        }
+        PlayerCharacterData data = SelectedCharacter.CharacterData != null
+            ? SelectedCharacter.CharacterData
+            : fallbackCharacter;
 
-        GetComponent<PlayerMovement>().SetMoveSpeed(characterData.moveSpeed);
-        GetComponent<Health>().SetMaxHealth(characterData.maxHealth, true);
+        if (data == null) return;
+
+        GetComponent<PlayerMovement>().SetMoveSpeed(data.moveSpeed);
+        GetComponent<Health>().SetMaxHealth(data.maxHealth, true);
     }
 }
