@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [Header("Scene Name")]
-    [SerializeField] private string gameScene = "GameScene";
+    //[SerializeField] private string gameScene = "GameScene";
 
     [Header("UI")]
     [SerializeField] private GameObject creditsPanel;
@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     
     public void PlayGame()
     {
-        SceneManager.LoadScene(gameScene);
+        SceneManager.LoadScene(1);
     }
 
     public void OpenCredits()
