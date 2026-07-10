@@ -3,117 +3,108 @@ using System.Collections;
 
 public class TankEnemy : EnemyBase
 {
-    [Header("Tank Jump")]
-    [SerializeField] private float jumpWindup = 0.45f;
-    [SerializeField] private float jumpDuration = 0.55f;
-    [SerializeField] private float jumpCooldown = 1.2f;
-    [SerializeField] private float landingRadius = 1.4f;
-    [SerializeField] private float landingDamage = 25f;
-    [SerializeField] private float playerJumpChance = 0.45f;
+    private enum TankState
+    {
+        Moving,
+        Windup,
+        Jumping,
+        Recovering
+    }
+
+    [Header("Tank")]
+    [SerializeField] private float jumpCooldown = 2.5f;
+    [SerializeField] private float jumpWindup = 0.55f;
+    [SerializeField] private float jumpDuration = 0.45f;
+    [SerializeField] private float recoverDuration = 0.5f;
+    [SerializeField] private float landingRadius = 1.5f;
+    [SerializeField] private float landingDamageMultiplier = 2f;
     [SerializeField] private LayerMask playerLayer;
 
-    [Header("Visual")]
-    [SerializeField] private Transform visualRoot;
-    [SerializeField] private float jumpScale = 1.35f;
+    private TankState state;
+    private float stateTimer;
+    private float nextJumpTime;
+    private Vector2 jumpStart;
+    private Vector2 jumpEnd;
+    private bool landed;
 
-    private RoomBounds roomBounds;
-    private bool jumping;
-
-    public override void Initialize(EnemyData data, Transform playerTarget)
+    protected override void OnEnable()
     {
-        base.Initialize(data, playerTarget);
-        roomBounds = FindObjectOfType<RoomBounds>();
-        StartCoroutine(JumpLoop());
+        base.OnEnable();
+        state = TankState.Moving;
+        nextJumpTime = Time.time + jumpCooldown;
     }
 
-    private IEnumerator JumpLoop()
+    protected override void TickEnemy()
     {
-        yield return new WaitForSeconds(0.8f);
+        if (target == null)
+            return;
 
-        while (!IsDead)
+        if (state == TankState.Moving)
         {
-            rb.linearVelocity = Vector2.zero;
+            MoveToward(target.position);
 
-            yield return new WaitForSeconds(jumpWindup);
-
-            Vector3 targetPosition = PickLandingPoint();
-            yield return JumpTo(targetPosition);
-
-            DamageLandingArea();
-
-            yield return new WaitForSeconds(jumpCooldown);
+            if (Time.time >= nextJumpTime)
+                StartWindup();
         }
-    }
-
-    private Vector3 PickLandingPoint()
-    {
-        bool jumpAtPlayer = target != null && Random.value <= playerJumpChance;
-
-        if (jumpAtPlayer)
-            return target.position;
-
-        if (roomBounds != null)
-            return roomBounds.GetRandomPoint();
-
-        return transform.position;
-    }
-
-    private IEnumerator JumpTo(Vector3 destination)
-    {
-        jumping = true;
-
-        Vector3 start = transform.position;
-        float timer = 0f;
-
-        while (timer < jumpDuration)
+        else if (state == TankState.Windup)
         {
-            timer += Time.deltaTime;
-            float t = timer / jumpDuration;
+            StopMoving();
+            stateTimer -= Time.fixedDeltaTime;
 
-            Vector3 flatPosition = Vector3.Lerp(start, destination, t);
+            if (stateTimer <= 0f)
+                StartJump();
+        }
+        else if (state == TankState.Jumping)
+        {
+            stateTimer += Time.fixedDeltaTime;
+            float t = Mathf.Clamp01(stateTimer / jumpDuration);
+            rb.MovePosition(Vector2.Lerp(jumpStart, jumpEnd, t));
 
-            if (visualRoot != null)
+            if (t >= 1f && !landed)
+                Land();
+        }
+        else
+        {
+            StopMoving();
+            stateTimer -= Time.fixedDeltaTime;
+
+            if (stateTimer <= 0f)
             {
-                float arc = Mathf.Sin(t * Mathf.PI);
-                visualRoot.localScale = Vector3.one * Mathf.Lerp(1f, jumpScale, arc);
+                state = TankState.Moving;
+                nextJumpTime = Time.time + jumpCooldown;
             }
-
-            transform.position = flatPosition;
-            yield return null;
         }
-
-        transform.position = destination;
-
-        if (visualRoot != null)
-            visualRoot.localScale = Vector3.one;
-
-        jumping = false;
     }
 
-    private void DamageLandingArea()
+    private void StartWindup()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(
-            transform.position,
-            landingRadius,
-            playerLayer
-        );
+        state = TankState.Windup;
+        stateTimer = jumpWindup;
+    }
+
+    private void StartJump()
+    {
+        state = TankState.Jumping;
+        stateTimer = 0f;
+        landed = false;
+        jumpStart = rb.position;
+        jumpEnd = target.position;
+    }
+
+    private void Land()
+    {
+        landed = true;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, landingRadius, playerLayer);
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(new DamageInfo(
-                    landingDamage,
-                    gameObject,
-                    hit.transform.position
-                ));
-            }
+            IDamageable damageable = GetDamageable(hit);
+            if (damageable != null)
+                damageable.TakeDamage(new DamageInfo(ContactDamage * landingDamageMultiplier, gameObject, hit.transform.position));
         }
-    }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, landingRadius);
+        state = TankState.Recovering;
+        stateTimer = recoverDuration;
     }
 }

@@ -4,72 +4,67 @@ public class MultiplierEnemy : EnemyBase
 {
     [Header("Multiplier")]
     [SerializeField] private EnemyData childEnemyData;
-    [SerializeField] private int generation;
-    [SerializeField] private int maxGeneration = 2;
-    [SerializeField] private int childrenPerDeath = 2;
-    [SerializeField] private float childSpawnOffset = 0.7f;
-    [SerializeField] private float childScaleMultiplier = 0.65f;
-    [SerializeField] private float childHealthMultiplier = 0.6f;
-    [SerializeField] private float childSpeedMultiplier = 1.2f;
+    [SerializeField] private int childCount = 2;
+    [SerializeField] private float childSpawnRadius = 0.6f;
+    [SerializeField] private float childScaleMultiplier = 0.75f;
 
-    protected override void HandleDied()
+    private float nextAttackTime;
+
+    protected override void TickEnemy()
     {
+        if (target == null)
+            return;
+
+        if (IsTargetInRange(AttackRange))
+        {
+            StopMoving();
+            TryAttack();
+            return;
+        }
+
+        MoveToward(target.position);
+    }
+
+    private void TryAttack()
+    {
+        if (Time.time < nextAttackTime)
+            return;
+
+        nextAttackTime = Time.time + AttackCooldown;
+        DamageTarget(ContactDamage, target.position);
+    }
+
+    protected override void OnDeathStarted()
+    {
+        base.OnDeathStarted();
         SpawnChildren();
-        base.HandleDied();
     }
 
     private void SpawnChildren()
     {
-        if (generation >= maxGeneration)
+        EnemyData dataToSpawn = childEnemyData != null ? childEnemyData : EnemyData != null ? EnemyData.childEnemyData : null;
+        int spawnCount = childCount > 0 ? childCount : EnemyData != null ? EnemyData.childCount : 0;
+
+        if (dataToSpawn == null || dataToSpawn.prefab == null || spawnCount <= 0)
             return;
 
-        EnemyData dataToSpawn = childEnemyData != null ? childEnemyData : enemyData;
-
-        if (dataToSpawn == null || dataToSpawn.prefab == null)
-            return;
-
-        for (int i = 0; i < childrenPerDeath; i++)
+        for (int i = 0; i < spawnCount; i++)
         {
-            float angle = (360f / childrenPerDeath) * i;
-            Vector2 offset = Quaternion.Euler(0f, 0f, angle) * Vector2.right * childSpawnOffset;
+            Vector2 offset = Random.insideUnitCircle.normalized * childSpawnRadius;
 
-            GameObject childObject = Instantiate(
-                dataToSpawn.prefab,
-                transform.position + (Vector3)offset,
-                Quaternion.identity
-            );
+            if (offset == Vector2.zero)
+                offset = Vector2.right * childSpawnRadius;
 
+            GameObject childObject = Instantiate(dataToSpawn.prefab, (Vector2)transform.position + offset, Quaternion.identity);
             childObject.transform.localScale = transform.localScale * childScaleMultiplier;
 
-            MultiplierEnemy childMultiplier = childObject.GetComponent<MultiplierEnemy>();
-            if (childMultiplier != null)
-            {
-                childMultiplier.SetGeneration(generation + 1);
-                childMultiplier.Initialize(dataToSpawn, target);
-            }
-
-            Health childHealth = childObject.GetComponent<Health>();
-            if (childHealth != null)
-            {
-                childHealth.SetMaxHealth(enemyData.maxHealth * childHealthMultiplier, true);
-            }
-
             EnemyBase childEnemy = childObject.GetComponent<EnemyBase>();
-            if (childEnemy != null && childMultiplier == null)
-            {
-                childEnemy.Initialize(dataToSpawn, target);
-            }
+            if (childEnemy == null)
+                continue;
 
-            Rigidbody2D childRb = childObject.GetComponent<Rigidbody2D>();
-            if (childRb != null)
-            {
-                childRb.linearVelocity = offset.normalized * enemyData.moveSpeed * childSpeedMultiplier;
-            }
+            childEnemy.Initialize(dataToSpawn, target);
+            childEnemy.ApplyDifficulty(CurrentDifficulty);
+            EnemyRuntimeRegistry.RaiseEnemySpawned(childEnemy);
         }
-    }
-
-    public void SetGeneration(int value)
-    {
-        generation = value;
     }
 }

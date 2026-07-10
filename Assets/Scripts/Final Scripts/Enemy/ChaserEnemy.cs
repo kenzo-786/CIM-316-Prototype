@@ -4,47 +4,27 @@ public class ChaserEnemy : EnemyBase
 {
     private float nextAttackTime;
 
-    private void FixedUpdate()
+    protected override void TickEnemy()
     {
-        if (target == null || enemyData == null || IsDead) return;
+        if (target == null)
+            return;
 
-        Vector2 direction = target.position - transform.position;
-        float distance = direction.magnitude;
-
-        if (distance > enemyData.attackRange)
+        if (IsTargetInRange(AttackRange))
         {
-            rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
-        }
-        else
-        {
-            rb.linearVelocity = Vector2.zero;
-            TryAttackPlayer();
-        }
-    }
-
-    private void TryAttackPlayer()
-    {
-        if (Time.time < nextAttackTime) return;
-
-        nextAttackTime = Time.time + enemyData.attackCooldown;
-
-        IDamageable damageable = target.GetComponent<IDamageable>();
-
-        if (damageable == null)
-            damageable = target.GetComponentInChildren<IDamageable>();
-
-        if (damageable == null)
-        {
-            Debug.LogWarning("Enemy could not find IDamageable/Health on player target.");
+            StopMoving();
+            TryAttack();
             return;
         }
 
-        Debug.Log("Enemy damaged player.");
+        MoveToward(target.position);
+    }
 
-        damageable.TakeDamage(new DamageInfo(
-            enemyData.contactDamage,
-            gameObject,
-            target.position
-        ));
+    private void TryAttack()
+    {
+        if (Time.time < nextAttackTime)
+            return;
+
+        nextAttackTime = Time.time + AttackCooldown;
+        DamageTarget(ContactDamage, target.position);
     }
 }

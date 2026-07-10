@@ -5,86 +5,90 @@ using UnityEngine;
 public class ShooterEnemy : EnemyBase
 {
     [Header("Shooter")]
-    [SerializeField] private float preferredRange = 6f;
-    [SerializeField] private float tooCloseRange = 3f;
-    [SerializeField] private float shootCooldown = 1.5f;
-    [SerializeField] private float relocateDelay = 0.45f;
-    [SerializeField] private float fadeScale = 0.1f;
+    [SerializeField] private float preferredRange = 8f;
+    [SerializeField] private float dangerRange = 3f;
+    [SerializeField] private float relocationCooldown = 3f;
+    [SerializeField] private float relocationDelay = 0.45f;
 
     private EnemyProjectileShooter shooter;
     private RoomBounds roomBounds;
-    private SpriteRenderer[] renderers;
     private float nextShootTime;
+    private float nextRelocateTime;
+    private float relocateTimer;
     private bool relocating;
 
     protected override void Awake()
     {
         base.Awake();
         shooter = GetComponent<EnemyProjectileShooter>();
-        renderers = GetComponentsInChildren<SpriteRenderer>();
+        roomBounds = FindObjectOfType<RoomBounds>();
     }
 
     public override void Initialize(EnemyData data, Transform playerTarget)
     {
         base.Initialize(data, playerTarget);
-        roomBounds = FindObjectOfType<RoomBounds>();
+
+        if (shooter != null && data != null && data.projectileData != null)
+            shooter.SetProjectileData(data.projectileData);
     }
 
-    private void FixedUpdate()
+    protected override void TickEnemy()
     {
-        if (target == null || enemyData == null || IsDead || relocating) return;
+        if (target == null)
+            return;
 
-        float distance = Vector2.Distance(transform.position, target.position);
-
-        if (distance <= tooCloseRange)
+        if (relocating)
         {
-            StartCoroutine(RelocateRoutine());
+            StopMoving();
+            relocateTimer -= Time.fixedDeltaTime;
+
+            if (relocateTimer <= 0f)
+                FinishRelocation();
+
             return;
         }
 
-        if (distance > preferredRange)
+        float distance = Vector2.Distance(transform.position, target.position);
+
+        if (distance <= dangerRange && Time.time >= nextRelocateTime)
         {
-            Vector2 direction = target.position - transform.position;
-            rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
+            StartRelocation();
+            return;
         }
+
+        if (distance < preferredRange * 0.75f)
+            MoveAwayFrom(target.position);
+        else if (distance > preferredRange)
+            MoveToward(target.position);
         else
-        {
-            rb.linearVelocity = Vector2.zero;
-            TryShoot();
-        }
+            StopMoving();
+
+        TryShoot();
     }
 
     private void TryShoot()
     {
-        if (Time.time < nextShootTime) return;
+        if (Time.time < nextShootTime)
+            return;
 
-        nextShootTime = Time.time + shootCooldown;
-        shooter.ShootAt(target.position);
+        nextShootTime = Time.time + AttackCooldown;
+
+        if (shooter != null)
+            shooter.ShootAt(target.position, CurrentDifficulty.damageMultiplier, gameObject);
     }
 
-    private IEnumerator RelocateRoutine()
+    private void StartRelocation()
     {
         relocating = true;
-        rb.linearVelocity = Vector2.zero;
+        relocateTimer = relocationDelay;
+        nextRelocateTime = Time.time + relocationCooldown;
+    }
 
-        SetVisible(false);
-        transform.localScale = Vector3.one * fadeScale;
-
-        yield return new WaitForSeconds(relocateDelay);
+    private void FinishRelocation()
+    {
+        relocating = false;
 
         if (roomBounds != null)
             transform.position = roomBounds.GetRandomPoint();
-
-        transform.localScale = Vector3.one;
-        SetVisible(true);
-
-        nextShootTime = Time.time + 0.4f;
-        relocating = false;
-    }
-
-    private void SetVisible(bool visible)
-    {
-        foreach (SpriteRenderer renderer in renderers)
-            renderer.enabled = visible;
     }
 }

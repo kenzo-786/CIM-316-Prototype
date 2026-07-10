@@ -4,14 +4,15 @@ using UnityEngine;
 public class MageEnemy : EnemyBase
 {
     [Header("Mage")]
-    [SerializeField] private float preferredRange = 6f;
-    [SerializeField] private float retreatRange = 3f;
-    [SerializeField] private float shootCooldown = 1.8f;
-    [SerializeField] private int shotsPerCast = 3;
-    [SerializeField] private float spreadAngle = 12f;
+    [SerializeField] private float preferredRange = 7f;
+    [SerializeField] private int projectileCount = 3;
+    [SerializeField] private float spreadAngle = 25f;
+    [SerializeField] private float castWindup = 0.45f;
 
     private EnemyProjectileShooter shooter;
-    private float nextShootTime;
+    private float nextCastTime;
+    private bool casting;
+    private float castTimer;
 
     protected override void Awake()
     {
@@ -19,68 +20,58 @@ public class MageEnemy : EnemyBase
         shooter = GetComponent<EnemyProjectileShooter>();
     }
 
-    private void FixedUpdate()
+    public override void Initialize(EnemyData data, Transform playerTarget)
     {
-        if (target == null || enemyData == null || IsDead) return;
+        base.Initialize(data, playerTarget);
 
-        float distance = Vector2.Distance(transform.position, target.position);
-
-        if (distance < retreatRange)
-        {
-            RetreatFromPlayer();
-        }
-        else if (distance > preferredRange)
-        {
-            MoveTowardPlayer();
-        }
-        else
-        {
-            rb.linearVelocity = Vector2.zero;
-            TryCast();
-        }
+        if (shooter != null && data != null && data.projectileData != null)
+            shooter.SetProjectileData(data.projectileData);
     }
 
-    private void MoveTowardPlayer()
+    protected override void TickEnemy()
     {
-        Vector2 direction = target.position - transform.position;
-        rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
-    }
+        if (target == null)
+            return;
 
-    private void RetreatFromPlayer()
-    {
-        Vector2 direction = transform.position - target.position;
-        rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
-    }
-
-    private void TryCast()
-    {
-        if (Time.time < nextShootTime) return;
-
-        nextShootTime = Time.time + shootCooldown;
-
-        Vector2 baseDirection = target.position - transform.position;
-
-        if (shotsPerCast <= 1)
+        if (casting)
         {
-            shooter.ShootAt(target.position);
+            StopMoving();
+            castTimer -= Time.fixedDeltaTime;
+
+            if (castTimer <= 0f)
+                ReleaseCast();
+
             return;
         }
 
-        int middle = shotsPerCast / 2;
+        float distance = Vector2.Distance(transform.position, target.position);
 
-        for (int i = 0; i < shotsPerCast; i++)
-        {
-            float angleOffset = (i - middle) * spreadAngle;
-            Vector2 direction = Rotate(baseDirection.normalized, angleOffset);
-            Vector3 fakeTarget = transform.position + (Vector3)(direction * 10f);
+        if (distance < preferredRange * 0.7f)
+            MoveAwayFrom(target.position);
+        else if (distance > preferredRange)
+            MoveToward(target.position);
+        else
+            StopMoving();
 
-            shooter.ShootAt(fakeTarget);
-        }
+        if (Time.time >= nextCastTime)
+            StartCast();
     }
 
-    private Vector2 Rotate(Vector2 direction, float angle)
+    private void StartCast()
     {
-        return Quaternion.Euler(0f, 0f, angle) * direction;
+        casting = true;
+        castTimer = castWindup;
+        nextCastTime = Time.time + AttackCooldown;
+    }
+
+    private void ReleaseCast()
+    {
+        casting = false;
+
+        Vector2 baseDirection = ((Vector2)target.position - rb.position).normalized;
+
+        if (shooter != null)
+            shooter.ShootSpread(baseDirection, projectileCount, spreadAngle, CurrentDifficulty.damageMultiplier, gameObject);
     }
 
 }

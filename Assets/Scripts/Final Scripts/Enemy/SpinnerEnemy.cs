@@ -12,110 +12,94 @@ public class SpinnerEnemy : EnemyBase
     }
 
     [Header("Spinner")]
-    [SerializeField] private float walkDuration = 1.5f;
-    [SerializeField] private float windupDuration = 0.4f;
-    [SerializeField] private float spinDuration = 1.2f;
-    [SerializeField] private float recoverDuration = 0.7f;
-    [SerializeField] private float spinSpeedMultiplier = 2.5f;
+    [SerializeField] private float walkDuration = 1.25f;
+    [SerializeField] private float windupDuration = 0.45f;
+    [SerializeField] private float spinDuration = 1.5f;
+    [SerializeField] private float recoverDuration = 0.5f;
+    [SerializeField] private float spinSpeedMultiplier = 2.2f;
     [SerializeField] private float spinDamageMultiplier = 1.5f;
-    [SerializeField] private float rotationSpeed = 900f;
+    [SerializeField] private float spinHitCooldown = 0.35f;
 
     private SpinnerState state;
-    private Vector2 spinDirection;
-    private float nextAttackTime;
+    private float stateTimer;
+    private float nextSpinHitTime;
 
-    protected override void Awake()
+    protected override void OnEnable()
     {
-        base.Awake();
+        base.OnEnable();
+        EnterState(SpinnerState.Walking);
     }
 
-    public override void Initialize(EnemyData data, Transform playerTarget)
+    protected override void TickEnemy()
     {
-        base.Initialize(data, playerTarget);
-        StartCoroutine(StateRoutine());
-    }
-
-    private void FixedUpdate()
-    {
-        if (target == null || enemyData == null || IsDead) return;
+        stateTimer -= Time.fixedDeltaTime;
 
         switch (state)
         {
             case SpinnerState.Walking:
-                WalkTowardPlayer();
-                TryDamagePlayer(enemyData.contactDamage);
+                TickWalking();
                 break;
 
             case SpinnerState.Windup:
-                rb.linearVelocity = Vector2.zero;
+                StopMoving();
+
+                if (stateTimer <= 0f)
+                    EnterState(SpinnerState.Spinning);
+
                 break;
 
             case SpinnerState.Spinning:
-                rb.linearVelocity = spinDirection * enemyData.moveSpeed * spinSpeedMultiplier;
-                transform.Rotate(0f, 0f, rotationSpeed * Time.fixedDeltaTime);
-                TryDamagePlayer(enemyData.contactDamage * spinDamageMultiplier);
+                TickSpinning();
                 break;
 
             case SpinnerState.Recovering:
-                rb.linearVelocity = Vector2.zero;
+                StopMoving();
+
+                if (stateTimer <= 0f)
+                    EnterState(SpinnerState.Walking);
+
                 break;
         }
     }
 
-    private IEnumerator StateRoutine()
+    private void TickWalking()
     {
-        while (!IsDead)
-        {
-            state = SpinnerState.Walking;
-            yield return new WaitForSeconds(walkDuration);
+        if (target != null)
+            MoveToward(target.position);
 
-            state = SpinnerState.Windup;
-            rb.linearVelocity = Vector2.zero;
-
-            if (target != null)
-                spinDirection = ((Vector2)target.position - rb.position).normalized;
-
-            yield return new WaitForSeconds(windupDuration);
-
-            state = SpinnerState.Spinning;
-            yield return new WaitForSeconds(spinDuration);
-
-            state = SpinnerState.Recovering;
-            rb.linearVelocity = Vector2.zero;
-            yield return new WaitForSeconds(recoverDuration);
-        }
+        if (stateTimer <= 0f)
+            EnterState(SpinnerState.Windup);
     }
 
-    private void WalkTowardPlayer()
+    private void TickSpinning()
     {
-        Vector2 direction = target.position - transform.position;
-        rb.linearVelocity = direction.normalized * enemyData.moveSpeed;
+        if (target != null)
+        {
+            Vector2 direction = ((Vector2)target.position - rb.position).normalized;
+            rb.MovePosition(rb.position + direction * MoveSpeed * spinSpeedMultiplier * Time.fixedDeltaTime);
+
+            if (IsTargetInRange(AttackRange) && Time.time >= nextSpinHitTime)
+            {
+                nextSpinHitTime = Time.time + spinHitCooldown;
+                DamageTarget(ContactDamage * spinDamageMultiplier, target.position);
+            }
+        }
+
+        if (stateTimer <= 0f)
+            EnterState(SpinnerState.Recovering);
     }
 
-    private void TryDamagePlayer(float damage)
+    private void EnterState(SpinnerState nextState)
     {
-        if (Time.time < nextAttackTime) return;
-        if (target == null) return;
+        state = nextState;
 
-        float distance = Vector2.Distance(transform.position, target.position);
-
-        if (distance > enemyData.attackRange)
-            return;
-
-        nextAttackTime = Time.time + enemyData.attackCooldown;
-
-        IDamageable damageable = target.GetComponent<IDamageable>();
-
-        if (damageable == null)
-            damageable = target.GetComponentInChildren<IDamageable>();
-
-        if (damageable != null)
-        {
-            damageable.TakeDamage(new DamageInfo(
-                damage,
-                gameObject,
-                target.position
-            ));
-        }
+        if (state == SpinnerState.Walking)
+            stateTimer = walkDuration;
+        else if (state == SpinnerState.Windup)
+            stateTimer = windupDuration;
+        else if (state == SpinnerState.Spinning)
+            stateTimer = spinDuration;
+        else
+            stateTimer = recoverDuration;
     }
 }

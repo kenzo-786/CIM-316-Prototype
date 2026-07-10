@@ -8,6 +8,7 @@ public class RoomCombatController : MonoBehaviour
 {
     [SerializeField] private ObjectPool xpGemPool;
     [SerializeField] private PlayerExperience playerExperience;
+    [SerializeField] private RoomDifficultySettings difficultySettings;
 
     private readonly List<EnemyBase> aliveEnemies = new List<EnemyBase>();
     private readonly List<ExperienceGem> droppedGems = new List<ExperienceGem>();
@@ -16,15 +17,39 @@ public class RoomCombatController : MonoBehaviour
     private RoomLayout currentLayout;
     private Transform player;
 
+    private RoomDifficultySnapshot currentDifficulty;
+    private bool combatActive;
+
     public event Action OnRoomCombatCleared;
 
-    public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform)
+    private void OnEnable()
+    {
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime += RegisterRuntimeEnemy;
+    }
+
+    private void OnDisable()
+    {
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime -= RegisterRuntimeEnemy;
+    }
+
+    public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform, int roomIndex)
     {
         StopAllCoroutines();
 
         currentRoomData = roomData;
         currentLayout = layout;
         player = playerTransform;
+
+        currentDifficulty = difficultySettings != null
+            ? difficultySettings.GetDifficulty(roomIndex)
+            : new RoomDifficultySnapshot
+            {
+                healthMultiplier = 1f,
+                damageMultiplier = 1f,
+                moveSpeedMultiplier = 1f
+            };
+
+        combatActive = true;
 
         aliveEnemies.Clear();
         droppedGems.Clear();
@@ -61,17 +86,35 @@ public class RoomCombatController : MonoBehaviour
 
     private void SpawnEnemy(EnemyData enemyData)
     {
-        if (enemyData == null || enemyData.prefab == null) return;
+        if (enemyData == null || enemyData.prefab == null)
+            return;
 
         Transform spawnPoint = GetRandomSpawnPoint();
-        Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : currentLayout.transform.position;
+        Vector3 spawnPosition = spawnPoint != null
+            ? spawnPoint.position
+            : currentLayout.transform.position;
 
         GameObject enemyObject = Instantiate(enemyData.prefab, spawnPosition, Quaternion.identity);
         EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
 
-        if (enemy == null) return;
+        if (enemy == null)
+            return;
 
         enemy.Initialize(enemyData, player);
+        enemy.ApplyDifficulty(currentDifficulty);
+
+        enemy.OnEnemyDied += HandleEnemyDied;
+        aliveEnemies.Add(enemy);
+    }
+
+    private void RegisterRuntimeEnemy(EnemyBase enemy)
+    {
+        if (!combatActive || enemy == null)
+            return;
+
+        if (aliveEnemies.Contains(enemy))
+            return;
+
         enemy.OnEnemyDied += HandleEnemyDied;
         aliveEnemies.Add(enemy);
     }
@@ -85,12 +128,14 @@ public class RoomCombatController : MonoBehaviour
 
     private void DropXp(EnemyBase enemy)
     {
-        if (xpGemPool == null || enemy.EnemyData == null) return;
+        if (xpGemPool == null || enemy.EnemyData == null)
+            return;
 
         GameObject gemObject = xpGemPool.Get(enemy.transform.position, Quaternion.identity);
         ExperienceGem gem = gemObject.GetComponent<ExperienceGem>();
 
-        if (gem == null) return;
+        if (gem == null)
+            return;
 
         gem.Initialize(enemy.EnemyData.xpDropAmount);
         droppedGems.Add(gem);
@@ -98,6 +143,7 @@ public class RoomCombatController : MonoBehaviour
 
     private void FinishRoomCombat()
     {
+        combatActive = false;
         MagnetizeAllGems();
         OnRoomCombatCleared?.Invoke();
     }
