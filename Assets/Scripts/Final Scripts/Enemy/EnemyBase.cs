@@ -95,7 +95,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void StopMoving()
     {
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
     }
 
     protected bool IsTargetInRange(float range)

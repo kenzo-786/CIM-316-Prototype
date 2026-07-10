@@ -48,7 +48,7 @@ public class ExperienceGem : MonoBehaviour, IPoolable
         magnetizing = true;
     }
 
-    public void OnTakenFromPool() { }
+    public void OnSpawnedFromPool() { }
 
     public void OnReturnedToPool()
     {

@@ -42,8 +42,13 @@ public class MultiplierEnemy : EnemyBase
 
     private void SpawnChildren()
     {
-        EnemyData dataToSpawn = childEnemyData != null ? childEnemyData : EnemyData != null ? EnemyData.childEnemyData : null;
-        int spawnCount = childCount > 0 ? childCount : EnemyData != null ? EnemyData.childCount : 0;
+        EnemyData dataToSpawn = childEnemyData != null
+            ? childEnemyData
+            : EnemyData != null ? EnemyData.childEnemyData : null;
+
+        int spawnCount = childCount > 0
+            ? childCount
+            : EnemyData != null ? EnemyData.childCount : 0;
 
         if (dataToSpawn == null || dataToSpawn.prefab == null || spawnCount <= 0)
             return;
@@ -55,7 +60,12 @@ public class MultiplierEnemy : EnemyBase
             if (offset == Vector2.zero)
                 offset = Vector2.right * childSpawnRadius;
 
-            GameObject childObject = Instantiate(dataToSpawn.prefab, (Vector2)transform.position + offset, Quaternion.identity);
+            GameObject childObject = Instantiate(
+                dataToSpawn.prefab,
+                (Vector2)transform.position + offset,
+                Quaternion.identity
+            );
+
             childObject.transform.localScale = transform.localScale * childScaleMultiplier;
 
             EnemyBase childEnemy = childObject.GetComponent<EnemyBase>();

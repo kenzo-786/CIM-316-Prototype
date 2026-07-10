@@ -1,52 +1,100 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class LevelUpUpgradeManager : MonoBehaviour
 {
     [SerializeField] private PlayerExperience playerExperience;
-    [SerializeField] private PlayerUpgradeManager playerUpgradeManager;
-    [SerializeField] private UpgradeSelectionUI upgradeSelectionUI;
-    [SerializeField] private UpgradeData[] upgradePool;
-    [SerializeField] private int choiceCount = 3;
+    [SerializeField] private PlayerUpgradeManager upgradeManager;
+    [SerializeField] private PlayerUpgradeInventory upgradeInventory;
+    [SerializeField] private UpgradeChoiceGenerator choiceGenerator;
+    [SerializeField] private UpgradeSelectionUI selectionUI;
+    [SerializeField] private int choicesPerLevel = 3;
+    [SerializeField] private bool pauseGameDuringChoice = true;
+
+    private readonly Queue<int> pendingLevelUps = new Queue<int>();
+    private bool showingChoice;
+    private float previousTimeScale = 1f;
+
+    private void Awake()
+    {
+        if (playerExperience == null)
+            playerExperience = FindObjectOfType<PlayerExperience>();
+
+        if (upgradeManager == null)
+            upgradeManager = FindObjectOfType<PlayerUpgradeManager>();
+
+        if (upgradeInventory == null)
+            upgradeInventory = FindObjectOfType<PlayerUpgradeInventory>();
+
+        if (choiceGenerator == null)
+            choiceGenerator = FindObjectOfType<UpgradeChoiceGenerator>();
+
+        if (selectionUI == null)
+            selectionUI = FindObjectOfType<UpgradeSelectionUI>();
+    }
 
     private void OnEnable()
     {
-        playerExperience.OnLevelUp += ShowLevelUpChoices;
+        if (playerExperience != null)
+            playerExperience.OnLevelUp += QueueLevelUpChoice;
     }
 
     private void OnDisable()
     {
-        playerExperience.OnLevelUp -= ShowLevelUpChoices;
+        if (playerExperience != null)
+            playerExperience.OnLevelUp -= QueueLevelUpChoice;
     }
 
-    private void ShowLevelUpChoices(int newLevel)
+    public void QueueLevelUpChoice(int level)
     {
-        List<UpgradeData> choices = GetRandomChoices();
-
-        Time.timeScale = 0f;
-
-        upgradeSelectionUI.Show(choices, upgrade =>
-        {
-            playerUpgradeManager.ApplyUpgrade(upgrade);
-            upgradeSelectionUI.Hide();
-            Time.timeScale = 1f;
-        });
+        pendingLevelUps.Enqueue(level);
+        TryShowNextChoice();
     }
 
-    private List<UpgradeData> GetRandomChoices()
+    public void QueueLevelUpChoice()
     {
-        List<UpgradeData> available = new List<UpgradeData>(upgradePool);
-        List<UpgradeData> selected = new List<UpgradeData>();
+        pendingLevelUps.Enqueue(0);
+        TryShowNextChoice();
+    }
 
-        int amount = Mathf.Min(choiceCount, available.Count);
+    private void TryShowNextChoice()
+    {
+        if (showingChoice || pendingLevelUps.Count == 0)
+            return;
 
-        for (int i = 0; i < amount; i++)
+        pendingLevelUps.Dequeue();
+        showingChoice = true;
+
+        if (pauseGameDuringChoice)
         {
-            int randomIndex = Random.Range(0, available.Count);
-            selected.Add(available[randomIndex]);
-            available.RemoveAt(randomIndex);
+            previousTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
         }
 
-        return selected;
+        List<UpgradeData> choices = choiceGenerator != null
+            ? choiceGenerator.GenerateChoices(choicesPerLevel, upgradeInventory, false)
+            : new List<UpgradeData>();
+
+        if (selectionUI != null)
+            selectionUI.ShowChoices(choices, upgradeInventory, SelectUpgrade);
+    }
+
+    private void SelectUpgrade(UpgradeData upgrade)
+    {
+        if (upgradeInventory != null && upgrade != null)
+            upgradeInventory.AddUpgrade(upgrade);
+
+        if (upgradeManager != null && upgrade != null)
+            upgradeManager.ApplyUpgrade(upgrade);
+
+        if (selectionUI != null)
+            selectionUI.Hide();
+
+        if (pauseGameDuringChoice)
+            Time.timeScale = previousTimeScale;
+
+        showingChoice = false;
+        TryShowNextChoice();
     }
 }

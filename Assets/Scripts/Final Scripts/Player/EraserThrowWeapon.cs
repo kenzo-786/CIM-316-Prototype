@@ -1,68 +1,117 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EraserThrowWeapon : PlayerWeaponBase
 {
-    [SerializeField] private EraserProjectile projectilePrefab;
+    [Header("Projectile")]
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float projectileSpeed = 9f;
-    [SerializeField] private float projectileLifetime = 3f;
+    [SerializeField] private float projectileSpeed = 12f;
+    [SerializeField] private float projectileLifetime = 4f;
 
-    [Header("Layers")]
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private LayerMask wallBounceLayer;
-    [SerializeField] private LayerMask destroyLayer;
+    [Header("Upgrade Driven")]
+    [SerializeField] private int pierceCount;
+    [SerializeField] private int enemyBounceCount;
+    [SerializeField] private int wallBounceCount;
+    [SerializeField] private int backToBackShots;
+    [SerializeField] private int sideBySideShots;
+    [SerializeField] private float backToBackDelay = 0.08f;
+    [SerializeField] private float sideOffset = 0.35f;
 
-    [Header("Multi Fire")]
-    [SerializeField] private float sideAngle = 12f;
-
-    protected override void Attack(Vector2 aimDirection)
+    protected override void Attack(Vector2 direction)
     {
-        FireProjectile(aimDirection);
+        if (projectilePrefab == null)
+            return;
 
-        if (stats == null) return;
+        if (direction == Vector2.zero)
+            direction = transform.right;
 
-        for (int i = 0; i < stats.SideProjectiles; i++)
+        direction.Normalize();
+
+        int sideShots = Mathf.Max(1, sideBySideShots);
+        int repeatShots = Mathf.Max(1, backToBackShots);
+
+        for (int repeat = 0; repeat < repeatShots; repeat++)
         {
-            float angle = sideAngle * (i + 1);
-            FireProjectile(Rotate(aimDirection, angle));
-            FireProjectile(Rotate(aimDirection, -angle));
-        }
-
-        for (int i = 0; i < stats.BackProjectiles; i++)
-        {
-            FireProjectile(-aimDirection);
+            float delay = repeat * backToBackDelay;
+            InvokeProjectileVolley(direction, sideShots, delay);
         }
     }
 
-    private void FireProjectile(Vector2 direction)
+    private void InvokeProjectileVolley(Vector2 direction, int sideShots, float delay)
     {
-        if (projectilePrefab == null) return;
+        if (delay <= 0f)
+        {
+            FireProjectileVolley(direction, sideShots);
+            return;
+        }
 
+        StartCoroutine(FireProjectileVolleyDelayed(direction, sideShots, delay));
+    }
+
+    private System.Collections.IEnumerator FireProjectileVolleyDelayed(Vector2 direction, int sideShots, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FireProjectileVolley(direction, sideShots);
+    }
+
+    private void FireProjectileVolley(Vector2 direction, int sideShots)
+    {
+        if (sideShots <= 1)
+        {
+            SpawnProjectile(direction, Vector2.zero);
+            return;
+        }
+
+        Vector2 perpendicular = new Vector2(-direction.y, direction.x);
+        float startOffset = -(sideShots - 1) * sideOffset * 0.5f;
+
+        for (int i = 0; i < sideShots; i++)
+        {
+            Vector2 offset = perpendicular * (startOffset + i * sideOffset);
+            SpawnProjectile(direction, offset);
+        }
+    }
+
+    private void SpawnProjectile(Vector2 direction, Vector2 offset)
+    {
         Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
+        spawnPosition += (Vector3)offset;
 
-        EraserProjectile projectile = Instantiate(
-            projectilePrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
+        GameObject projectileObject = ProjectilePoolProvider.Instance != null
+            ? ProjectilePoolProvider.Instance.Spawn(projectilePrefab, spawnPosition, Quaternion.identity)
+            : Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
-        projectile.Initialize(
+        EraserProjectile projectile = projectileObject != null
+            ? projectileObject.GetComponent<EraserProjectile>()
+            : null;
+
+        if (projectile == null)
+            return;
+
+        projectile.Launch(
+            direction,
             GetFinalDamage(),
             projectileSpeed,
             projectileLifetime,
-            direction,
-            gameObject,
-            enemyLayer,
-            wallBounceLayer,
-            destroyLayer,
-            stats != null ? stats.PierceCount : 0,
-            stats != null ? stats.EnemyBounceCount : 0,
-            stats != null ? stats.WallBounceCount : 0
+            pierceCount,
+            enemyBounceCount,
+            wallBounceCount,
+            gameObject
         );
     }
 
-    private Vector2 Rotate(Vector2 direction, float angle)
+    public void SetProjectileModifiers(
+        int newPierceCount,
+        int newEnemyBounceCount,
+        int newWallBounceCount,
+        int newBackToBackShots,
+        int newSideBySideShots)
     {
-        return Quaternion.Euler(0f, 0f, angle) * direction;
+        pierceCount = Mathf.Max(0, newPierceCount);
+        enemyBounceCount = Mathf.Max(0, newEnemyBounceCount);
+        wallBounceCount = Mathf.Max(0, newWallBounceCount);
+        backToBackShots = Mathf.Max(1, newBackToBackShots);
+        sideBySideShots = Mathf.Max(1, newSideBySideShots);
     }
 }

@@ -3,16 +3,20 @@ using UnityEngine.Pool;
 
 public class PoolHandle : MonoBehaviour
 {
-    private ObjectPool pool;
+    private ObjectPool owner;
 
-    public void SetPool(ObjectPool owner)
+    public bool HasOwner => owner != null;
+
+    public void SetOwner(ObjectPool pool)
     {
-        pool = owner;
+        owner = pool;
     }
 
     public void ReturnToPool()
     {
-        if (pool != null) pool.Return(gameObject);
-        else Destroy(gameObject);
+        if (owner != null)
+            owner.Release(gameObject);
+        else
+            Destroy(gameObject);
     }
 }

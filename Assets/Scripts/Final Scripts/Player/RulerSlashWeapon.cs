@@ -3,101 +3,149 @@ using UnityEngine;
 public class RulerSlashWeapon :PlayerWeaponBase
 {
     [Header("Melee Slash")]
-    [SerializeField] private Transform slashOrigin;
-    [SerializeField] private float range = 1.8f;
-    [SerializeField] private float arcAngle = 100f;
+    [SerializeField] private Transform slashPoint;
+    [SerializeField] private float slashRadius = 1.2f;
     [SerializeField] private LayerMask enemyLayer;
 
-    [Header("Slash Wave")]
-    [SerializeField] private RulerSlashWave slashWavePrefab;
+    [Header("Ranged Slash Wave")]
+    [SerializeField] private GameObject slashWavePrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float waveSpeed = 10f;
-    [SerializeField] private float waveLifetime = 1.5f;
-    [SerializeField] private LayerMask wallBounceLayer;
-    [SerializeField] private LayerMask destroyLayer;
+    [SerializeField] private float slashWaveSpeed = 11f;
+    [SerializeField] private float slashWaveLifetime = 3f;
 
-    [Header("Multi Fire")]
-    [SerializeField] private float sideAngle = 10f;
+    [Header("Upgrade Driven")]
+    [SerializeField] private int pierceCount;
+    [SerializeField] private int enemyBounceCount;
+    [SerializeField] private int wallBounceCount;
+    [SerializeField] private int backToBackShots;
+    [SerializeField] private int sideBySideShots;
+    [SerializeField] private float backToBackDelay = 0.08f;
+    [SerializeField] private float sideOffset = 0.35f;
 
-    protected override void Attack(Vector2 aimDirection)
+    protected override void Attack(Vector2 direction)
     {
-        DoMeleeSlash(aimDirection);
-        FireSlashWave(aimDirection);
+        if (direction == Vector2.zero)
+            direction = transform.right;
 
-        if (stats == null) return;
+        direction.Normalize();
 
-        for (int i = 0; i < stats.SideProjectiles; i++)
-        {
-            float angle = sideAngle * (i + 1);
-            FireSlashWave(Rotate(aimDirection, angle));
-            FireSlashWave(Rotate(aimDirection, -angle));
-        }
-
-        for (int i = 0; i < stats.BackProjectiles; i++)
-        {
-            FireSlashWave(-aimDirection);
-        }
+        DoMeleeSlash();
+        FireWavePattern(direction);
     }
 
-    private void DoMeleeSlash(Vector2 aimDirection)
+    private void DoMeleeSlash()
     {
-        Vector2 origin = slashOrigin != null ? slashOrigin.position : transform.position;
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, range, enemyLayer);
+        Vector3 center = slashPoint != null ? slashPoint.position : transform.position;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(center, slashRadius, enemyLayer);
 
         foreach (Collider2D hit in hits)
         {
-            Vector2 directionToTarget = (Vector2)hit.transform.position - origin;
-            float angle = Vector2.Angle(aimDirection, directionToTarget);
+            IDamageable damageable = hit.GetComponent<IDamageable>();
 
-            if (angle > arcAngle * 0.5f)
-                continue;
+            if (damageable == null)
+                damageable = hit.GetComponentInParent<IDamageable>();
 
-            if (hit.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(
-                    new DamageInfo(GetFinalDamage(), gameObject, hit.transform.position)
-                );
-            }
+            if (damageable != null)
+                damageable.TakeDamage(new DamageInfo(GetFinalDamage(), gameObject, hit.transform.position));
         }
     }
 
-    private void FireSlashWave(Vector2 direction)
+    private void FireWavePattern(Vector2 direction)
     {
-        if (slashWavePrefab == null) return;
+        if (slashWavePrefab == null)
+            return;
 
+        int sideShots = Mathf.Max(1, sideBySideShots);
+        int repeatShots = Mathf.Max(1, backToBackShots);
+
+        for (int repeat = 0; repeat < repeatShots; repeat++)
+        {
+            float delay = repeat * backToBackDelay;
+            InvokeWaveVolley(direction, sideShots, delay);
+        }
+    }
+
+    private void InvokeWaveVolley(Vector2 direction, int sideShots, float delay)
+    {
+        if (delay <= 0f)
+        {
+            FireWaveVolley(direction, sideShots);
+            return;
+        }
+
+        StartCoroutine(FireWaveVolleyDelayed(direction, sideShots, delay));
+    }
+
+    private System.Collections.IEnumerator FireWaveVolleyDelayed(Vector2 direction, int sideShots, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FireWaveVolley(direction, sideShots);
+    }
+
+    private void FireWaveVolley(Vector2 direction, int sideShots)
+    {
+        if (sideShots <= 1)
+        {
+            SpawnSlashWave(direction, Vector2.zero);
+            return;
+        }
+
+        Vector2 perpendicular = new Vector2(-direction.y, direction.x);
+        float startOffset = -(sideShots - 1) * sideOffset * 0.5f;
+
+        for (int i = 0; i < sideShots; i++)
+        {
+            Vector2 offset = perpendicular * (startOffset + i * sideOffset);
+            SpawnSlashWave(direction, offset);
+        }
+    }
+
+    private void SpawnSlashWave(Vector2 direction, Vector2 offset)
+    {
         Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
+        spawnPosition += (Vector3)offset;
 
-        RulerSlashWave wave = Instantiate(
-            slashWavePrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
+        GameObject waveObject = ProjectilePoolProvider.Instance != null
+            ? ProjectilePoolProvider.Instance.Spawn(slashWavePrefab, spawnPosition, Quaternion.identity)
+            : Instantiate(slashWavePrefab, spawnPosition, Quaternion.identity);
 
-        wave.Initialize(
-            GetFinalDamage(),
-            waveSpeed,
-            waveLifetime,
+        RulerSlashWave wave = waveObject != null
+            ? waveObject.GetComponent<RulerSlashWave>()
+            : null;
+
+        if (wave == null)
+            return;
+
+        wave.Launch(
             direction,
-            gameObject,
-            enemyLayer,
-            wallBounceLayer,
-            destroyLayer,
-            stats != null ? stats.PierceCount : 0,
-            stats != null ? stats.EnemyBounceCount : 0,
-            stats != null ? stats.WallBounceCount : 0
+            GetFinalDamage(),
+            slashWaveSpeed,
+            slashWaveLifetime,
+            pierceCount,
+            enemyBounceCount,
+            wallBounceCount,
+            gameObject
         );
     }
 
-    private Vector2 Rotate(Vector2 direction, float angle)
+    public void SetProjectileModifiers(
+        int newPierceCount,
+        int newEnemyBounceCount,
+        int newWallBounceCount,
+        int newBackToBackShots,
+        int newSideBySideShots)
     {
-        return Quaternion.Euler(0f, 0f, angle) * direction;
+        pierceCount = Mathf.Max(0, newPierceCount);
+        enemyBounceCount = Mathf.Max(0, newEnemyBounceCount);
+        wallBounceCount = Mathf.Max(0, newWallBounceCount);
+        backToBackShots = Mathf.Max(1, newBackToBackShots);
+        sideBySideShots = Mathf.Max(1, newSideBySideShots);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 origin = slashOrigin != null ? slashOrigin.position : transform.position;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(origin, range);
+        Vector3 center = slashPoint != null ? slashPoint.position : transform.position;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center, slashRadius);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class EnemyProjectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour, IPoolable
 {
     private Rigidbody2D rb;
     private Collider2D bodyCollider;
@@ -22,9 +22,27 @@ public class EnemyProjectile : MonoBehaviour
         bodyCollider = GetComponent<Collider2D>();
     }
 
-    private void OnEnable()
+    public void OnSpawnedFromPool()
     {
         lifeTimer = 0f;
+
+        if (bodyCollider != null)
+            bodyCollider.enabled = true;
+    }
+
+    public void OnReturnedToPool()
+    {
+        data = null;
+        owner = null;
+        damage = 0f;
+        bouncesLeft = 0;
+        hitsLeft = 0;
+        lifeTimer = 0f;
+        direction = Vector2.zero;
+        speed = 0f;
+
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
     }
 
     private void Update()
@@ -32,7 +50,7 @@ public class EnemyProjectile : MonoBehaviour
         lifeTimer += Time.deltaTime;
 
         if (data != null && lifeTimer >= data.lifetime)
-            Destroy(gameObject);
+            Despawn();
     }
 
     public void Launch(EnemyProjectileData projectileData, Vector2 launchDirection, float damageMultiplier, GameObject projectileOwner)
@@ -47,12 +65,9 @@ public class EnemyProjectile : MonoBehaviour
         damage = data != null ? data.damage * damageMultiplier : 1f;
         bouncesLeft = data != null ? data.wallBounces : 0;
         hitsLeft = data != null ? Mathf.Max(1, data.hitsBeforeDestroy) : 1;
-
         speed = data != null ? data.speed : 8f;
-        rb.velocity = direction * speed;
 
-        if (bodyCollider != null)
-            bodyCollider.enabled = true;
+        rb.linearVelocity = direction * speed;
 
         if (data != null && data.rotateToDirection)
             transform.right = direction;
@@ -76,10 +91,10 @@ public class EnemyProjectile : MonoBehaviour
 
     private void HandleHit(Collider2D other, Collision2D collision)
     {
-        if (other == null)
+        if (other == null || data == null)
             return;
 
-        if (data != null && IsInLayer(other.gameObject.layer, data.playerLayer))
+        if (IsInLayer(other.gameObject.layer, data.playerLayer))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
 
@@ -94,27 +109,27 @@ public class EnemyProjectile : MonoBehaviour
                 hitsLeft--;
 
                 if (hitsLeft <= 0)
-                    Destroy(gameObject);
+                    Despawn();
             }
 
             return;
         }
 
-        if (data != null && IsInLayer(other.gameObject.layer, data.wallLayer))
+        if (IsInLayer(other.gameObject.layer, data.wallLayer))
         {
             TryBounce(other, collision);
             return;
         }
 
-        if (data != null && IsInLayer(other.gameObject.layer, data.destroyLayer))
-            Destroy(gameObject);
+        if (IsInLayer(other.gameObject.layer, data.destroyLayer))
+            Despawn();
     }
 
     private void TryBounce(Collider2D wall, Collision2D collision)
     {
         if (bouncesLeft <= 0)
         {
-            Destroy(gameObject);
+            Despawn();
             return;
         }
 
@@ -125,7 +140,7 @@ public class EnemyProjectile : MonoBehaviour
             normal = -direction;
 
         direction = Vector2.Reflect(direction, normal).normalized;
-        rb.velocity = direction * speed;
+        rb.linearVelocity = direction * speed;
 
         if (data != null && data.rotateToDirection)
             transform.right = direction;
@@ -143,5 +158,10 @@ public class EnemyProjectile : MonoBehaviour
     private bool IsInLayer(int layer, LayerMask mask)
     {
         return (mask.value & (1 << layer)) != 0;
+    }
+
+    private void Despawn()
+    {
+        PooledProjectileUtility.Despawn(gameObject);
     }
 }

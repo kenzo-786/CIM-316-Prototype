@@ -4,8 +4,15 @@ public class EnemyProjectileShooter : MonoBehaviour
 {
     [SerializeField] private EnemyProjectileData projectileData;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private ProjectilePoolProvider poolProvider;
 
     public EnemyProjectileData ProjectileData => projectileData;
+
+    private void Awake()
+    {
+        if (poolProvider == null)
+            poolProvider = ProjectilePoolProvider.Instance;
+    }
 
     public void SetProjectileData(EnemyProjectileData data)
     {
@@ -14,9 +21,6 @@ public class EnemyProjectileShooter : MonoBehaviour
 
     public void ShootAt(Vector2 targetPosition, float damageMultiplier, GameObject owner)
     {
-        if (projectileData == null || projectileData.prefab == null)
-            return;
-
         Vector2 startPosition = firePoint != null ? firePoint.position : transform.position;
         Vector2 direction = (targetPosition - startPosition).normalized;
         ShootDirection(direction, damageMultiplier, owner);
@@ -31,8 +35,12 @@ public class EnemyProjectileShooter : MonoBehaviour
             direction = Vector2.right;
 
         Vector2 startPosition = firePoint != null ? firePoint.position : transform.position;
-        GameObject projectileObject = Instantiate(projectileData.prefab, startPosition, Quaternion.identity);
-        EnemyProjectile projectile = projectileObject.GetComponent<EnemyProjectile>();
+        ProjectilePoolProvider provider = poolProvider != null ? poolProvider : ProjectilePoolProvider.Instance;
+        GameObject projectileObject = provider != null
+            ? provider.Spawn(projectileData.prefab, startPosition, Quaternion.identity)
+            : Instantiate(projectileData.prefab, startPosition, Quaternion.identity);
+
+        EnemyProjectile projectile = projectileObject != null ? projectileObject.GetComponent<EnemyProjectile>() : null;
 
         if (projectile != null)
             projectile.Launch(projectileData, direction, damageMultiplier, owner);

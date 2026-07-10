@@ -2,9 +2,13 @@ using UnityEngine;
 
 public enum RoomType
 {
-    Starter,
-    OpenArea,
-    Hallway,
+    Normal,
     Classroom,
-    Boss
+    Hallway,
+    OpenArea,
+    Elite,
+    Treasure,
+    Rest,
+    Boss,
+    Final
 }

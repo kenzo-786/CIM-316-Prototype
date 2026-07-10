@@ -16,50 +16,66 @@ public class RoomCombatController : MonoBehaviour
     private RoomData currentRoomData;
     private RoomLayout currentLayout;
     private Transform player;
-
-    private RoomDifficultySnapshot currentDifficulty;
-    private bool combatActive;
+    private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
+    private Coroutine waveRoutine;
+    private bool combatRunning;
 
     public event Action OnRoomCombatCleared;
 
     private void OnEnable()
     {
-        EnemyRuntimeRegistry.OnEnemySpawnedRuntime += RegisterRuntimeEnemy;
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime += TrackRuntimeEnemy;
     }
 
     private void OnDisable()
     {
-        EnemyRuntimeRegistry.OnEnemySpawnedRuntime -= RegisterRuntimeEnemy;
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime -= TrackRuntimeEnemy;
+        StopAllCoroutines();
+        ClearEnemySubscriptions();
+    }
+
+    public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform)
+    {
+        StartRoomCombat(roomData, layout, playerTransform, 0);
     }
 
     public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform, int roomIndex)
     {
-        StopAllCoroutines();
+        StopCurrentCombat();
 
         currentRoomData = roomData;
         currentLayout = layout;
         player = playerTransform;
+        combatRunning = true;
 
         currentDifficulty = difficultySettings != null
             ? difficultySettings.GetDifficulty(roomIndex)
-            : new RoomDifficultySnapshot
-            {
-                healthMultiplier = 1f,
-                damageMultiplier = 1f,
-                moveSpeedMultiplier = 1f
-            };
-
-        combatActive = true;
+            : RoomDifficultySnapshot.Default;
 
         aliveEnemies.Clear();
         droppedGems.Clear();
 
-        StartCoroutine(RunWaves());
+        waveRoutine = StartCoroutine(RunWaves());
+    }
+
+    public void StopCurrentCombat()
+    {
+        combatRunning = false;
+
+        if (waveRoutine != null)
+        {
+            StopCoroutine(waveRoutine);
+            waveRoutine = null;
+        }
+
+        ClearEnemySubscriptions();
+        aliveEnemies.Clear();
+        droppedGems.Clear();
     }
 
     private IEnumerator RunWaves()
     {
-        if (currentRoomData.waves == null || currentRoomData.waves.Length == 0)
+        if (currentRoomData == null || currentRoomData.waves == null || currentRoomData.waves.Length == 0)
         {
             FinishRoomCombat();
             yield break;
@@ -67,14 +83,25 @@ public class RoomCombatController : MonoBehaviour
 
         foreach (WaveData wave in currentRoomData.waves)
         {
+            if (wave == null)
+                continue;
+
             yield return new WaitForSeconds(wave.delayBeforeWave);
+
+            if (wave.enemies == null)
+                continue;
 
             foreach (EnemySpawnEntry entry in wave.enemies)
             {
+                if (entry == null || entry.enemyData == null)
+                    continue;
+
                 for (int i = 0; i < entry.count; i++)
                 {
                     SpawnEnemy(entry.enemyData);
-                    yield return new WaitForSeconds(entry.delayBetweenSpawns);
+
+                    if (entry.delayBetweenSpawns > 0f)
+                        yield return new WaitForSeconds(entry.delayBetweenSpawns);
                 }
             }
 
@@ -90,9 +117,7 @@ public class RoomCombatController : MonoBehaviour
             return;
 
         Transform spawnPoint = GetRandomSpawnPoint();
-        Vector3 spawnPosition = spawnPoint != null
-            ? spawnPoint.position
-            : currentLayout.transform.position;
+        Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : currentLayout.transform.position;
 
         GameObject enemyObject = Instantiate(enemyData.prefab, spawnPosition, Quaternion.identity);
         EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
@@ -102,17 +127,20 @@ public class RoomCombatController : MonoBehaviour
 
         enemy.Initialize(enemyData, player);
         enemy.ApplyDifficulty(currentDifficulty);
-
-        enemy.OnEnemyDied += HandleEnemyDied;
-        aliveEnemies.Add(enemy);
+        TrackEnemy(enemy);
     }
 
-    private void RegisterRuntimeEnemy(EnemyBase enemy)
+    private void TrackRuntimeEnemy(EnemyBase enemy)
     {
-        if (!combatActive || enemy == null)
+        if (!combatRunning)
             return;
 
-        if (aliveEnemies.Contains(enemy))
+        TrackEnemy(enemy);
+    }
+
+    private void TrackEnemy(EnemyBase enemy)
+    {
+        if (enemy == null || aliveEnemies.Contains(enemy))
             return;
 
         enemy.OnEnemyDied += HandleEnemyDied;
@@ -121,6 +149,9 @@ public class RoomCombatController : MonoBehaviour
 
     private void HandleEnemyDied(EnemyBase enemy)
     {
+        if (enemy == null)
+            return;
+
         enemy.OnEnemyDied -= HandleEnemyDied;
         aliveEnemies.Remove(enemy);
         DropXp(enemy);
@@ -128,11 +159,11 @@ public class RoomCombatController : MonoBehaviour
 
     private void DropXp(EnemyBase enemy)
     {
-        if (xpGemPool == null || enemy.EnemyData == null)
+        if (xpGemPool == null || enemy == null || enemy.EnemyData == null)
             return;
 
         GameObject gemObject = xpGemPool.Get(enemy.transform.position, Quaternion.identity);
-        ExperienceGem gem = gemObject.GetComponent<ExperienceGem>();
+        ExperienceGem gem = gemObject != null ? gemObject.GetComponent<ExperienceGem>() : null;
 
         if (gem == null)
             return;
@@ -143,7 +174,7 @@ public class RoomCombatController : MonoBehaviour
 
     private void FinishRoomCombat()
     {
-        combatActive = false;
+        combatRunning = false;
         MagnetizeAllGems();
         OnRoomCombatCleared?.Invoke();
     }
@@ -155,15 +186,29 @@ public class RoomCombatController : MonoBehaviour
             if (gem != null)
                 gem.MagnetizeTo(player, playerExperience);
         }
+
+        droppedGems.Clear();
     }
 
     private Transform GetRandomSpawnPoint()
     {
-        Transform root = currentLayout.EnemySpawnRoot;
-
-        if (root == null || root.childCount == 0)
+        if (currentLayout == null || currentLayout.EnemySpawnRoot == null)
             return null;
 
+        Transform root = currentLayout.EnemySpawnRoot;
+
+        if (root.childCount == 0)
+            return root;
+
         return root.GetChild(UnityEngine.Random.Range(0, root.childCount));
+    }
+
+    private void ClearEnemySubscriptions()
+    {
+        foreach (EnemyBase enemy in aliveEnemies)
+        {
+            if (enemy != null)
+                enemy.OnEnemyDied -= HandleEnemyDied;
+        }
     }
 }
