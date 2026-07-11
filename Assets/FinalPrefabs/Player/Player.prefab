@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 2629145152188045966}
   - component: {fileID: 5815303451549159985}
   - component: {fileID: 757746119904546252}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f481d892f15f64e91b4c268b9703a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacterApplier
-  characterData: {fileID: 11400000, guid: cb047c6e2b148174eaee579de2636763, type: 2}
+  fallbackCharacter: {fileID: 0}
 --- !u!114 &6815564233224503679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 2267677930499236819}
   - component: {fileID: 3108047417664260913}
   - component: {fileID: 7395021007787808653}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 7436193552616336581}
   - component: {fileID: 2858256896689298780}
   - component: {fileID: 1032251283092527932}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: FillImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 8923314287749745578}
   - component: {fileID: 2328301291541412228}
   - component: {fileID: 14018136707397212}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: WorldHealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5747502978513656082}
   - component: {fileID: 833426712444372461}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

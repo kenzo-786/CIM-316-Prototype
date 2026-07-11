@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - TeamMonkey
-  - TeamEnemy
   - Enemy
+  - Projectile
+  - EnemyProjectile
+  - Door
+  - XP
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -14,15 +17,15 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
   - Player
+  - Enemy
   - PlayerProjectile
   - EnemyProjectile
   - Wall
-  - Obstacle
   - Door
-  - Pickup
-  - 
+  - Obstacle
+  - XP
+  - Trigger
   - 
   - 
   - 

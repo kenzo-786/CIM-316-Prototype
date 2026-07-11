@@ -144,7 +144,10 @@ public abstract class EnemyBase : MonoBehaviour
 
         isDead = true;
         OnDeathStarted();
+
         OnEnemyDied?.Invoke(this);
+        EnemyEvents.RaiseEnemyDied(this);
+
         DestroyEnemyObject();
     }
 

@@ -9,12 +9,12 @@ public class EraserThrowWeapon : PlayerWeaponBase
     [SerializeField] private float projectileSpeed = 12f;
     [SerializeField] private float projectileLifetime = 4f;
 
-    [Header("Upgrade Driven")]
-    [SerializeField] private int pierceCount;
-    [SerializeField] private int enemyBounceCount;
-    [SerializeField] private int wallBounceCount;
-    [SerializeField] private int backToBackShots;
-    [SerializeField] private int sideBySideShots;
+    [Header("Base Projectile Modifiers")]
+    [SerializeField] private int basePierceCount;
+    [SerializeField] private int baseEnemyBounceCount;
+    [SerializeField] private int baseWallBounceCount;
+    [SerializeField] private int baseBackToBackShots = 1;
+    [SerializeField] private int baseSideBySideShots = 1;
     [SerializeField] private float backToBackDelay = 0.08f;
     [SerializeField] private float sideOffset = 0.35f;
 
@@ -28,8 +28,8 @@ public class EraserThrowWeapon : PlayerWeaponBase
 
         direction.Normalize();
 
-        int sideShots = Mathf.Max(1, sideBySideShots);
-        int repeatShots = Mathf.Max(1, backToBackShots);
+        int sideShots = Mathf.Max(1, baseSideBySideShots + (stats != null ? stats.SideProjectiles : 0));
+        int repeatShots = Mathf.Max(1, baseBackToBackShots + (stats != null ? stats.BackProjectiles : 0));
 
         for (int repeat = 0; repeat < repeatShots; repeat++)
         {
@@ -89,29 +89,19 @@ public class EraserThrowWeapon : PlayerWeaponBase
         if (projectile == null)
             return;
 
+        int pierce = basePierceCount + (stats != null ? stats.PierceCount : 0);
+        int enemyBounce = baseEnemyBounceCount + (stats != null ? stats.EnemyBounceCount : 0);
+        int wallBounce = baseWallBounceCount + (stats != null ? stats.WallBounceCount : 0);
+
         projectile.Launch(
             direction,
             GetFinalDamage(),
             projectileSpeed,
             projectileLifetime,
-            pierceCount,
-            enemyBounceCount,
-            wallBounceCount,
+            pierce,
+            enemyBounce,
+            wallBounce,
             gameObject
         );
-    }
-
-    public void SetProjectileModifiers(
-        int newPierceCount,
-        int newEnemyBounceCount,
-        int newWallBounceCount,
-        int newBackToBackShots,
-        int newSideBySideShots)
-    {
-        pierceCount = Mathf.Max(0, newPierceCount);
-        enemyBounceCount = Mathf.Max(0, newEnemyBounceCount);
-        wallBounceCount = Mathf.Max(0, newWallBounceCount);
-        backToBackShots = Mathf.Max(1, newBackToBackShots);
-        sideBySideShots = Mathf.Max(1, newSideBySideShots);
     }
 }
