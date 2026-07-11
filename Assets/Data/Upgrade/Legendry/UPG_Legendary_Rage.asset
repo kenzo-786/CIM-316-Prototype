@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73847e2213da28b4d8afa1daef864566, type: 3}
-  m_Name: New Upgrade Data 2
+  m_Name: UPG_Legendary_Rage
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  upgradeName: Heal
-  description: 
+  upgradeId: legendary_rage
+  upgradeName: Unleashed Rage
+  description: Enter a temporary rage state that increases your movement speed, attack
+    speed, and damage.
   icon: {fileID: 0}
-  rarity: 0
-  upgradeType: 12
-  value: 25
-  intValue: 1
-  duration: 5
+  upgradeType: 11
+  rarity: 3
+  target: 0
+  maxLevel: 3
+  canAppearInStarterRoom: 0
+  canAppearOnLevelUp: 1
+  value: 0
+  intValue: 0
+  duration: 8

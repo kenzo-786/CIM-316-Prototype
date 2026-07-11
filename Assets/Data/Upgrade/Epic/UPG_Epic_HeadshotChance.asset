@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73847e2213da28b4d8afa1daef864566, type: 3}
-  m_Name: New Upgrade Data 3
+  m_Name: UPG_Epic_HeadshotChance
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  upgradeName: Max Health
-  description: 
+  upgradeId: 'epic_headshot_chance '
+  upgradeName: Deadeye
+  description: Gain 15% headshot chance
   icon: {fileID: 0}
-  rarity: 0
-  upgradeType: 13
-  value: 100
-  intValue: 1
-  duration: 5
+  upgradeType: 6
+  rarity: 2
+  target: 0
+  maxLevel: 3
+  canAppearInStarterRoom: 0
+  canAppearOnLevelUp: 1
+  value: 0.05
+  intValue: 0
+  duration: 0

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73847e2213da28b4d8afa1daef864566, type: 3}
+  m_Name: UPG_Common_HealNow
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  upgradeId: common_heal_now
+  upgradeName: Restoration
+  description: 'Restore a portion of your lost health. Restore {value} health. '
+  icon: {fileID: 0}
+  upgradeType: 12
+  rarity: 0
+  target: 0
+  maxLevel: 0
+  canAppearInStarterRoom: 0
+  canAppearOnLevelUp: 1
+  value: 25
+  intValue: 0
+  duration: 0

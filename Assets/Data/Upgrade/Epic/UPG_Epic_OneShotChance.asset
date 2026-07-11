@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73847e2213da28b4d8afa1daef864566, type: 3}
-  m_Name: New Upgrade Data
+  m_Name: UPG_Epic_OneShotChance
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  upgradeName: Damage Boost
-  description: 
+  upgradeId: epic_one_shot
+  upgradeName: Executioner
+  description: ' Gain 10% chance to instantly defeat an enemy.'
   icon: {fileID: 0}
-  rarity: 0
-  upgradeType: 8
-  value: 0.2
-  intValue: 1
-  duration: 5
+  upgradeType: 4
+  rarity: 2
+  target: 0
+  maxLevel: 2
+  canAppearInStarterRoom: 0
+  canAppearOnLevelUp: 1
+  value: 0.01
+  intValue: 0
+  duration: 0

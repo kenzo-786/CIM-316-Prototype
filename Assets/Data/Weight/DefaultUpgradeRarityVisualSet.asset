@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeRarityVisualSet
   common:
     rarity: 0
-    tint: {r: 1, g: 1, b: 1, a: 1}
-    cardBackground: {fileID: 0}
+    tint: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
+    cardBackground: {fileID: -1459958703885751333, guid: d8139dd1e36f5e94487014809e828bd4, type: 3}
   rare:
     rarity: 1
-    tint: {r: 1, g: 1, b: 1, a: 1}
-    cardBackground: {fileID: 0}
+    tint: {r: 0, g: 0.09308498, b: 0.5283019, a: 0}
+    cardBackground: {fileID: -7314063809976950411, guid: c89305f622133c949a36dad4dc372a14, type: 3}
   epic:
     rarity: 2
-    tint: {r: 1, g: 1, b: 1, a: 1}
-    cardBackground: {fileID: 0}
+    tint: {r: 0.5324191, g: 0.09972411, b: 0.7830189, a: 0}
+    cardBackground: {fileID: 4636762194602774447, guid: f49f7c640f62d58429c046e9eb20e5a8, type: 3}
   legendary:
     rarity: 3
-    tint: {r: 1, g: 1, b: 1, a: 1}
-    cardBackground: {fileID: 0}
+    tint: {r: 0.8396226, g: 0.7245126, b: 0.18614274, a: 0}
+    cardBackground: {fileID: -8061753859470657270, guid: 790c7c7e23affae4b9b4c31747ae4954, type: 3}

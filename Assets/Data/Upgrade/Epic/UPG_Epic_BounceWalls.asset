@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73847e2213da28b4d8afa1daef864566, type: 3}
+  m_Name: UPG_Epic_BounceWalls
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  upgradeId: epic_bounce_walls
+  upgradeName: Echo Strike
+  description: Projectiles bounce off walls.
+  icon: {fileID: 0}
+  upgradeType: 15
+  rarity: 2
+  target: 0
+  maxLevel: 2
+  canAppearInStarterRoom: 0
+  canAppearOnLevelUp: 1
+  value: 0
+  intValue: 1
+  duration: 0
