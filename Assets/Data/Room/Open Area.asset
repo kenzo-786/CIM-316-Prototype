@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7afa0265f469104982d6c0e25a04ebb, type: 3}
-  m_Name: New Room Data 1
+  m_Name: Open Area
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  roomName: Level2
-  roomType: 2
+  roomName: Level1
+  roomType: 3
   layoutPrefab: {fileID: 6824032912967098769, guid: ee5ec76c918b5b8459718f27c2e9aa0a, type: 3}
   waves:
   - {fileID: 11400000, guid: a0496871e15f609428ad515f46be8dde, type: 2}
-  - {fileID: 11400000, guid: 6e013521ef6d99748bcdeb5aede0490b, type: 2}

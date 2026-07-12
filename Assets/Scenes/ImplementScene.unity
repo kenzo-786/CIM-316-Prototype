@@ -6494,10 +6494,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   roomSequence:
   - {fileID: 11400000, guid: 4ff2023cc74b4da49a0de519430d6a40, type: 2}
-  - {fileID: 11400000, guid: de9242b52e784474ab1a28bd5329fbcf, type: 2}
   - {fileID: 11400000, guid: 7e1a0d9c6bf7a5b42a0c7b2284462ea5, type: 2}
+  - {fileID: 11400000, guid: de9242b52e784474ab1a28bd5329fbcf, type: 2}
+  - {fileID: 11400000, guid: 7aaeb07f60c0e8041bd39814784b6407, type: 2}
   runConfig: {fileID: 0}
-  totalRooms: 30
+  totalRooms: 10
   autoLoadFirstRoom: 1
   activeRoomRoot: {fileID: 372891551}
   player: {fileID: 242738780}
