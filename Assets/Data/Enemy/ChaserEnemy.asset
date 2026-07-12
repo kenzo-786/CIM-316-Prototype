@@ -16,10 +16,10 @@ MonoBehaviour:
   prefab: {fileID: 3360867081428378876, guid: 20e1974e09e08174ca2e4f44895a4f39, type: 3}
   maxHealth: 20
   moveSpeed: 2.2
-  contactDamage: 5
-  attackRange: 0.75
-  attackCooldown: 0.5
-  xpDropAmount: 5
+  contactDamage: 10
+  attackRange: 1.5
+  attackCooldown: 1
+  xpDropAmount: 2
   projectileData: {fileID: 0}
   childEnemyData: {fileID: 0}
   childCount: 0

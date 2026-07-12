@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de90eac7de8cb1a479483979841327ad, type: 3}
+  m_Name: GirlCharacter
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacterData
+  characterName: Girl
+  portrait: {fileID: 6796149651730216360, guid: acd1caa3639bef249a9a290169272174, type: 3}
+  gameplaySprite: {fileID: -3450511945178428379, guid: c1fc5c97ad434e248818846e46b481d9, type: 3}
+  maxHealth: 100
+  moveSpeed: 6
+  weaponType: 1
+  canAttackWhileMoving: 0

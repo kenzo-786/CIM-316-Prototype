@@ -3,12 +3,12 @@ using UnityEngine;
 public class MultiplierEnemy : EnemyBase
 {
     [Header("Multiplier")]
-    [SerializeField] private EnemyData childEnemyData;
-    [SerializeField] private int childCount = 2;
+    [SerializeField] private int maxSplitGenerations = 2;
     [SerializeField] private float childSpawnRadius = 0.6f;
     [SerializeField] private float childScaleMultiplier = 0.75f;
 
     private float nextAttackTime;
+    private int splitGeneration;
 
     protected override void TickEnemy()
     {
@@ -31,7 +31,10 @@ public class MultiplierEnemy : EnemyBase
             return;
 
         nextAttackTime = Time.time + AttackCooldown;
-        DamageTarget(ContactDamage, target.position);
+
+        DamageTarget(
+            ContactDamage,
+            target.position);
     }
 
     protected override void OnDeathStarted()
@@ -42,39 +45,78 @@ public class MultiplierEnemy : EnemyBase
 
     private void SpawnChildren()
     {
-        EnemyData dataToSpawn = childEnemyData != null
-            ? childEnemyData
-            : EnemyData != null ? EnemyData.childEnemyData : null;
-
-        int spawnCount = childCount > 0
-            ? childCount
-            : EnemyData != null ? EnemyData.childCount : 0;
-
-        if (dataToSpawn == null || dataToSpawn.prefab == null || spawnCount <= 0)
+        if (splitGeneration >= maxSplitGenerations)
             return;
+
+        if (EnemyData == null)
+            return;
+
+        EnemyData childData = EnemyData.childEnemyData;
+        int spawnCount = EnemyData.childCount;
+
+        if (childData == null ||
+            childData.prefab == null ||
+            spawnCount <= 0)
+        {
+            return;
+        }
+
+        // Prevent an accidental direct self-reference.
+        if (childData == EnemyData)
+        {
+            Debug.LogError(
+                "Multiplier EnemyData references itself: " +
+                EnemyData.name,
+                this);
+
+            return;
+        }
 
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector2 offset = Random.insideUnitCircle.normalized * childSpawnRadius;
+            Vector2 direction =
+                Random.insideUnitCircle.normalized;
 
-            if (offset == Vector2.zero)
-                offset = Vector2.right * childSpawnRadius;
+            if (direction == Vector2.zero)
+                direction = Vector2.right;
+
+            Vector2 spawnPosition =
+                (Vector2)transform.position +
+                direction * childSpawnRadius;
 
             GameObject childObject = Instantiate(
-                dataToSpawn.prefab,
-                (Vector2)transform.position + offset,
-                Quaternion.identity
-            );
+                childData.prefab,
+                spawnPosition,
+                Quaternion.identity);
 
-            childObject.transform.localScale = transform.localScale * childScaleMultiplier;
+            childObject.transform.localScale =
+                transform.localScale *
+                childScaleMultiplier;
 
-            EnemyBase childEnemy = childObject.GetComponent<EnemyBase>();
+            EnemyBase childEnemy =
+                childObject.GetComponent<EnemyBase>();
+
             if (childEnemy == null)
-                continue;
+            {
+                Debug.LogError(
+                    "Multiplier child prefab is missing EnemyBase.",
+                    childObject);
 
-            childEnemy.Initialize(dataToSpawn, target);
+                Destroy(childObject);
+                continue;
+            }
+
+            if (childEnemy is MultiplierEnemy multiplierChild)
+            {
+                multiplierChild.splitGeneration =
+                    splitGeneration + 1;
+            }
+
+            childEnemy.Initialize(childData, target);
             childEnemy.ApplyDifficulty(CurrentDifficulty);
-            EnemyRuntimeRegistry.RaiseEnemySpawned(childEnemy);
+
+            EnemyRuntimeRegistry.RaiseEnemySpawned(
+                childEnemy);
         }
     }
 }

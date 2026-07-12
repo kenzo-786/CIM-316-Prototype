@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de90eac7de8cb1a479483979841327ad, type: 3}
+  m_Name: BoyCharacter
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacterData
+  characterName: boy
+  portrait: {fileID: -4615057420341375881, guid: 92e09a8a121192b428fe199d1799bf9b, type: 3}
+  gameplaySprite: {fileID: 6789255226102730252, guid: 9d16efe0686da8f4b9e257c5a6d2efb5, type: 3}
+  maxHealth: 110
+  moveSpeed: 5.2
+  weaponType: 0
+  canAttackWhileMoving: 0

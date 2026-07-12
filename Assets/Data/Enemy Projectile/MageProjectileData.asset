@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00adc9f0d1c160346ba83cc7c07348df, type: 3}
+  m_Name: MageProjectileData
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectileData
+  prefab: {fileID: 2888237792334994807, guid: a04e8f14b691e7046aa3bbbe8a4df7ef, type: 3}
+  damage: 12
+  speed: 7
+  lifetime: 7
+  wallBounces: 3
+  hitsBeforeDestroy: 1
+  destroyOnPlayerHit: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 7168
+  destroyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rotateToDirection: 1
