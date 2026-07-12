@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 9d16efe0686da8f4b9e257c5a6d2efb5
+guid: 35527e28320ec014798a2407399a3fc4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6789255226102730252
-    second: man walking right_0
-  - first:
-      213: -8595427346433712695
-    second: man walking right_1
-  - first:
-      213: -5393670110990790662
-    second: man walking right_2
-  - first:
-      213: 5949436507396203475
-    second: man walking right_3
-  - first:
-      213: 61813329082362548
-    second: man walking right_4
+      213: 8033975403568566451
+    second: desk_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -112,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: man walking right_0
+      name: desk_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 465
-        width: 128
-        height: 186
+        x: 1587
+        y: 133
+        width: 3643
+        height: 4692
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0e415938a7483e50800000000000000
-      internalID: 6789255226102730252
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: man walking right_1
-      rect:
-        serializedVersion: 2
-        x: 241
-        y: 469
-        width: 134
-        height: 183
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9cdd3237e58e6b880800000000000000
-      internalID: -8595427346433712695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: man walking right_2
-      rect:
-        serializedVersion: 2
-        x: 474
-        y: 469
-        width: 126
-        height: 182
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aff80c66c95d525b0800000000000000
-      internalID: -5393670110990790662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: man walking right_3
-      rect:
-        serializedVersion: 2
-        x: 709
-        y: 466
-        width: 133
-        height: 185
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3d367156bf4a09250800000000000000
-      internalID: 5949436507396203475
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: man walking right_4
-      rect:
-        serializedVersion: 2
-        x: 940
-        y: 465
-        width: 132
-        height: 185
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4baa65235ea9bd000800000000000000
-      internalID: 61813329082362548
+      spriteID: 3b01eef401a6e7f60800000000000000
+      internalID: 8033975403568566451
       vertices: []
       indices: 
       edges: []
@@ -235,11 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      man walking right_0: 6789255226102730252
-      man walking right_1: -8595427346433712695
-      man walking right_2: -5393670110990790662
-      man walking right_3: 5949436507396203475
-      man walking right_4: 61813329082362548
+      desk_0: 8033975403568566451
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
