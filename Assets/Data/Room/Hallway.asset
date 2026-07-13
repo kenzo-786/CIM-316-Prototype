@@ -17,3 +17,4 @@ MonoBehaviour:
   layoutPrefab: {fileID: 6824032912967098769, guid: df9886d04bd3ecc478c11dfd7bdc71ab, type: 3}
   waves:
   - {fileID: 11400000, guid: 44d3354612346684ebe21589133f1f14, type: 2}
+  - {fileID: 11400000, guid: 0cfc65953b3702c4b99cca73937bd78e, type: 2}

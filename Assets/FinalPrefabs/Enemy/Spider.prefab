@@ -220,11 +220,11 @@ MonoBehaviour:
   visual: {fileID: 4216025546545835069}
   spawnVisibleDuration: 1.5
   initialFlashDuration: 0.5
-  stationaryDelay: 0.6
-  emergeDistance: 2
+  stationaryDelay: 1
+  emergeDistance: 3
   telegraphDuration: 0.75
   attackAfterEmergingDelay: 0.25
-  vanishDistance: 3
+  vanishDistance: 5
   vanishDuration: 0.4
   flashInterval: 0.1
   spawnClearance: 0.45
