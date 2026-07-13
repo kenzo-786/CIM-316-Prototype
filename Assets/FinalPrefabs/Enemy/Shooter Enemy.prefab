@@ -130,8 +130,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00000009934107, y: 0.03398925}
-  m_Size: {x: 2.1420429, y: 2.5635114}
+  m_Offset: {x: 0.009528299, y: 0.008580883}
+  m_Size: {x: 1.322626, y: 1.8012635}
   m_Direction: 0
 --- !u!114 &155877684525813468
 MonoBehaviour:
@@ -175,10 +175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemy
   enemyData: {fileID: 11400000, guid: fbf3cdb146c5b144a9db7e95fda8823e, type: 2}
   visual: {fileID: 1858187046507212384}
-  preferredRange: 8
-  rangeTolerance: 1.25
+  minimumDistance: 5
   movementStepDuration: 0.35
   movementStepCooldown: 0.7
+  shotBlockingLayer:
+    serializedVersion: 2
+    m_Bits: 0
   allowRelocation: 1
   dangerRange: 3
   relocationCooldown: 3
@@ -210,8 +212,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8219061172087984139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
