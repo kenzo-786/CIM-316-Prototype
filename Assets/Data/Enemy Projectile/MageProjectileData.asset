@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00adc9f0d1c160346ba83cc7c07348df, type: 3}
   m_Name: MageProjectileData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectileData
-  prefab: {fileID: 2888237792334994807, guid: a04e8f14b691e7046aa3bbbe8a4df7ef, type: 3}
+  prefab: {fileID: 2888237792334994807, guid: 7481c80a2d85aa54eab2a3bc19c86c68, type: 3}
   damage: 12
   speed: 7
   lifetime: 7

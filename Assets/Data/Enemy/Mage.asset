@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b0d3fb274682646889523819533497, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Spinner
+  enemyName: Mage
   prefab: {fileID: 3360867081428378876, guid: 6eb7c6e52a61998478a6e727cc422b8e, type: 3}
   maxHealth: 55
   moveSpeed: 1
@@ -20,6 +20,6 @@ MonoBehaviour:
   attackRange: 1
   attackCooldown: 3
   xpDropAmount: 4
-  projectileData: {fileID: 11400000, guid: 49392b3c27b495244b08acf6268eac83, type: 2}
+  projectileData: {fileID: 11400000, guid: 0f9257a4d46841d478153891965ba2cd, type: 2}
   childEnemyData: {fileID: 0}
   childCount: 0
