@@ -18,4 +18,4 @@ MonoBehaviour:
   maxHealth: 100
   moveSpeed: 6
   weaponType: 1
-  canAttackWhileMoving: 0
+  canAttackWhileMoving: 1
