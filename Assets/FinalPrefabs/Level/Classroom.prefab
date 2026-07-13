@@ -1521,6 +1521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: desk
       objectReference: {fileID: 0}
+    - target: {fileID: 8166312786419346185, guid: ccc0de88e759c5244bf444b5c9f7260d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8229276677136474604, guid: ccc0de88e759c5244bf444b5c9f7260d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05000001
@@ -1730,6 +1734,10 @@ PrefabInstance:
     - target: {fileID: 4425064615119244497, guid: ccc0de88e759c5244bf444b5c9f7260d, type: 3}
       propertyPath: m_Name
       value: desk (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166312786419346185, guid: ccc0de88e759c5244bf444b5c9f7260d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8229276677136474604, guid: ccc0de88e759c5244bf444b5c9f7260d, type: 3}
       propertyPath: m_LocalScale.x
