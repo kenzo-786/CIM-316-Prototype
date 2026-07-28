@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a78d286bc79bd943ab4e91dd417708f, type: 3}
   m_Name: Wave 14
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  delayBeforeWave: 2
+  delayBeforeWave: 1
   enemies:
   - enemyData: {fileID: 11400000, guid: fbf3cdb146c5b144a9db7e95fda8823e, type: 2}
     count: 3

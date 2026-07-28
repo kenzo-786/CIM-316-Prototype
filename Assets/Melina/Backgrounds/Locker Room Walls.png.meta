@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: f44e25fb8d0877641a9b2098075ae921
+guid: 26598208b57665f43aebec28d47a9acb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1383373440328361802
-    second: Hallway Floor_0
+      213: -5680816128859284660
+    second: Locker Room Walls_0
+  - first:
+      213: 5839259554181854247
+    second: Locker Room Walls_1
+  - first:
+      213: 3863850778331899176
+    second: Locker Room Walls_2
+  - first:
+      213: -5885719629374916312
+    second: Locker Room Walls_3
+  - first:
+      213: -2033163994914416769
+    second: Locker Room Walls_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hallway Floor_0
+      name: Locker Room Walls_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1010
         width: 1920
-        height: 1080
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6b894897f254dcce0800000000000000
-      internalID: -1383373440328361802
+      spriteID: c4b580d34dfa921b0800000000000000
+      internalID: -5680816128859284660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Locker Room Walls_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 898
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 724b05670a7390150800000000000000
+      internalID: 5839259554181854247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Locker Room Walls_2
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 705
+        width: 892
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 825e693bfc72f9530800000000000000
+      internalID: 3863850778331899176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Locker Room Walls_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 535
+        width: 340
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82970935e29b15ea0800000000000000
+      internalID: -5885719629374916312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Locker Room Walls_4
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 534
+        width: 288
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7713096e10c8c3e0800000000000000
+      internalID: -2033163994914416769
       vertices: []
       indices: 
       edges: []
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hallway Floor_0: -1383373440328361802
+      Locker Room Walls_0: -5680816128859284660
+      Locker Room Walls_1: 5839259554181854247
+      Locker Room Walls_2: 3863850778331899176
+      Locker Room Walls_3: -5885719629374916312
+      Locker Room Walls_4: -2033163994914416769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

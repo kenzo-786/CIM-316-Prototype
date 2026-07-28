@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7afa0265f469104982d6c0e25a04ebb, type: 3}
-  m_Name: Hallway
+  m_Name: Parking
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  roomName: Level3
-  roomType: 2
-  layoutPrefab: {fileID: 6824032912967098769, guid: df9886d04bd3ecc478c11dfd7bdc71ab, type: 3}
+  roomName: 
+  roomType: 0
+  layoutPrefab: {fileID: 6824032912967098769, guid: 0c16bd3a60ac16d42a8d262ad799e590, type: 3}
   waves:
+  - {fileID: 11400000, guid: 10c44f2557257714dbfed5b3f0dea8a6, type: 2}
   - {fileID: 11400000, guid: cffa09509ae2c6f4996f1458a65392c5, type: 2}
-  - {fileID: 11400000, guid: a708ef32c5989fa448998d11127dc3e6, type: 2}
-  - {fileID: 11400000, guid: f5492f4accf9f7849bb46cc2770abf48, type: 2}
-  - {fileID: 11400000, guid: fba84acb444ccb941a73492206d988bb, type: 2}
+  - {fileID: 11400000, guid: 10c44f2557257714dbfed5b3f0dea8a6, type: 2}
+  - {fileID: 11400000, guid: cffa09509ae2c6f4996f1458a65392c5, type: 2}

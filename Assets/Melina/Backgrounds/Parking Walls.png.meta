@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: f44e25fb8d0877641a9b2098075ae921
+guid: 823421d40b4bb9e49b5a958562ede7f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1383373440328361802
-    second: Hallway Floor_0
+      213: 3283929422706923974
+    second: Parking Walls_0
+  - first:
+      213: 2770846385913995210
+    second: Parking Walls_1
+  - first:
+      213: -3671771288090119363
+    second: Parking Walls_2
+  - first:
+      213: 7402695806399340988
+    second: Parking Walls_3
+  - first:
+      213: -2936779543503197054
+    second: Parking Walls_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hallway Floor_0
+      name: Parking Walls_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1010
         width: 1920
-        height: 1080
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6b894897f254dcce0800000000000000
-      internalID: -1383373440328361802
+      spriteID: 6c956e3396cd29d20800000000000000
+      internalID: 3283929422706923974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Parking Walls_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 898
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acf149f7b16047620800000000000000
+      internalID: 2770846385913995210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Parking Walls_2
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 705
+        width: 892
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33f8e4a77f3b0dc0800000000000000
+      internalID: -3671771288090119363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Parking Walls_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 535
+        width: 340
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1e4b06d98abb660800000000000000
+      internalID: 7402695806399340988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Parking Walls_4
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 534
+        width: 288
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cabdd90967e37d0800000000000000
+      internalID: -2936779543503197054
       vertices: []
       indices: 
       edges: []
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hallway Floor_0: -1383373440328361802
+      Parking Walls_0: 3283929422706923974
+      Parking Walls_1: 2770846385913995210
+      Parking Walls_2: -3671771288090119363
+      Parking Walls_3: 7402695806399340988
+      Parking Walls_4: -2936779543503197054
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7afa0265f469104982d6c0e25a04ebb, type: 3}
-  m_Name: Classroom
+  m_Name: Lab
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  roomName: Level2
-  roomType: 4
-  layoutPrefab: {fileID: 6824032912967098769, guid: 071a83090f1a4c94dac61ffb768e0b7e, type: 3}
+  roomName: 
+  roomType: 0
+  layoutPrefab: {fileID: 6824032912967098769, guid: c6a65c7045526ac49acb1c022b9e198c, type: 3}
   waves:
-  - {fileID: 11400000, guid: be2e39df5f62fb747af49c9660f59acd, type: 2}
+  - {fileID: 11400000, guid: c5d22b7f83b034045bfb07cfed26a028, type: 2}
   - {fileID: 11400000, guid: 24bfad6c9b937f24195dec5a85714a75, type: 2}
-  - {fileID: 11400000, guid: f5492f4accf9f7849bb46cc2770abf48, type: 2}
-  - {fileID: 11400000, guid: 625d32d889304854b933355922077afc, type: 2}
+  - {fileID: 11400000, guid: c99f8a3b21251d24f81cb6883680cb86, type: 2}
+  - {fileID: 11400000, guid: 24a25dab5ce3ef541b83bcf3a395a66e, type: 2}
+  - {fileID: 11400000, guid: 482c33ecb1b832e4995c234721d4af79, type: 2}

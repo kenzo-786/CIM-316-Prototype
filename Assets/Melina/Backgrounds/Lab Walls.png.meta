@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: f44e25fb8d0877641a9b2098075ae921
+guid: 5f28f17beeaaa824b884a25cda4a526a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1383373440328361802
-    second: Hallway Floor_0
+      213: 3587513667688426904
+    second: Lab Walls_0
+  - first:
+      213: -274797680066205892
+    second: Lab Walls_1
+  - first:
+      213: 5904384762000181298
+    second: Lab Walls_2
+  - first:
+      213: 6478337291820032575
+    second: Lab Walls_3
+  - first:
+      213: -3106337076566439218
+    second: Lab Walls_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hallway Floor_0
+      name: Lab Walls_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1010
         width: 1920
-        height: 1080
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6b894897f254dcce0800000000000000
-      internalID: -1383373440328361802
+      spriteID: 89d6d6d5ca869c130800000000000000
+      internalID: 3587513667688426904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab Walls_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 898
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c376d8647f8bf2cf0800000000000000
+      internalID: -274797680066205892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab Walls_2
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 705
+        width: 892
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 238004488a690f150800000000000000
+      internalID: 5904384762000181298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab Walls_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 535
+        width: 340
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f326916717da7e950800000000000000
+      internalID: 6478337291820032575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lab Walls_4
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 534
+        width: 288
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecac1ae03e214e4d0800000000000000
+      internalID: -3106337076566439218
       vertices: []
       indices: 
       edges: []
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hallway Floor_0: -1383373440328361802
+      Lab Walls_0: 3587513667688426904
+      Lab Walls_1: -274797680066205892
+      Lab Walls_2: 5904384762000181298
+      Lab Walls_3: 6478337291820032575
+      Lab Walls_4: -3106337076566439218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

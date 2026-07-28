@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7afa0265f469104982d6c0e25a04ebb, type: 3}
-  m_Name: Open Area
+  m_Name: Locker
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  roomName: Level1
-  roomType: 3
-  layoutPrefab: {fileID: 6824032912967098769, guid: ee5ec76c918b5b8459718f27c2e9aa0a, type: 3}
+  roomName: 
+  roomType: 0
+  layoutPrefab: {fileID: 6824032912967098769, guid: 62e828c239e9c544bb7a04e5764f65ba, type: 3}
   waves:
-  - {fileID: 11400000, guid: 141a8656a681b9a48b220e59c7d6df9b, type: 2}
+  - {fileID: 11400000, guid: f5492f4accf9f7849bb46cc2770abf48, type: 2}
+  - {fileID: 11400000, guid: fba84acb444ccb941a73492206d988bb, type: 2}
+  - {fileID: 11400000, guid: cffa09509ae2c6f4996f1458a65392c5, type: 2}
   - {fileID: 11400000, guid: e867571338546e1479a855605ae4c6e5, type: 2}
-  - {fileID: 11400000, guid: 141a8656a681b9a48b220e59c7d6df9b, type: 2}
-  - {fileID: 11400000, guid: e867571338546e1479a855605ae4c6e5, type: 2}
+  - {fileID: 11400000, guid: 482c33ecb1b832e4995c234721d4af79, type: 2}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f44e25fb8d0877641a9b2098075ae921
+guid: 7b6eea656864cae4cb699c5587e2951b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1383373440328361802
-    second: Hallway Floor_0
+      213: -7494692400043721993
+    second: Lab BG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hallway Floor_0
+      name: Lab BG_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6b894897f254dcce0800000000000000
-      internalID: -1383373440328361802
+      spriteID: 7faf29288f08df790800000000000000
+      internalID: -7494692400043721993
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hallway Floor_0: -1383373440328361802
+      Lab BG_0: -7494692400043721993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
