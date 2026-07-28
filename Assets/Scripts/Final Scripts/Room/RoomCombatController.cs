@@ -6,17 +6,27 @@ using UnityEngine;
 
 public class RoomCombatController : MonoBehaviour
 {
+    [Header("Systems")]
     [SerializeField] private ObjectPool xpGemPool;
     [SerializeField] private PlayerExperience playerExperience;
     [SerializeField] private RoomDifficultySettings difficultySettings;
 
-    private readonly List<EnemyBase> aliveEnemies = new List<EnemyBase>();
-    private readonly List<ExperienceGem> droppedGems = new List<ExperienceGem>();
+    [Header("Player")]
+    [SerializeField] private PlayerWeaponController playerWeaponController;
+
+    private readonly List<EnemyBase> aliveEnemies =
+        new List<EnemyBase>();
+
+    private readonly List<ExperienceGem> droppedGems =
+        new List<ExperienceGem>();
 
     private RoomData currentRoomData;
     private RoomLayout currentLayout;
     private Transform player;
-    private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
+
+    private RoomDifficultySnapshot currentDifficulty =
+        RoomDifficultySnapshot.Default;
+
     private Coroutine waveRoutine;
     private bool combatRunning;
 
@@ -24,38 +34,68 @@ public class RoomCombatController : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyRuntimeRegistry.OnEnemySpawnedRuntime += TrackRuntimeEnemy;
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime +=
+            TrackRuntimeEnemy;
     }
 
     private void OnDisable()
     {
-        EnemyRuntimeRegistry.OnEnemySpawnedRuntime -= TrackRuntimeEnemy;
+        EnemyRuntimeRegistry.OnEnemySpawnedRuntime -=
+            TrackRuntimeEnemy;
+
         StopAllCoroutines();
         ClearEnemySubscriptions();
+        SetPlayerCombatActive(false);
+        DespawnAllCombatProjectiles();
     }
 
-    public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform)
+    public void StartRoomCombat(
+        RoomData roomData,
+        RoomLayout layout,
+        Transform playerTransform)
     {
-        StartRoomCombat(roomData, layout, playerTransform, 0);
+        StartRoomCombat(
+            roomData,
+            layout,
+            playerTransform,
+            0
+        );
     }
 
-    public void StartRoomCombat(RoomData roomData, RoomLayout layout, Transform playerTransform, int roomIndex)
+    public void StartRoomCombat(
+        RoomData roomData,
+        RoomLayout layout,
+        Transform playerTransform,
+        int roomIndex)
     {
         StopCurrentCombat();
 
         currentRoomData = roomData;
         currentLayout = layout;
         player = playerTransform;
+
+        if (playerWeaponController == null &&
+            player != null)
+        {
+            playerWeaponController =
+                player.GetComponent<PlayerWeaponController>();
+        }
+
         combatRunning = true;
 
-        currentDifficulty = difficultySettings != null
-            ? difficultySettings.GetDifficulty(roomIndex)
-            : RoomDifficultySnapshot.Default;
+        currentDifficulty =
+            difficultySettings != null
+                ? difficultySettings
+                    .GetDifficulty(roomIndex)
+                : RoomDifficultySnapshot.Default;
 
         aliveEnemies.Clear();
         droppedGems.Clear();
 
-        waveRoutine = StartCoroutine(RunWaves());
+        SetPlayerCombatActive(true);
+
+        waveRoutine =
+            StartCoroutine(RunWaves());
     }
 
     public void StopCurrentCombat()
@@ -68,6 +108,9 @@ public class RoomCombatController : MonoBehaviour
             waveRoutine = null;
         }
 
+        SetPlayerCombatActive(false);
+        DespawnAllCombatProjectiles();
+
         ClearEnemySubscriptions();
         aliveEnemies.Clear();
         droppedGems.Clear();
@@ -75,37 +118,55 @@ public class RoomCombatController : MonoBehaviour
 
     private IEnumerator RunWaves()
     {
-        if (currentRoomData == null || currentRoomData.waves == null || currentRoomData.waves.Length == 0)
+        if (currentRoomData == null ||
+            currentRoomData.waves == null ||
+            currentRoomData.waves.Length == 0)
         {
             FinishRoomCombat();
             yield break;
         }
 
-        foreach (WaveData wave in currentRoomData.waves)
+        foreach (WaveData wave in
+                 currentRoomData.waves)
         {
             if (wave == null)
                 continue;
 
-            yield return new WaitForSeconds(wave.delayBeforeWave);
+            yield return new WaitForSeconds(
+                wave.delayBeforeWave
+            );
 
             if (wave.enemies == null)
                 continue;
 
-            foreach (EnemySpawnEntry entry in wave.enemies)
+            foreach (EnemySpawnEntry entry in
+                     wave.enemies)
             {
-                if (entry == null || entry.enemyData == null)
+                if (entry == null ||
+                    entry.enemyData == null)
+                {
                     continue;
+                }
 
-                for (int i = 0; i < entry.count; i++)
+                for (int i = 0;
+                     i < entry.count;
+                     i++)
                 {
                     SpawnEnemy(entry.enemyData);
 
                     if (entry.delayBetweenSpawns > 0f)
-                        yield return new WaitForSeconds(entry.delayBetweenSpawns);
+                    {
+                        yield return
+                            new WaitForSeconds(
+                                entry.delayBetweenSpawns
+                            );
+                    }
                 }
             }
 
-            yield return new WaitUntil(() => aliveEnemies.Count == 0);
+            yield return new WaitUntil(
+                () => aliveEnemies.Count == 0
+            );
         }
 
         FinishRoomCombat();
@@ -113,24 +174,44 @@ public class RoomCombatController : MonoBehaviour
 
     private void SpawnEnemy(EnemyData enemyData)
     {
-        if (enemyData == null || enemyData.prefab == null)
+        if (enemyData == null ||
+            enemyData.prefab == null)
+        {
             return;
+        }
 
-        Transform spawnPoint = GetRandomSpawnPoint();
-        Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : currentLayout.transform.position;
+        Transform spawnPoint =
+            GetRandomSpawnPoint();
 
-        GameObject enemyObject = Instantiate(enemyData.prefab, spawnPosition, Quaternion.identity);
-        EnemyBase enemy = enemyObject.GetComponent<EnemyBase>();
+        Vector3 spawnPosition =
+            spawnPoint != null
+                ? spawnPoint.position
+                : currentLayout.transform.position;
+
+        GameObject enemyObject =
+            Instantiate(
+                enemyData.prefab,
+                spawnPosition,
+                Quaternion.identity
+            );
+
+        EnemyBase enemy =
+            enemyObject.GetComponent<EnemyBase>();
 
         if (enemy == null)
+        {
+            Destroy(enemyObject);
             return;
+        }
 
         enemy.Initialize(enemyData, player);
         enemy.ApplyDifficulty(currentDifficulty);
+
         TrackEnemy(enemy);
     }
 
-    private void TrackRuntimeEnemy(EnemyBase enemy)
+    private void TrackRuntimeEnemy(
+        EnemyBase enemy)
     {
         if (!combatRunning)
             return;
@@ -140,43 +221,118 @@ public class RoomCombatController : MonoBehaviour
 
     private void TrackEnemy(EnemyBase enemy)
     {
-        if (enemy == null || aliveEnemies.Contains(enemy))
+        if (enemy == null ||
+            aliveEnemies.Contains(enemy))
+        {
             return;
+        }
 
         enemy.OnEnemyDied += HandleEnemyDied;
         aliveEnemies.Add(enemy);
     }
 
-    private void HandleEnemyDied(EnemyBase enemy)
+    private void HandleEnemyDied(
+        EnemyBase enemy)
     {
         if (enemy == null)
             return;
 
         enemy.OnEnemyDied -= HandleEnemyDied;
         aliveEnemies.Remove(enemy);
+
         DropXp(enemy);
     }
 
     private void DropXp(EnemyBase enemy)
     {
-        if (xpGemPool == null || enemy == null || enemy.EnemyData == null)
+        if (xpGemPool == null ||
+            enemy == null ||
+            enemy.EnemyData == null)
+        {
             return;
+        }
 
-        GameObject gemObject = xpGemPool.Get(enemy.transform.position, Quaternion.identity);
-        ExperienceGem gem = gemObject != null ? gemObject.GetComponent<ExperienceGem>() : null;
+        GameObject gemObject =
+            xpGemPool.Get(
+                enemy.transform.position,
+                Quaternion.identity
+            );
+
+        ExperienceGem gem =
+            gemObject != null
+                ? gemObject
+                    .GetComponent<ExperienceGem>()
+                : null;
 
         if (gem == null)
             return;
 
-        gem.Initialize(enemy.EnemyData.xpDropAmount);
+        gem.Initialize(
+            enemy.EnemyData.xpDropAmount
+        );
+
         droppedGems.Add(gem);
     }
 
     private void FinishRoomCombat()
     {
+        if (!combatRunning)
+            return;
+
         combatRunning = false;
+        waveRoutine = null;
+
+        SetPlayerCombatActive(false);
+        DespawnAllCombatProjectiles();
         MagnetizeAllGems();
+
         OnRoomCombatCleared?.Invoke();
+    }
+
+    private void SetPlayerCombatActive(bool active)
+    {
+        if (playerWeaponController == null &&
+            player != null)
+        {
+            playerWeaponController =
+                player.GetComponent<PlayerWeaponController>();
+        }
+
+        if (playerWeaponController != null)
+            playerWeaponController.SetCombatActive(active);
+    }
+
+    private void DespawnAllCombatProjectiles()
+    {
+        EraserProjectile[] playerProjectiles =
+            FindObjectsOfType<EraserProjectile>();
+
+        foreach (EraserProjectile projectile in
+                 playerProjectiles)
+        {
+            if (projectile != null &&
+                projectile.gameObject.activeInHierarchy)
+            {
+                PooledProjectileUtility.Despawn(
+                    projectile.gameObject
+                );
+            }
+        }
+
+        EnemyProjectile[] enemyProjectiles =
+            FindObjectsOfType<EnemyProjectile>();
+
+        foreach (EnemyProjectile projectile in
+                 enemyProjectiles)
+        {
+            if (projectile != null &&
+                projectile.gameObject.activeInHierarchy)
+            {
+                PooledProjectileUtility.Despawn(
+                    projectile.gameObject
+                );
+            }
+        }
     }
 
     private void MagnetizeAllGems()
@@ -184,7 +340,12 @@ public class RoomCombatController : MonoBehaviour
         foreach (ExperienceGem gem in droppedGems)
         {
             if (gem != null)
-                gem.MagnetizeTo(player, playerExperience);
+            {
+                gem.MagnetizeTo(
+                    player,
+                    playerExperience
+                );
+            }
         }
 
         droppedGems.Clear();
@@ -192,15 +353,24 @@ public class RoomCombatController : MonoBehaviour
 
     private Transform GetRandomSpawnPoint()
     {
-        if (currentLayout == null || currentLayout.EnemySpawnRoot == null)
+        if (currentLayout == null ||
+            currentLayout.EnemySpawnRoot == null)
+        {
             return null;
+        }
 
-        Transform root = currentLayout.EnemySpawnRoot;
+        Transform root =
+            currentLayout.EnemySpawnRoot;
 
         if (root.childCount == 0)
             return root;
 
-        return root.GetChild(UnityEngine.Random.Range(0, root.childCount));
+        return root.GetChild(
+            UnityEngine.Random.Range(
+                0,
+                root.childCount
+            )
+        );
     }
 
     private void ClearEnemySubscriptions()
@@ -208,7 +378,10 @@ public class RoomCombatController : MonoBehaviour
         foreach (EnemyBase enemy in aliveEnemies)
         {
             if (enemy != null)
-                enemy.OnEnemyDied -= HandleEnemyDied;
+            {
+                enemy.OnEnemyDied -=
+                    HandleEnemyDied;
+            }
         }
     }
 }

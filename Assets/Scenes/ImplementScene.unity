@@ -1568,6 +1568,7 @@ MonoBehaviour:
   firePoint: {fileID: 746033714}
   projectileSpeed: 12
   projectileLifetime: 4
+  homingTurnSpeed: 360
   basePierceCount: 0
   baseEnemyBounceCount: 0
   baseWallBounceCount: 0
@@ -1606,7 +1607,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
   startingWeapon: {fileID: 242738769}
   autoFireWhenStationary: 1
-  allowAttackWhileMoving: 1
+  allowAttackWhileMoving: 0
+  autoTargetEnemies: 1
+  combatActive: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 7168
+  targetRange: 25
+  targetRefreshInterval: 0.1
+  requireLineOfSight: 1
 --- !u!114 &242738772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1792,6 +1804,7 @@ MonoBehaviour:
   firePoint: {fileID: 746033714}
   slashWaveSpeed: 11
   slashWaveLifetime: 3
+  homingTurnSpeed: 360
   pierceCount: 0
   enemyBounceCount: 0
   wallBounceCount: 0
@@ -3739,6 +3752,7 @@ MonoBehaviour:
   xpGemPool: {fileID: 859712859}
   playerExperience: {fileID: 242738775}
   difficultySettings: {fileID: 0}
+  playerWeaponController: {fileID: 242738771}
 --- !u!1 &746033713
 GameObject:
   m_ObjectHideFlags: 0

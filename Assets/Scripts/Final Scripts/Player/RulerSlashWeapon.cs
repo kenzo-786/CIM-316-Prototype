@@ -12,13 +12,14 @@ public class RulerSlashWeapon :PlayerWeaponBase
     [SerializeField] private Transform firePoint;
     [SerializeField] private float slashWaveSpeed = 11f;
     [SerializeField] private float slashWaveLifetime = 3f;
+    [SerializeField] private float homingTurnSpeed = 900f;
 
     [Header("Upgrade Driven")]
     [SerializeField] private int pierceCount;
     [SerializeField] private int enemyBounceCount;
     [SerializeField] private int wallBounceCount;
-    [SerializeField] private int backToBackShots;
-    [SerializeField] private int sideBySideShots;
+    [SerializeField] private int backToBackShots = 1;
+    [SerializeField] private int sideBySideShots = 1;
     [SerializeField] private float backToBackDelay = 0.08f;
     [SerializeField] private float sideOffset = 0.35f;
 
@@ -29,89 +30,185 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
         direction.Normalize();
 
+        Transform target = AttackTarget;
+
         DoMeleeSlash();
-        FireWavePattern(direction);
+        FireWavePattern(direction, target);
     }
 
     private void DoMeleeSlash()
     {
-        Vector3 center = slashPoint != null ? slashPoint.position : transform.position;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(center, slashRadius, enemyLayer);
+        Vector3 center = slashPoint != null
+            ? slashPoint.position
+            : transform.position;
+
+        Collider2D[] hits =
+            Physics2D.OverlapCircleAll(
+                center,
+                slashRadius,
+                enemyLayer
+            );
 
         foreach (Collider2D hit in hits)
         {
-            IDamageable damageable = hit.GetComponent<IDamageable>();
+            IDamageable damageable =
+                hit.GetComponent<IDamageable>();
 
             if (damageable == null)
-                damageable = hit.GetComponentInParent<IDamageable>();
+            {
+                damageable =
+                    hit.GetComponentInParent<IDamageable>();
+            }
 
-            if (damageable != null)
-                damageable.TakeDamage(new DamageInfo(GetFinalDamage(), gameObject, hit.transform.position));
+            if (damageable == null)
+                continue;
+
+            damageable.TakeDamage(
+                new DamageInfo(
+                    GetFinalDamage(),
+                    gameObject,
+                    hit.transform.position
+                )
+            );
         }
     }
 
-    private void FireWavePattern(Vector2 direction)
+    private void FireWavePattern(
+        Vector2 direction,
+        Transform target)
     {
         if (slashWavePrefab == null)
             return;
 
-        int sideShots = Mathf.Max(1, sideBySideShots);
-        int repeatShots = Mathf.Max(1, backToBackShots);
+        int sideShots =
+            Mathf.Max(1, sideBySideShots);
 
-        for (int repeat = 0; repeat < repeatShots; repeat++)
+        int repeatShots =
+            Mathf.Max(1, backToBackShots);
+
+        for (int repeat = 0;
+             repeat < repeatShots;
+             repeat++)
         {
             float delay = repeat * backToBackDelay;
-            InvokeWaveVolley(direction, sideShots, delay);
+
+            InvokeWaveVolley(
+                direction,
+                target,
+                sideShots,
+                delay
+            );
         }
     }
 
-    private void InvokeWaveVolley(Vector2 direction, int sideShots, float delay)
+    private void InvokeWaveVolley(
+        Vector2 direction,
+        Transform target,
+        int sideShots,
+        float delay)
     {
         if (delay <= 0f)
         {
-            FireWaveVolley(direction, sideShots);
+            FireWaveVolley(
+                direction,
+                target,
+                sideShots
+            );
+
             return;
         }
 
-        StartCoroutine(FireWaveVolleyDelayed(direction, sideShots, delay));
+        StartCoroutine(
+            FireWaveVolleyDelayed(
+                direction,
+                target,
+                sideShots,
+                delay
+            )
+        );
     }
 
-    private System.Collections.IEnumerator FireWaveVolleyDelayed(Vector2 direction, int sideShots, float delay)
+    private System.Collections.IEnumerator
+        FireWaveVolleyDelayed(
+            Vector2 direction,
+            Transform target,
+            int sideShots,
+            float delay)
     {
         yield return new WaitForSeconds(delay);
-        FireWaveVolley(direction, sideShots);
+
+        FireWaveVolley(
+            direction,
+            target,
+            sideShots
+        );
     }
 
-    private void FireWaveVolley(Vector2 direction, int sideShots)
+    private void FireWaveVolley(
+        Vector2 direction,
+        Transform target,
+        int sideShots)
     {
         if (sideShots <= 1)
         {
-            SpawnSlashWave(direction, Vector2.zero);
+            SpawnSlashWave(
+                direction,
+                Vector2.zero,
+                target
+            );
+
             return;
         }
 
-        Vector2 perpendicular = new Vector2(-direction.y, direction.x);
-        float startOffset = -(sideShots - 1) * sideOffset * 0.5f;
+        Vector2 perpendicular =
+            new Vector2(-direction.y, direction.x);
+
+        float startOffset =
+            -(sideShots - 1) * sideOffset * 0.5f;
 
         for (int i = 0; i < sideShots; i++)
         {
-            Vector2 offset = perpendicular * (startOffset + i * sideOffset);
-            SpawnSlashWave(direction, offset);
+            Vector2 offset =
+                perpendicular *
+                (startOffset + i * sideOffset);
+
+            SpawnSlashWave(
+                direction,
+                offset,
+                target
+            );
         }
     }
 
-    private void SpawnSlashWave(Vector2 direction, Vector2 offset)
+    private void SpawnSlashWave(
+        Vector2 direction,
+        Vector2 offset,
+        Transform target)
     {
-        Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
+        Vector3 spawnPosition = firePoint != null
+            ? firePoint.position
+            : transform.position;
+
         spawnPosition += (Vector3)offset;
 
-        GameObject waveObject = ProjectilePoolProvider.Instance != null
-            ? ProjectilePoolProvider.Instance.Spawn(slashWavePrefab, spawnPosition, Quaternion.identity)
-            : Instantiate(slashWavePrefab, spawnPosition, Quaternion.identity);
+        GameObject waveObject =
+            ProjectilePoolProvider.Instance != null
+                ? ProjectilePoolProvider.Instance.Spawn(
+                    slashWavePrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                )
+                : Instantiate(
+                    slashWavePrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
 
-        RulerSlashWave wave = waveObject != null
-            ? waveObject.GetComponent<RulerSlashWave>()
-            : null;
+        RulerSlashWave wave =
+            waveObject != null
+                ? waveObject
+                    .GetComponent<RulerSlashWave>()
+                : null;
 
         if (wave == null)
             return;
@@ -126,6 +223,11 @@ public class RulerSlashWeapon :PlayerWeaponBase
             wallBounceCount,
             gameObject
         );
+
+        wave.SetHomingTarget(
+            target,
+            homingTurnSpeed
+        );
     }
 
     public void SetProjectileModifiers(
@@ -135,16 +237,28 @@ public class RulerSlashWeapon :PlayerWeaponBase
         int newBackToBackShots,
         int newSideBySideShots)
     {
-        pierceCount = Mathf.Max(0, newPierceCount);
-        enemyBounceCount = Mathf.Max(0, newEnemyBounceCount);
-        wallBounceCount = Mathf.Max(0, newWallBounceCount);
-        backToBackShots = Mathf.Max(1, newBackToBackShots);
-        sideBySideShots = Mathf.Max(1, newSideBySideShots);
+        pierceCount =
+            Mathf.Max(0, newPierceCount);
+
+        enemyBounceCount =
+            Mathf.Max(0, newEnemyBounceCount);
+
+        wallBounceCount =
+            Mathf.Max(0, newWallBounceCount);
+
+        backToBackShots =
+            Mathf.Max(1, newBackToBackShots);
+
+        sideBySideShots =
+            Mathf.Max(1, newSideBySideShots);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 center = slashPoint != null ? slashPoint.position : transform.position;
+        Vector3 center = slashPoint != null
+            ? slashPoint.position
+            : transform.position;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(center, slashRadius);
     }

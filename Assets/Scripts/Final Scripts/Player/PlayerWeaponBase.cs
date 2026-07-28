@@ -6,7 +6,10 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     [SerializeField] protected float baseCooldown = 0.5f;
 
     private float nextAttackTime;
+    private Transform attackTarget;
+
     protected PlayerStats stats;
+    protected Transform AttackTarget => attackTarget;
 
     protected virtual void Awake()
     {
@@ -15,19 +18,35 @@ public abstract class PlayerWeaponBase : MonoBehaviour
 
     public bool TryAttack(Vector2 aimDirection)
     {
-        float attackSpeed = stats != null ? stats.GetAttackSpeedMultiplier() : 1f;
-        float cooldown = baseCooldown / attackSpeed;
+        float attackSpeed = stats != null
+            ? stats.GetAttackSpeedMultiplier()
+            : 1f;
 
-        if (Time.time < nextAttackTime) return false;
+        float cooldown =
+            baseCooldown / Mathf.Max(0.01f, attackSpeed);
+
+        if (Time.time < nextAttackTime)
+            return false;
+
+        if (aimDirection == Vector2.zero)
+            aimDirection = Vector2.right;
 
         nextAttackTime = Time.time + cooldown;
+
         Attack(aimDirection.normalized);
         return true;
     }
 
+    public void SetAttackTarget(Transform target)
+    {
+        attackTarget = target;
+    }
+
     protected float GetFinalDamage()
     {
-        if (stats == null) return baseDamage;
+        if (stats == null)
+            return baseDamage;
+
         return stats.RollDamage(baseDamage);
     }
 
