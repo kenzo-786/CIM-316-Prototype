@@ -6,6 +6,13 @@ public enum PlayerWeaponType
     Eraser
 }
 
+public enum PlayerFiringMode
+{
+    BuildAStationaryMouseAim,
+    BuildBMoveAndShootMouseAim,
+    BuildCStationaryAutoTarget
+}
+
 [CreateAssetMenu(menuName = "Deadline Dungeon/Player Character")]
 public class PlayerCharacterData : ScriptableObject
 {
@@ -14,11 +21,16 @@ public class PlayerCharacterData : ScriptableObject
     public Sprite portrait;
     public Sprite gameplaySprite;
 
+    [Header("Animation")]
+    public RuntimeAnimatorController animatorController;
+
     [Header("Stats")]
     public float maxHealth = 100f;
     public float moveSpeed = 5f;
 
     [Header("Combat")]
     public PlayerWeaponType weaponType;
-    public bool canAttackWhileMoving;
+
+    public PlayerFiringMode firingMode =
+        PlayerFiringMode.BuildAStationaryMouseAim;
 }

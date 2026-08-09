@@ -34,10 +34,10 @@ public class SpiderAmbushEnemy : EnemyBase
     [Header("References")]
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private SpriteRenderer[] visuals;
+    [SerializeField] private EnemyTelegraphFeedback telegraph;
 
     private PlayerMovement playerMovement;
     private RoomBounds roomBounds;
-
     private SpiderState state;
     private float stateTimer;
     private float stationaryTimer;
@@ -49,10 +49,19 @@ public class SpiderAmbushEnemy : EnemyBase
         base.Awake();
 
         if (bodyCollider == null)
+        {
             bodyCollider = GetComponent<Collider2D>();
+        }
 
         if (visuals == null || visuals.Length == 0)
+        {
             visuals = GetComponentsInChildren<SpriteRenderer>();
+        }
+
+        if (telegraph == null)
+        {
+            telegraph = GetComponent<EnemyTelegraphFeedback>();
+        }
 
         roomBounds = FindObjectOfType<RoomBounds>();
     }
@@ -65,7 +74,8 @@ public class SpiderAmbushEnemy : EnemyBase
 
     public override void Initialize(
         EnemyData data,
-        Transform playerTarget)
+        Transform playerTarget
+    )
     {
         base.Initialize(data, playerTarget);
 
@@ -81,7 +91,9 @@ public class SpiderAmbushEnemy : EnemyBase
     protected override void TickEnemy()
     {
         if (target == null)
+        {
             return;
+        }
 
         switch (state)
         {
@@ -110,15 +122,22 @@ public class SpiderAmbushEnemy : EnemyBase
     private void TickSpawnReveal()
     {
         StopMoving();
+
         stateTimer -= Time.fixedDeltaTime;
 
         if (stateTimer <= initialFlashDuration)
+        {
             SetVisuals(IsFlashVisible());
+        }
         else
+        {
             SetVisuals(true);
+        }
 
         if (stateTimer <= 0f)
+        {
             EnterHidden();
+        }
     }
 
     private void TickHidden()
@@ -134,17 +153,18 @@ public class SpiderAmbushEnemy : EnemyBase
         stationaryTimer += Time.fixedDeltaTime;
 
         if (stationaryTimer >= stationaryDelay)
+        {
             BeginTelegraph();
+        }
     }
 
     private void TickTelegraph()
     {
         StopMoving();
-        stateTimer -= Time.fixedDeltaTime;
 
+        stateTimer -= Time.fixedDeltaTime;
         SetVisuals(IsFlashVisible());
 
-        // Moving during the warning cancels the ambush.
         if (IsPlayerMoving())
         {
             BeginVanishing();
@@ -152,7 +172,9 @@ public class SpiderAmbushEnemy : EnemyBase
         }
 
         if (stateTimer <= 0f)
+        {
             BecomeActive();
+        }
     }
 
     private void TickActive()
@@ -161,7 +183,10 @@ public class SpiderAmbushEnemy : EnemyBase
         SetBodyCollider(true);
 
         float distance =
-            Vector2.Distance(transform.position, target.position);
+            Vector2.Distance(
+                transform.position,
+                target.position
+            );
 
         if (distance > vanishDistance)
         {
@@ -182,12 +207,14 @@ public class SpiderAmbushEnemy : EnemyBase
     private void TickVanishing()
     {
         StopMoving();
-        stateTimer -= Time.fixedDeltaTime;
 
+        stateTimer -= Time.fixedDeltaTime;
         SetVisuals(IsFlashVisible());
 
         if (stateTimer <= 0f)
+        {
             EnterHidden();
+        }
     }
 
     private void BeginSpawnReveal()
@@ -205,6 +232,11 @@ public class SpiderAmbushEnemy : EnemyBase
         state = SpiderState.Hidden;
         stationaryTimer = 0f;
 
+        if (telegraph != null)
+        {
+            telegraph.End();
+        }
+
         SetVisuals(false);
         SetBodyCollider(false);
         StopMoving();
@@ -218,6 +250,11 @@ public class SpiderAmbushEnemy : EnemyBase
 
         transform.position = FindAmbushPosition();
 
+        if (telegraph != null)
+        {
+            telegraph.Begin(telegraphDuration);
+        }
+
         SetBodyCollider(false);
         SetVisuals(true);
         StopMoving();
@@ -226,8 +263,14 @@ public class SpiderAmbushEnemy : EnemyBase
     private void BecomeActive()
     {
         state = SpiderState.Active;
+
         attackReadyTime =
             Time.time + attackAfterEmergingDelay;
+
+        if (telegraph != null)
+        {
+            telegraph.End();
+        }
 
         SetVisuals(true);
         SetBodyCollider(true);
@@ -243,6 +286,11 @@ public class SpiderAmbushEnemy : EnemyBase
 
         state = SpiderState.Vanishing;
         stateTimer = vanishDuration;
+
+        if (telegraph != null)
+        {
+            telegraph.End();
+        }
 
         SetBodyCollider(false);
         StopMoving();
@@ -260,7 +308,8 @@ public class SpiderAmbushEnemy : EnemyBase
 
         DamageTarget(
             ContactDamage,
-            target.position);
+            target.position
+        );
     }
 
     private Vector2 FindAmbushPosition()
@@ -271,27 +320,36 @@ public class SpiderAmbushEnemy : EnemyBase
                 Random.insideUnitCircle.normalized;
 
             if (direction == Vector2.zero)
+            {
                 direction = Vector2.right;
+            }
 
             Vector2 point =
                 (Vector2)target.position +
-                direction * emergeDistance;
+                direction *
+                emergeDistance;
 
             if (roomBounds != null)
+            {
                 point = roomBounds.ClampPoint(point);
+            }
 
             bool blocked = Physics2D.OverlapCircle(
                 point,
                 spawnClearance,
-                blockedLayer);
+                blockedLayer
+            );
 
             if (!blocked)
+            {
                 return point;
+            }
         }
 
         Vector2 fallback =
             (Vector2)target.position +
-            Vector2.right * emergeDistance;
+            Vector2.right *
+            emergeDistance;
 
         return roomBounds != null
             ? roomBounds.ClampPoint(fallback)
@@ -307,27 +365,36 @@ public class SpiderAmbushEnemy : EnemyBase
     private bool IsFlashVisible()
     {
         if (flashInterval <= 0f)
+        {
             return true;
+        }
 
         return Mathf.FloorToInt(
-            Time.time / flashInterval) % 2 == 0;
+            Time.time / flashInterval
+        ) % 2 == 0;
     }
 
     private void SetVisuals(bool visible)
     {
         if (visuals == null)
+        {
             return;
+        }
 
         foreach (SpriteRenderer spriteRenderer in visuals)
         {
             if (spriteRenderer != null)
+            {
                 spriteRenderer.enabled = visible;
+            }
         }
     }
 
     private void SetBodyCollider(bool enabled)
     {
         if (bodyCollider != null)
+        {
             bodyCollider.enabled = enabled;
+        }
     }
 }

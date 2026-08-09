@@ -1,13 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Damage Rolls")]
     [SerializeField] private float critMultiplier = 2f;
     [SerializeField] private float headshotMultiplier = 3f;
     [SerializeField] private float lowHealthThreshold = 0.35f;
 
     private Health health;
+    private PlayerMovement movement;
+    private Coroutine rageRoutine;
+
+    private bool rageActive;
+    private float rageDamageMultiplier = 1f;
+    private float rageAttackSpeedMultiplier = 1f;
+    private float movementSpeedBeforeRage;
 
     public float DamageMultiplier { get; private set; } = 1f;
     public float AttackSpeedMultiplier { get; private set; } = 1f;
@@ -28,21 +37,15 @@ public class PlayerStats : MonoBehaviour
 
     public float HealOnKillPercent { get; private set; }
 
-    private bool rageActive;
-    private float rageDamageMultiplier = 1f;
-    private float rageAttackSpeedMultiplier = 1f;
-    private float rageMoveSpeedMultiplier = 1f;
-
-    private PlayerMovement movement;
-    private float baseMoveSpeed;
-
     private void Awake()
     {
         health = GetComponent<Health>();
         movement = GetComponent<PlayerMovement>();
+    }
 
-        if (movement != null)
-            baseMoveSpeed = movement.MoveSpeed;
+    private void OnDisable()
+    {
+        RestoreMovementAfterRage();
     }
 
     public float RollDamage(float baseDamage)
@@ -50,7 +53,8 @@ public class PlayerStats : MonoBehaviour
         if (Random.value < OneShotChance)
             return 999999f;
 
-        float finalDamage = baseDamage * GetDamageMultiplier();
+        float finalDamage =
+            baseDamage * GetDamageMultiplier();
 
         if (Random.value < HeadshotChance)
             finalDamage *= headshotMultiplier;
@@ -70,7 +74,7 @@ public class PlayerStats : MonoBehaviour
         if (rageActive)
             multiplier *= rageDamageMultiplier;
 
-        return multiplier;
+        return Mathf.Max(0.1f, multiplier);
     }
 
     public float GetAttackSpeedMultiplier()
@@ -86,56 +90,167 @@ public class PlayerStats : MonoBehaviour
         return Mathf.Max(0.1f, multiplier);
     }
 
-    public void AddDamage(float value) => DamageMultiplier += value;
-    public void AddAttackSpeed(float value) => AttackSpeedMultiplier += value;
-    public void AddCritChance(float value) => CritChance += value;
-    public void AddHeadshotChance(float value) => HeadshotChance += value;
-    public void AddOneShotChance(float value) => OneShotChance += value;
-    public void AddLowHealthDamage(float value) => LowHealthDamageBonus += value;
-    public void AddLowHealthAttackSpeed(float value) => LowHealthAttackSpeedBonus += value;
-    public void AddSideProjectiles(int value) => SideProjectiles += value;
-    public void AddBackProjectiles(int value) => BackProjectiles += value;
-    public void AddPierce(int value) => PierceCount += value;
-    public void AddEnemyBounce(int value) => EnemyBounceCount += value;
-    public void AddWallBounce(int value) => WallBounceCount += value;
-    public void AddExtraLife(int value) => ExtraLives += value;
-    public void AddHealOnKill(float value) => HealOnKillPercent += value;
+    public void AddDamage(float value)
+    {
+        DamageMultiplier += Mathf.Max(0f, value);
+    }
+
+    public void AddAttackSpeed(float value)
+    {
+        AttackSpeedMultiplier += Mathf.Max(0f, value);
+    }
+
+    public void AddCritChance(float value)
+    {
+        CritChance = Mathf.Clamp01(CritChance + value);
+    }
+
+    public void AddHeadshotChance(float value)
+    {
+        HeadshotChance =
+            Mathf.Clamp01(HeadshotChance + value);
+    }
+
+    public void AddOneShotChance(float value)
+    {
+        OneShotChance =
+            Mathf.Clamp01(OneShotChance + value);
+    }
+
+    public void AddLowHealthDamage(float value)
+    {
+        LowHealthDamageBonus += Mathf.Max(0f, value);
+    }
+
+    public void AddLowHealthAttackSpeed(float value)
+    {
+        LowHealthAttackSpeedBonus +=
+            Mathf.Max(0f, value);
+    }
+
+    public void AddSideProjectiles(int value)
+    {
+        SideProjectiles += Mathf.Max(0, value);
+    }
+
+    public void AddBackProjectiles(int value)
+    {
+        BackProjectiles += Mathf.Max(0, value);
+    }
+
+    public void AddPierce(int value)
+    {
+        PierceCount += Mathf.Max(0, value);
+    }
+
+    public void AddEnemyBounce(int value)
+    {
+        EnemyBounceCount += Mathf.Max(0, value);
+    }
+
+    public void AddWallBounce(int value)
+    {
+        WallBounceCount += Mathf.Max(0, value);
+    }
+
+    public void AddExtraLife(int value)
+    {
+        ExtraLives += Mathf.Max(0, value);
+    }
+
+    public void AddHealOnKill(float value)
+    {
+        HealOnKillPercent =
+            Mathf.Clamp01(HealOnKillPercent + value);
+    }
 
     public bool TryUseExtraLife()
     {
-        if (ExtraLives <= 0) return false;
+        if (ExtraLives <= 0)
+            return false;
 
         ExtraLives--;
         return true;
     }
 
-    public void ActivateRage(float duration, float damageBoost, float attackSpeedBoost, float moveSpeedBoost)
+    public void ActivateRage(
+        float duration,
+        float damageBoost,
+        float attackSpeedBoost,
+        float moveSpeedBoost)
     {
-        StopAllCoroutines();
-        StartCoroutine(RageRoutine(duration, damageBoost, attackSpeedBoost, moveSpeedBoost));
+        if (rageRoutine != null)
+        {
+            StopCoroutine(rageRoutine);
+            rageRoutine = null;
+
+            RestoreMovementAfterRage();
+        }
+
+        rageRoutine = StartCoroutine(
+            RageRoutine(
+                duration,
+                damageBoost,
+                attackSpeedBoost,
+                moveSpeedBoost
+            )
+        );
     }
 
-    private System.Collections.IEnumerator RageRoutine(float duration, float damageBoost, float attackSpeedBoost, float moveSpeedBoost)
+    private IEnumerator RageRoutine(
+        float duration,
+        float damageBoost,
+        float attackSpeedBoost,
+        float moveSpeedBoost)
     {
         rageActive = true;
-        rageDamageMultiplier = damageBoost;
-        rageAttackSpeedMultiplier = attackSpeedBoost;
-        rageMoveSpeedMultiplier = moveSpeedBoost;
+
+        rageDamageMultiplier =
+            Mathf.Max(1f, damageBoost);
+
+        rageAttackSpeedMultiplier =
+            Mathf.Max(1f, attackSpeedBoost);
 
         if (movement != null)
-            movement.SetMoveSpeed(baseMoveSpeed * rageMoveSpeedMultiplier);
+        {
+            movementSpeedBeforeRage =
+                movement.MoveSpeed;
 
-        yield return new WaitForSeconds(duration);
+            movement.SetMoveSpeed(
+                movementSpeedBeforeRage *
+                Mathf.Max(1f, moveSpeedBoost)
+            );
+        }
+
+        yield return new WaitForSeconds(
+            Mathf.Max(0f, duration)
+        );
+
+        RestoreMovementAfterRage();
+        rageRoutine = null;
+    }
+
+    private void RestoreMovementAfterRage()
+    {
+        if (rageActive && movement != null)
+        {
+            movement.SetMoveSpeed(
+                movementSpeedBeforeRage
+            );
+        }
 
         rageActive = false;
-
-        if (movement != null)
-            movement.SetMoveSpeed(baseMoveSpeed);
+        rageDamageMultiplier = 1f;
+        rageAttackSpeedMultiplier = 1f;
     }
 
     private bool IsLowHealth()
     {
-        if (health == null || health.MaxHealth <= 0) return false;
-        return health.CurrentHealth / health.MaxHealth <= lowHealthThreshold;
+        if (health == null || health.MaxHealth <= 0f)
+            return false;
+
+        return
+            health.CurrentHealth / health.MaxHealth <=
+            lowHealthThreshold;
     }
 }

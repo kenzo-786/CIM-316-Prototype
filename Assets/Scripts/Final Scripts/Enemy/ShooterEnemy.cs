@@ -10,6 +10,10 @@ public class ShooterEnemy : EnemyBase
     [SerializeField] private float movementStepCooldown = 0.8f;
     [SerializeField] private LayerMask shotBlockingLayer;
 
+    [Header("Shot Telegraph")]
+    [SerializeField, Min(0f)] private float shotWindup = 0.25f;
+    [SerializeField] private EnemyTelegraphFeedback telegraph;
+
     [Header("Emergency Relocation")]
     [SerializeField] private bool allowRelocation = true;
     [SerializeField] private float dangerRange = 2.5f;
@@ -18,17 +22,17 @@ public class ShooterEnemy : EnemyBase
 
     private EnemyProjectileShooter shooter;
     private RoomBounds roomBounds;
-
     private float nextShootTime;
     private float nextMovementTime;
     private float movementTimer;
     private Vector2 movementDirection;
     private bool moving;
-
     private float nextRelocateTime;
     private float relocationTimer;
     private bool relocating;
     private int sideStepDirection = 1;
+    private bool preparingShot;
+    private float shotTimer;
 
     protected override void Awake()
     {
@@ -37,13 +41,21 @@ public class ShooterEnemy : EnemyBase
         shooter = GetComponent<EnemyProjectileShooter>();
         roomBounds = FindObjectOfType<RoomBounds>();
 
+        if (telegraph == null)
+        {
+            telegraph = GetComponent<EnemyTelegraphFeedback>();
+        }
+
         sideStepDirection =
-            GetInstanceID() % 2 == 0 ? 1 : -1;
+            GetInstanceID() % 2 == 0
+                ? 1
+                : -1;
     }
 
     public override void Initialize(
         EnemyData data,
-        Transform playerTarget)
+        Transform playerTarget
+    )
     {
         base.Initialize(data, playerTarget);
 
@@ -60,7 +72,22 @@ public class ShooterEnemy : EnemyBase
     protected override void TickEnemy()
     {
         if (target == null)
+        {
             return;
+        }
+
+        if (preparingShot)
+        {
+            StopMoving();
+            shotTimer -= Time.fixedDeltaTime;
+
+            if (shotTimer <= 0f)
+            {
+                ReleaseShot();
+            }
+
+            return;
+        }
 
         if (relocating)
         {
@@ -104,17 +131,21 @@ public class ShooterEnemy : EnemyBase
                 Vector2 sideways =
                     new Vector2(
                         -towardPlayer.y,
-                        towardPlayer.x) *
-                    sideStepDirection;
+                        towardPlayer.x
+                    ) * sideStepDirection;
 
                 sideStepDirection *= -1;
+
                 StartMovementStep(sideways);
                 return;
             }
         }
 
-        if (HasClearShot())
-            TryShoot();
+        if (HasClearShot() &&
+            Time.time >= nextShootTime)
+        {
+            BeginShot();
+        }
     }
 
     private bool HasClearShot()
@@ -122,15 +153,52 @@ public class ShooterEnemy : EnemyBase
         RaycastHit2D hit = Physics2D.Linecast(
             transform.position,
             target.position,
-            shotBlockingLayer);
+            shotBlockingLayer
+        );
 
         return hit.collider == null;
+    }
+
+    private void BeginShot()
+    {
+        preparingShot = true;
+        shotTimer = shotWindup;
+
+        if (telegraph != null)
+        {
+            telegraph.Begin(shotWindup);
+        }
+    }
+
+    private void ReleaseShot()
+    {
+        preparingShot = false;
+
+        if (telegraph != null)
+        {
+            telegraph.End();
+        }
+
+        nextShootTime = Time.time + AttackCooldown;
+
+        if (shooter != null &&
+            target != null &&
+            HasClearShot())
+        {
+            shooter.ShootAt(
+                target.position,
+                CurrentDifficulty.damageMultiplier,
+                gameObject
+            );
+        }
     }
 
     private void StartMovementStep(Vector2 direction)
     {
         if (direction == Vector2.zero)
+        {
             return;
+        }
 
         moving = true;
         movementDirection = direction.normalized;
@@ -153,7 +221,10 @@ public class ShooterEnemy : EnemyBase
             Time.fixedDeltaTime;
 
         if (roomBounds != null)
-            destination = roomBounds.ClampPoint(destination);
+        {
+            destination =
+                roomBounds.ClampPoint(destination);
+        }
 
         rb.MovePosition(destination);
         FaceDirection(movementDirection);
@@ -162,22 +233,6 @@ public class ShooterEnemy : EnemyBase
         {
             moving = false;
             StopMoving();
-        }
-    }
-
-    private void TryShoot()
-    {
-        if (Time.time < nextShootTime)
-            return;
-
-        nextShootTime = Time.time + AttackCooldown;
-
-        if (shooter != null)
-        {
-            shooter.ShootAt(
-                target.position,
-                CurrentDifficulty.damageMultiplier,
-                gameObject);
         }
     }
 
@@ -190,24 +245,33 @@ public class ShooterEnemy : EnemyBase
         nextRelocateTime =
             Time.time + relocationCooldown;
 
+        if (telegraph != null)
+        {
+            telegraph.Begin(relocationDelay);
+        }
+
         StopMoving();
     }
 
     private void TickRelocation()
     {
         StopMoving();
+
         relocationTimer -= Time.fixedDeltaTime;
 
         if (relocationTimer <= 0f)
-            FinishRelocation();
+        {
+            relocating = false;
+
+            if (telegraph != null)
+            {
+                telegraph.End();
+            }
+
+            if (roomBounds != null)
+            {
+                rb.position = roomBounds.GetRandomPoint();
+            }
+        }
     }
-
-    private void FinishRelocation()
-    {
-        relocating = false;
-
-        if (roomBounds != null)
-            rb.position = roomBounds.GetRandomPoint();
-    }
-
 }

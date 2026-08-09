@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RulerSlashWeapon :PlayerWeaponBase
@@ -12,14 +14,14 @@ public class RulerSlashWeapon :PlayerWeaponBase
     [SerializeField] private Transform firePoint;
     [SerializeField] private float slashWaveSpeed = 11f;
     [SerializeField] private float slashWaveLifetime = 3f;
-    [SerializeField] private float homingTurnSpeed = 900f;
+    [SerializeField] private float homingTurnSpeed = 360f;
 
-    [Header("Upgrade Driven")]
-    [SerializeField] private int pierceCount;
-    [SerializeField] private int enemyBounceCount;
-    [SerializeField] private int wallBounceCount;
-    [SerializeField] private int backToBackShots = 1;
-    [SerializeField] private int sideBySideShots = 1;
+    [Header("Base Projectile Modifiers")]
+    [SerializeField] private int basePierceCount;
+    [SerializeField] private int baseEnemyBounceCount;
+    [SerializeField] private int baseWallBounceCount;
+    [SerializeField] private int baseBackToBackShots = 1;
+    [SerializeField] private int baseSideBySideShots = 1;
     [SerializeField] private float backToBackDelay = 0.08f;
     [SerializeField] private float sideOffset = 0.35f;
 
@@ -30,10 +32,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
         direction.Normalize();
 
-        Transform target = AttackTarget;
-
         DoMeleeSlash();
-        FireWavePattern(direction, target);
+        FireWavePattern(direction, AttackTarget);
     }
 
     private void DoMeleeSlash()
@@ -42,26 +42,27 @@ public class RulerSlashWeapon :PlayerWeaponBase
             ? slashPoint.position
             : transform.position;
 
-        Collider2D[] hits =
-            Physics2D.OverlapCircleAll(
-                center,
-                slashRadius,
-                enemyLayer
-            );
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            center,
+            slashRadius,
+            enemyLayer
+        );
+
+        HashSet<IDamageable> damagedEnemies =
+            new HashSet<IDamageable>();
 
         foreach (Collider2D hit in hits)
         {
             IDamageable damageable =
-                hit.GetComponent<IDamageable>();
+                hit.GetComponentInParent<IDamageable>();
 
-            if (damageable == null)
+            if (damageable == null ||
+                damagedEnemies.Contains(damageable))
             {
-                damageable =
-                    hit.GetComponentInParent<IDamageable>();
+                continue;
             }
 
-            if (damageable == null)
-                continue;
+            damagedEnemies.Add(damageable);
 
             damageable.TakeDamage(
                 new DamageInfo(
@@ -80,68 +81,49 @@ public class RulerSlashWeapon :PlayerWeaponBase
         if (slashWavePrefab == null)
             return;
 
-        int sideShots =
-            Mathf.Max(1, sideBySideShots);
+        int sideShots = Mathf.Max(
+            1,
+            baseSideBySideShots +
+            (stats != null ? stats.SideProjectiles : 0)
+        );
 
-        int repeatShots =
-            Mathf.Max(1, backToBackShots);
+        int repeatShots = Mathf.Max(
+            1,
+            baseBackToBackShots +
+            (stats != null ? stats.BackProjectiles : 0)
+        );
 
-        for (int repeat = 0;
-             repeat < repeatShots;
-             repeat++)
+        for (int repeat = 0; repeat < repeatShots; repeat++)
         {
             float delay = repeat * backToBackDelay;
 
-            InvokeWaveVolley(
-                direction,
-                target,
-                sideShots,
-                delay
-            );
+            if (delay <= 0f)
+            {
+                FireWaveVolley(direction, target, sideShots);
+            }
+            else
+            {
+                StartCoroutine(
+                    FireWaveVolleyDelayed(
+                        direction,
+                        target,
+                        sideShots,
+                        delay
+                    )
+                );
+            }
         }
     }
 
-    private void InvokeWaveVolley(
+    private IEnumerator FireWaveVolleyDelayed(
         Vector2 direction,
         Transform target,
         int sideShots,
         float delay)
     {
-        if (delay <= 0f)
-        {
-            FireWaveVolley(
-                direction,
-                target,
-                sideShots
-            );
-
-            return;
-        }
-
-        StartCoroutine(
-            FireWaveVolleyDelayed(
-                direction,
-                target,
-                sideShots,
-                delay
-            )
-        );
-    }
-
-    private System.Collections.IEnumerator
-        FireWaveVolleyDelayed(
-            Vector2 direction,
-            Transform target,
-            int sideShots,
-            float delay)
-    {
         yield return new WaitForSeconds(delay);
 
-        FireWaveVolley(
-            direction,
-            target,
-            sideShots
-        );
+        FireWaveVolley(direction, target, sideShots);
     }
 
     private void FireWaveVolley(
@@ -172,11 +154,7 @@ public class RulerSlashWeapon :PlayerWeaponBase
                 perpendicular *
                 (startOffset + i * sideOffset);
 
-            SpawnSlashWave(
-                direction,
-                offset,
-                target
-            );
+            SpawnSlashWave(direction, offset, target);
         }
     }
 
@@ -204,23 +182,33 @@ public class RulerSlashWeapon :PlayerWeaponBase
                     Quaternion.identity
                 );
 
-        RulerSlashWave wave =
-            waveObject != null
-                ? waveObject
-                    .GetComponent<RulerSlashWave>()
-                : null;
+        RulerSlashWave wave = waveObject != null
+            ? waveObject.GetComponent<RulerSlashWave>()
+            : null;
 
         if (wave == null)
             return;
+
+        int pierce =
+            basePierceCount +
+            (stats != null ? stats.PierceCount : 0);
+
+        int enemyBounce =
+            baseEnemyBounceCount +
+            (stats != null ? stats.EnemyBounceCount : 0);
+
+        int wallBounce =
+            baseWallBounceCount +
+            (stats != null ? stats.WallBounceCount : 0);
 
         wave.Launch(
             direction,
             GetFinalDamage(),
             slashWaveSpeed,
             slashWaveLifetime,
-            pierceCount,
-            enemyBounceCount,
-            wallBounceCount,
+            pierce,
+            enemyBounce,
+            wallBounce,
             gameObject
         );
 
@@ -228,29 +216,6 @@ public class RulerSlashWeapon :PlayerWeaponBase
             target,
             homingTurnSpeed
         );
-    }
-
-    public void SetProjectileModifiers(
-        int newPierceCount,
-        int newEnemyBounceCount,
-        int newWallBounceCount,
-        int newBackToBackShots,
-        int newSideBySideShots)
-    {
-        pierceCount =
-            Mathf.Max(0, newPierceCount);
-
-        enemyBounceCount =
-            Mathf.Max(0, newEnemyBounceCount);
-
-        wallBounceCount =
-            Mathf.Max(0, newWallBounceCount);
-
-        backToBackShots =
-            Mathf.Max(1, newBackToBackShots);
-
-        sideBySideShots =
-            Mathf.Max(1, newSideBySideShots);
     }
 
     private void OnDrawGizmosSelected()

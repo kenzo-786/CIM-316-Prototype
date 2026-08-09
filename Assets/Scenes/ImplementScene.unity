@@ -1519,6 +1519,10 @@ GameObject:
   - component: {fileID: 242738768}
   - component: {fileID: 242738767}
   - component: {fileID: 242738781}
+  - component: {fileID: 242738782}
+  - component: {fileID: 242738783}
+  - component: {fileID: 242738784}
+  - component: {fileID: 242738785}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1550,6 +1554,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecf248fcebe3494fa58a986f69c9391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerReviveController
+  restoredHealthPercent: 0.5
+  invulnerabilityDuration: 2
+  slowMotionScale: 0.25
+  slowMotionDuration: 0.35
+  revivalEffectPrefab: {fileID: 0}
+  revivalSoundId: player_revive
+  revivalTextColor: {r: 0.3, g: 1, b: 0.7, a: 1}
+  shakeIntensity: 0.18
+  shakeDuration: 0.12
 --- !u!114 &242738769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,6 +1603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacterApplier
   fallbackCharacter: {fileID: 11400000, guid: cb047c6e2b148174eaee579de2636763, type: 2}
   playerVisual: {fileID: 1839325599}
+  playerAnimator: {fileID: 0}
   weaponController: {fileID: 242738771}
   rulerWeapon: {fileID: 242738781}
   eraserWeapon: {fileID: 242738769}
@@ -1805,13 +1819,89 @@ MonoBehaviour:
   slashWaveSpeed: 11
   slashWaveLifetime: 3
   homingTurnSpeed: 360
-  pierceCount: 0
-  enemyBounceCount: 0
-  wallBounceCount: 0
-  backToBackShots: 1
-  sideBySideShots: 1
+  basePierceCount: 0
+  baseEnemyBounceCount: 0
+  baseWallBounceCount: 0
+  baseBackToBackShots: 1
+  baseSideBySideShots: 1
   backToBackDelay: 0.08
   sideOffset: 0.35
+--- !u!114 &242738782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242738766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55cd8ef8f2211c488f2527f13cdb5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoTargetFeedback
+  weaponController: {fileID: 242738771}
+  playerMovement: {fileID: 242738776}
+  targetMarkerPrefab: {fileID: 3357077561020149239, guid: 9e22b657464b09d4d9560bcf50d81d8f, type: 3}
+  targetOffset: {x: 0, y: 0.9, z: 0}
+  pulseAmount: 0.12
+  pulseSpeed: 5
+  rotateMarker: 1
+  rotationSpeed: 120
+--- !u!114 &242738783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242738766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6fe41c5d2df5d94b81ffee0f3f2f331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponFireFeedback
+  weapon: {fileID: 242738769}
+  effectOrigin: {fileID: 746033714}
+  launchEffectPrefab: {fileID: 7129200690840943078, guid: ead791ef2f831df48ad8faeadf1662af, type: 3}
+  launchSoundId: eraser_throw
+  shakeIntensity: 0.025
+  shakeDuration: 0.035
+--- !u!95 &242738784
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242738766}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &242738785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242738766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e360ff4ae96bb984b98b31b71f5c7168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationController
+  animator: {fileID: 0}
+  startingFacingDirection: {x: 0, y: -1}
+  movementThreshold: 0.01
+  playAttackAnimations: 0
 --- !u!1 &273351603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,6 +1989,8 @@ GameObject:
   - component: {fileID: 291412173}
   - component: {fileID: 291412172}
   - component: {fileID: 291412171}
+  - component: {fileID: 291412175}
+  - component: {fileID: 291412174}
   m_Layer: 0
   m_Name: FeedbackManagers
   m_TagString: Untagged
@@ -1933,8 +2025,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87f7e5bdcb8eae4ea862c05b3deacee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake
-  cameraTransform: {fileID: 1802998234}
-  maxOffset: 0.25
+  roomCameraController: {fileID: 1802998235}
+  maxOffset: 0.2
+  maximumDuration: 0.3
 --- !u!114 &291412172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1960,9 +2053,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84b69057674ad241a3cff81ac474fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageNumberSpawner
-  damageNumberPrefab: {fileID: 0}
+  damageNumberPrefab: {fileID: 7492950250164861853, guid: e3617bbb5c6d84345960355434a6559c, type: 3}
   spawnOffset: {x: 0, y: 0.7, z: 0}
   poolProvider: {fileID: 2034575706}
+--- !u!114 &291412174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291412169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7d7e7df95538b4bac5e659950661bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectSpawner
+  poolProvider: {fileID: 2034575706}
+--- !u!114 &291412175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291412169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65f6a63cce570f42bffe2c6741ccaa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomClearFeedback
+  combatController: {fileID: 695120765}
+  effectOrigin: {fileID: 306893344745534762, guid: ee71d8dfb36a7b048aef24b0bc8f9764, type: 3}
+  roomClearEffectPrefab: {fileID: 0}
+  roomClearSoundId: room_clear
+  shakeIntensity: 0.1
+  shakeDuration: 0.08
 --- !u!1 &300415544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2897,13 @@ MonoBehaviour:
   health: {fileID: 242738777}
   fillImage: {fileID: 51327947}
   visualRoot: {fileID: 352382582}
+  pulseRoot: {fileID: 0}
   hideWhenFull: 0
+  fillSmoothSpeed: 8
+  hitPulseAmount: 0.12
+  lowHealthPulseAmount: 0.04
+  lowHealthPulseSpeed: 5
+  lowHealthThreshold: 0.3
 --- !u!114 &473403992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3751,7 +3881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomCombatController
   xpGemPool: {fileID: 859712859}
   playerExperience: {fileID: 242738775}
-  difficultySettings: {fileID: 0}
+  difficultySettings: {fileID: 11400000, guid: 807b6139690fa6c408657dbbcda80df3, type: 2}
   playerWeaponController: {fileID: 242738771}
 --- !u!1 &746033713
 GameObject:
@@ -6094,6 +6224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrosshairCursor
   canvas: {fileID: 1426210184}
+  weaponController: {fileID: 242738771}
   uiScreens:
   - {fileID: 164736389}
   - {fileID: 2144491375}

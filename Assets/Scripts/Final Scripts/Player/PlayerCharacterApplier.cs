@@ -9,11 +9,30 @@ public class PlayerCharacterApplier : MonoBehaviour
 
     [Header("Visual")]
     [SerializeField] private SpriteRenderer playerVisual;
+    [SerializeField] private Animator playerAnimator;
 
     [Header("Weapons")]
     [SerializeField] private PlayerWeaponController weaponController;
     [SerializeField] private RulerSlashWeapon rulerWeapon;
     [SerializeField] private EraserThrowWeapon eraserWeapon;
+
+    private void Awake()
+    {
+        if (playerVisual == null)
+        {
+            playerVisual = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (playerAnimator == null)
+        {
+            playerAnimator = GetComponentInChildren<Animator>();
+        }
+
+        if (weaponController == null)
+        {
+            weaponController = GetComponent<PlayerWeaponController>();
+        }
+    }
 
     private void Start()
     {
@@ -31,50 +50,59 @@ public class PlayerCharacterApplier : MonoBehaviour
         {
             Debug.LogError(
                 "PlayerCharacterApplier has no selected or fallback character.",
-                this);
+                this
+            );
 
             return;
         }
 
-        PlayerMovement movement =
-            GetComponent<PlayerMovement>();
-
-        Health health =
-            GetComponent<Health>();
-
-        if (weaponController == null)
-            weaponController =
-                GetComponent<PlayerWeaponController>();
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        Health health = GetComponent<Health>();
 
         movement.SetMoveSpeed(data.moveSpeed);
         health.SetMaxHealth(data.maxHealth, true);
 
-        if (playerVisual != null &&
-            data.gameplaySprite != null)
+        if (playerVisual != null && data.gameplaySprite != null)
         {
             playerVisual.sprite = data.gameplaySprite;
         }
 
-        if (weaponController != null)
+        if (playerAnimator != null && data.animatorController != null)
         {
-            weaponController.SetAllowAttackWhileMoving(
-                data.canAttackWhileMoving);
-
-            switch (data.weaponType)
-            {
-                case PlayerWeaponType.Ruler:
-                    weaponController.EquipWeapon(rulerWeapon);
-                    break;
-
-                case PlayerWeaponType.Eraser:
-                    weaponController.EquipWeapon(eraserWeapon);
-                    break;
-            }
+            playerAnimator.runtimeAnimatorController = data.animatorController;
+            playerAnimator.Rebind();
+            playerAnimator.Update(0f);
         }
 
-        Debug.Log(
-            "Applied selected character: " +
-            data.characterName,
-            this);
+        if (weaponController == null)
+        {
+            return;
+        }
+
+        ApplyFiringMode(data.firingMode);
+
+        switch (data.weaponType)
+        {
+            case PlayerWeaponType.Ruler:
+                weaponController.EquipWeapon(rulerWeapon);
+                break;
+
+            case PlayerWeaponType.Eraser:
+                weaponController.EquipWeapon(eraserWeapon);
+                break;
+        }
+    }
+
+    private void ApplyFiringMode(PlayerFiringMode firingMode)
+    {
+        bool canMoveAndShoot =
+            firingMode == PlayerFiringMode.BuildBMoveAndShootMouseAim;
+
+        bool usesAutoTarget =
+            firingMode == PlayerFiringMode.BuildCStationaryAutoTarget;
+
+        weaponController.SetAllowAttackWhileMoving(canMoveAndShoot);
+        weaponController.SetAutoTargeting(usesAutoTarget);
+        weaponController.SetAutoFireWhenStationary(true);
     }
 }

@@ -13,6 +13,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected Transform target;
 
     private bool isDead;
+    private EnemyDeathFeedback deathFeedback;
     private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
 
     public event Action<EnemyBase> OnEnemyDied;
@@ -22,19 +23,38 @@ public abstract class EnemyBase : MonoBehaviour
     public RoomDifficultySnapshot CurrentDifficulty => currentDifficulty;
     public bool IsDead => isDead;
 
-    protected float MoveSpeed => enemyData != null ? enemyData.moveSpeed * currentDifficulty.moveSpeedMultiplier : 0f;
-    protected float ContactDamage => enemyData != null ? enemyData.contactDamage * currentDifficulty.damageMultiplier : 0f;
-    protected float AttackRange => enemyData != null ? enemyData.attackRange : 1f;
-    protected float AttackCooldown => enemyData != null ? enemyData.attackCooldown : 1f;
+    protected float MoveSpeed =>
+        enemyData != null
+            ? enemyData.moveSpeed * currentDifficulty.moveSpeedMultiplier
+            : 0f;
+
+    protected float ContactDamage =>
+        enemyData != null
+            ? enemyData.contactDamage * currentDifficulty.damageMultiplier
+            : 0f;
+
+    protected float AttackRange =>
+        enemyData != null
+            ? enemyData.attackRange
+            : 1f;
+
+    protected float AttackCooldown =>
+        enemyData != null
+            ? enemyData.attackCooldown
+            : 1f;
+
     protected SpriteRenderer Visual => visual;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
+        deathFeedback = GetComponent<EnemyDeathFeedback>();
 
         if (visual == null)
+        {
             visual = GetComponentInChildren<SpriteRenderer>();
+        }
     }
 
     protected virtual void OnEnable()
@@ -42,13 +62,17 @@ public abstract class EnemyBase : MonoBehaviour
         isDead = false;
 
         if (health != null)
+        {
             health.OnDied += HandleDied;
+        }
     }
 
     protected virtual void OnDisable()
     {
         if (health != null)
+        {
             health.OnDied -= HandleDied;
+        }
     }
 
     public virtual void Initialize(EnemyData data, Transform playerTarget)
@@ -58,7 +82,9 @@ public abstract class EnemyBase : MonoBehaviour
         isDead = false;
 
         if (enemyData != null && health != null)
+        {
             health.SetMaxHealth(enemyData.maxHealth, true);
+        }
     }
 
     public virtual void ApplyDifficulty(RoomDifficultySnapshot difficulty)
@@ -66,13 +92,20 @@ public abstract class EnemyBase : MonoBehaviour
         currentDifficulty = difficulty;
 
         if (enemyData != null && health != null)
-            health.SetMaxHealth(enemyData.maxHealth * currentDifficulty.healthMultiplier, true);
+        {
+            health.SetMaxHealth(
+                enemyData.maxHealth * currentDifficulty.healthMultiplier,
+                true
+            );
+        }
     }
 
     protected virtual void FixedUpdate()
     {
         if (isDead || target == null || enemyData == null)
+        {
             return;
+        }
 
         TickEnemy();
     }
@@ -82,14 +115,28 @@ public abstract class EnemyBase : MonoBehaviour
     protected void MoveToward(Vector2 worldPosition)
     {
         Vector2 direction = (worldPosition - rb.position).normalized;
-        rb.MovePosition(rb.position + direction * MoveSpeed * Time.fixedDeltaTime);
+
+        rb.MovePosition(
+            rb.position +
+            direction *
+            MoveSpeed *
+            Time.fixedDeltaTime
+        );
+
         FaceDirection(direction);
     }
 
     protected void MoveAwayFrom(Vector2 worldPosition)
     {
         Vector2 direction = (rb.position - worldPosition).normalized;
-        rb.MovePosition(rb.position + direction * MoveSpeed * Time.fixedDeltaTime);
+
+        rb.MovePosition(
+            rb.position +
+            direction *
+            MoveSpeed *
+            Time.fixedDeltaTime
+        );
+
         FaceDirection(direction);
     }
 
@@ -100,31 +147,44 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected bool IsTargetInRange(float range)
     {
-        if (target == null)
-            return false;
-
-        return Vector2.Distance(transform.position, target.position) <= range;
+        return target != null &&
+               Vector2.Distance(transform.position, target.position) <= range;
     }
 
     protected void DamageTarget(float damage, Vector2 hitPoint)
     {
         if (target == null || damage <= 0f)
+        {
             return;
+        }
 
         IDamageable damageable = target.GetComponent<IDamageable>();
+
         if (damageable != null)
-            damageable.TakeDamage(new DamageInfo(damage, gameObject, hitPoint));
+        {
+            damageable.TakeDamage(
+                new DamageInfo(
+                    damage,
+                    gameObject,
+                    hitPoint
+                )
+            );
+        }
     }
 
     protected IDamageable GetDamageable(Collider2D hit)
     {
         if (hit == null)
+        {
             return null;
+        }
 
         IDamageable damageable = hit.GetComponent<IDamageable>();
 
         if (damageable == null)
+        {
             damageable = hit.GetComponentInParent<IDamageable>();
+        }
 
         return damageable;
     }
@@ -132,7 +192,9 @@ public abstract class EnemyBase : MonoBehaviour
     protected void FaceDirection(Vector2 direction)
     {
         if (visual == null || Mathf.Abs(direction.x) < 0.01f)
+        {
             return;
+        }
 
         visual.flipX = direction.x < 0f;
     }
@@ -140,15 +202,41 @@ public abstract class EnemyBase : MonoBehaviour
     private void HandleDied()
     {
         if (isDead)
+        {
             return;
+        }
 
         isDead = true;
+
+        StopMoving();
+        DisablePhysicalBody();
         OnDeathStarted();
+
+        if (deathFeedback != null)
+        {
+            deathFeedback.PlayDeath();
+        }
 
         OnEnemyDied?.Invoke(this);
         EnemyEvents.RaiseEnemyDied(this);
 
         DestroyEnemyObject();
+    }
+
+    private void DisablePhysicalBody()
+    {
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+
+        foreach (Collider2D bodyCollider in colliders)
+        {
+            bodyCollider.enabled = false;
+        }
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false;
+        }
     }
 
     protected virtual void OnDeathStarted()
@@ -157,6 +245,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void DestroyEnemyObject()
     {
-        Destroy(gameObject);
+        float delay = deathFeedback != null
+            ? deathFeedback.DeathDuration
+            : 0f;
+
+        Destroy(gameObject, delay);
     }
 }

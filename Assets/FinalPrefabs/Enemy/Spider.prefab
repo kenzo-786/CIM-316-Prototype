@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 8901815528011600232}
   - component: {fileID: 155877684525813468}
   - component: {fileID: -7195723133628429220}
+  - component: {fileID: -6530936329484164435}
+  - component: {fileID: 3798750571749266266}
   m_Layer: 7
   m_Name: Spider
   m_TagString: Enemy
@@ -234,3 +236,37 @@ MonoBehaviour:
   bodyCollider: {fileID: 8901815528011600232}
   visuals:
   - {fileID: 4216025546545835069}
+--- !u!114 &-6530936329484164435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b59f01e807a23d4ab81d0b673142c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlash
+  renderers:
+  - {fileID: 4216025546545835069}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.08
+--- !u!114 &3798750571749266266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daaf393b28050944aaf952964dfdede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback
+  hitFlash: {fileID: -6530936329484164435}
+  hitEffectPrefab: {fileID: 797284089319625959, guid: 8e31355537c26f040bbd9c17e064cdfb, type: 3}
+  hitSoundId: enemy_hit
+  showDamageNumber: 1
+  shakeIntensity: 0.04
+  shakeDuration: 0.04

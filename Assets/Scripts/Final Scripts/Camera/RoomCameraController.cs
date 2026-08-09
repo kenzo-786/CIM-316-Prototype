@@ -8,7 +8,9 @@ public class RoomCameraController : MonoBehaviour
     [SerializeField] private int startingRoomIndex = 0;
 
     private Camera cam;
-    private Vector3 targetPosition;
+    private Vector3 currentRoomPosition;
+    private Vector3 targetRoomPosition;
+    private Vector3 shakeOffset;
     private int currentRoomIndex;
 
     public int CurrentRoomIndex => currentRoomIndex;
@@ -26,21 +28,49 @@ public class RoomCameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!smoothTransition) return;
+        if (smoothTransition)
+        {
+            float speed =
+                settings != null
+                    ? settings.transitionSpeed
+                    : 8f;
 
-        float speed = settings != null ? settings.transitionSpeed : 8f;
-        float step = 1f - Mathf.Exp(-speed * Time.deltaTime);
+            float step =
+                1f -
+                Mathf.Exp(
+                    -speed * Time.deltaTime);
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, step);
+            currentRoomPosition =
+                Vector3.Lerp(
+                    currentRoomPosition,
+                    targetRoomPosition,
+                    step);
+        }
+        else
+        {
+            currentRoomPosition =
+                targetRoomPosition;
+        }
+
+        ApplyFinalPosition();
     }
 
     public void MoveToRoom(int roomIndex)
     {
-        currentRoomIndex = Mathf.Max(0, roomIndex);
-        targetPosition = GetRoomCameraPosition(currentRoomIndex);
+        currentRoomIndex =
+           Mathf.Max(0, roomIndex);
+
+        targetRoomPosition =
+            GetRoomCameraPosition(
+                currentRoomIndex);
 
         if (!smoothTransition)
-            transform.position = targetPosition;
+        {
+            currentRoomPosition =
+                targetRoomPosition;
+
+            ApplyFinalPosition();
+        }
     }
 
     public void MoveToNextRoom()
@@ -50,9 +80,38 @@ public class RoomCameraController : MonoBehaviour
 
     public void SnapToRoom(int roomIndex)
     {
-        currentRoomIndex = Mathf.Max(0, roomIndex);
-        targetPosition = GetRoomCameraPosition(currentRoomIndex);
-        transform.position = targetPosition;
+        currentRoomIndex =
+            Mathf.Max(0, roomIndex);
+
+        targetRoomPosition =
+            GetRoomCameraPosition(
+                currentRoomIndex);
+
+        currentRoomPosition =
+            targetRoomPosition;
+
+        ApplyFinalPosition();
+    }
+
+    public void SetShakeOffset(Vector2 offset)
+    {
+        shakeOffset =
+            new Vector3(
+                offset.x,
+                offset.y,
+                0f);
+    }
+
+    public void ClearShakeOffset()
+    {
+        shakeOffset = Vector3.zero;
+    }
+
+    private void ApplyFinalPosition()
+    {
+        transform.position =
+            currentRoomPosition +
+            shakeOffset;
     }
 
     private Vector3 GetRoomCameraPosition(int roomIndex)

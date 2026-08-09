@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -26,6 +27,8 @@ public class PlayerWeaponController : MonoBehaviour
     private Transform currentTarget;
     private float nextTargetRefreshTime;
 
+    public event Action<Vector2> OnAttackPerformed;
+
     public PlayerWeaponBase CurrentWeapon => currentWeapon;
     public Transform CurrentTarget => currentTarget;
     public bool AutoTargetEnemies => autoTargetEnemies;
@@ -47,14 +50,12 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        if (movement.IsMoving &&
-            !allowAttackWhileMoving)
+        if (movement.IsMoving && !allowAttackWhileMoving)
         {
             return;
         }
 
-        Vector2 attackDirection =
-            movement.AimDirection;
+        Vector2 attackDirection = movement.AimDirection;
 
         if (autoTargetEnemies)
         {
@@ -83,14 +84,19 @@ public class PlayerWeaponController : MonoBehaviour
             autoFireWhenStationary ||
             Input.GetMouseButton(0);
 
-        if (wantsToAttack)
-            currentWeapon.TryAttack(attackDirection);
+        if (wantsToAttack &&
+            currentWeapon.TryAttack(attackDirection))
+        {
+            OnAttackPerformed?.Invoke(attackDirection);
+        }
     }
 
     public void EquipWeapon(PlayerWeaponBase weapon)
     {
         if (weapon == null)
+        {
             return;
+        }
 
         currentWeapon = weapon;
         currentWeapon.SetAttackTarget(currentTarget);
@@ -106,7 +112,9 @@ public class PlayerWeaponController : MonoBehaviour
             nextTargetRefreshTime = 0f;
 
             if (currentWeapon != null)
+            {
                 currentWeapon.SetAttackTarget(null);
+            }
         }
     }
 
@@ -127,13 +135,14 @@ public class PlayerWeaponController : MonoBehaviour
         nextTargetRefreshTime = 0f;
 
         if (currentWeapon != null)
+        {
             currentWeapon.SetAttackTarget(null);
+        }
     }
 
     private void RefreshTargetWhenNeeded()
     {
-        bool targetStillValid =
-            IsTargetValid(currentTarget);
+        bool targetStillValid = IsTargetValid(currentTarget);
 
         if (targetStillValid &&
             Time.time < nextTargetRefreshTime)
@@ -150,16 +159,14 @@ public class PlayerWeaponController : MonoBehaviour
 
     private Transform FindNearestVisibleEnemy()
     {
-        Collider2D[] hits =
-            Physics2D.OverlapCircleAll(
-                transform.position,
-                targetRange,
-                enemyLayer
-            );
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            transform.position,
+            targetRange,
+            enemyLayer
+        );
 
         EnemyBase closestEnemy = null;
-        float closestDistanceSquared =
-            float.MaxValue;
+        float closestDistanceSquared = float.MaxValue;
 
         foreach (Collider2D hit in hits)
         {
@@ -174,22 +181,20 @@ public class PlayerWeaponController : MonoBehaviour
             }
 
             if (!HasLineOfSight(enemy.transform))
-                continue;
-
-            float distanceSquared =
-                ((Vector2)enemy.transform.position -
-                 (Vector2)transform.position)
-                .sqrMagnitude;
-
-            if (distanceSquared >=
-                closestDistanceSquared)
             {
                 continue;
             }
 
-            closestDistanceSquared =
-                distanceSquared;
+            float distanceSquared =
+                ((Vector2)enemy.transform.position -
+                 (Vector2)transform.position).sqrMagnitude;
 
+            if (distanceSquared >= closestDistanceSquared)
+            {
+                continue;
+            }
+
+            closestDistanceSquared = distanceSquared;
             closestEnemy = enemy;
         }
 
@@ -198,35 +203,35 @@ public class PlayerWeaponController : MonoBehaviour
             : null;
     }
 
-    private bool IsTargetValid(Transform target)
+    private bool IsTargetValid(Transform checkedTarget)
     {
-        if (target == null ||
-            !target.gameObject.activeInHierarchy)
+        if (checkedTarget == null ||
+            !checkedTarget.gameObject.activeInHierarchy)
         {
             return false;
         }
 
         EnemyBase enemy =
-            target.GetComponentInParent<EnemyBase>();
+            checkedTarget.GetComponentInParent<EnemyBase>();
 
         if (enemy == null || enemy.IsDead)
-            return false;
-
-        float distanceSquared =
-            ((Vector2)target.position -
-             (Vector2)transform.position)
-            .sqrMagnitude;
-
-        if (distanceSquared >
-            targetRange * targetRange)
         {
             return false;
         }
 
-        return HasLineOfSight(target);
+        float distanceSquared =
+            ((Vector2)checkedTarget.position -
+             (Vector2)transform.position).sqrMagnitude;
+
+        if (distanceSquared > targetRange * targetRange)
+        {
+            return false;
+        }
+
+        return HasLineOfSight(checkedTarget);
     }
 
-    private bool HasLineOfSight(Transform target)
+    private bool HasLineOfSight(Transform checkedTarget)
     {
         if (!requireLineOfSight ||
             obstructionLayer.value == 0)
@@ -234,12 +239,11 @@ public class PlayerWeaponController : MonoBehaviour
             return true;
         }
 
-        RaycastHit2D obstruction =
-            Physics2D.Linecast(
-                transform.position,
-                target.position,
-                obstructionLayer
-            );
+        RaycastHit2D obstruction = Physics2D.Linecast(
+            transform.position,
+            checkedTarget.position,
+            obstructionLayer
+        );
 
         return obstruction.collider == null;
     }
@@ -247,10 +251,6 @@ public class PlayerWeaponController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-
-        Gizmos.DrawWireSphere(
-            transform.position,
-            targetRange
-        );
+        Gizmos.DrawWireSphere(transform.position, targetRange);
     }
 }

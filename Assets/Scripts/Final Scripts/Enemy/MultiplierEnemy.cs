@@ -6,6 +6,7 @@ public class MultiplierEnemy : EnemyBase
     [SerializeField] private int maxSplitGenerations = 2;
     [SerializeField] private float childSpawnRadius = 0.6f;
     [SerializeField] private float childScaleMultiplier = 0.75f;
+    [SerializeField] private float childRevealDuration = 0.22f;
 
     private float nextAttackTime;
     private int splitGeneration;
@@ -13,7 +14,9 @@ public class MultiplierEnemy : EnemyBase
     protected override void TickEnemy()
     {
         if (target == null)
+        {
             return;
+        }
 
         if (IsTargetInRange(AttackRange))
         {
@@ -28,13 +31,16 @@ public class MultiplierEnemy : EnemyBase
     private void TryAttack()
     {
         if (Time.time < nextAttackTime)
+        {
             return;
+        }
 
         nextAttackTime = Time.time + AttackCooldown;
 
         DamageTarget(
             ContactDamage,
-            target.position);
+            target.position
+        );
     }
 
     protected override void OnDeathStarted()
@@ -46,13 +52,20 @@ public class MultiplierEnemy : EnemyBase
     private void SpawnChildren()
     {
         if (splitGeneration >= maxSplitGenerations)
+        {
             return;
+        }
 
         if (EnemyData == null)
+        {
             return;
+        }
 
-        EnemyData childData = EnemyData.childEnemyData;
-        int spawnCount = EnemyData.childCount;
+        EnemyData childData =
+            EnemyData.childEnemyData;
+
+        int spawnCount =
+            EnemyData.childCount;
 
         if (childData == null ||
             childData.prefab == null ||
@@ -61,13 +74,13 @@ public class MultiplierEnemy : EnemyBase
             return;
         }
 
-        // Prevent an accidental direct self-reference.
         if (childData == EnemyData)
         {
             Debug.LogError(
                 "Multiplier EnemyData references itself: " +
                 EnemyData.name,
-                this);
+                this
+            );
 
             return;
         }
@@ -78,20 +91,28 @@ public class MultiplierEnemy : EnemyBase
                 Random.insideUnitCircle.normalized;
 
             if (direction == Vector2.zero)
+            {
                 direction = Vector2.right;
+            }
 
             Vector2 spawnPosition =
                 (Vector2)transform.position +
-                direction * childSpawnRadius;
+                direction *
+                childSpawnRadius;
 
-            GameObject childObject = Instantiate(
-                childData.prefab,
-                spawnPosition,
-                Quaternion.identity);
+            GameObject childObject =
+                Instantiate(
+                    childData.prefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
 
-            childObject.transform.localScale =
+            Vector3 finalChildScale =
                 transform.localScale *
                 childScaleMultiplier;
+
+            childObject.transform.localScale =
+                finalChildScale;
 
             EnemyBase childEnemy =
                 childObject.GetComponent<EnemyBase>();
@@ -100,7 +121,8 @@ public class MultiplierEnemy : EnemyBase
             {
                 Debug.LogError(
                     "Multiplier child prefab is missing EnemyBase.",
-                    childObject);
+                    childObject
+                );
 
                 Destroy(childObject);
                 continue;
@@ -112,11 +134,26 @@ public class MultiplierEnemy : EnemyBase
                     splitGeneration + 1;
             }
 
-            childEnemy.Initialize(childData, target);
-            childEnemy.ApplyDifficulty(CurrentDifficulty);
+            childEnemy.Initialize(
+                childData,
+                target
+            );
+
+            childEnemy.ApplyDifficulty(
+                CurrentDifficulty
+            );
+
+            SpawnScaleReveal reveal =
+                childObject.AddComponent<SpawnScaleReveal>();
+
+            reveal.Play(
+                finalChildScale,
+                childRevealDuration
+            );
 
             EnemyRuntimeRegistry.RaiseEnemySpawned(
-                childEnemy);
+                childEnemy
+            );
         }
     }
 }

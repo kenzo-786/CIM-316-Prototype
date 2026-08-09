@@ -19,10 +19,21 @@ public class SpinnerEnemy : EnemyBase
     [SerializeField] private float spinSpeedMultiplier = 2.2f;
     [SerializeField] private float spinDamageMultiplier = 1.5f;
     [SerializeField] private float spinHitCooldown = 0.35f;
+    [SerializeField] private EnemyTelegraphFeedback telegraph;
 
     private SpinnerState state;
     private float stateTimer;
     private float nextSpinHitTime;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (telegraph == null)
+        {
+            telegraph = GetComponent<EnemyTelegraphFeedback>();
+        }
+    }
 
     protected override void OnEnable()
     {
@@ -44,7 +55,9 @@ public class SpinnerEnemy : EnemyBase
                 StopMoving();
 
                 if (stateTimer <= 0f)
+                {
                     EnterState(SpinnerState.Spinning);
+                }
 
                 break;
 
@@ -56,7 +69,9 @@ public class SpinnerEnemy : EnemyBase
                 StopMoving();
 
                 if (stateTimer <= 0f)
+                {
                     EnterState(SpinnerState.Walking);
+                }
 
                 break;
         }
@@ -65,41 +80,89 @@ public class SpinnerEnemy : EnemyBase
     private void TickWalking()
     {
         if (target != null)
+        {
             MoveToward(target.position);
+        }
 
         if (stateTimer <= 0f)
+        {
             EnterState(SpinnerState.Windup);
+        }
     }
 
     private void TickSpinning()
     {
         if (target != null)
         {
-            Vector2 direction = ((Vector2)target.position - rb.position).normalized;
-            rb.MovePosition(rb.position + direction * MoveSpeed * spinSpeedMultiplier * Time.fixedDeltaTime);
+            Vector2 direction =
+                ((Vector2)target.position - rb.position).normalized;
 
-            if (IsTargetInRange(AttackRange) && Time.time >= nextSpinHitTime)
+            rb.MovePosition(
+                rb.position +
+                direction *
+                MoveSpeed *
+                spinSpeedMultiplier *
+                Time.fixedDeltaTime
+            );
+
+            if (IsTargetInRange(AttackRange) &&
+                Time.time >= nextSpinHitTime)
             {
-                nextSpinHitTime = Time.time + spinHitCooldown;
-                DamageTarget(ContactDamage * spinDamageMultiplier, target.position);
+                nextSpinHitTime =
+                    Time.time + spinHitCooldown;
+
+                DamageTarget(
+                    ContactDamage * spinDamageMultiplier,
+                    target.position
+                );
             }
         }
 
         if (stateTimer <= 0f)
+        {
             EnterState(SpinnerState.Recovering);
+        }
     }
 
     private void EnterState(SpinnerState nextState)
     {
         state = nextState;
 
-        if (state == SpinnerState.Walking)
-            stateTimer = walkDuration;
-        else if (state == SpinnerState.Windup)
-            stateTimer = windupDuration;
-        else if (state == SpinnerState.Spinning)
-            stateTimer = spinDuration;
-        else
-            stateTimer = recoverDuration;
+        switch (state)
+        {
+            case SpinnerState.Walking:
+                stateTimer = walkDuration;
+                break;
+
+            case SpinnerState.Windup:
+                stateTimer = windupDuration;
+
+                if (telegraph != null)
+                {
+                    telegraph.Begin(windupDuration);
+                }
+
+                break;
+
+            case SpinnerState.Spinning:
+                stateTimer = spinDuration;
+
+                if (telegraph != null)
+                {
+                    telegraph.End();
+                }
+
+                break;
+
+            case SpinnerState.Recovering:
+                stateTimer = recoverDuration;
+
+                if (telegraph != null)
+                {
+                    telegraph.End();
+                }
+
+                break;
+        }
     }
 }

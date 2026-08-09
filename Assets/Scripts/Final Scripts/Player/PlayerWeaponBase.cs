@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class PlayerWeaponBase : MonoBehaviour
@@ -11,6 +12,8 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     protected PlayerStats stats;
     protected Transform AttackTarget => attackTarget;
 
+    public event Action<Vector2> OnAttackPerformed;
+
     protected virtual void Awake()
     {
         stats = GetComponentInParent<PlayerStats>();
@@ -19,11 +22,12 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     public bool TryAttack(Vector2 aimDirection)
     {
         float attackSpeed = stats != null
-            ? stats.GetAttackSpeedMultiplier()
-            : 1f;
+           ? stats.GetAttackSpeedMultiplier()
+           : 1f;
 
         float cooldown =
-            baseCooldown / Mathf.Max(0.01f, attackSpeed);
+            baseCooldown /
+            Mathf.Max(0.01f, attackSpeed);
 
         if (Time.time < nextAttackTime)
             return false;
@@ -31,9 +35,17 @@ public abstract class PlayerWeaponBase : MonoBehaviour
         if (aimDirection == Vector2.zero)
             aimDirection = Vector2.right;
 
-        nextAttackTime = Time.time + cooldown;
+        Vector2 normalizedDirection =
+            aimDirection.normalized;
 
-        Attack(aimDirection.normalized);
+        nextAttackTime =
+            Time.time + cooldown;
+
+        Attack(normalizedDirection);
+
+        OnAttackPerformed?.Invoke(
+            normalizedDirection);
+
         return true;
     }
 

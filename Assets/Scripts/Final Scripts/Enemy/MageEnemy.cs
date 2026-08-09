@@ -8,6 +8,7 @@ public class MageEnemy : EnemyBase
     [SerializeField] private int projectileCount = 3;
     [SerializeField] private float spreadAngle = 25f;
     [SerializeField] private float castWindup = 0.45f;
+    [SerializeField] private EnemyTelegraphFeedback telegraph;
 
     private EnemyProjectileShooter shooter;
     private float nextCastTime;
@@ -17,44 +18,76 @@ public class MageEnemy : EnemyBase
     protected override void Awake()
     {
         base.Awake();
+
         shooter = GetComponent<EnemyProjectileShooter>();
+
+        if (telegraph == null)
+        {
+            telegraph = GetComponent<EnemyTelegraphFeedback>();
+        }
     }
 
-    public override void Initialize(EnemyData data, Transform playerTarget)
+    public override void Initialize(
+        EnemyData data,
+        Transform playerTarget
+    )
     {
         base.Initialize(data, playerTarget);
 
-        if (shooter != null && data != null && data.projectileData != null)
-            shooter.SetProjectileData(data.projectileData);
+        if (shooter != null &&
+            data != null &&
+            data.projectileData != null)
+        {
+            shooter.SetProjectileData(
+                data.projectileData
+            );
+        }
     }
 
     protected override void TickEnemy()
     {
         if (target == null)
+        {
             return;
+        }
 
         if (casting)
         {
             StopMoving();
+
             castTimer -= Time.fixedDeltaTime;
 
             if (castTimer <= 0f)
+            {
                 ReleaseCast();
+            }
 
             return;
         }
 
-        float distance = Vector2.Distance(transform.position, target.position);
+        float distance =
+            Vector2.Distance(
+                transform.position,
+                target.position
+            );
 
         if (distance < preferredRange * 0.7f)
+        {
             MoveAwayFrom(target.position);
+        }
         else if (distance > preferredRange)
+        {
             MoveToward(target.position);
+        }
         else
+        {
             StopMoving();
+        }
 
         if (Time.time >= nextCastTime)
+        {
             StartCast();
+        }
     }
 
     private void StartCast()
@@ -62,16 +95,37 @@ public class MageEnemy : EnemyBase
         casting = true;
         castTimer = castWindup;
         nextCastTime = Time.time + AttackCooldown;
+
+        if (telegraph != null)
+        {
+            telegraph.Begin(castWindup);
+        }
     }
 
     private void ReleaseCast()
     {
         casting = false;
 
-        Vector2 baseDirection = ((Vector2)target.position - rb.position).normalized;
+        if (telegraph != null)
+        {
+            telegraph.End();
+        }
+
+        Vector2 baseDirection =
+            (
+                (Vector2)target.position -
+                rb.position
+            ).normalized;
 
         if (shooter != null)
-            shooter.ShootSpread(baseDirection, projectileCount, spreadAngle, CurrentDifficulty.damageMultiplier, gameObject);
+        {
+            shooter.ShootSpread(
+                baseDirection,
+                projectileCount,
+                spreadAngle,
+                CurrentDifficulty.damageMultiplier,
+                gameObject
+            );
+        }
     }
-
 }
