@@ -15,7 +15,8 @@ MonoBehaviour:
   characterName: boy
   portrait: {fileID: -4615057420341375881, guid: 92e09a8a121192b428fe199d1799bf9b, type: 3}
   gameplaySprite: {fileID: 412689550006464982, guid: 4a99cb37f7ddf5f4d88d02f894313310, type: 3}
+  animatorController: {fileID: 9100000, guid: 67910c407b65e884c9f58993479dbbf2, type: 2}
   maxHealth: 110
   moveSpeed: 5.2
   weaponType: 0
-  canAttackWhileMoving: 0
+  firingMode: 0
