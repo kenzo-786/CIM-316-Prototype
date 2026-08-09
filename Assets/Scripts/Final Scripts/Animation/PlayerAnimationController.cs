@@ -6,67 +6,44 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerMovement movement;
+    [SerializeField] private PlayerWeaponController weaponController;
+    [SerializeField] private Transform weaponPivot;
 
-    [Header("Direction")]
-    [SerializeField] private Vector2 startingFacingDirection = Vector2.down;
-    [SerializeField, Min(0f)] private float movementThreshold = 0.01f;
+    [Header("Facing")]
+    [SerializeField] private Vector2 startingDirection = Vector2.down;
+    [SerializeField] private bool faceAimWhenStationary = true;
+    [SerializeField] private float weaponTurnSpeed = 720f;
 
-    [Header("Attack")]
-    [SerializeField] private bool playAttackAnimations;
+    private static readonly int IsWalkingHash =
+        Animator.StringToHash("IsWalking");
 
-    private static readonly int MoveXHash =
-        Animator.StringToHash("MoveX");
+    private static readonly int XInputHash =
+        Animator.StringToHash("XInput");
 
-    private static readonly int MoveYHash =
-        Animator.StringToHash("MoveY");
+    private static readonly int YInputHash =
+        Animator.StringToHash("YInput");
 
-    private static readonly int SpeedHash =
-        Animator.StringToHash("Speed");
-
-    private static readonly int AimXHash =
-        Animator.StringToHash("AimX");
-
-    private static readonly int AimYHash =
-        Animator.StringToHash("AimY");
-
-    private static readonly int AttackHash =
-        Animator.StringToHash("Attack");
-
-    private PlayerMovement movement;
-    private PlayerWeaponController weaponController;
-    private Vector2 lastMovementDirection;
-    private Vector2 lastAimDirection;
+    private Vector2 lastDirection;
 
     private void Awake()
     {
-        movement = GetComponent<PlayerMovement>();
-        weaponController = GetComponent<PlayerWeaponController>();
-
         if (animator == null)
         {
-            animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<Animator>(true);
         }
 
-        lastMovementDirection =
-            SnapToCardinal(startingFacingDirection);
-
-        lastAimDirection = lastMovementDirection;
-    }
-
-    private void OnEnable()
-    {
-        if (weaponController != null)
+        if (movement == null)
         {
-            weaponController.OnAttackPerformed += HandleAttack;
+            movement = GetComponent<PlayerMovement>();
         }
-    }
 
-    private void OnDisable()
-    {
-        if (weaponController != null)
+        if (weaponController == null)
         {
-            weaponController.OnAttackPerformed -= HandleAttack;
+            weaponController = GetComponent<PlayerWeaponController>();
         }
+
+        lastDirection = SnapToCardinal(startingDirection);
     }
 
     private void LateUpdate()
@@ -76,79 +53,65 @@ public class PlayerAnimationController : MonoBehaviour
             return;
         }
 
-        Vector2 moveInput = movement.MoveInput;
+        Vector2 aimDirection = GetAimDirection();
 
-        bool isMoving =
-            moveInput.sqrMagnitude >
-            movementThreshold * movementThreshold;
-
-        if (isMoving)
+        if (movement.IsMoving)
         {
-            lastMovementDirection =
-                SnapToCardinal(moveInput);
+            lastDirection = SnapToCardinal(movement.MoveInput);
+        }
+        else if (faceAimWhenStationary &&
+                 aimDirection.sqrMagnitude > 0.01f)
+        {
+            lastDirection = SnapToCardinal(aimDirection);
         }
 
-        animator.SetFloat(
-            MoveXHash,
-            lastMovementDirection.x
-        );
+        animator.SetBool(IsWalkingHash, movement.IsMoving);
+        animator.SetFloat(XInputHash, lastDirection.x);
+        animator.SetFloat(YInputHash, lastDirection.y);
 
-        animator.SetFloat(
-            MoveYHash,
-            lastMovementDirection.y
-        );
-
-        animator.SetFloat(
-            SpeedHash,
-            isMoving ? 1f : 0f
-        );
-
-        animator.SetFloat(
-            AimXHash,
-            lastAimDirection.x
-        );
-
-        animator.SetFloat(
-            AimYHash,
-            lastAimDirection.y
-        );
+        UpdateWeaponPivot(aimDirection);
     }
 
-    private void HandleAttack(Vector2 attackDirection)
+    private Vector2 GetAimDirection()
     {
-        if (animator == null)
+        if (weaponController != null &&
+            weaponController.AutoTargetEnemies &&
+            weaponController.CurrentTarget != null)
+        {
+            return (
+                (Vector2)weaponController.CurrentTarget.position -
+                (Vector2)transform.position
+            ).normalized;
+        }
+
+        return movement.AimDirection.normalized;
+    }
+
+    private void UpdateWeaponPivot(Vector2 aimDirection)
+    {
+        if (weaponPivot == null || aimDirection.sqrMagnitude <= 0.01f)
         {
             return;
         }
 
-        if (attackDirection.sqrMagnitude > 0.01f)
-        {
-            lastAimDirection =
-                SnapToCardinal(attackDirection);
-        }
+        float targetAngle = Mathf.Atan2(
+            aimDirection.y,
+            aimDirection.x
+        ) * Mathf.Rad2Deg;
 
-        animator.SetFloat(
-            AimXHash,
-            lastAimDirection.x
+        float currentAngle = weaponPivot.localEulerAngles.z;
+
+        float smoothAngle = Mathf.MoveTowardsAngle(
+            currentAngle,
+            targetAngle,
+            weaponTurnSpeed * Time.deltaTime
         );
 
-        animator.SetFloat(
-            AimYHash,
-            lastAimDirection.y
+        weaponPivot.localRotation = Quaternion.Euler(
+            0f,
+            0f,
+            smoothAngle
         );
-
-        if (!playAttackAnimations)
-        {
-            return;
-        }
-
-        animator.ResetTrigger(AttackHash);
-        animator.SetTrigger(AttackHash);
-    }
-
-    public void SetAttackAnimationsEnabled(bool enabled)
-    {
-        playAttackAnimations = enabled;
     }
 
     private static Vector2 SnapToCardinal(Vector2 direction)

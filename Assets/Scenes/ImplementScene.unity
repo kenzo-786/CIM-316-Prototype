@@ -1521,7 +1521,6 @@ GameObject:
   - component: {fileID: 242738781}
   - component: {fileID: 242738782}
   - component: {fileID: 242738783}
-  - component: {fileID: 242738784}
   - component: {fileID: 242738785}
   m_Layer: 6
   m_Name: Player
@@ -1864,28 +1863,6 @@ MonoBehaviour:
   launchSoundId: eraser_throw
   shakeIntensity: 0.025
   shakeDuration: 0.035
---- !u!95 &242738784
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242738766}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &242738785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,10 +1875,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e360ff4ae96bb984b98b31b71f5c7168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationController
-  animator: {fileID: 0}
-  startingFacingDirection: {x: 0, y: -1}
-  movementThreshold: 0.01
-  playAttackAnimations: 0
+  animator: {fileID: 1839325600}
+  movement: {fileID: 242738776}
+  weaponController: {fileID: 242738771}
+  weaponPivot: {fileID: 1700839578}
+  startingDirection: {x: 0, y: -1}
+  faceAimWhenStationary: 1
 --- !u!1 &273351603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6531,6 +6510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1839325598}
   - component: {fileID: 1839325599}
+  - component: {fileID: 1839325600}
   m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
@@ -6612,6 +6592,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &1839325600
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839325597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1851506944
 GameObject:
   m_ObjectHideFlags: 0
