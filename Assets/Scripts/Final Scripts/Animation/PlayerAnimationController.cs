@@ -93,7 +93,6 @@ public class PlayerAnimationController : MonoBehaviour
         {
             return;
         }
-
         float targetAngle = Mathf.Atan2(
             aimDirection.y,
             aimDirection.x

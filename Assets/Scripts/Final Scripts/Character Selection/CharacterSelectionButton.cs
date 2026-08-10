@@ -6,16 +6,44 @@ using UnityEngine.UI;
 public class CharacterSelectionButton : MonoBehaviour
 {
     [SerializeField] private PlayerCharacterData characterData;
-    [SerializeField] private string gameplaySceneName = "Game";
+    [SerializeField] private string tutorialSceneName = "TutorialScene";
+    [SerializeField] private string gameplaySceneName = "ImplementScene";
+    [SerializeField] private bool alwaysShowTutorialDuringDevelopment = true;
+
+    private Button button;
 
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(SelectCharacter);
+        button = GetComponent<Button>();
+        button.onClick.AddListener(SelectCharacter);
+    }
+
+    private void OnDestroy()
+    {
+        if (button != null)
+        {
+            button.onClick.RemoveListener(SelectCharacter);
+        }
     }
 
     private void SelectCharacter()
     {
+        if (characterData == null)
+        {
+            Debug.LogError("CharacterSelectionButton has no Character Data.", this);
+            return;
+        }
+
         SelectedCharacter.Set(characterData);
-        SceneManager.LoadScene(gameplaySceneName);
+
+        bool shouldShowTutorial =
+            alwaysShowTutorialDuringDevelopment ||
+            !TutorialProgress.IsCompleted;
+
+        SceneManager.LoadScene(
+            shouldShowTutorial
+                ? tutorialSceneName
+                : gameplaySceneName
+        );
     }
 }
