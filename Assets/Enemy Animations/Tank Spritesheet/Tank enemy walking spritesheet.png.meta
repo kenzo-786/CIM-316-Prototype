@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 624f22a4f9c35a243b670fbb249463c4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1670460394916442252
+    second: Tank enemy walking spritesheet_0
+  - first:
+      213: -422019665496720253
+    second: Tank enemy walking spritesheet_1
+  - first:
+      213: 3926827354866592598
+    second: Tank enemy walking spritesheet_2
+  - first:
+      213: -8062825129097478418
+    second: Tank enemy walking spritesheet_3
+  - first:
+      213: -7620854185606202154
+    second: Tank enemy walking spritesheet_4
+  - first:
+      213: -2492530700276837621
+    second: Tank enemy walking spritesheet_5
+  - first:
+      213: 2200192138117126010
+    second: Tank enemy walking spritesheet_6
+  - first:
+      213: 8475510041080236883
+    second: Tank enemy walking spritesheet_7
+  - first:
+      213: 7368120746650493477
+    second: Tank enemy walking spritesheet_8
+  - first:
+      213: 4416796841432021555
+    second: Tank enemy walking spritesheet_9
+  - first:
+      213: -3322530779513097194
+    second: Tank enemy walking spritesheet_10
+  - first:
+      213: 6046473178374822137
+    second: Tank enemy walking spritesheet_11
+  - first:
+      213: 5525778704099228898
+    second: Tank enemy walking spritesheet_12
+  - first:
+      213: 4502126407308766383
+    second: Tank enemy walking spritesheet_13
+  - first:
+      213: 6403551912099015357
+    second: Tank enemy walking spritesheet_14
+  - first:
+      213: 5963283592012856860
+    second: Tank enemy walking spritesheet_15
+  - first:
+      213: 8363100212077588506
+    second: Tank enemy walking spritesheet_16
+  - first:
+      213: -4359659764364018223
+    second: Tank enemy walking spritesheet_17
+  - first:
+      213: 3904390730214696903
+    second: Tank enemy walking spritesheet_18
+  - first:
+      213: -3803679626111470368
+    second: Tank enemy walking spritesheet_19
+  - first:
+      213: 2308596368946675215
+    second: Tank enemy walking spritesheet_20
+  - first:
+      213: -4398413356568867498
+    second: Tank enemy walking spritesheet_21
+  - first:
+      213: 2383412844366609580
+    second: Tank enemy walking spritesheet_22
+  - first:
+      213: 2307065935058297522
+    second: Tank enemy walking spritesheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 875
+        width: 172
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c807a52f0eaae2710800000000000000
+      internalID: 1670460394916442252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 875
+        width: 172
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38cb6d5a95fa42af0800000000000000
+      internalID: -422019665496720253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 874
+        width: 172
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b2c1d8ca4ee7630800000000000000
+      internalID: 3926827354866592598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 871
+        width: 176
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee3d0683471b1090800000000000000
+      internalID: -8062825129097478418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 870
+        width: 181
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dcb4e5ce794d3690800000000000000
+      internalID: -7620854185606202154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 874
+        width: 172
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b035e3ab880c86dd0800000000000000
+      internalID: -2492530700276837621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 627
+        width: 173
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a77141ea717a88e10800000000000000
+      internalID: 2200192138117126010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 625
+        width: 181
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b08d82a7f0f9570800000000000000
+      internalID: 8475510041080236883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 626
+        width: 176
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 522e946f7c2d04660800000000000000
+      internalID: 7368120746650493477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 626
+        width: 173
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33a7f9a735d9b4d30800000000000000
+      internalID: 4416796841432021555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 625
+        width: 172
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 614f1db0cdff3e1d0800000000000000
+      internalID: -3322530779513097194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 625
+        width: 172
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f855f4f15369e350800000000000000
+      internalID: 6046473178374822137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 334
+        width: 106
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ecb04d54728fac40800000000000000
+      internalID: 5525778704099228898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 333
+        width: 105
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fac6b893d14ca7e30800000000000000
+      internalID: 4502126407308766383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 330
+        width: 106
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba6f6d598cfdd850800000000000000
+      internalID: 6403551912099015357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 328
+        width: 108
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1e77d405d6d1c250800000000000000
+      internalID: 5963283592012856860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 322
+        width: 110
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a10f0e15553bf0470800000000000000
+      internalID: 8363100212077588506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 326
+        width: 106
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ddf483fa806f73c0800000000000000
+      internalID: -4359659764364018223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 75
+        width: 106
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c766caceae2f2630800000000000000
+      internalID: 3904390730214696903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 66
+        width: 110
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e43c36688d963bc0800000000000000
+      internalID: -3803679626111470368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 73
+        width: 109
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0eb2d48a28c90020800000000000000
+      internalID: 2308596368946675215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 74
+        width: 106
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d01622b52b5f2c0800000000000000
+      internalID: -4398413356568867498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 73
+        width: 105
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cac3395aa55931120800000000000000
+      internalID: 2383412844366609580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tank enemy walking spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 71
+        width: 106
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b2ed8c9e38540020800000000000000
+      internalID: 2307065935058297522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tank enemy walking spritesheet_0: 1670460394916442252
+      Tank enemy walking spritesheet_1: -422019665496720253
+      Tank enemy walking spritesheet_10: -3322530779513097194
+      Tank enemy walking spritesheet_11: 6046473178374822137
+      Tank enemy walking spritesheet_12: 5525778704099228898
+      Tank enemy walking spritesheet_13: 4502126407308766383
+      Tank enemy walking spritesheet_14: 6403551912099015357
+      Tank enemy walking spritesheet_15: 5963283592012856860
+      Tank enemy walking spritesheet_16: 8363100212077588506
+      Tank enemy walking spritesheet_17: -4359659764364018223
+      Tank enemy walking spritesheet_18: 3904390730214696903
+      Tank enemy walking spritesheet_19: -3803679626111470368
+      Tank enemy walking spritesheet_2: 3926827354866592598
+      Tank enemy walking spritesheet_20: 2308596368946675215
+      Tank enemy walking spritesheet_21: -4398413356568867498
+      Tank enemy walking spritesheet_22: 2383412844366609580
+      Tank enemy walking spritesheet_23: 2307065935058297522
+      Tank enemy walking spritesheet_3: -8062825129097478418
+      Tank enemy walking spritesheet_4: -7620854185606202154
+      Tank enemy walking spritesheet_5: -2492530700276837621
+      Tank enemy walking spritesheet_6: 2200192138117126010
+      Tank enemy walking spritesheet_7: 8475510041080236883
+      Tank enemy walking spritesheet_8: 7368120746650493477
+      Tank enemy walking spritesheet_9: 4416796841432021555
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

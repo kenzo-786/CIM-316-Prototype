@@ -248,7 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionButton
   characterData: {fileID: 11400000, guid: 00988b98a201d8e47a66f80adefb4a62, type: 2}
+  tutorialSceneName: TutorialScene
   gameplaySceneName: ImplementScene
+  alwaysShowTutorialDuringDevelopment: 1
 --- !u!114 &159399550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionButton
   characterData: {fileID: 11400000, guid: cb047c6e2b148174eaee579de2636763, type: 2}
+  tutorialSceneName: TutorialScene
   gameplaySceneName: ImplementScene
+  alwaysShowTutorialDuringDevelopment: 1
 --- !u!114 &335531201
 MonoBehaviour:
   m_ObjectHideFlags: 0

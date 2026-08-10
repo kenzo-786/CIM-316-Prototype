@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 3428281db74e0094692b7ad177a78ba0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2607592075326336266
+    second: tank enemy attack spritesheet_0
+  - first:
+      213: -8695604484084146882
+    second: tank enemy attack spritesheet_1
+  - first:
+      213: -3739624873316328916
+    second: tank enemy attack spritesheet_2
+  - first:
+      213: 1379489140900590812
+    second: tank enemy attack spritesheet_3
+  - first:
+      213: 1133139052428116635
+    second: tank enemy attack spritesheet_4
+  - first:
+      213: -3962483592029062848
+    second: tank enemy attack spritesheet_5
+  - first:
+      213: 2553222179866258413
+    second: tank enemy attack spritesheet_6
+  - first:
+      213: -9008995470237349168
+    second: tank enemy attack spritesheet_7
+  - first:
+      213: -2440441282238165791
+    second: tank enemy attack spritesheet_8
+  - first:
+      213: -2688101050238523046
+    second: tank enemy attack spritesheet_9
+  - first:
+      213: 217950549390114859
+    second: tank enemy attack spritesheet_10
+  - first:
+      213: 8883897051013560979
+    second: tank enemy attack spritesheet_11
+  - first:
+      213: -4178696127751731387
+    second: tank enemy attack spritesheet_12
+  - first:
+      213: -7140268628750115831
+    second: tank enemy attack spritesheet_13
+  - first:
+      213: 6708410507144383228
+    second: tank enemy attack spritesheet_14
+  - first:
+      213: 6360650409102057181
+    second: tank enemy attack spritesheet_15
+  - first:
+      213: -8494066214070872676
+    second: tank enemy attack spritesheet_16
+  - first:
+      213: -1966348313689726173
+    second: tank enemy attack spritesheet_17
+  - first:
+      213: 4770000908310729135
+    second: tank enemy attack spritesheet_18
+  - first:
+      213: -539469158359808671
+    second: tank enemy attack spritesheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 3
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 846
+        width: 257
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0d23f84d27003420800000000000000
+      internalID: 2607592075326336266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 845
+        width: 217
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3dded20bc1035780800000000000000
+      internalID: -8695604484084146882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1001
+        width: 18
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2ad3c8bdfe2a1cc0800000000000000
+      internalID: -3739624873316328916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 857
+        width: 178
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd473e6901ee42310800000000000000
+      internalID: 1379489140900590812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 825
+        width: 159
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b92c91de6f7b9bf00800000000000000
+      internalID: 1133139052428116635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 623
+        width: 257
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0493bccca2e6209c0800000000000000
+      internalID: -3962483592029062848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 623
+        width: 217
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deba3978b0ede6320800000000000000
+      internalID: 2553222179866258413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 620
+        width: 18
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0da466df95e99f280800000000000000
+      internalID: -9008995470237349168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 575
+        width: 178
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eccef4759fc12ed0800000000000000
+      internalID: -2440441282238165791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 613
+        width: 159
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59ad244652f1bad0800000000000000
+      internalID: -2688101050238523046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 310
+        width: 158
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20cff2bed0560300800000000000000
+      internalID: 217950549390114859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 350
+        width: 6
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39abdca8c41f94b70800000000000000
+      internalID: 8883897051013560979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 332
+        width: 159
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547ce01f20a4206c0800000000000000
+      internalID: -4178696127751731387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 349
+        width: 195
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90cdb7e438ba8ec90800000000000000
+      internalID: -7140268628750115831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 345
+        width: 179
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfac6d540df091d50800000000000000
+      internalID: 6708410507144383228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 20
+        width: 158
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde98fec8d1954850800000000000000
+      internalID: 6360650409102057181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 43
+        width: 172
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9598a328c30f1a80800000000000000
+      internalID: -8494066214070872676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 224
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 323e5d970a026b4e0800000000000000
+      internalID: -1966348313689726173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 52
+        width: 195
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1d626bd82723240800000000000000
+      internalID: 4770000908310729135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank enemy attack spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 63
+        width: 179
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1654fa0a8ab6388f0800000000000000
+      internalID: -539469158359808671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      tank enemy attack spritesheet_0: 2607592075326336266
+      tank enemy attack spritesheet_1: -8695604484084146882
+      tank enemy attack spritesheet_10: 217950549390114859
+      tank enemy attack spritesheet_11: 8883897051013560979
+      tank enemy attack spritesheet_12: -4178696127751731387
+      tank enemy attack spritesheet_13: -7140268628750115831
+      tank enemy attack spritesheet_14: 6708410507144383228
+      tank enemy attack spritesheet_15: 6360650409102057181
+      tank enemy attack spritesheet_16: -8494066214070872676
+      tank enemy attack spritesheet_17: -1966348313689726173
+      tank enemy attack spritesheet_18: 4770000908310729135
+      tank enemy attack spritesheet_19: -539469158359808671
+      tank enemy attack spritesheet_2: -3739624873316328916
+      tank enemy attack spritesheet_3: 1379489140900590812
+      tank enemy attack spritesheet_4: 1133139052428116635
+      tank enemy attack spritesheet_5: -3962483592029062848
+      tank enemy attack spritesheet_6: 2553222179866258413
+      tank enemy attack spritesheet_7: -9008995470237349168
+      tank enemy attack spritesheet_8: -2440441282238165791
+      tank enemy attack spritesheet_9: -2688101050238523046
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
