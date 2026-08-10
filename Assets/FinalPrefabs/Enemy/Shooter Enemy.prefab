@@ -69,6 +69,7 @@ Transform:
   m_Children:
   - {fileID: 7286349063346780371}
   - {fileID: 1841112386118346239}
+  - {fileID: 1767906330787937897}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2304114965193295206
@@ -183,6 +184,8 @@ MonoBehaviour:
   shotBlockingLayer:
     serializedVersion: 2
     m_Bits: 0
+  shotWindup: 0.25
+  telegraph: {fileID: 0}
   allowRelocation: 1
   dangerRange: 3
   relocationCooldown: 3
@@ -219,6 +222,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 797284089319625959, guid: 8e31355537c26f040bbd9c17e064cdfb, type: 3}
   hitSoundId: enemy_hit
   showDamageNumber: 1
+  enableCameraShake: 0
   shakeIntensity: 0.04
   shakeDuration: 0.04
 --- !u!1 &3975962755301810900
@@ -312,3 +316,47 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &5961897610070924989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767906330787937897}
+  - component: {fileID: 1545067894212991906}
+  m_Layer: 7
+  m_Name: TargetMarkerPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1767906330787937897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961897610070924989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.96, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8219061172087984139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1545067894212991906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961897610070924989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4e5210b3fa1384182e47d253d868db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetMarkerAnchor

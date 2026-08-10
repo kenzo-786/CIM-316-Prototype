@@ -1,18 +1,23 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class BossHealthTarget : MonoBehaviour
 {
+    [SerializeField] private string bossName = "The Web Keeper";
+    [SerializeField] private BossHealthHud healthHud;
+
     private Health health;
-    private float lastCurrentHealth;
-    private float lastMaxHealth;
     private bool deathSent;
 
     public event Action<float, float> OnBossHealthChanged;
     public event Action OnBossDefeated;
 
-    public float CurrentHealth => health != null ? health.CurrentHealth : 0f;
-    public float MaxHealth => health != null ? health.MaxHealth : 0f;
+    public float CurrentHealth =>
+        health != null ? health.CurrentHealth : 0f;
+
+    public float MaxHealth =>
+        health != null ? health.MaxHealth : 0f;
 
     private void Awake()
     {
@@ -22,34 +27,65 @@ public class BossHealthTarget : MonoBehaviour
     private void OnEnable()
     {
         deathSent = false;
-        CacheAndNotify();
-    }
 
-    private void Update()
-    {
-        if (health == null)
-            return;
-
-        if (!Mathf.Approximately(lastCurrentHealth, health.CurrentHealth) ||
-            !Mathf.Approximately(lastMaxHealth, health.MaxHealth))
+        if (health != null)
         {
-            CacheAndNotify();
-        }
-
-        if (!deathSent && health.CurrentHealth <= 0f)
-        {
-            deathSent = true;
-            OnBossDefeated?.Invoke();
+            health.OnHealthChanged += HandleHealthChanged;
+            health.OnDied += HandleDied;
         }
     }
 
-    private void CacheAndNotify()
+    private void Start()
     {
-        if (health == null)
-            return;
+        if (healthHud == null)
+        {
+            healthHud = FindObjectOfType<BossHealthHud>();
+        }
 
-        lastCurrentHealth = health.CurrentHealth;
-        lastMaxHealth = health.MaxHealth;
-        OnBossHealthChanged?.Invoke(lastCurrentHealth, lastMaxHealth);
+        if (healthHud != null)
+        {
+            healthHud.Show(this, bossName);
+        }
+
+        HandleHealthChanged(
+            CurrentHealth,
+            MaxHealth
+        );
+    }
+
+    private void OnDisable()
+    {
+        if (health != null)
+        {
+            health.OnHealthChanged -= HandleHealthChanged;
+            health.OnDied -= HandleDied;
+        }
+
+        if (healthHud != null)
+        {
+            healthHud.Hide();
+        }
+    }
+
+    private void HandleHealthChanged(
+        float currentHealth,
+        float maximumHealth)
+    {
+        OnBossHealthChanged?.Invoke(
+            currentHealth,
+            maximumHealth
+        );
+    }
+
+    private void HandleDied()
+    {
+        if (deathSent)
+        {
+            return;
+        }
+
+        deathSent = true;
+        OnBossDefeated?.Invoke();
     }
 }
+

@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: ba43ee950d163874a9b05eefe161729e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1474116882650790150
+    second: spider_boss_enemy_attack_1_spritesheet_0
+  - first:
+      213: -2608463939845889485
+    second: spider_boss_enemy_attack_1_spritesheet_1
+  - first:
+      213: -4960127214213010966
+    second: spider_boss_enemy_attack_1_spritesheet_2
+  - first:
+      213: 8167536432046204817
+    second: spider_boss_enemy_attack_1_spritesheet_3
+  - first:
+      213: 8501760525104984239
+    second: spider_boss_enemy_attack_1_spritesheet_4
+  - first:
+      213: 8207660856106591504
+    second: spider_boss_enemy_attack_1_spritesheet_5
+  - first:
+      213: -2695869779028011770
+    second: spider_boss_enemy_attack_1_spritesheet_6
+  - first:
+      213: 2847310040615210544
+    second: spider_boss_enemy_attack_1_spritesheet_7
+  - first:
+      213: 978210402438256592
+    second: spider_boss_enemy_attack_1_spritesheet_8
+  - first:
+      213: 6200353235263348338
+    second: spider_boss_enemy_attack_1_spritesheet_9
+  - first:
+      213: -648974163645163486
+    second: spider_boss_enemy_attack_1_spritesheet_10
+  - first:
+      213: -2264020133477466615
+    second: spider_boss_enemy_attack_1_spritesheet_11
+  - first:
+      213: -5499035492101707068
+    second: spider_boss_enemy_attack_1_spritesheet_12
+  - first:
+      213: 7024273890213965227
+    second: spider_boss_enemy_attack_1_spritesheet_13
+  - first:
+      213: -230388355812598422
+    second: spider_boss_enemy_attack_1_spritesheet_14
+  - first:
+      213: 1845064959559248846
+    second: spider_boss_enemy_attack_1_spritesheet_15
+  - first:
+      213: 7282328315304816925
+    second: spider_boss_enemy_attack_1_spritesheet_16
+  - first:
+      213: -5798649262712898245
+    second: spider_boss_enemy_attack_1_spritesheet_17
+  - first:
+      213: 8918412519139421240
+    second: spider_boss_enemy_attack_1_spritesheet_18
+  - first:
+      213: -8979255793781211874
+    second: spider_boss_enemy_attack_1_spritesheet_19
+  - first:
+      213: 7403187175389332841
+    second: spider_boss_enemy_attack_1_spritesheet_20
+  - first:
+      213: 2810995286160020367
+    second: spider_boss_enemy_attack_1_spritesheet_21
+  - first:
+      213: -5245240589748856690
+    second: spider_boss_enemy_attack_1_spritesheet_22
+  - first:
+      213: 5865972283113500494
+    second: spider_boss_enemy_attack_1_spritesheet_23
+  - first:
+      213: -2323555145696909330
+    second: spider_boss_enemy_attack_1_spritesheet_24
+  - first:
+      213: -5997195054540983804
+    second: spider_boss_enemy_attack_1_spritesheet_25
+  - first:
+      213: -6309943469579977169
+    second: spider_boss_enemy_attack_1_spritesheet_26
+  - first:
+      213: 3507716318018224498
+    second: spider_boss_enemy_attack_1_spritesheet_27
+  - first:
+      213: 3928637595847247333
+    second: spider_boss_enemy_attack_1_spritesheet_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 474
+        width: 224
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6097ecb9e7d157410800000000000000
+      internalID: 1474116882650790150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 651
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 332e110fddfdccbd0800000000000000
+      internalID: -2608463939845889485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 665
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae9e51c14961a2bb0800000000000000
+      internalID: -4960127214213010966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 655
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197ec2a8c1be85170800000000000000
+      internalID: 8167536432046204817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 649
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa0325047225cf570800000000000000
+      internalID: 8501760525104984239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 452
+        width: 243
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 24, z: 0, w: 16}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 015ac15001877e170800000000000000
+      internalID: 8207660856106591504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 653
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 605135428b8569ad0800000000000000
+      internalID: -2695869779028011770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 638
+        width: 61
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03ec540756da38720800000000000000
+      internalID: 2847310040615210544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 661
+        width: 54
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d79ce0ad2d439d00800000000000000
+      internalID: 978210402438256592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 647
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ed0d5aa641c0650800000000000000
+      internalID: 6200353235263348338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 655
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2281683cf616ef6f0800000000000000
+      internalID: -648974163645163486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 647
+        width: 62
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e3eb31fa59490e0800000000000000
+      internalID: -2264020133477466615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 478
+        width: 235
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca2306ea508fa3b0800000000000000
+      internalID: -5499035492101707068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 633
+        width: 37
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad214f03eb3b7160800000000000000
+      internalID: 7024273890213965227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 645
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6d5763d20f7dccf0800000000000000
+      internalID: -230388355812598422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 654
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecbac0e1eccfa9910800000000000000
+      internalID: 1845064959559248846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 638
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d113383f407001560800000000000000
+      internalID: 7282328315304816925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 452
+        width: 238
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 24, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3dbae6d73f078fa0800000000000000
+      internalID: -5798649262712898245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 477
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83ca3b33fe094cb70800000000000000
+      internalID: 8918412519139421240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 478
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1d7d400e66436380800000000000000
+      internalID: -8979255793781211874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 488
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9650fc223876db660800000000000000
+      internalID: 7403187175389332841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 481
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f839dd8c159a20720800000000000000
+      internalID: 2810995286160020367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 469
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e881f8e59792537b0800000000000000
+      internalID: -5245240589748856690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 472
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f644556be186150800000000000000
+      internalID: 5865972283113500494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 478
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee764bcd7e211cfd0800000000000000
+      internalID: -2323555145696909330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 473
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 402fa555fdea5cca0800000000000000
+      internalID: -5997195054540983804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 475
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2eb3ee88d39e68a0800000000000000
+      internalID: -6309943469579977169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 474
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27141541869eda030800000000000000
+      internalID: 3507716318018224498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider_boss_enemy_attack_1_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 469
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e548bf1413558630800000000000000
+      internalID: 3928637595847247333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ae9efdc9aa0a7fc46876eacb4e4781e3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spider_boss_enemy_attack_1_spritesheet_0: 1474116882650790150
+      spider_boss_enemy_attack_1_spritesheet_1: -2608463939845889485
+      spider_boss_enemy_attack_1_spritesheet_10: -648974163645163486
+      spider_boss_enemy_attack_1_spritesheet_11: -2264020133477466615
+      spider_boss_enemy_attack_1_spritesheet_12: -5499035492101707068
+      spider_boss_enemy_attack_1_spritesheet_13: 7024273890213965227
+      spider_boss_enemy_attack_1_spritesheet_14: -230388355812598422
+      spider_boss_enemy_attack_1_spritesheet_15: 1845064959559248846
+      spider_boss_enemy_attack_1_spritesheet_16: 7282328315304816925
+      spider_boss_enemy_attack_1_spritesheet_17: -5798649262712898245
+      spider_boss_enemy_attack_1_spritesheet_18: 8918412519139421240
+      spider_boss_enemy_attack_1_spritesheet_19: -8979255793781211874
+      spider_boss_enemy_attack_1_spritesheet_2: -4960127214213010966
+      spider_boss_enemy_attack_1_spritesheet_20: 7403187175389332841
+      spider_boss_enemy_attack_1_spritesheet_21: 2810995286160020367
+      spider_boss_enemy_attack_1_spritesheet_22: -5245240589748856690
+      spider_boss_enemy_attack_1_spritesheet_23: 5865972283113500494
+      spider_boss_enemy_attack_1_spritesheet_24: -2323555145696909330
+      spider_boss_enemy_attack_1_spritesheet_25: -5997195054540983804
+      spider_boss_enemy_attack_1_spritesheet_26: -6309943469579977169
+      spider_boss_enemy_attack_1_spritesheet_27: 3507716318018224498
+      spider_boss_enemy_attack_1_spritesheet_28: 3928637595847247333
+      spider_boss_enemy_attack_1_spritesheet_3: 8167536432046204817
+      spider_boss_enemy_attack_1_spritesheet_4: 8501760525104984239
+      spider_boss_enemy_attack_1_spritesheet_5: 8207660856106591504
+      spider_boss_enemy_attack_1_spritesheet_6: -2695869779028011770
+      spider_boss_enemy_attack_1_spritesheet_7: 2847310040615210544
+      spider_boss_enemy_attack_1_spritesheet_8: 978210402438256592
+      spider_boss_enemy_attack_1_spritesheet_9: 6200353235263348338
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

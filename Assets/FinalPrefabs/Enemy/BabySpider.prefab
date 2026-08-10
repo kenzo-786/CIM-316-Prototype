@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &397725068456446309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2437929133770913266}
+  - component: {fileID: 3299776935972287468}
+  m_Layer: 7
+  m_Name: TargetMarkerPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2437929133770913266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397725068456446309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.575, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8219061172087984139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3299776935972287468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397725068456446309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4e5210b3fa1384182e47d253d868db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetMarkerAnchor
 --- !u!1 &1053223663856059746
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,8 +71,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.26133332, y: 0.28, z: 0.9333333}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8219061172087984139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,11 +147,11 @@ GameObject:
   - component: {fileID: 2304114965193295206}
   - component: {fileID: 8901815528011600232}
   - component: {fileID: 155877684525813468}
-  - component: {fileID: -7195723133628429220}
   - component: {fileID: -6530936329484164435}
   - component: {fileID: 3798750571749266266}
+  - component: {fileID: 5079539612599002805}
   m_Layer: 7
-  m_Name: Spider
+  m_Name: BabySpider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,11 +167,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.051512, y: 1.051512, z: 1.051512}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8364754921771101717}
-  - {fileID: 3188971066414493408}
+  - {fileID: 2437929133770913266}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2304114965193295206
@@ -191,8 +235,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.10698164, y: 0.0068139033}
-  m_Size: {x: 1.0172489, y: 1.1240268}
+  m_Offset: {x: -0.07332685, y: 0.0020062923}
+  m_Size: {x: 0.6807018, y: 1.4605744}
   m_Direction: 0
 --- !u!114 &155877684525813468
 MonoBehaviour:
@@ -207,37 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
---- !u!114 &-7195723133628429220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360867081428378876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a62f47335bf8b0a47a9a7be5b3ee6cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpiderAmbushEnemy
-  enemyData: {fileID: 11400000, guid: 8fec6b836c1b51c4783231bae40ca74b, type: 2}
-  visual: {fileID: 4216025546545835069}
-  spawnVisibleDuration: 1.5
-  initialFlashDuration: 0.5
-  stationaryDelay: 1
-  emergeDistance: 3
-  telegraphDuration: 0.75
-  attackAfterEmergingDelay: 0.25
-  vanishDistance: 5
-  vanishDuration: 0.4
-  flashInterval: 0.1
-  spawnClearance: 0.45
-  blockedLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  bodyCollider: {fileID: 8901815528011600232}
-  visuals:
-  - {fileID: 4216025546545835069}
-  telegraph: {fileID: 0}
 --- !u!114 &-6530936329484164435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,47 +286,19 @@ MonoBehaviour:
   enableCameraShake: 0
   shakeIntensity: 0.04
   shakeDuration: 0.04
---- !u!1 &8294478463466170349
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3188971066414493408}
-  - component: {fileID: 2895310298021330302}
-  m_Layer: 7
-  m_Name: TargetMarkerPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3188971066414493408
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294478463466170349}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.853, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8219061172087984139}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2895310298021330302
+--- !u!114 &5079539612599002805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294478463466170349}
+  m_GameObject: {fileID: 3360867081428378876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4e5210b3fa1384182e47d253d868db, type: 3}
+  m_Script: {fileID: 11500000, guid: 09945768ed34f514eb278339bfaac007, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetMarkerAnchor
+  m_EditorClassIdentifier: Assembly-CSharp::ChaserEnemy
+  enemyData: {fileID: 0}
+  visual: {fileID: 4216025546545835069}
+  attackWindup: 0.25
+  telegraph: {fileID: 0}

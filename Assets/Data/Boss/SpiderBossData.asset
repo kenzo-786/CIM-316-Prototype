@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b0d3fb274682646889523819533497, type: 3}
+  m_Name: SpiderBossData
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: The Web Keeper
+  prefab: {fileID: 2160148140219872733, guid: 4507264bcc6ebf94c9b7e8b036386301, type: 3}
+  maxHealth: 400
+  moveSpeed: 0
+  contactDamage: 0
+  attackRange: 0
+  attackCooldown: 1
+  xpDropAmount: 20
+  projectileData: {fileID: 0}
+  childEnemyData: {fileID: 0}
+  childCount: 2
