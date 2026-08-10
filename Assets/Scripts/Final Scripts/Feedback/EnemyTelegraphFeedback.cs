@@ -4,7 +4,9 @@ public class EnemyTelegraphFeedback : MonoBehaviour
 {
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer[] renderers;
-    [SerializeField] private Color warningColor = new Color(1f, 0.25f, 0.1f, 1f);
+    [SerializeField]
+    private Color warningColor =
+        new Color(1f, 0.25f, 0.1f, 1f);
     [SerializeField, Min(0f)] private float pulseSpeed = 12f;
 
     [Header("Start Cue")]
@@ -19,12 +21,30 @@ public class EnemyTelegraphFeedback : MonoBehaviour
     private GameObject worldMarker;
     private float remainingTime;
     private bool active;
+    private bool initialized;
 
     private void Awake()
     {
+        Initialize();
+
+        if (worldMarkerPrefab != null)
+        {
+            worldMarker = Instantiate(worldMarkerPrefab);
+            worldMarker.SetActive(false);
+        }
+    }
+
+    private void Initialize()
+    {
         if (renderers == null || renderers.Length == 0)
         {
-            renderers = GetComponentsInChildren<SpriteRenderer>();
+            renderers =
+                GetComponentsInChildren<SpriteRenderer>(true);
+        }
+
+        if (renderers == null)
+        {
+            renderers = new SpriteRenderer[0];
         }
 
         normalColors = new Color[renderers.Length];
@@ -37,11 +57,7 @@ public class EnemyTelegraphFeedback : MonoBehaviour
             }
         }
 
-        if (worldMarkerPrefab != null)
-        {
-            worldMarker = Instantiate(worldMarkerPrefab);
-            worldMarker.SetActive(false);
-        }
+        initialized = true;
     }
 
     private void Update()
@@ -51,15 +67,26 @@ public class EnemyTelegraphFeedback : MonoBehaviour
             return;
         }
 
+        EnsureInitialized();
+
         remainingTime -= Time.deltaTime;
 
-        float pulse = (Mathf.Sin(Time.time * pulseSpeed) + 1f) * 0.5f;
+        float pulse =
+            (Mathf.Sin(Time.time * pulseSpeed) + 1f) * 0.5f;
 
-        for (int i = 0; i < renderers.Length; i++)
+        int count =
+            Mathf.Min(renderers.Length, normalColors.Length);
+
+        for (int i = 0; i < count; i++)
         {
             if (renderers[i] != null)
             {
-                renderers[i].color = Color.Lerp(normalColors[i], warningColor, pulse);
+                renderers[i].color =
+                    Color.Lerp(
+                        normalColors[i],
+                        warningColor,
+                        pulse
+                    );
             }
         }
 
@@ -71,15 +98,25 @@ public class EnemyTelegraphFeedback : MonoBehaviour
 
     public void Begin(float duration)
     {
+        EnsureInitialized();
+
         active = true;
         remainingTime = Mathf.Max(0.01f, duration);
 
-        Vector3 position = effectOrigin != null
-            ? effectOrigin.position
-            : transform.position;
+        Vector3 position =
+            effectOrigin != null
+                ? effectOrigin.position
+                : transform.position;
 
-        FeedbackEventBus.SpawnEffect(telegraphEffectPrefab, position);
-        FeedbackEventBus.PlaySound(telegraphSoundId, position);
+        FeedbackEventBus.SpawnEffect(
+            telegraphEffectPrefab,
+            position
+        );
+
+        FeedbackEventBus.PlaySound(
+            telegraphSoundId,
+            position
+        );
 
         if (worldMarker != null)
         {
@@ -87,7 +124,10 @@ public class EnemyTelegraphFeedback : MonoBehaviour
         }
     }
 
-    public void BeginAtPosition(float duration, Vector2 position, float diameter)
+    public void BeginAtPosition(
+        float duration,
+        Vector2 position,
+        float diameter)
     {
         Begin(duration);
 
@@ -97,13 +137,21 @@ public class EnemyTelegraphFeedback : MonoBehaviour
         }
 
         worldMarker.transform.position = position;
-        worldMarker.transform.localScale = new Vector3(diameter, diameter, 1f);
+
+        worldMarker.transform.localScale =
+            new Vector3(
+                diameter,
+                diameter,
+                1f
+            );
+
         worldMarker.SetActive(true);
     }
 
     public void MoveMarker(Vector2 position)
     {
-        if (worldMarker != null && worldMarker.activeSelf)
+        if (worldMarker != null &&
+            worldMarker.activeSelf)
         {
             worldMarker.transform.position = position;
         }
@@ -114,17 +162,39 @@ public class EnemyTelegraphFeedback : MonoBehaviour
         active = false;
         remainingTime = 0f;
 
-        for (int i = 0; i < renderers.Length; i++)
+        if (renderers != null &&
+            normalColors != null)
         {
-            if (renderers[i] != null)
+            int count =
+                Mathf.Min(
+                    renderers.Length,
+                    normalColors.Length
+                );
+
+            for (int i = 0; i < count; i++)
             {
-                renderers[i].color = normalColors[i];
+                if (renderers[i] != null)
+                {
+                    renderers[i].color =
+                        normalColors[i];
+                }
             }
         }
 
         if (worldMarker != null)
         {
             worldMarker.SetActive(false);
+        }
+    }
+
+    private void EnsureInitialized()
+    {
+        if (!initialized ||
+            renderers == null ||
+            normalColors == null ||
+            renderers.Length != normalColors.Length)
+        {
+            Initialize();
         }
     }
 

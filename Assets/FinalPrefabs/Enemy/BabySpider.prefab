@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 397725068456446309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.575, y: 0, z: 0}
+  m_LocalPosition: {x: -0.575, y: -0.027, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: -6530936329484164435}
   - component: {fileID: 3798750571749266266}
   - component: {fileID: 5079539612599002805}
+  - component: {fileID: 8706671877145926437}
   m_Layer: 7
   m_Name: BabySpider
   m_TagString: Enemy
@@ -302,3 +303,23 @@ MonoBehaviour:
   visual: {fileID: 4216025546545835069}
   attackWindup: 0.25
   telegraph: {fileID: 0}
+--- !u!114 &8706671877145926437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067434e815efb374cad6f694689f6975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTelegraphFeedback
+  renderers:
+  - {fileID: 4216025546545835069}
+  warningColor: {r: 1, g: 0.25, b: 0.1, a: 1}
+  pulseSpeed: 12
+  effectOrigin: {fileID: 8219061172087984139}
+  telegraphEffectPrefab: {fileID: 0}
+  telegraphSoundId: 
+  worldMarkerPrefab: {fileID: 0}

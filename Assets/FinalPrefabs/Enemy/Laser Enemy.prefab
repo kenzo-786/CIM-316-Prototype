@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5448358542049779326}
   - component: {fileID: 7211459418656502973}
   - component: {fileID: 1549760520127777989}
+  - component: {fileID: -3732905380642105705}
   m_Layer: 7
   m_Name: Laser Enemy
   m_TagString: Enemy
@@ -292,6 +293,26 @@ MonoBehaviour:
   enableCameraShake: 0
   shakeIntensity: 0.04
   shakeDuration: 0.04
+--- !u!114 &-3732905380642105705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067434e815efb374cad6f694689f6975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTelegraphFeedback
+  renderers:
+  - {fileID: 2250200168914418903}
+  warningColor: {r: 1, g: 0.25, b: 0.1, a: 1}
+  pulseSpeed: 12
+  effectOrigin: {fileID: 8219061172087984139}
+  telegraphEffectPrefab: {fileID: 0}
+  telegraphSoundId: 
+  worldMarkerPrefab: {fileID: 0}
 --- !u!1 &3869288733246219631
 GameObject:
   m_ObjectHideFlags: 0

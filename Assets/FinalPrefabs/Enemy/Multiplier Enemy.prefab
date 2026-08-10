@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7408419016871813260}
   - component: {fileID: -585805539516745903}
   - component: {fileID: 5440465468123813459}
+  - component: {fileID: -4670225303049096739}
   m_Layer: 7
   m_Name: Multiplier Enemy
   m_TagString: Enemy
@@ -168,6 +169,26 @@ MonoBehaviour:
   enableCameraShake: 0
   shakeIntensity: 0.04
   shakeDuration: 0.04
+--- !u!114 &-4670225303049096739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067434e815efb374cad6f694689f6975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTelegraphFeedback
+  renderers:
+  - {fileID: 8408703828061812248}
+  warningColor: {r: 1, g: 0.25, b: 0.1, a: 1}
+  pulseSpeed: 12
+  effectOrigin: {fileID: 8219061172087984139}
+  telegraphEffectPrefab: {fileID: 0}
+  telegraphSoundId: 
+  worldMarkerPrefab: {fileID: 0}
 --- !u!1 &3504846687614485145
 GameObject:
   m_ObjectHideFlags: 0

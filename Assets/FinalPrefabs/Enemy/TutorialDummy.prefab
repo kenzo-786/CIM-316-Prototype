@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f44d885b697db4cae06b3b96ce1351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialDummyEnemy
-  enemyData: {fileID: 0}
-  visual: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: a4f2922769eed5842bd6471bb713ae52, type: 2}
+  visual: {fileID: 7079629116705562067}
 --- !u!1 &7403395032361453433
 GameObject:
   m_ObjectHideFlags: 0

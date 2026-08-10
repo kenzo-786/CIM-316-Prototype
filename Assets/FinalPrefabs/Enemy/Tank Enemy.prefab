@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: -3999173872277527004}
   - component: {fileID: -2416651769560689988}
   - component: {fileID: 6119436674451448469}
+  - component: {fileID: 1228656665842637628}
   m_Layer: 7
   m_Name: Tank Enemy
   m_TagString: Enemy
@@ -374,3 +375,23 @@ MonoBehaviour:
   enableCameraShake: 0
   shakeIntensity: 0.04
   shakeDuration: 0.04
+--- !u!114 &1228656665842637628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067434e815efb374cad6f694689f6975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTelegraphFeedback
+  renderers:
+  - {fileID: 4673602555329707884}
+  warningColor: {r: 1, g: 0.25, b: 0.1, a: 1}
+  pulseSpeed: 12
+  effectOrigin: {fileID: 0}
+  telegraphEffectPrefab: {fileID: 0}
+  telegraphSoundId: 
+  worldMarkerPrefab: {fileID: 8832048912217835876, guid: 3c2d1d81e27da3f4da07d6f81a2208d4, type: 3}

@@ -27,7 +27,9 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
         lifeTimer = 0f;
 
         if (bodyCollider != null)
+        {
             bodyCollider.enabled = true;
+        }
     }
 
     public void OnReturnedToPool()
@@ -42,7 +44,9 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
         speed = 0f;
 
         if (rb != null)
+        {
             rb.linearVelocity = Vector2.zero;
+        }
     }
 
     private void Update()
@@ -50,33 +54,56 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
         lifeTimer += Time.deltaTime;
 
         if (data != null && lifeTimer >= data.lifetime)
+        {
             Despawn();
+        }
     }
 
-    public void Launch(EnemyProjectileData projectileData, Vector2 launchDirection, float damageMultiplier, GameObject projectileOwner)
+    public void Launch(
+        EnemyProjectileData projectileData,
+        Vector2 launchDirection,
+        float damageMultiplier,
+        GameObject projectileOwner)
     {
         data = projectileData;
         owner = projectileOwner;
         direction = launchDirection.normalized;
 
         if (direction == Vector2.zero)
+        {
             direction = Vector2.right;
+        }
 
-        damage = data != null ? data.damage * damageMultiplier : 1f;
-        bouncesLeft = data != null ? data.wallBounces : 0;
-        hitsLeft = data != null ? Mathf.Max(1, data.hitsBeforeDestroy) : 1;
-        speed = data != null ? data.speed : 8f;
+        damage = data != null
+            ? data.damage * damageMultiplier
+            : 1f;
+
+        bouncesLeft = data != null
+            ? data.wallBounces
+            : 0;
+
+        hitsLeft = data != null
+            ? Mathf.Max(1, data.hitsBeforeDestroy)
+            : 1;
+
+        speed = data != null
+            ? data.speed
+            : 8f;
 
         rb.linearVelocity = direction * speed;
 
         if (data != null && data.rotateToDirection)
+        {
             transform.right = direction;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (owner != null && other.gameObject == owner)
+        {
             return;
+        }
 
         HandleHit(other, null);
     }
@@ -84,32 +111,60 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (owner != null && collision.gameObject == owner)
+        {
             return;
+        }
 
         HandleHit(collision.collider, collision);
     }
 
-    private void HandleHit(Collider2D other, Collision2D collision)
+    private void HandleHit(
+        Collider2D other,
+        Collision2D collision)
     {
         if (other == null || data == null)
+        {
             return;
+        }
 
         if (IsInLayer(other.gameObject.layer, data.playerLayer))
         {
-            IDamageable damageable = other.GetComponent<IDamageable>();
+            IDamageable damageable =
+                other.GetComponent<IDamageable>();
 
             if (damageable == null)
-                damageable = other.GetComponentInParent<IDamageable>();
+            {
+                damageable =
+                    other.GetComponentInParent<IDamageable>();
+            }
 
             if (damageable != null)
-                damageable.TakeDamage(new DamageInfo(damage, gameObject, transform.position));
+            {
+                GameObject damageSource =
+                    owner != null
+                        ? owner
+                        : gameObject;
+
+                Vector2 hitPoint =
+                    other.ClosestPoint(transform.position);
+
+                damageable.TakeDamage(
+                    new DamageInfo(
+                        damage,
+                        damageSource,
+                        hitPoint
+                    )
+                );
+            }
 
             if (data.destroyOnPlayerHit)
             {
                 hitsLeft--;
 
                 if (hitsLeft <= 0)
+                {
                     Despawn();
+                }
             }
 
             return;
@@ -122,10 +177,14 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
         }
 
         if (IsInLayer(other.gameObject.layer, data.destroyLayer))
+        {
             Despawn();
+        }
     }
 
-    private void TryBounce(Collider2D wall, Collision2D collision)
+    private void TryBounce(
+        Collider2D wall,
+        Collision2D collision)
     {
         if (bouncesLeft <= 0)
         {
@@ -134,30 +193,50 @@ public class EnemyProjectile : MonoBehaviour, IPoolable
         }
 
         bouncesLeft--;
-        Vector2 normal = GetBounceNormal(wall, collision);
+
+        Vector2 normal =
+            GetBounceNormal(wall, collision);
 
         if (normal == Vector2.zero)
+        {
             normal = -direction;
+        }
 
-        direction = Vector2.Reflect(direction, normal).normalized;
+        direction =
+            Vector2.Reflect(direction, normal).normalized;
+
         rb.linearVelocity = direction * speed;
 
         if (data != null && data.rotateToDirection)
+        {
             transform.right = direction;
+        }
     }
 
-    private Vector2 GetBounceNormal(Collider2D wall, Collision2D collision)
+    private Vector2 GetBounceNormal(
+        Collider2D wall,
+        Collision2D collision)
     {
-        if (collision != null && collision.contactCount > 0)
+        if (collision != null &&
+            collision.contactCount > 0)
+        {
             return collision.GetContact(0).normal;
+        }
 
-        Vector2 closestPoint = wall.ClosestPoint(transform.position);
-        return ((Vector2)transform.position - closestPoint).normalized;
+        Vector2 closestPoint =
+            wall.ClosestPoint(transform.position);
+
+        return
+            ((Vector2)transform.position - closestPoint)
+            .normalized;
     }
 
-    private bool IsInLayer(int layer, LayerMask mask)
+    private bool IsInLayer(
+        int layer,
+        LayerMask mask)
     {
-        return (mask.value & (1 << layer)) != 0;
+        return
+            (mask.value & (1 << layer)) != 0;
     }
 
     private void Despawn()

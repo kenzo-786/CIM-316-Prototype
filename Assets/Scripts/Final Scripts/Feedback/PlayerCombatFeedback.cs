@@ -7,14 +7,22 @@ public class PlayerCombatFeedback : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private SpriteRenderer[] playerRenderers;
+    [SerializeField] private Canvas feedbackCanvas;
+    [SerializeField] private Camera worldCamera;
     [SerializeField] private CanvasGroup damageVignette;
     [SerializeField] private CanvasGroup lowHealthVignette;
     [SerializeField] private RectTransform directionalIndicator;
     [SerializeField] private CanvasGroup directionalIndicatorCanvas;
 
+    [Header("Directional Indicator")]
+    [SerializeField, Min(0f)] private float directionalIndicatorRadius = 70f;
+    [SerializeField] private float directionalIndicatorRotationOffset;
+    [SerializeField, Min(0f)] private float directionalIndicatorEdgePadding = 20f;
+
     [Header("Damage")]
     [SerializeField]
-    private Color damageFlashColor = new Color(1f, 0.2f, 0.2f, 1f);
+    private Color damageFlashColor =
+        new Color(1f, 0.2f, 0.2f, 1f);
 
     [SerializeField, Min(0f)] private float damageFlashDuration = 0.1f;
     [SerializeField, Min(0f)] private float hitInvulnerabilityDuration = 0.45f;
@@ -55,18 +63,33 @@ public class PlayerCombatFeedback : MonoBehaviour
     {
         health = GetComponent<Health>();
 
-        if (playerRenderers == null || playerRenderers.Length == 0)
+        if (playerRenderers == null ||
+            playerRenderers.Length == 0)
         {
-            playerRenderers = GetComponentsInChildren<SpriteRenderer>();
+            playerRenderers =
+                GetComponentsInChildren<SpriteRenderer>();
         }
 
-        normalColors = new Color[playerRenderers.Length];
+        if (feedbackCanvas == null)
+        {
+            feedbackCanvas =
+                FindObjectOfType<Canvas>();
+        }
+
+        if (worldCamera == null)
+        {
+            worldCamera = Camera.main;
+        }
+
+        normalColors =
+            new Color[playerRenderers.Length];
 
         for (int i = 0; i < playerRenderers.Length; i++)
         {
             if (playerRenderers[i] != null)
             {
-                normalColors[i] = playerRenderers[i].color;
+                normalColors[i] =
+                    playerRenderers[i].color;
             }
         }
 
@@ -85,7 +108,8 @@ public class PlayerCombatFeedback : MonoBehaviour
         health.OnDamaged += HandleDamaged;
         health.OnHealed += HandleHealed;
         health.OnHealthChanged += HandleHealthChanged;
-        health.OnInvulnerabilityChanged += HandleInvulnerabilityChanged;
+        health.OnInvulnerabilityChanged +=
+            HandleInvulnerabilityChanged;
 
         HandleHealthChanged(
             health.CurrentHealth,
@@ -98,7 +122,8 @@ public class PlayerCombatFeedback : MonoBehaviour
         health.OnDamaged -= HandleDamaged;
         health.OnHealed -= HandleHealed;
         health.OnHealthChanged -= HandleHealthChanged;
-        health.OnInvulnerabilityChanged -= HandleInvulnerabilityChanged;
+        health.OnInvulnerabilityChanged -=
+            HandleInvulnerabilityChanged;
 
         RestoreRenderers();
         SetLowHealthAudio(false);
@@ -115,30 +140,35 @@ public class PlayerCombatFeedback : MonoBehaviour
 
     private void Update()
     {
-        float targetAlpha = lowHealth
-            ? lowHealthVignetteAlpha
-            : 0f;
+        float targetAlpha =
+            lowHealth
+                ? lowHealthVignetteAlpha
+                : 0f;
 
         if (lowHealthVignette != null)
         {
-            lowHealthVignette.alpha = Mathf.MoveTowards(
-                lowHealthVignette.alpha,
-                targetAlpha,
-                Time.unscaledDeltaTime * 1.5f
-            );
+            lowHealthVignette.alpha =
+                Mathf.MoveTowards(
+                    lowHealthVignette.alpha,
+                    targetAlpha,
+                    Time.unscaledDeltaTime * 1.5f
+                );
         }
 
         if (musicSource != null)
         {
-            float targetVolume = lowHealth
-                ? normalMusicVolume * lowHealthMusicMultiplier
-                : normalMusicVolume;
+            float targetVolume =
+                lowHealth
+                    ? normalMusicVolume *
+                      lowHealthMusicMultiplier
+                    : normalMusicVolume;
 
-            musicSource.volume = Mathf.MoveTowards(
-                musicSource.volume,
-                targetVolume,
-                Time.unscaledDeltaTime
-            );
+            musicSource.volume =
+                Mathf.MoveTowards(
+                    musicSource.volume,
+                    targetVolume,
+                    Time.unscaledDeltaTime
+                );
         }
     }
 
@@ -170,22 +200,18 @@ public class PlayerCombatFeedback : MonoBehaviour
             StopCoroutine(flashRoutine);
         }
 
-        flashRoutine = StartCoroutine(
-            DamageFlashRoutine()
-        );
+        flashRoutine =
+            StartCoroutine(DamageFlashRoutine());
 
         if (vignetteRoutine != null)
         {
             StopCoroutine(vignetteRoutine);
         }
 
-        vignetteRoutine = StartCoroutine(
-            DamageVignetteRoutine()
-        );
+        vignetteRoutine =
+            StartCoroutine(DamageVignetteRoutine());
 
-        ShowDirectionalIndicator(
-            damageInfo.source
-        );
+        ShowDirectionalIndicator(damageInfo);
 
         if (health.CurrentHealth > 0f)
         {
@@ -215,8 +241,7 @@ public class PlayerCombatFeedback : MonoBehaviour
 
     private void HandleHealthChanged(
         float current,
-        float maximum
-    )
+        float maximum)
     {
         lowHealth =
             !health.IsDead &&
@@ -226,9 +251,7 @@ public class PlayerCombatFeedback : MonoBehaviour
         SetLowHealthAudio(lowHealth);
     }
 
-    private void HandleInvulnerabilityChanged(
-        bool active
-    )
+    private void HandleInvulnerabilityChanged(bool active)
     {
         if (blinkRoutine != null)
         {
@@ -237,9 +260,8 @@ public class PlayerCombatFeedback : MonoBehaviour
 
         if (active)
         {
-            blinkRoutine = StartCoroutine(
-                BlinkRoutine()
-            );
+            blinkRoutine =
+                StartCoroutine(BlinkRoutine());
         }
         else
         {
@@ -270,11 +292,12 @@ public class PlayerCombatFeedback : MonoBehaviour
 
         while (damageVignette.alpha > 0f)
         {
-            damageVignette.alpha = Mathf.MoveTowards(
-                damageVignette.alpha,
-                0f,
-                Time.unscaledDeltaTime * 2.5f
-            );
+            damageVignette.alpha =
+                Mathf.MoveTowards(
+                    damageVignette.alpha,
+                    0f,
+                    Time.unscaledDeltaTime * 2.5f
+                );
 
             yield return null;
         }
@@ -283,19 +306,136 @@ public class PlayerCombatFeedback : MonoBehaviour
     }
 
     private void ShowDirectionalIndicator(
-        GameObject source
-    )
+        DamageInfo damageInfo)
     {
         if (directionalIndicator == null ||
-            directionalIndicatorCanvas == null)
+            directionalIndicatorCanvas == null ||
+            feedbackCanvas == null)
         {
             return;
         }
 
-        Vector2 direction = source != null
-            ? ((Vector2)source.transform.position -
-               (Vector2)transform.position).normalized
-            : Vector2.up;
+        Vector2 direction =
+            GetDamageDirection(damageInfo);
+
+        PositionDirectionalIndicator(direction);
+
+        if (indicatorRoutine != null)
+        {
+            StopCoroutine(indicatorRoutine);
+        }
+
+        indicatorRoutine =
+            StartCoroutine(IndicatorRoutine());
+    }
+
+    private Vector2 GetDamageDirection(
+        DamageInfo damageInfo)
+    {
+        if (damageInfo.source != null)
+        {
+            Vector2 sourceDirection =
+                (Vector2)damageInfo.source.transform.position -
+                (Vector2)transform.position;
+
+            if (sourceDirection.sqrMagnitude > 0.001f)
+            {
+                return sourceDirection.normalized;
+            }
+        }
+
+        Vector2 hitDirection =
+            damageInfo.hitPoint -
+            (Vector2)transform.position;
+
+        if (hitDirection.sqrMagnitude > 0.001f)
+        {
+            return hitDirection.normalized;
+        }
+
+        return Vector2.up;
+    }
+
+    private void PositionDirectionalIndicator(
+        Vector2 direction)
+    {
+        RectTransform canvasRect =
+            feedbackCanvas.transform as RectTransform;
+
+        if (canvasRect == null)
+        {
+            return;
+        }
+
+        if (worldCamera == null)
+        {
+            worldCamera = Camera.main;
+        }
+
+        Vector3 screenPosition =
+            worldCamera != null
+                ? worldCamera.WorldToScreenPoint(
+                    transform.position
+                )
+                : new Vector3(
+                    Screen.width * 0.5f,
+                    Screen.height * 0.5f,
+                    0f
+                );
+
+        Camera uiCamera =
+            feedbackCanvas.renderMode ==
+            RenderMode.ScreenSpaceOverlay
+                ? null
+                : feedbackCanvas.worldCamera != null
+                    ? feedbackCanvas.worldCamera
+                    : worldCamera;
+
+        if (!RectTransformUtility
+                .ScreenPointToLocalPointInRectangle(
+                    canvasRect,
+                    screenPosition,
+                    uiCamera,
+                    out Vector2 playerUiPosition
+                ))
+        {
+            return;
+        }
+
+        Vector2 indicatorPosition =
+            playerUiPosition +
+            direction.normalized *
+            directionalIndicatorRadius;
+
+        Vector2 halfSize =
+            directionalIndicator.rect.size * 0.5f;
+
+        Rect canvasBounds = canvasRect.rect;
+
+        indicatorPosition.x =
+            Mathf.Clamp(
+                indicatorPosition.x,
+                canvasBounds.xMin +
+                directionalIndicatorEdgePadding +
+                halfSize.x,
+                canvasBounds.xMax -
+                directionalIndicatorEdgePadding -
+                halfSize.x
+            );
+
+        indicatorPosition.y =
+            Mathf.Clamp(
+                indicatorPosition.y,
+                canvasBounds.yMin +
+                directionalIndicatorEdgePadding +
+                halfSize.y,
+                canvasBounds.yMax -
+                directionalIndicatorEdgePadding -
+                halfSize.y
+            );
+
+        directionalIndicator.anchoredPosition =
+            indicatorPosition;
 
         float angle =
             Mathf.Atan2(direction.y, direction.x) *
@@ -305,17 +445,11 @@ public class PlayerCombatFeedback : MonoBehaviour
             Quaternion.Euler(
                 0f,
                 0f,
-                angle - 90f
+                angle +
+                directionalIndicatorRotationOffset
             );
 
-        if (indicatorRoutine != null)
-        {
-            StopCoroutine(indicatorRoutine);
-        }
-
-        indicatorRoutine = StartCoroutine(
-            IndicatorRoutine()
-        );
+        directionalIndicator.SetAsLastSibling();
     }
 
     private IEnumerator IndicatorRoutine()
@@ -424,8 +558,7 @@ public class PlayerCombatFeedback : MonoBehaviour
 
     private static void SetCanvasAlpha(
         CanvasGroup group,
-        float alpha
-    )
+        float alpha)
     {
         if (group != null)
         {
