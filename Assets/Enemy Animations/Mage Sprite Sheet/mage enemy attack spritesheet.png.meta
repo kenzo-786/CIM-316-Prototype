@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 0bc7dfd57e16bfa4f9142850650b11ea
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6205752954900286972
+    second: mage enemy attack spritesheet_0
+  - first:
+      213: -4223061693940178416
+    second: mage enemy attack spritesheet_1
+  - first:
+      213: -5129766024576015173
+    second: mage enemy attack spritesheet_2
+  - first:
+      213: -4462816930965629522
+    second: mage enemy attack spritesheet_3
+  - first:
+      213: -7590198385096473543
+    second: mage enemy attack spritesheet_4
+  - first:
+      213: 857640552347679736
+    second: mage enemy attack spritesheet_5
+  - first:
+      213: 3823390680283449552
+    second: mage enemy attack spritesheet_6
+  - first:
+      213: 6163368187558919148
+    second: mage enemy attack spritesheet_7
+  - first:
+      213: -7639661268517099439
+    second: mage enemy attack spritesheet_8
+  - first:
+      213: -205832374502577341
+    second: mage enemy attack spritesheet_9
+  - first:
+      213: 6126975360761991783
+    second: mage enemy attack spritesheet_10
+  - first:
+      213: 6860886392293730590
+    second: mage enemy attack spritesheet_11
+  - first:
+      213: 6627515703165665488
+    second: mage enemy attack spritesheet_12
+  - first:
+      213: -1962806362091037553
+    second: mage enemy attack spritesheet_13
+  - first:
+      213: -3146040966415747789
+    second: mage enemy attack spritesheet_14
+  - first:
+      213: -1662893763253273529
+    second: mage enemy attack spritesheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 879
+        width: 178
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfd89a8de634f1650800000000000000
+      internalID: 6205752954900286972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 880
+        width: 204
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 012e22c93cba465c0800000000000000
+      internalID: -4223061693940178416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 816
+        width: 147
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb46744baf86fc8b0800000000000000
+      internalID: -5129766024576015173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 880
+        width: 203
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5d13475a3e012c0800000000000000
+      internalID: -4462816930965629522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 567
+        width: 178
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 934c49988c23aa690800000000000000
+      internalID: -7590198385096473543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 567
+        width: 204
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb37a3d983f6eb00800000000000000
+      internalID: 857640552347679736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 567
+        width: 145
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d885d701996f0530800000000000000
+      internalID: 3823390680283449552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 567
+        width: 203
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceb746f26bea88550800000000000000
+      internalID: 6163368187558919148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 313
+        width: 181
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1586abd8d887af590800000000000000
+      internalID: -7639661268517099439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 298
+        width: 180
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34baf72cb8cb42df0800000000000000
+      internalID: -205832374502577341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 356
+        width: 244
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7621ac5e0a3670550800000000000000
+      internalID: 6126975360761991783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 305
+        width: 180
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e19aaf0c2d3c63f50800000000000000
+      internalID: 6860886392293730590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 77
+        width: 180
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d0438efa6aa9fb50800000000000000
+      internalID: 6627515703165665488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 67
+        width: 180
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8cdfa85306b2c4e0800000000000000
+      internalID: -1962806362091037553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 73
+        width: 245
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33576f3d8640754d0800000000000000
+      internalID: -3146040966415747789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage enemy attack spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 60
+        width: 180
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c7316cee63ce8e0800000000000000
+      internalID: -1662893763253273529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mage enemy attack spritesheet_0: 6205752954900286972
+      mage enemy attack spritesheet_1: -4223061693940178416
+      mage enemy attack spritesheet_10: 6126975360761991783
+      mage enemy attack spritesheet_11: 6860886392293730590
+      mage enemy attack spritesheet_12: 6627515703165665488
+      mage enemy attack spritesheet_13: -1962806362091037553
+      mage enemy attack spritesheet_14: -3146040966415747789
+      mage enemy attack spritesheet_15: -1662893763253273529
+      mage enemy attack spritesheet_2: -5129766024576015173
+      mage enemy attack spritesheet_3: -4462816930965629522
+      mage enemy attack spritesheet_4: -7590198385096473543
+      mage enemy attack spritesheet_5: 857640552347679736
+      mage enemy attack spritesheet_6: 3823390680283449552
+      mage enemy attack spritesheet_7: 6163368187558919148
+      mage enemy attack spritesheet_8: -7639661268517099439
+      mage enemy attack spritesheet_9: -205832374502577341
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
