@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: f84d66f1cc9bc4b48bd533dde4433974
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8110719923676576066
+    second: Multiplier Enemy walking spritesheet_0
+  - first:
+      213: -7585510938567439951
+    second: Multiplier Enemy walking spritesheet_1
+  - first:
+      213: -5368150523076349460
+    second: Multiplier Enemy walking spritesheet_2
+  - first:
+      213: -183825251720865612
+    second: Multiplier Enemy walking spritesheet_3
+  - first:
+      213: -8354911850147448222
+    second: Multiplier Enemy walking spritesheet_4
+  - first:
+      213: -3354873856354065508
+    second: Multiplier Enemy walking spritesheet_5
+  - first:
+      213: -7068198786340247679
+    second: Multiplier Enemy walking spritesheet_6
+  - first:
+      213: -491243800682518746
+    second: Multiplier Enemy walking spritesheet_7
+  - first:
+      213: 8164511380455061055
+    second: Multiplier Enemy walking spritesheet_8
+  - first:
+      213: 3871013738442799875
+    second: Multiplier Enemy walking spritesheet_9
+  - first:
+      213: -457085989081059634
+    second: Multiplier Enemy walking spritesheet_10
+  - first:
+      213: -578860987190577791
+    second: Multiplier Enemy walking spritesheet_11
+  - first:
+      213: 9179550624789384269
+    second: Multiplier Enemy walking spritesheet_12
+  - first:
+      213: 7007113138347951966
+    second: Multiplier Enemy walking spritesheet_13
+  - first:
+      213: 2000154157121125547
+    second: Multiplier Enemy walking spritesheet_14
+  - first:
+      213: 3809463973517705464
+    second: Multiplier Enemy walking spritesheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 821
+        width: 210
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249fc635cc01f8070800000000000000
+      internalID: 8110719923676576066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 821
+        width: 210
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b909dabdf9dab690800000000000000
+      internalID: -7585510938567439951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 821
+        width: 210
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce1f43b7a8f7085b0800000000000000
+      internalID: -5368150523076349460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 821
+        width: 210
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b85e6258ebe27df0800000000000000
+      internalID: -183825251720865612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 607
+        width: 211
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26a724240f36d0c80800000000000000
+      internalID: -8354911850147448222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 580
+        width: 210
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9365c5a0081171d0800000000000000
+      internalID: -3354873856354065508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 548
+        width: 210
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 187a75a17a6b8ed90800000000000000
+      internalID: -7068198786340247679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 580
+        width: 210
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 627a432bd50ce29f0800000000000000
+      internalID: -491243800682518746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 294
+        width: 185
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3678a4d7db2e4170800000000000000
+      internalID: 8164511380455061055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 291
+        width: 211
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b3a805c7a98b530800000000000000
+      internalID: 3871013738442799875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 292
+        width: 243
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecee305f6ba18a9f0800000000000000
+      internalID: -457085989081059634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 288
+        width: 211
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1857c24cff877f7f0800000000000000
+      internalID: -578860987190577791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 49
+        width: 184
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4c494c68a0546f70800000000000000
+      internalID: 9179550624789384269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 55
+        width: 220
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e57c33826444e3160800000000000000
+      internalID: 7007113138347951966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 46
+        width: 251
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bacb93fcb99f1cb10800000000000000
+      internalID: 2000154157121125547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Multiplier Enemy walking spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 43
+        width: 210
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f0cb2eec4fedd430800000000000000
+      internalID: 3809463973517705464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Multiplier Enemy walking spritesheet_0: 8110719923676576066
+      Multiplier Enemy walking spritesheet_1: -7585510938567439951
+      Multiplier Enemy walking spritesheet_10: -457085989081059634
+      Multiplier Enemy walking spritesheet_11: -578860987190577791
+      Multiplier Enemy walking spritesheet_12: 9179550624789384269
+      Multiplier Enemy walking spritesheet_13: 7007113138347951966
+      Multiplier Enemy walking spritesheet_14: 2000154157121125547
+      Multiplier Enemy walking spritesheet_15: 3809463973517705464
+      Multiplier Enemy walking spritesheet_2: -5368150523076349460
+      Multiplier Enemy walking spritesheet_3: -183825251720865612
+      Multiplier Enemy walking spritesheet_4: -8354911850147448222
+      Multiplier Enemy walking spritesheet_5: -3354873856354065508
+      Multiplier Enemy walking spritesheet_6: -7068198786340247679
+      Multiplier Enemy walking spritesheet_7: -491243800682518746
+      Multiplier Enemy walking spritesheet_8: 8164511380455061055
+      Multiplier Enemy walking spritesheet_9: 3871013738442799875
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
