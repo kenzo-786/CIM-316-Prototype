@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: 9fb0a373772249242b71ed7a866b739f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5817153033134435476
+    second: laser enemy movement spritesheet_0
+  - first:
+      213: -8901060127594888496
+    second: laser enemy movement spritesheet_1
+  - first:
+      213: -8178888586123715772
+    second: laser enemy movement spritesheet_2
+  - first:
+      213: 3166778097345232325
+    second: laser enemy movement spritesheet_3
+  - first:
+      213: -6957081024067451936
+    second: laser enemy movement spritesheet_4
+  - first:
+      213: 2349715085501370727
+    second: laser enemy movement spritesheet_5
+  - first:
+      213: -6014108164976509651
+    second: laser enemy movement spritesheet_6
+  - first:
+      213: -221310587133956690
+    second: laser enemy movement spritesheet_7
+  - first:
+      213: 6246115751087834031
+    second: laser enemy movement spritesheet_8
+  - first:
+      213: 92564587349698980
+    second: laser enemy movement spritesheet_9
+  - first:
+      213: -1685166200922725769
+    second: laser enemy movement spritesheet_10
+  - first:
+      213: 5227879519835592795
+    second: laser enemy movement spritesheet_11
+  - first:
+      213: 7336981124941439542
+    second: laser enemy movement spritesheet_12
+  - first:
+      213: 4810983360736765928
+    second: laser enemy movement spritesheet_13
+  - first:
+      213: -4318236436934997280
+    second: laser enemy movement spritesheet_14
+  - first:
+      213: -83088089961399211
+    second: laser enemy movement spritesheet_15
+  - first:
+      213: 723858088776238303
+    second: laser enemy movement spritesheet_16
+  - first:
+      213: 7955209850358712769
+    second: laser enemy movement spritesheet_17
+  - first:
+      213: 3826509119840472785
+    second: laser enemy movement spritesheet_18
+  - first:
+      213: 9085989372191086245
+    second: laser enemy movement spritesheet_19
+  - first:
+      213: 7319233266549255827
+    second: laser enemy movement spritesheet_20
+  - first:
+      213: -3155488153718013136
+    second: laser enemy movement spritesheet_21
+  - first:
+      213: 8470854839127735901
+    second: laser enemy movement spritesheet_22
+  - first:
+      213: -7587295038413236363
+    second: laser enemy movement spritesheet_23
+  - first:
+      213: -1501549582520845134
+    second: laser enemy movement spritesheet_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 296
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c6010fcddaab050800000000000000
+      internalID: 5817153033134435476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 904
+        width: 241
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2405a49f4197480800000000000000
+      internalID: -8901060127594888496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 873
+        width: 191
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b599e1a20ce7e80800000000000000
+      internalID: -8178888586123715772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 916
+        width: 275
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cdffb6b6e7a2fb20800000000000000
+      internalID: 3166778097345232325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 884
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e349d63bab737f90800000000000000
+      internalID: -6957081024067451936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 879
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7619fa2cb6ddb9020800000000000000
+      internalID: 2349715085501370727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 884
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d7cc1fc78998ca0800000000000000
+      internalID: -6014108164976509651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 671
+        width: 191
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eade8dc813fbdecf0800000000000000
+      internalID: -221310587133956690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 823
+        width: 20
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa30099ae29aea650800000000000000
+      internalID: 6246115751087834031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 829
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a962c3700bd84100800000000000000
+      internalID: 92564587349698980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 820
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 772a186c4461d98e0800000000000000
+      internalID: -1685166200922725769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 646
+        width: 275
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58175c89b82d8840800000000000000
+      internalID: 5227879519835592795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 669
+        width: 241
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63261ebc57132d560800000000000000
+      internalID: 7336981124941439542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 647
+        width: 297
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e7a70d70eb04c240800000000000000
+      internalID: 4810983360736765928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 362
+        width: 168
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ea4750f6da8214c0800000000000000
+      internalID: -4318236436934997280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 379
+        width: 140
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55cf8c882dfc8def0800000000000000
+      internalID: -83088089961399211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 402
+        width: 189
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd40d49b819ab0a00800000000000000
+      internalID: 723858088776238303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 480
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c9c15cd535966e60800000000000000
+      internalID: 7955209850358712769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 364
+        width: 155
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1de42e155cd7a1530800000000000000
+      internalID: 3826509119840472785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 50
+        width: 209
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a69c62c13be71e70800000000000000
+      internalID: 9085989372191086245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 69
+        width: 145
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39ee3e080e3239560800000000000000
+      internalID: 7319233266549255827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 96
+        width: 133
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0334fa02e347534d0800000000000000
+      internalID: -3155488153718013136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 201
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5e7b1e78958e8570800000000000000
+      internalID: 8470854839127735901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 50
+        width: 155
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5779b4d9c5384b690800000000000000
+      internalID: -7587295038413236363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser enemy movement spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 129
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bc75393c9c692be0800000000000000
+      internalID: -1501549582520845134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      laser enemy movement spritesheet_0: 5817153033134435476
+      laser enemy movement spritesheet_1: -8901060127594888496
+      laser enemy movement spritesheet_10: -1685166200922725769
+      laser enemy movement spritesheet_11: 5227879519835592795
+      laser enemy movement spritesheet_12: 7336981124941439542
+      laser enemy movement spritesheet_13: 4810983360736765928
+      laser enemy movement spritesheet_14: -4318236436934997280
+      laser enemy movement spritesheet_15: -83088089961399211
+      laser enemy movement spritesheet_16: 723858088776238303
+      laser enemy movement spritesheet_17: 7955209850358712769
+      laser enemy movement spritesheet_18: 3826509119840472785
+      laser enemy movement spritesheet_19: 9085989372191086245
+      laser enemy movement spritesheet_2: -8178888586123715772
+      laser enemy movement spritesheet_20: 7319233266549255827
+      laser enemy movement spritesheet_21: -3155488153718013136
+      laser enemy movement spritesheet_22: 8470854839127735901
+      laser enemy movement spritesheet_23: -7587295038413236363
+      laser enemy movement spritesheet_24: -1501549582520845134
+      laser enemy movement spritesheet_3: 3166778097345232325
+      laser enemy movement spritesheet_4: -6957081024067451936
+      laser enemy movement spritesheet_5: 2349715085501370727
+      laser enemy movement spritesheet_6: -6014108164976509651
+      laser enemy movement spritesheet_7: -221310587133956690
+      laser enemy movement spritesheet_8: 6246115751087834031
+      laser enemy movement spritesheet_9: 92564587349698980
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
