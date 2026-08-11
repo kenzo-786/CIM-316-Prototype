@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: ef622dd39634cad4392e00572f820545
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5487014657718131691
+    second: spider attack spritesheet_0
+  - first:
+      213: 3674748629580261079
+    second: spider attack spritesheet_1
+  - first:
+      213: 6924632402578353281
+    second: spider attack spritesheet_2
+  - first:
+      213: 7202981515050968995
+    second: spider attack spritesheet_3
+  - first:
+      213: -5828563013565161542
+    second: spider attack spritesheet_4
+  - first:
+      213: -6974034524100922782
+    second: spider attack spritesheet_5
+  - first:
+      213: -8752021359335794693
+    second: spider attack spritesheet_6
+  - first:
+      213: 1973354289659244966
+    second: spider attack spritesheet_7
+  - first:
+      213: 6351330977809164205
+    second: spider attack spritesheet_8
+  - first:
+      213: -170611232484592867
+    second: spider attack spritesheet_9
+  - first:
+      213: -726863636928102880
+    second: spider attack spritesheet_10
+  - first:
+      213: 8747948432645307292
+    second: spider attack spritesheet_11
+  - first:
+      213: -6601888304199711330
+    second: spider attack spritesheet_12
+  - first:
+      213: 5954986446682049304
+    second: spider attack spritesheet_13
+  - first:
+      213: -2544111861237634719
+    second: spider attack spritesheet_14
+  - first:
+      213: 2868066776414438334
+    second: spider attack spritesheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spider attack spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 800
+        width: 196
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51469518d353ad3b0800000000000000
+      internalID: -5487014657718131691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 796
+        width: 188
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d62cf0b8645ff230800000000000000
+      internalID: 3674748629580261079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 793
+        width: 172
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18ca7db5b7c391060800000000000000
+      internalID: 6924632402578353281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 800
+        width: 185
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a76150668126f360800000000000000
+      internalID: 7202981515050968995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 638
+        width: 197
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abfd779f1d8cc1fa0800000000000000
+      internalID: -5828563013565161542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 634
+        width: 188
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26277a3ec80473f90800000000000000
+      internalID: -6974034524100922782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 635
+        width: 180
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf79822a1f29a8680800000000000000
+      internalID: -8752021359335794693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 640
+        width: 186
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a1f12b6543c26b10800000000000000
+      internalID: 1973354289659244966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 399
+        width: 130
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7ef3f9fd5742850800000000000000
+      internalID: 6351330977809164205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 412
+        width: 127
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d13701decfdd1adf0800000000000000
+      internalID: -170611232484592867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 409
+        width: 129
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02e70c09f59a9e5f0800000000000000
+      internalID: -726863636928102880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 415
+        width: 128
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9b324930c4f66970800000000000000
+      internalID: 8747948432645307292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 184
+        width: 131
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e95ce5dc0916164a0800000000000000
+      internalID: -6601888304199711330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 190
+        width: 127
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81bcfb45f9c54a250800000000000000
+      internalID: 5954986446682049304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 199
+        width: 130
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 169a212ddbf71bcd0800000000000000
+      internalID: -2544111861237634719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spider attack spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 198
+        width: 127
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb34848998b6dc720800000000000000
+      internalID: 2868066776414438334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spider attack spritesheet_0: -5487014657718131691
+      spider attack spritesheet_1: 3674748629580261079
+      spider attack spritesheet_10: -726863636928102880
+      spider attack spritesheet_11: 8747948432645307292
+      spider attack spritesheet_12: -6601888304199711330
+      spider attack spritesheet_13: 5954986446682049304
+      spider attack spritesheet_14: -2544111861237634719
+      spider attack spritesheet_15: 2868066776414438334
+      spider attack spritesheet_2: 6924632402578353281
+      spider attack spritesheet_3: 7202981515050968995
+      spider attack spritesheet_4: -5828563013565161542
+      spider attack spritesheet_5: -6974034524100922782
+      spider attack spritesheet_6: -8752021359335794693
+      spider attack spritesheet_7: 1973354289659244966
+      spider attack spritesheet_8: 6351330977809164205
+      spider attack spritesheet_9: -170611232484592867
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
