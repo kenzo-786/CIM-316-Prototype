@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,12 +9,22 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private SpriteRenderer visual;
 
+    [Header("Movement Steering")]
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField, Min(0f)] private float separationRadius = 1.1f;
+    [SerializeField, Min(0f)] private float separationStrength = 1.35f;
+    [SerializeField, Min(0f)] private float obstacleProbeDistance = 0.65f;
+    [SerializeField, Min(0f)] private float obstacleProbeRadius = 0.25f;
+    [SerializeField, Min(0f)] private float wallAvoidanceStrength = 1.1f;
+
     protected Rigidbody2D rb;
     protected Health health;
     protected Transform target;
 
     private bool isDead;
     private EnemyDeathFeedback deathFeedback;
+    private CodeDeathAnimation deathAnimation;
     private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
 
     public event Action<EnemyBase> OnEnemyDied;
@@ -50,11 +61,10 @@ public abstract class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
         deathFeedback = GetComponent<EnemyDeathFeedback>();
+        deathAnimation = GetComponent<CodeDeathAnimation>();
 
         if (visual == null)
-        {
             visual = GetComponentInChildren<SpriteRenderer>();
-        }
     }
 
     protected virtual void OnEnable()
@@ -62,17 +72,13 @@ public abstract class EnemyBase : MonoBehaviour
         isDead = false;
 
         if (health != null)
-        {
             health.OnDied += HandleDied;
-        }
     }
 
     protected virtual void OnDisable()
     {
         if (health != null)
-        {
             health.OnDied -= HandleDied;
-        }
     }
 
     public virtual void Initialize(EnemyData data, Transform playerTarget)
@@ -82,9 +88,7 @@ public abstract class EnemyBase : MonoBehaviour
         isDead = false;
 
         if (enemyData != null && health != null)
-        {
             health.SetMaxHealth(enemyData.maxHealth, true);
-        }
     }
 
     public virtual void ApplyDifficulty(RoomDifficultySnapshot difficulty)
@@ -103,9 +107,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (isDead || target == null || enemyData == null)
-        {
             return;
-        }
 
         TickEnemy();
     }
@@ -114,30 +116,80 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void MoveToward(Vector2 worldPosition)
     {
-        Vector2 direction = (worldPosition - rb.position).normalized;
-
-        rb.MovePosition(
-            rb.position +
-            direction *
-            MoveSpeed *
-            Time.fixedDeltaTime
-        );
-
-        FaceDirection(direction);
+        MoveInDirection(worldPosition - rb.position);
     }
 
     protected void MoveAwayFrom(Vector2 worldPosition)
     {
-        Vector2 direction = (rb.position - worldPosition).normalized;
+        MoveInDirection(rb.position - worldPosition);
+    }
+
+    protected void MoveInDirection(Vector2 direction, float speedMultiplier = 1f)
+    {
+        if (direction.sqrMagnitude <= 0.0001f)
+        {
+            StopMoving();
+            return;
+        }
+
+        Vector2 steeringDirection = GetSteeredDirection(direction);
 
         rb.MovePosition(
             rb.position +
-            direction *
+            steeringDirection *
             MoveSpeed *
+            speedMultiplier *
             Time.fixedDeltaTime
         );
 
-        FaceDirection(direction);
+        FaceDirection(steeringDirection);
+    }
+
+    protected Vector2 GetSteeredDirection(Vector2 desiredDirection)
+    {
+        Vector2 desired = desiredDirection.normalized;
+
+        if (desired == Vector2.zero)
+            return Vector2.zero;
+
+        Vector2 separation = CalculateSeparation();
+        Vector2 steering = desired + separation * separationStrength;
+
+        if (steering.sqrMagnitude <= 0.0001f)
+            steering = desired;
+
+        steering.Normalize();
+
+        if (obstacleLayer.value != 0 && obstacleProbeDistance > 0f)
+        {
+            RaycastHit2D hit = Physics2D.CircleCast(
+                rb.position,
+                obstacleProbeRadius,
+                steering,
+                obstacleProbeDistance,
+                obstacleLayer
+            );
+
+            if (hit.collider != null)
+            {
+                Vector2 left = new Vector2(-hit.normal.y, hit.normal.x);
+                Vector2 right = -left;
+
+                Vector2 sideStep =
+                    Vector2.Dot(left, desired) >
+                    Vector2.Dot(right, desired)
+                        ? left
+                        : right;
+
+                steering = (
+                    desired * 0.25f +
+                    sideStep * wallAvoidanceStrength +
+                    separation * separationStrength
+                ).normalized;
+            }
+        }
+
+        return steering;
     }
 
     protected void StopMoving()
@@ -154,9 +206,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected void DamageTarget(float damage, Vector2 hitPoint)
     {
         if (target == null || damage <= 0f)
-        {
             return;
-        }
 
         IDamageable damageable = target.GetComponent<IDamageable>();
 
@@ -175,16 +225,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected IDamageable GetDamageable(Collider2D hit)
     {
         if (hit == null)
-        {
             return null;
-        }
 
         IDamageable damageable = hit.GetComponent<IDamageable>();
 
         if (damageable == null)
-        {
             damageable = hit.GetComponentInParent<IDamageable>();
-        }
 
         return damageable;
     }
@@ -192,19 +238,55 @@ public abstract class EnemyBase : MonoBehaviour
     protected void FaceDirection(Vector2 direction)
     {
         if (visual == null || Mathf.Abs(direction.x) < 0.01f)
-        {
             return;
-        }
 
         visual.flipX = direction.x < 0f;
+    }
+
+    private Vector2 CalculateSeparation()
+    {
+        if (enemyLayer.value == 0 || separationRadius <= 0f)
+            return Vector2.zero;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            rb.position,
+            separationRadius,
+            enemyLayer
+        );
+
+        HashSet<EnemyBase> checkedEnemies = new HashSet<EnemyBase>();
+        Vector2 separation = Vector2.zero;
+
+        foreach (Collider2D hit in hits)
+        {
+            EnemyBase other = hit.GetComponentInParent<EnemyBase>();
+
+            if (other == null || other == this || other.IsDead || !checkedEnemies.Add(other))
+                continue;
+
+            Vector2 difference = rb.position - (Vector2)other.transform.position;
+            float distance = difference.magnitude;
+
+            if (distance <= 0.001f)
+            {
+                difference = GetInstanceID() > other.GetInstanceID()
+                    ? Vector2.right
+                    : Vector2.left;
+
+                distance = 0.001f;
+            }
+
+            float strength = 1f - Mathf.Clamp01(distance / separationRadius);
+            separation += difference.normalized * strength;
+        }
+
+        return separation;
     }
 
     private void HandleDied()
     {
         if (isDead)
-        {
             return;
-        }
 
         isDead = true;
 
@@ -213,9 +295,7 @@ public abstract class EnemyBase : MonoBehaviour
         OnDeathStarted();
 
         if (deathFeedback != null)
-        {
             deathFeedback.PlayDeath();
-        }
 
         OnEnemyDied?.Invoke(this);
         EnemyEvents.RaiseEnemyDied(this);
@@ -228,9 +308,7 @@ public abstract class EnemyBase : MonoBehaviour
         Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
 
         foreach (Collider2D bodyCollider in colliders)
-        {
             bodyCollider.enabled = false;
-        }
 
         if (rb != null)
         {
@@ -245,9 +323,13 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void DestroyEnemyObject()
     {
-        float delay = deathFeedback != null
-            ? deathFeedback.DeathDuration
-            : 0f;
+        float delay = 0f;
+
+        if (deathFeedback != null)
+            delay = deathFeedback.DeathDuration;
+
+        if (deathAnimation != null)
+            delay = Mathf.Max(delay, deathAnimation.Duration);
 
         Destroy(gameObject, delay);
     }

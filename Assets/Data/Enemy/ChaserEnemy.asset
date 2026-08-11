@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHealth: 20
   moveSpeed: 2.2
   contactDamage: 10
-  attackRange: 1.5
+  attackRange: 1.15
   attackCooldown: 1
   xpDropAmount: 2
   projectileData: {fileID: 0}

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7211459418656502973}
   - component: {fileID: 1549760520127777989}
   - component: {fileID: -3732905380642105705}
+  - component: {fileID: -2279766335311251605}
   m_Layer: 7
   m_Name: Laser Enemy
   m_TagString: Enemy
@@ -242,6 +243,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaserEnemy
   enemyData: {fileID: 11400000, guid: d1ecf44eee53e084b994344e04b84c8d, type: 2}
   visual: {fileID: 2250200168914418903}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 7168
+  separationRadius: 1.1
+  separationStrength: 1.35
+  obstacleProbeDistance: 0.65
+  obstacleProbeRadius: 0.25
+  wallAvoidanceStrength: 1.1
   preferredRange: 9
   rangeTolerance: 1.5
   strafeSpeedMultiplier: 0.8
@@ -313,6 +325,25 @@ MonoBehaviour:
   telegraphEffectPrefab: {fileID: 0}
   telegraphSoundId: 
   worldMarkerPrefab: {fileID: 0}
+--- !u!114 &-2279766335311251605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d26cbae00bcd3408947a753f771872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodeDeathAnimation
+  visualRoot: {fileID: 3455635475611078501}
+  renderers: []
+  duration: 0.35
+  endScaleMultiplier: 0.12
+  squashAmount: 0.12
+  spinDegrees: 140
+  fadeSprites: 1
 --- !u!1 &3869288733246219631
 GameObject:
   m_ObjectHideFlags: 0

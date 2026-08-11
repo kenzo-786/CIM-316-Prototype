@@ -15,17 +15,13 @@ public class PauseMenu : MonoBehaviour
         previousActiveStates = new bool[hideWhilePaused.Length];
 
         if (root != null)
-        {
             root.SetActive(false);
-        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(pauseKey))
-        {
             TogglePause();
-        }
     }
 
     public void TogglePause()
@@ -40,79 +36,44 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        paused = false;
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SetPaused(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit()
     {
-        Time.timeScale = 1f;
+        SetPaused(false);
         Application.Quit();
     }
 
     private void SetPaused(bool value)
     {
-        if (paused == value)
-        {
-            return;
-        }
-
         paused = value;
 
         if (paused)
         {
-            HideGameplayUI();
-
-            if (root != null)
+            for (int i = 0; i < hideWhilePaused.Length; i++)
             {
-                root.SetActive(true);
-                root.transform.SetAsLastSibling();
-            }
+                if (hideWhilePaused[i] == null)
+                    continue;
 
-            Time.timeScale = 0f;
+                previousActiveStates[i] = hideWhilePaused[i].activeSelf;
+                hideWhilePaused[i].SetActive(false);
+            }
         }
         else
         {
-            if (root != null)
+            for (int i = 0; i < hideWhilePaused.Length; i++)
             {
-                root.SetActive(false);
-            }
-
-            RestoreGameplayUI();
-            Time.timeScale = 1f;
-        }
-    }
-
-    private void HideGameplayUI()
-    {
-        for (int i = 0; i < hideWhilePaused.Length; i++)
-        {
-            GameObject target = hideWhilePaused[i];
-
-            if (target == null)
-            {
-                continue;
-            }
-
-            previousActiveStates[i] = target.activeSelf;
-            target.SetActive(false);
-        }
-    }
-
-    private void RestoreGameplayUI()
-    {
-        for (int i = 0; i < hideWhilePaused.Length; i++)
-        {
-            GameObject target = hideWhilePaused[i];
-
-            if (target != null)
-            {
-                target.SetActive(previousActiveStates[i]);
+                if (hideWhilePaused[i] != null && previousActiveStates[i])
+                    hideWhilePaused[i].SetActive(true);
             }
         }
+
+        if (root != null)
+            root.SetActive(paused);
+
+        Time.timeScale = paused ? 0f : 1f;
+        GameAudioManager.Instance?.SetPaused(paused);
     }
 }

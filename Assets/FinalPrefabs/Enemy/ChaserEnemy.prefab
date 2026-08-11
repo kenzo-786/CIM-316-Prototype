@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -6511899977613598675}
   - component: {fileID: -7591177609644863618}
   - component: {fileID: -8502578836806264149}
+  - component: {fileID: -471865079102898270}
   m_Layer: 7
   m_Name: ChaserEnemy
   m_TagString: Enemy
@@ -283,6 +284,25 @@ MonoBehaviour:
   telegraphEffectPrefab: {fileID: 0}
   telegraphSoundId: 
   worldMarkerPrefab: {fileID: 0}
+--- !u!114 &-471865079102898270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d26cbae00bcd3408947a753f771872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodeDeathAnimation
+  visualRoot: {fileID: 8219061172087984139}
+  renderers: []
+  duration: 0.35
+  endScaleMultiplier: 0.12
+  squashAmount: 0.12
+  spinDegrees: 140
+  fadeSprites: 1
 --- !u!1 &5879773394528370799
 GameObject:
   m_ObjectHideFlags: 0

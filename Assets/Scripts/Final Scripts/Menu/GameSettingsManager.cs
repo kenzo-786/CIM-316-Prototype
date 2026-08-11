@@ -83,6 +83,7 @@ public class GameSettingsManager : MonoBehaviour
         AudioListener.volume = settings.masterVolume;
         Screen.fullScreen = settings.fullscreen;
         Application.targetFrameRate = settings.targetFrameRate;
+        GameAudioManager.Instance?.RefreshVolumes();
     }
 
     public void Save()
