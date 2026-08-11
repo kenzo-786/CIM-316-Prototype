@@ -18,19 +18,26 @@ public class EnemyAnimScript : MonoBehaviour
     private void Update()
     {
         Vector2 velocity = rb.linearVelocity;
+
+        // Check if the enemy is currently moving
         bool isFollowing = velocity.sqrMagnitude > 0.01f;
 
-        // Remember the last movement direction
+        // Remember the last direction the enemy was moving
         if (isFollowing)
         {
             lastDirection = velocity.normalized;
         }
 
-        // Walking Bool
+        // Walking / following
         animator.SetBool("IsFollowing", isFollowing);
 
-        // Blend Tree Parameters
+        // Direction for Blend Tree
         animator.SetFloat("XDirection", lastDirection.x);
         animator.SetFloat("YDirection", lastDirection.y);
+    }
+
+    public void PlayAttack()
+    {
+        animator.SetTrigger("IsAttacking");
     }
 }

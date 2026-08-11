@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: d1797070ec43d03439ab0f521ade7fd0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 469084504640828264
+    second: Female Attack Sprite Sheet_0
+  - first:
+      213: 8437092983448440709
+    second: Female Attack Sprite Sheet_1
+  - first:
+      213: 7650778202610530702
+    second: Female Attack Sprite Sheet_2
+  - first:
+      213: -1530996619292115924
+    second: Female Attack Sprite Sheet_3
+  - first:
+      213: 7961355366858325921
+    second: Female Attack Sprite Sheet_4
+  - first:
+      213: 5495606158478381214
+    second: Female Attack Sprite Sheet_5
+  - first:
+      213: 2002182243991718502
+    second: Female Attack Sprite Sheet_6
+  - first:
+      213: -434480862706889435
+    second: Female Attack Sprite Sheet_7
+  - first:
+      213: -2590160020889877453
+    second: Female Attack Sprite Sheet_8
+  - first:
+      213: 666968284057299695
+    second: Female Attack Sprite Sheet_9
+  - first:
+      213: -7337009533714568041
+    second: Female Attack Sprite Sheet_10
+  - first:
+      213: -5308226747755148965
+    second: Female Attack Sprite Sheet_11
+  - first:
+      213: 6983722419441587310
+    second: Female Attack Sprite Sheet_12
+  - first:
+      213: 1435897486769911519
+    second: Female Attack Sprite Sheet_13
+  - first:
+      213: 4589914367128176873
+    second: Female Attack Sprite Sheet_14
+  - first:
+      213: 3461604479448634752
+    second: Female Attack Sprite Sheet_15
+  - first:
+      213: -2558030977053077683
+    second: Female Attack Sprite Sheet_16
+  - first:
+      213: 5928643393271535935
+    second: Female Attack Sprite Sheet_17
+  - first:
+      213: -4627231185411993971
+    second: Female Attack Sprite Sheet_18
+  - first:
+      213: 6961066949504175730
+    second: Female Attack Sprite Sheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 826
+        width: 89
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 863b1c42fd5828600800000000000000
+      internalID: 469084504640828264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 826
+        width: 96
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58f8267ed53961570800000000000000
+      internalID: 8437092983448440709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 825
+        width: 110
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e89f6ed5d360d2a60800000000000000
+      internalID: 7650778202610530702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 825
+        width: 110
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cf4c2bfaec0cae0800000000000000
+      internalID: -1530996619292115924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 825
+        width: 90
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af7d3c668a6c7e60800000000000000
+      internalID: 7961355366858325921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 571
+        width: 87
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e909d852fa0544c40800000000000000
+      internalID: 5495606158478381214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 571
+        width: 93
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a88b4942e29cb10800000000000000
+      internalID: 2002182243991718502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 571
+        width: 98
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d86a415f968f9f0800000000000000
+      internalID: -434480862706889435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 571
+        width: 99
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 334c07b2f27ed0cd0800000000000000
+      internalID: -2590160020889877453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 571
+        width: 87
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feaefafde1c814900800000000000000
+      internalID: 666968284057299695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 331
+        width: 104
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79ce945c3b4bd2a90800000000000000
+      internalID: -7337009533714568041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 331
+        width: 115
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59c3d8a5e36556b0800000000000000
+      internalID: -5308226747755148965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 331
+        width: 120
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e645fb40a8a2be060800000000000000
+      internalID: 6983722419441587310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 331
+        width: 119
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd6fbc018255de310800000000000000
+      internalID: 1435897486769911519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 331
+        width: 104
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8032a6cc6a2bf30800000000000000
+      internalID: 4589914367128176873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 108
+        width: 107
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085df660fe61a0030800000000000000
+      internalID: 3461604479448634752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 108
+        width: 118
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4f4e40216c008cd0800000000000000
+      internalID: -2558030977053077683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 110
+        width: 123
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f399aef31c5c64250800000000000000
+      internalID: 5928643393271535935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 109
+        width: 122
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e88e3c0c5c8cfb0800000000000000
+      internalID: -4627231185411993971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Female Attack Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 108
+        width: 105
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27e88ee528daa9060800000000000000
+      internalID: 6961066949504175730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Female Attack Sprite Sheet_0: 469084504640828264
+      Female Attack Sprite Sheet_1: 8437092983448440709
+      Female Attack Sprite Sheet_10: -7337009533714568041
+      Female Attack Sprite Sheet_11: -5308226747755148965
+      Female Attack Sprite Sheet_12: 6983722419441587310
+      Female Attack Sprite Sheet_13: 1435897486769911519
+      Female Attack Sprite Sheet_14: 4589914367128176873
+      Female Attack Sprite Sheet_15: 3461604479448634752
+      Female Attack Sprite Sheet_16: -2558030977053077683
+      Female Attack Sprite Sheet_17: 5928643393271535935
+      Female Attack Sprite Sheet_18: -4627231185411993971
+      Female Attack Sprite Sheet_19: 6961066949504175730
+      Female Attack Sprite Sheet_2: 7650778202610530702
+      Female Attack Sprite Sheet_3: -1530996619292115924
+      Female Attack Sprite Sheet_4: 7961355366858325921
+      Female Attack Sprite Sheet_5: 5495606158478381214
+      Female Attack Sprite Sheet_6: 2002182243991718502
+      Female Attack Sprite Sheet_7: -434480862706889435
+      Female Attack Sprite Sheet_8: -2590160020889877453
+      Female Attack Sprite Sheet_9: 666968284057299695
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
