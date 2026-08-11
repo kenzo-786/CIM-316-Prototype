@@ -331,6 +331,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankEnemy
   enemyData: {fileID: 11400000, guid: 0e73996486076d74dbd3e3146d8c1617, type: 2}
   visual: {fileID: 4673602555329707884}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  separationRadius: 1.1
+  separationStrength: 1.35
+  obstacleProbeDistance: 0.65
+  obstacleProbeRadius: 0.25
+  wallAvoidanceStrength: 1.1
   jumpCooldown: 2.5
   jumpWindup: 0.55
   jumpDuration: 0.45
@@ -403,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3360867081428378876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0d26cbae00bcd3408947a753f771872, type: 3}
   m_Name: 
