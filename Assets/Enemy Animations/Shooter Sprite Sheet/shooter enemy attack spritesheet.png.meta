@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: b5e970f326a1159409ba0ced8cda23ca
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5174434399527479932
+    second: shooter enemy attack spritesheet_0
+  - first:
+      213: 4207889218237938624
+    second: shooter enemy attack spritesheet_1
+  - first:
+      213: 3994967796734683882
+    second: shooter enemy attack spritesheet_2
+  - first:
+      213: 3402375613945812909
+    second: shooter enemy attack spritesheet_3
+  - first:
+      213: -7129237595167511921
+    second: shooter enemy attack spritesheet_4
+  - first:
+      213: -3459848436029191850
+    second: shooter enemy attack spritesheet_5
+  - first:
+      213: 6631488722980222487
+    second: shooter enemy attack spritesheet_6
+  - first:
+      213: 6587816277596494402
+    second: shooter enemy attack spritesheet_7
+  - first:
+      213: -3460257331009674449
+    second: shooter enemy attack spritesheet_8
+  - first:
+      213: -3459085582529759434
+    second: shooter enemy attack spritesheet_9
+  - first:
+      213: 4697089829684911079
+    second: shooter enemy attack spritesheet_10
+  - first:
+      213: -17523863271956472
+    second: shooter enemy attack spritesheet_11
+  - first:
+      213: 5000329112671771853
+    second: shooter enemy attack spritesheet_12
+  - first:
+      213: -4217030945669816430
+    second: shooter enemy attack spritesheet_13
+  - first:
+      213: -7378603004927816526
+    second: shooter enemy attack spritesheet_14
+  - first:
+      213: 7734968427813163492
+    second: shooter enemy attack spritesheet_15
+  - first:
+      213: -7346687030765528022
+    second: shooter enemy attack spritesheet_16
+  - first:
+      213: 2304955062098007529
+    second: shooter enemy attack spritesheet_17
+  - first:
+      213: 5340921863422955155
+    second: shooter enemy attack spritesheet_18
+  - first:
+      213: -4993669192800559943
+    second: shooter enemy attack spritesheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 860
+        width: 196
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7aa569cba84fc740800000000000000
+      internalID: 5174434399527479932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 858
+        width: 178
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cbb44b13fc656a30800000000000000
+      internalID: 4207889218237938624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 856
+        width: 146
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeaee7d7b0af07730800000000000000
+      internalID: 3994967796734683882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 858
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da711b5289aa73f20800000000000000
+      internalID: 3402375613945812909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 858
+        width: 178
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8a2ea4fd2cdf0d90800000000000000
+      internalID: -7129237595167511921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 606
+        width: 196
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6590ac1bd262cffc0800000000000000
+      internalID: -3459848436029191850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 606
+        width: 178
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 716be31cbd7c70c50800000000000000
+      internalID: 6631488722980222487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 606
+        width: 146
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24adcaf2000ac6b50800000000000000
+      internalID: 6587816277596494402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 606
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f232ab96a42baffc0800000000000000
+      internalID: -3460257331009674449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 606
+        width: 178
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63773ad5dfbdeffc0800000000000000
+      internalID: -3459085582529759434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 335
+        width: 156
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb1878505a6f2140800000000000000
+      internalID: 4697089829684911079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 355
+        width: 158
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8002592a32eb1cff0800000000000000
+      internalID: -17523863271956472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 378
+        width: 160
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcc58d8c5dcb46540800000000000000
+      internalID: 5000329112671771853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 387
+        width: 158
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29f558c92b81a75c0800000000000000
+      internalID: -4217030945669816430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 362
+        width: 158
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bcc5a819afe99990800000000000000
+      internalID: -7378603004927816526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 82
+        width: 156
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e15aa0bdc0285b60800000000000000
+      internalID: 7734968427813163492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 100
+        width: 158
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2c5047e1135b0a90800000000000000
+      internalID: -7346687030765528022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 109
+        width: 160
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e51793ba68dcff10800000000000000
+      internalID: 2304955062098007529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 110
+        width: 158
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e417a2324ce1a40800000000000000
+      internalID: 5340921863422955155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shooter enemy attack spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 93
+        width: 158
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bc9f45a35ce2bab0800000000000000
+      internalID: -4993669192800559943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shooter enemy attack spritesheet_0: 5174434399527479932
+      shooter enemy attack spritesheet_1: 4207889218237938624
+      shooter enemy attack spritesheet_10: 4697089829684911079
+      shooter enemy attack spritesheet_11: -17523863271956472
+      shooter enemy attack spritesheet_12: 5000329112671771853
+      shooter enemy attack spritesheet_13: -4217030945669816430
+      shooter enemy attack spritesheet_14: -7378603004927816526
+      shooter enemy attack spritesheet_15: 7734968427813163492
+      shooter enemy attack spritesheet_16: -7346687030765528022
+      shooter enemy attack spritesheet_17: 2304955062098007529
+      shooter enemy attack spritesheet_18: 5340921863422955155
+      shooter enemy attack spritesheet_19: -4993669192800559943
+      shooter enemy attack spritesheet_2: 3994967796734683882
+      shooter enemy attack spritesheet_3: 3402375613945812909
+      shooter enemy attack spritesheet_4: -7129237595167511921
+      shooter enemy attack spritesheet_5: -3459848436029191850
+      shooter enemy attack spritesheet_6: 6631488722980222487
+      shooter enemy attack spritesheet_7: 6587816277596494402
+      shooter enemy attack spritesheet_8: -3460257331009674449
+      shooter enemy attack spritesheet_9: -3459085582529759434
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
