@@ -20,24 +20,31 @@ public class SpinnerEnemy : EnemyBase
     [SerializeField] private float spinDamageMultiplier = 1.5f;
     [SerializeField] private float spinHitCooldown = 0.35f;
     [SerializeField] private EnemyTelegraphFeedback telegraph;
+    [SerializeField] private EnemyAnimationController animationController;
 
     private SpinnerState state;
     private float stateTimer;
     private float nextSpinHitTime;
+    private Vector2 lastTargetDirection = Vector2.down;
 
     protected override void Awake()
     {
         base.Awake();
 
         if (telegraph == null)
-        {
             telegraph = GetComponent<EnemyTelegraphFeedback>();
-        }
+
+        if (animationController == null)
+            animationController = GetComponentInChildren<EnemyAnimationController>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        animationController?.SetSpinning(false);
+        animationController?.SetStationary();
+
         EnterState(SpinnerState.Walking);
     }
 
@@ -53,11 +60,12 @@ public class SpinnerEnemy : EnemyBase
 
             case SpinnerState.Windup:
                 StopMoving();
+                animationController?.SetSpinning(false);
+                animationController?.SetStationary();
+                animationController?.SetFacingDirection(lastTargetDirection);
 
                 if (stateTimer <= 0f)
-                {
                     EnterState(SpinnerState.Spinning);
-                }
 
                 break;
 
@@ -67,11 +75,12 @@ public class SpinnerEnemy : EnemyBase
 
             case SpinnerState.Recovering:
                 StopMoving();
+                animationController?.SetSpinning(false);
+                animationController?.SetStationary();
+                animationController?.SetFacingDirection(lastTargetDirection);
 
                 if (stateTimer <= 0f)
-                {
                     EnterState(SpinnerState.Walking);
-                }
 
                 break;
         }
@@ -79,37 +88,41 @@ public class SpinnerEnemy : EnemyBase
 
     private void TickWalking()
     {
+        animationController?.SetSpinning(false);
+
         if (target != null)
         {
-            MoveToward(target.position);
+            Vector2 direction = (Vector2)target.position - rb.position;
+
+            if (direction.sqrMagnitude > 0.0001f)
+            {
+                lastTargetDirection = direction.normalized;
+                MoveInDirection(direction);
+                animationController?.SetMovementDirection(direction);
+            }
         }
 
         if (stateTimer <= 0f)
-        {
             EnterState(SpinnerState.Windup);
-        }
     }
 
     private void TickSpinning()
     {
+        animationController?.SetSpinning(true);
+
         if (target != null)
         {
-            Vector2 direction =
-                ((Vector2)target.position - rb.position).normalized;
+            Vector2 direction = (Vector2)target.position - rb.position;
 
-            rb.MovePosition(
-                rb.position +
-                direction *
-                MoveSpeed *
-                spinSpeedMultiplier *
-                Time.fixedDeltaTime
-            );
-
-            if (IsTargetInRange(AttackRange) &&
-                Time.time >= nextSpinHitTime)
+            if (direction.sqrMagnitude > 0.0001f)
             {
-                nextSpinHitTime =
-                    Time.time + spinHitCooldown;
+                lastTargetDirection = direction.normalized;
+                MoveInDirection(direction, spinSpeedMultiplier);
+            }
+
+            if (IsTargetInRange(AttackRange) && Time.time >= nextSpinHitTime)
+            {
+                nextSpinHitTime = Time.time + spinHitCooldown;
 
                 DamageTarget(
                     ContactDamage * spinDamageMultiplier,
@@ -119,9 +132,7 @@ public class SpinnerEnemy : EnemyBase
         }
 
         if (stateTimer <= 0f)
-        {
             EnterState(SpinnerState.Recovering);
-        }
     }
 
     private void EnterState(SpinnerState nextState)
@@ -132,35 +143,33 @@ public class SpinnerEnemy : EnemyBase
         {
             case SpinnerState.Walking:
                 stateTimer = walkDuration;
+                animationController?.SetSpinning(false);
                 break;
 
             case SpinnerState.Windup:
                 stateTimer = windupDuration;
+                animationController?.SetSpinning(false);
 
                 if (telegraph != null)
-                {
                     telegraph.Begin(windupDuration);
-                }
 
                 break;
 
             case SpinnerState.Spinning:
                 stateTimer = spinDuration;
+                animationController?.SetSpinning(true);
 
                 if (telegraph != null)
-                {
                     telegraph.End();
-                }
 
                 break;
 
             case SpinnerState.Recovering:
                 stateTimer = recoverDuration;
+                animationController?.SetSpinning(false);
 
                 if (telegraph != null)
-                {
                     telegraph.End();
-                }
 
                 break;
         }

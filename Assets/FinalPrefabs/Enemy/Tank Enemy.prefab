@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 8016549227848500533}
   - component: {fileID: 4673602555329707884}
   - component: {fileID: 2923784361976444056}
+  - component: {fileID: 8594197550002624209}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -72,8 +73,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 10}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8219061172087984139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -158,6 +159,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8594197550002624209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693933071221272134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284f81d9bb99c7641934cc8020d584bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationController
+  movementBody: {fileID: 2304114965193295206}
+  health: {fileID: 155877684525813468}
+  visual: {fileID: 4673602555329707884}
+  movingThreshold: 0.05
 --- !u!1 &3360867081428378876
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,13 +185,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8219061172087984139}
   - component: {fileID: 2304114965193295206}
-  - component: {fileID: 8901815528011600232}
   - component: {fileID: 155877684525813468}
   - component: {fileID: -3999173872277527004}
   - component: {fileID: -2416651769560689988}
   - component: {fileID: 6119436674451448469}
   - component: {fileID: 1228656665842637628}
   - component: {fileID: 2351539155891562901}
+  - component: {fileID: 7349337661237427802}
   m_Layer: 7
   m_Name: Tank Enemy
   m_TagString: Enemy
@@ -192,7 +209,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8016549227848500533}
@@ -226,43 +243,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &8901815528011600232
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360867081428378876}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.027832508, y: -0.6645862}
-  m_Size: {x: 7.40368, y: 8.670078}
-  m_Direction: 0
 --- !u!114 &155877684525813468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,18 +272,18 @@ MonoBehaviour:
   visual: {fileID: 4673602555329707884}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 7168
   separationRadius: 1.1
   separationStrength: 1.35
   obstacleProbeDistance: 0.65
   obstacleProbeRadius: 0.25
   wallAvoidanceStrength: 1.1
   jumpCooldown: 2.5
-  jumpWindup: 0.55
-  jumpDuration: 0.45
+  jumpWindup: 0.38
+  attackAnimationDuration: 0.667
   recoverDuration: 0.5
   landingRadius: 1.5
   landingDamageMultiplier: 2
@@ -311,6 +291,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   telegraph: {fileID: 0}
+  animationController: {fileID: 8594197550002624209}
 --- !u!114 &-2416651769560689988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,3 +366,39 @@ MonoBehaviour:
   squashAmount: 0.12
   spinDegrees: 140
   fadeSprites: 1
+--- !u!58 &7349337661237427802
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.061428547, y: 0}
+  m_Radius: 1.6671438

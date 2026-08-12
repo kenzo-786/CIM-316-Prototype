@@ -62,7 +62,7 @@ public class EnemyAnimationController : MonoBehaviour
         bool isFollowing = velocity.sqrMagnitude > movingThreshold * movingThreshold;
 
         if (isFollowing)
-            lastDirection = velocity.normalized;
+            lastDirection = GetCardinalDirection(velocity);
 
         ApplyAnimation(isFollowing);
     }
@@ -73,7 +73,7 @@ public class EnemyAnimationController : MonoBehaviour
         externalIsMoving = direction.sqrMagnitude > movingThreshold * movingThreshold;
 
         if (externalIsMoving)
-            lastDirection = direction.normalized;
+            lastDirection = GetCardinalDirection(direction);
 
         ApplyAnimation(externalIsMoving);
     }
@@ -91,8 +91,13 @@ public class EnemyAnimationController : MonoBehaviour
             return;
 
         useExternalMotion = true;
-        lastDirection = direction.normalized;
+        lastDirection = GetCardinalDirection(direction);
         ApplyAnimation(externalIsMoving);
+    }
+
+    public void SetSpinning(bool value)
+    {
+        SetBool("IsSpinning", value);
     }
 
     public void UsePhysicsMovement()
@@ -113,6 +118,14 @@ public class EnemyAnimationController : MonoBehaviour
     public void PlayDeath()
     {
         SetTrigger("Death");
+    }
+
+    private Vector2 GetCardinalDirection(Vector2 direction)
+    {
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            return direction.x >= 0f ? Vector2.right : Vector2.left;
+
+        return direction.y >= 0f ? Vector2.up : Vector2.down;
     }
 
     private void ApplyAnimation(bool isFollowing)
