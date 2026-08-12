@@ -6,6 +6,7 @@ public class PlayerExperience : MonoBehaviour
     [SerializeField] private int startingLevel = 1;
     [SerializeField] private int baseXpToLevel = 10;
     [SerializeField] private float levelXpGrowth = 1.35f;
+    [SerializeField] private string levelUpSoundId = "level_up";
 
     public event Action<int, int, int> OnXpChanged;
     public event Action<int> OnLevelUp;
@@ -23,7 +24,8 @@ public class PlayerExperience : MonoBehaviour
 
     public void AddXp(int amount)
     {
-        if (amount <= 0) return;
+        if (amount <= 0)
+            return;
 
         CurrentXp += amount;
 
@@ -31,7 +33,11 @@ public class PlayerExperience : MonoBehaviour
         {
             CurrentXp -= XpToNextLevel;
             Level++;
-            XpToNextLevel = Mathf.CeilToInt(baseXpToLevel * Mathf.Pow(levelXpGrowth, Level - 1));
+            XpToNextLevel = Mathf.CeilToInt(
+                baseXpToLevel * Mathf.Pow(levelXpGrowth, Level - 1)
+            );
+
+            FeedbackEventBus.PlaySound(levelUpSoundId, transform.position);
             OnLevelUp?.Invoke(Level);
         }
 
