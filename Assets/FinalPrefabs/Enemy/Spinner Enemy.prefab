@@ -144,13 +144,21 @@ MonoBehaviour:
   obstacleProbeDistance: 0.65
   obstacleProbeRadius: 0.25
   wallAvoidanceStrength: 1.1
-  walkDuration: 1.25
+  normalMoveDurationMin: 2
+  normalMoveDurationMax: 3.25
   windupDuration: 0.45
   spinDuration: 1.5
   recoverDuration: 0.5
+  spinCooldown: 4
   spinSpeedMultiplier: 2.2
   spinDamageMultiplier: 1.5
   spinHitCooldown: 0.35
+  spinHitStartDelay: 0.1
+  minimumSpinStartDistance: 1.4
+  maximumSpinStartDistance: 6
+  preferredDistance: 3.5
+  orbitStrength: 0.7
+  recoveryRetreatSpeedMultiplier: 0.8
   telegraph: {fileID: 0}
   animationController: {fileID: 2267711888271830636}
 --- !u!114 &-3705751283142895445
