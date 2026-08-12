@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3455635475611078501}
@@ -270,6 +270,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   telegraph: {fileID: 0}
+  animationController: {fileID: 4300947925776972054}
 --- !u!114 &7211459418656502973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +400,7 @@ GameObject:
   - component: {fileID: 3455635475611078501}
   - component: {fileID: 2250200168914418903}
   - component: {fileID: 1824902940139356087}
+  - component: {fileID: 4300947925776972054}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -416,7 +418,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8219061172087984139}
@@ -502,3 +504,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4300947925776972054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4088692944334099939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284f81d9bb99c7641934cc8020d584bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationController
+  movementBody: {fileID: 2304114965193295206}
+  health: {fileID: 155877684525813468}
+  movingThreshold: 0.05

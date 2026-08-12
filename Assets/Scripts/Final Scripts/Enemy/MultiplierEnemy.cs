@@ -4,43 +4,97 @@ public class MultiplierEnemy : EnemyBase
 {
     [Header("Multiplier")]
     [SerializeField] private int maxSplitGenerations = 2;
-    [SerializeField] private float childSpawnRadius = 0.6f;
+    [SerializeField] private float childSpawnRadius = 1.25f;
     [SerializeField] private float childScaleMultiplier = 0.75f;
     [SerializeField] private float childRevealDuration = 0.22f;
 
+    [Header("Attack")]
+    [SerializeField] private float attackWindup = 0.25f;
+    [SerializeField] private float attackRangeLeeway = 0.25f;
+    [SerializeField] private EnemyAnimationController animationController;
+
     private float nextAttackTime;
+    private float attackTimer;
     private int splitGeneration;
+    private bool attacking;
+    private Vector2 attackDirection = Vector2.down;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (animationController == null)
+            animationController = GetComponentInChildren<EnemyAnimationController>();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        attacking = false;
+        nextAttackTime = 0f;
+        animationController?.SetStationary();
+    }
 
     protected override void TickEnemy()
     {
         if (target == null)
+            return;
+
+        if (attacking)
         {
+            StopMoving();
+            animationController?.SetStationary();
+            animationController?.SetFacingDirection(attackDirection);
+
+            attackTimer -= Time.fixedDeltaTime;
+
+            if (attackTimer <= 0f)
+                FinishAttack();
+
             return;
         }
+
+        Vector2 toPlayer = (Vector2)target.position - rb.position;
 
         if (IsTargetInRange(AttackRange))
         {
             StopMoving();
-            TryAttack();
+            animationController?.SetStationary();
+            animationController?.SetFacingDirection(toPlayer);
+            TryStartAttack(toPlayer);
             return;
         }
 
-        MoveToward(target.position);
+        MoveInDirection(toPlayer);
+        animationController?.SetMovementDirection(toPlayer);
     }
 
-    private void TryAttack()
+    private void TryStartAttack(Vector2 toPlayer)
     {
         if (Time.time < nextAttackTime)
-        {
             return;
-        }
 
+        if (toPlayer.sqrMagnitude > 0.0001f)
+            attackDirection = toPlayer.normalized;
+
+        attacking = true;
+        attackTimer = attackWindup;
         nextAttackTime = Time.time + AttackCooldown;
 
-        DamageTarget(
-            ContactDamage,
-            target.position
-        );
+        animationController?.SetStationary();
+        animationController?.SetFacingDirection(attackDirection);
+        animationController?.PlayAttack();
+    }
+
+    private void FinishAttack()
+    {
+        attacking = false;
+
+        if (!IsTargetInRange(AttackRange + attackRangeLeeway))
+            return;
+
+        DamageTarget(ContactDamage, target.position);
     }
 
     protected override void OnDeathStarted()
@@ -51,109 +105,62 @@ public class MultiplierEnemy : EnemyBase
 
     private void SpawnChildren()
     {
-        if (splitGeneration >= maxSplitGenerations)
-        {
+        if (splitGeneration >= maxSplitGenerations || EnemyData == null)
             return;
-        }
 
-        if (EnemyData == null)
-        {
+        EnemyData childData = EnemyData.childEnemyData;
+        int spawnCount = EnemyData.childCount;
+
+        if (childData == null || childData.prefab == null || spawnCount <= 0)
             return;
-        }
-
-        EnemyData childData =
-            EnemyData.childEnemyData;
-
-        int spawnCount =
-            EnemyData.childCount;
-
-        if (childData == null ||
-            childData.prefab == null ||
-            spawnCount <= 0)
-        {
-            return;
-        }
 
         if (childData == EnemyData)
         {
-            Debug.LogError(
-                "Multiplier EnemyData references itself: " +
-                EnemyData.name,
-                this
-            );
-
+            Debug.LogError("Multiplier EnemyData references itself: " + EnemyData.name, this);
             return;
         }
 
+        float startAngle = Random.Range(0f, 360f);
+
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector2 direction =
-                Random.insideUnitCircle.normalized;
+            float angle = startAngle + 360f * i / spawnCount;
+            float radians = angle * Mathf.Deg2Rad;
 
-            if (direction == Vector2.zero)
-            {
-                direction = Vector2.right;
-            }
+            Vector2 direction = new Vector2(
+                Mathf.Cos(radians),
+                Mathf.Sin(radians)
+            );
 
-            Vector2 spawnPosition =
-                (Vector2)transform.position +
-                direction *
-                childSpawnRadius;
+            Vector2 spawnPosition = (Vector2)transform.position + direction * childSpawnRadius;
 
-            GameObject childObject =
-                Instantiate(
-                    childData.prefab,
-                    spawnPosition,
-                    Quaternion.identity
-                );
+            GameObject childObject = Instantiate(
+                childData.prefab,
+                spawnPosition,
+                Quaternion.identity
+            );
 
-            Vector3 finalChildScale =
-                transform.localScale *
-                childScaleMultiplier;
+            Vector3 finalChildScale = transform.localScale * childScaleMultiplier;
+            childObject.transform.localScale = finalChildScale;
 
-            childObject.transform.localScale =
-                finalChildScale;
-
-            EnemyBase childEnemy =
-                childObject.GetComponent<EnemyBase>();
+            EnemyBase childEnemy = childObject.GetComponent<EnemyBase>();
 
             if (childEnemy == null)
             {
-                Debug.LogError(
-                    "Multiplier child prefab is missing EnemyBase.",
-                    childObject
-                );
-
                 Destroy(childObject);
                 continue;
             }
 
             if (childEnemy is MultiplierEnemy multiplierChild)
-            {
-                multiplierChild.splitGeneration =
-                    splitGeneration + 1;
-            }
+                multiplierChild.splitGeneration = splitGeneration + 1;
 
-            childEnemy.Initialize(
-                childData,
-                target
-            );
+            childEnemy.Initialize(childData, target);
+            childEnemy.ApplyDifficulty(CurrentDifficulty);
 
-            childEnemy.ApplyDifficulty(
-                CurrentDifficulty
-            );
+            SpawnScaleReveal reveal = childObject.AddComponent<SpawnScaleReveal>();
+            reveal.Play(finalChildScale, childRevealDuration);
 
-            SpawnScaleReveal reveal =
-                childObject.AddComponent<SpawnScaleReveal>();
-
-            reveal.Play(
-                finalChildScale,
-                childRevealDuration
-            );
-
-            EnemyRuntimeRegistry.RaiseEnemySpawned(
-                childEnemy
-            );
+            EnemyRuntimeRegistry.RaiseEnemySpawned(childEnemy);
         }
     }
 }

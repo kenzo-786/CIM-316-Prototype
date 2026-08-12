@@ -5711,7 +5711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &908337896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9345,10 +9345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   roomSequence:
+  - {fileID: 11400000, guid: 4ff2023cc74b4da49a0de519430d6a40, type: 2}
   - {fileID: 11400000, guid: 7e1a0d9c6bf7a5b42a0c7b2284462ea5, type: 2}
   - {fileID: 11400000, guid: 9c8a30ccec259074fb643a3491d57d86, type: 2}
   - {fileID: 11400000, guid: d1fdd4e15b4d6c640a9e01baff39a4e3, type: 2}
-  - {fileID: 11400000, guid: 4ff2023cc74b4da49a0de519430d6a40, type: 2}
   - {fileID: 11400000, guid: 0f6ee74d14cdfb74db58b33d7c998304, type: 2}
   - {fileID: 11400000, guid: de9242b52e784474ab1a28bd5329fbcf, type: 2}
   - {fileID: 11400000, guid: 634384f6297a17944bcd7907469589f5, type: 2}
