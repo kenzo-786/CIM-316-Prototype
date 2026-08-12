@@ -27,10 +27,18 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(pauseKey))
         {
-            if (paused && statusContent != null && statusContent.activeSelf)
+            if (!paused)
+            {
+                SetPaused(true);
+            }
+            else if (statusContent != null && statusContent.activeSelf)
+            {
                 ShowMenuContent();
+            }
             else
-                TogglePause();
+            {
+                SetPaused(false);
+            }
         }
     }
 
@@ -77,7 +85,12 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         SetPaused(false);
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     private void SetPaused(bool value)
@@ -91,7 +104,9 @@ public class PauseMenu : MonoBehaviour
                 if (hideWhilePaused[i] == null)
                     continue;
 
-                previousActiveStates[i] = hideWhilePaused[i].activeSelf;
+                previousActiveStates[i] =
+                    hideWhilePaused[i].activeSelf;
+
                 hideWhilePaused[i].SetActive(false);
             }
 
@@ -101,8 +116,11 @@ public class PauseMenu : MonoBehaviour
         {
             for (int i = 0; i < hideWhilePaused.Length; i++)
             {
-                if (hideWhilePaused[i] != null && previousActiveStates[i])
+                if (hideWhilePaused[i] != null &&
+                    previousActiveStates[i])
+                {
                     hideWhilePaused[i].SetActive(true);
+                }
             }
 
             ShowMenuContent();
@@ -112,6 +130,7 @@ public class PauseMenu : MonoBehaviour
             root.SetActive(paused);
 
         Time.timeScale = paused ? 0f : 1f;
+
         GameAudioManager.Instance?.SetPaused(paused);
     }
 }
