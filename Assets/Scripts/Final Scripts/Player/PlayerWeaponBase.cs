@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public abstract class PlayerWeaponBase : MonoBehaviour
@@ -7,6 +8,7 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     [SerializeField] protected float baseCooldown = 0.5f;
 
     private float nextAttackTime;
+    private float permanentDamageMultiplier = 1f;
     private Transform attackTarget;
 
     protected PlayerStats stats;
@@ -22,12 +24,10 @@ public abstract class PlayerWeaponBase : MonoBehaviour
     public bool TryAttack(Vector2 aimDirection)
     {
         float attackSpeed = stats != null
-           ? stats.GetAttackSpeedMultiplier()
-           : 1f;
+            ? stats.GetAttackSpeedMultiplier()
+            : 1f;
 
-        float cooldown =
-            baseCooldown /
-            Mathf.Max(0.01f, attackSpeed);
+        float cooldown = baseCooldown / Mathf.Max(0.01f, attackSpeed);
 
         if (Time.time < nextAttackTime)
             return false;
@@ -35,16 +35,13 @@ public abstract class PlayerWeaponBase : MonoBehaviour
         if (aimDirection == Vector2.zero)
             aimDirection = Vector2.right;
 
-        Vector2 normalizedDirection =
-            aimDirection.normalized;
+        Vector2 normalizedDirection = aimDirection.normalized;
 
-        nextAttackTime =
-            Time.time + cooldown;
+        nextAttackTime = Time.time + cooldown;
 
         Attack(normalizedDirection);
 
-        OnAttackPerformed?.Invoke(
-            normalizedDirection);
+        OnAttackPerformed?.Invoke(normalizedDirection);
 
         return true;
     }
@@ -54,12 +51,19 @@ public abstract class PlayerWeaponBase : MonoBehaviour
         attackTarget = target;
     }
 
+    public void SetPermanentDamageMultiplier(float value)
+    {
+        permanentDamageMultiplier = Mathf.Max(0.1f, value);
+    }
+
     protected float GetFinalDamage()
     {
-        if (stats == null)
-            return baseDamage;
+        float damage = baseDamage * permanentDamageMultiplier;
 
-        return stats.RollDamage(baseDamage);
+        if (stats == null)
+            return damage;
+
+        return stats.RollDamage(damage);
     }
 
     protected abstract void Attack(Vector2 aimDirection);

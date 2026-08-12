@@ -18,12 +18,17 @@ public class RoomManager : MonoBehaviour
     public event Action OnRunWon;
 
     private RoomLayout currentLayout;
+    private RoomData currentRoomData;
     private int currentRoomIndex = -1;
     private bool roomCleared;
     private bool runEnded;
 
     public int CurrentRoomNumber => currentRoomIndex + 1;
     public int TotalRooms => totalRooms;
+    public int ClearedRoomCount { get; private set; }
+    public int EliteRoomsCleared { get; private set; }
+    public int BossRoomsCleared { get; private set; }
+    public int FinalRoomsCleared { get; private set; }
 
     private void Start()
     {
@@ -66,6 +71,7 @@ public class RoomManager : MonoBehaviour
         }
 
         currentRoomIndex = index;
+        currentRoomData = roomData;
         roomCleared = false;
 
         if (currentLayout != null)
@@ -83,6 +89,7 @@ public class RoomManager : MonoBehaviour
         currentLayout.PrepareRoom();
 
         RoomExitTrigger exitTrigger = currentLayout.GetComponentInChildren<RoomExitTrigger>();
+
         if (exitTrigger != null)
             exitTrigger.Initialize(this);
 
@@ -109,6 +116,26 @@ public class RoomManager : MonoBehaviour
             return;
 
         roomCleared = true;
+        ClearedRoomCount++;
+
+        if (currentRoomData != null)
+        {
+            switch (currentRoomData.roomType)
+            {
+                case RoomType.Elite:
+                    EliteRoomsCleared++;
+                    break;
+
+                case RoomType.Boss:
+                    BossRoomsCleared++;
+                    break;
+
+                case RoomType.Final:
+                    FinalRoomsCleared++;
+                    break;
+            }
+        }
+
         currentLayout.OpenExit();
     }
 
@@ -131,6 +158,5 @@ public class RoomManager : MonoBehaviour
         runEnded = true;
         Time.timeScale = 0f;
         OnRunWon?.Invoke();
-        Debug.Log("Run won.", this);
     }
 }

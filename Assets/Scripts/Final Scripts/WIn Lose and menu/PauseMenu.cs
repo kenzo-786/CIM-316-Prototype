@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject root;
+    [SerializeField] private GameObject menuContent;
+    [SerializeField] private GameObject statusContent;
+    [SerializeField] private RunStatusUI runStatusUI;
     [SerializeField] private GameObject[] hideWhilePaused;
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
 
@@ -16,12 +19,19 @@ public class PauseMenu : MonoBehaviour
 
         if (root != null)
             root.SetActive(false);
+
+        ShowMenuContent();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(pauseKey))
-            TogglePause();
+        {
+            if (paused && statusContent != null && statusContent.activeSelf)
+                ShowMenuContent();
+            else
+                TogglePause();
+        }
     }
 
     public void TogglePause()
@@ -32,6 +42,30 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         SetPaused(false);
+    }
+
+    public void ShowStatus()
+    {
+        if (!paused)
+            return;
+
+        if (menuContent != null)
+            menuContent.SetActive(false);
+
+        if (statusContent != null)
+            statusContent.SetActive(true);
+
+        if (runStatusUI != null)
+            runStatusUI.Refresh();
+    }
+
+    public void ShowMenuContent()
+    {
+        if (menuContent != null)
+            menuContent.SetActive(true);
+
+        if (statusContent != null)
+            statusContent.SetActive(false);
     }
 
     public void Restart()
@@ -60,6 +94,8 @@ public class PauseMenu : MonoBehaviour
                 previousActiveStates[i] = hideWhilePaused[i].activeSelf;
                 hideWhilePaused[i].SetActive(false);
             }
+
+            ShowMenuContent();
         }
         else
         {
@@ -68,6 +104,8 @@ public class PauseMenu : MonoBehaviour
                 if (hideWhilePaused[i] != null && previousActiveStates[i])
                     hideWhilePaused[i].SetActive(true);
             }
+
+            ShowMenuContent();
         }
 
         if (root != null)

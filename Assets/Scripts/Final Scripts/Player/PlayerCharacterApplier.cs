@@ -6,12 +6,8 @@ using UnityEngine;
 public class PlayerCharacterApplier : MonoBehaviour
 {
     [SerializeField] private PlayerCharacterData fallbackCharacter;
-
-    [Header("Visual")]
     [SerializeField] private SpriteRenderer playerVisual;
     [SerializeField] private Animator playerAnimator;
-
-    [Header("Weapons")]
     [SerializeField] private PlayerWeaponController weaponController;
     [SerializeField] private RulerSlashWeapon rulerWeapon;
     [SerializeField] private EraserThrowWeapon eraserWeapon;
@@ -19,19 +15,13 @@ public class PlayerCharacterApplier : MonoBehaviour
     private void Awake()
     {
         if (playerVisual == null)
-        {
             playerVisual = GetComponentInChildren<SpriteRenderer>();
-        }
 
         if (playerAnimator == null)
-        {
             playerAnimator = GetComponentInChildren<Animator>();
-        }
 
         if (weaponController == null)
-        {
             weaponController = GetComponent<PlayerWeaponController>();
-        }
     }
 
     private void Start()
@@ -48,11 +38,7 @@ public class PlayerCharacterApplier : MonoBehaviour
 
         if (data == null)
         {
-            Debug.LogError(
-                "PlayerCharacterApplier has no selected or fallback character.",
-                this
-            );
-
+            Debug.LogError("PlayerCharacterApplier has no selected or fallback character.", this);
             return;
         }
 
@@ -63,9 +49,7 @@ public class PlayerCharacterApplier : MonoBehaviour
         health.SetMaxHealth(data.maxHealth, true);
 
         if (playerVisual != null && data.gameplaySprite != null)
-        {
             playerVisual.sprite = data.gameplaySprite;
-        }
 
         if (playerAnimator != null && data.animatorController != null)
         {
@@ -75,9 +59,7 @@ public class PlayerCharacterApplier : MonoBehaviour
         }
 
         if (weaponController == null)
-        {
             return;
-        }
 
         ApplyFiringMode(data.firingMode);
 
@@ -91,6 +73,8 @@ public class PlayerCharacterApplier : MonoBehaviour
                 weaponController.EquipWeapon(eraserWeapon);
                 break;
         }
+
+        MetaProgressionManager.Instance?.ApplyToPlayer(gameObject);
     }
 
     private void ApplyFiringMode(PlayerFiringMode firingMode)

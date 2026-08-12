@@ -16,19 +16,26 @@ public class RunEndUI : MonoBehaviour
 
     private void Awake()
     {
-        root.SetActive(false);
+        if (root != null)
+            root.SetActive(false);
     }
 
     private void OnEnable()
     {
-        roomManager.OnRunWon += ShowWin;
-        playerHealth.OnDied += HandlePlayerDied;
+        if (roomManager != null)
+            roomManager.OnRunWon += ShowWin;
+
+        if (playerHealth != null)
+            playerHealth.OnDied += HandlePlayerDied;
     }
 
     private void OnDisable()
     {
-        roomManager.OnRunWon -= ShowWin;
-        playerHealth.OnDied -= HandlePlayerDied;
+        if (roomManager != null)
+            roomManager.OnRunWon -= ShowWin;
+
+        if (playerHealth != null)
+            playerHealth.OnDied -= HandlePlayerDied;
     }
 
     private void HandlePlayerDied()
@@ -40,30 +47,59 @@ public class RunEndUI : MonoBehaviour
     {
         yield return null;
 
-        if (playerHealth.IsDead)
+        if (playerHealth != null && playerHealth.IsDead)
             ShowLose();
     }
 
     private void ShowWin()
     {
-        Show("Prototype Complete", "You cleared the run.");
+        Show("Run Complete", "You cleared the dungeon.", true);
     }
 
     private void ShowLose()
     {
-        Show("Run Lost", "You were defeated.");
+        Show("Run Lost", "You were defeated.", false);
     }
 
-    private void Show(string title, string body)
+    private void Show(string title, string body, bool won)
     {
-        if (ended) return;
+        if (ended)
+            return;
 
         ended = true;
-        Time.timeScale = 0f;
-        root.SetActive(true);
 
-        titleText.text = title;
-        bodyText.text = body;
+        int creditsEarned = GrantStudyCredits(won);
+
+        Time.timeScale = 0f;
+
+        if (root != null)
+            root.SetActive(true);
+
+        if (titleText != null)
+            titleText.text = title;
+
+        if (bodyText != null)
+        {
+            bodyText.text = body +
+                "\n\nRooms Cleared: " +
+                (roomManager != null ? roomManager.ClearedRoomCount : 0) +
+                "\nStudy Credits Earned: " +
+                creditsEarned;
+        }
+    }
+
+    private int GrantStudyCredits(bool won)
+    {
+        if (MetaProgressionManager.Instance == null || roomManager == null)
+            return 0;
+
+        return MetaProgressionManager.Instance.GrantRunRewards(
+            roomManager.ClearedRoomCount,
+            roomManager.EliteRoomsCleared,
+            roomManager.BossRoomsCleared,
+            roomManager.FinalRoomsCleared,
+            won
+        );
     }
 
     public void Restart()
@@ -74,6 +110,7 @@ public class RunEndUI : MonoBehaviour
 
     public void Quit()
     {
+        Time.timeScale = 1f;
         Application.Quit();
     }
 }

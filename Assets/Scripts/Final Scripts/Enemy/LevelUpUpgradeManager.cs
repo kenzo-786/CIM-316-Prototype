@@ -76,21 +76,31 @@ public class LevelUpUpgradeManager : MonoBehaviour
             ? choiceGenerator.GenerateChoices(choicesPerLevel, upgradeInventory, false)
             : new List<UpgradeData>();
 
+        if (choices.Count == 0)
+        {
+            FinishCurrentChoice();
+            return;
+        }
+
         if (selectionUI != null)
             selectionUI.ShowChoices(choices, upgradeInventory, SelectUpgrade);
     }
 
     private void SelectUpgrade(UpgradeData upgrade)
     {
-        if (upgradeInventory != null && upgrade != null)
-            upgradeInventory.AddUpgrade(upgrade);
+        bool accepted = upgradeInventory == null || upgradeInventory.TryAddUpgrade(upgrade, out _);
 
-        if (upgradeManager != null && upgrade != null)
+        if (accepted && upgradeManager != null && upgrade != null)
             upgradeManager.ApplyUpgrade(upgrade);
 
         if (selectionUI != null)
             selectionUI.Hide();
 
+        FinishCurrentChoice();
+    }
+
+    private void FinishCurrentChoice()
+    {
         if (pauseGameDuringChoice)
             Time.timeScale = previousTimeScale;
 
