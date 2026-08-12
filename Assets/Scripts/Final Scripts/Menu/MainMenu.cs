@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button creditsBackButton;
 
     [Header("Selection Icon")]
     [SerializeField] private RectTransform selectionIcon;
@@ -21,6 +22,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject optionsPanel;
 
+    [Header("Credits Back Button")]
+    [SerializeField] private Color creditsBackNormalColor = Color.white;
+    [SerializeField] private Color creditsBackHoverColor = Color.blue;
+
     [Header("Button Pop")]
     [SerializeField] private float popScale = 1.05f;
     [SerializeField] private float popSpeed = 0.08f;
@@ -29,7 +34,8 @@ public class MainMenu : MonoBehaviour
     private Button hoveredButton;
     private Coroutine popCoroutine;
 
-    private Dictionary<Button, Vector3> originalScales = new Dictionary<Button, Vector3>();
+    private Dictionary<Button, Vector3> originalScales =
+        new Dictionary<Button, Vector3>();
 
     void Start()
     {
@@ -40,17 +46,26 @@ public class MainMenu : MonoBehaviour
         RegisterButton(optionsButton);
         RegisterButton(creditsButton);
         RegisterButton(quitButton);
+        RegisterButton(creditsBackButton);
 
         currentButton = null;
         hoveredButton = null;
 
         selectionIcon.gameObject.SetActive(false);
 
+        SetCreditsBackColor(creditsBackNormalColor);
+
         EventSystem.current.SetSelectedGameObject(null);
     }
 
     void Update()
     {
+        if (creditsPanel != null && creditsPanel.activeSelf)
+        {
+            HandleCreditsBackHover();
+            return;
+        }
+
         HandleMouseHover();
         HandleKeyboardNavigation();
     }
@@ -60,17 +75,25 @@ public class MainMenu : MonoBehaviour
         if (EventSystem.current == null)
             return;
 
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        PointerEventData pointerData =
+            new PointerEventData(EventSystem.current);
+
         pointerData.position = Input.mousePosition;
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+        List<RaycastResult> results =
+            new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(
+            pointerData,
+            results
+        );
 
         Button newHoveredButton = null;
 
         foreach (RaycastResult result in results)
         {
-            Button button = result.gameObject.GetComponentInParent<Button>();
+            Button button =
+                result.gameObject.GetComponentInParent<Button>();
 
             if (button == playButton ||
                 button == optionsButton ||
@@ -97,14 +120,72 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private void HandleCreditsBackHover()
+    {
+        if (EventSystem.current == null ||
+            creditsBackButton == null)
+            return;
+
+        PointerEventData pointerData =
+            new PointerEventData(EventSystem.current);
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results =
+            new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(
+            pointerData,
+            results
+        );
+
+        bool hoveringBack = false;
+
+        foreach (RaycastResult result in results)
+        {
+            Button button =
+                result.gameObject.GetComponentInParent<Button>();
+
+            if (button == creditsBackButton)
+            {
+                hoveringBack = true;
+                break;
+            }
+        }
+
+        if (hoveringBack)
+        {
+            if (hoveredButton != creditsBackButton)
+            {
+                hoveredButton = creditsBackButton;
+
+                SetCreditsBackColor(
+                    creditsBackHoverColor
+                );
+
+                PlayPop(creditsBackButton);
+            }
+        }
+        else if (hoveredButton == creditsBackButton)
+        {
+            hoveredButton = null;
+
+            SetCreditsBackColor(
+                creditsBackNormalColor
+            );
+        }
+    }
+
     private void HandleKeyboardNavigation()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W) ||
+            Input.GetKeyDown(KeyCode.UpArrow))
         {
             SelectPreviousButton();
         }
 
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.S) ||
+            Input.GetKeyDown(KeyCode.DownArrow))
         {
             SelectNextButton();
         }
@@ -114,7 +195,8 @@ public class MainMenu : MonoBehaviour
     {
         if (button != null)
         {
-            originalScales[button] = button.transform.localScale;
+            originalScales[button] =
+                button.transform.localScale;
         }
     }
 
@@ -128,7 +210,9 @@ public class MainMenu : MonoBehaviour
 
         currentButton = button;
 
-        EventSystem.current.SetSelectedGameObject(button.gameObject);
+        EventSystem.current.SetSelectedGameObject(
+            button.gameObject
+        );
 
         selectionIcon.gameObject.SetActive(true);
 
@@ -189,27 +273,53 @@ public class MainMenu : MonoBehaviour
         if (currentButton == null)
             return;
 
-        RectTransform buttonRect = currentButton.GetComponent<RectTransform>();
+        RectTransform buttonRect =
+            currentButton.GetComponent<RectTransform>();
 
         selectionIcon.position = new Vector3(
-            buttonRect.position.x - buttonRect.rect.width / 2f - iconDistance,
+            buttonRect.position.x -
+            buttonRect.rect.width / 2f -
+            iconDistance,
             buttonRect.position.y,
             selectionIcon.position.z
         );
     }
 
+    private void SetCreditsBackColor(Color color)
+    {
+        if (creditsBackButton == null)
+            return;
+
+        ColorBlock colors =
+            creditsBackButton.colors;
+
+        colors.normalColor = color;
+        colors.highlightedColor = color;
+        colors.selectedColor = color;
+        colors.pressedColor = color;
+
+        creditsBackButton.colors = colors;
+    }
+
     private void PlayPop(Button button)
     {
+        if (button == null)
+            return;
+
         if (popCoroutine != null)
             StopCoroutine(popCoroutine);
 
-        popCoroutine = StartCoroutine(PopButton(button));
+        popCoroutine =
+            StartCoroutine(PopButton(button));
     }
 
     private IEnumerator PopButton(Button button)
     {
-        Vector3 originalScale = originalScales[button];
-        Vector3 enlargedScale = originalScale * popScale;
+        Vector3 originalScale =
+            originalScales[button];
+
+        Vector3 enlargedScale =
+            originalScale * popScale;
 
         float time = 0f;
 
@@ -217,11 +327,12 @@ public class MainMenu : MonoBehaviour
         {
             time += Time.unscaledDeltaTime;
 
-            button.transform.localScale = Vector3.Lerp(
-                originalScale,
-                enlargedScale,
-                time / popSpeed
-            );
+            button.transform.localScale =
+                Vector3.Lerp(
+                    originalScale,
+                    enlargedScale,
+                    time / popSpeed
+                );
 
             yield return null;
         }
@@ -232,16 +343,18 @@ public class MainMenu : MonoBehaviour
         {
             time += Time.unscaledDeltaTime;
 
-            button.transform.localScale = Vector3.Lerp(
-                enlargedScale,
-                originalScale,
-                time / popSpeed
-            );
+            button.transform.localScale =
+                Vector3.Lerp(
+                    enlargedScale,
+                    originalScale,
+                    time / popSpeed
+                );
 
             yield return null;
         }
 
-        button.transform.localScale = originalScale;
+        button.transform.localScale =
+            originalScale;
     }
 
     public void PlayGame()
@@ -252,26 +365,58 @@ public class MainMenu : MonoBehaviour
     public void OpenCredits()
     {
         creditsPanel.SetActive(true);
+
+        currentButton = null;
+        hoveredButton = null;
+
+        selectionIcon.gameObject.SetActive(false);
+
+        SetCreditsBackColor(
+            creditsBackNormalColor
+        );
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseCredits()
     {
+        PlayPop(creditsBackButton);
+
         creditsPanel.SetActive(false);
+
         currentButton = null;
+        hoveredButton = null;
+
         selectionIcon.gameObject.SetActive(false);
+
+        SetCreditsBackColor(
+            creditsBackNormalColor
+        );
+
         EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenOptions()
     {
         optionsPanel.SetActive(true);
+
+        currentButton = null;
+        hoveredButton = null;
+
+        selectionIcon.gameObject.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseOptions()
     {
         optionsPanel.SetActive(false);
+
         currentButton = null;
+        hoveredButton = null;
+
         selectionIcon.gameObject.SetActive(false);
+
         EventSystem.current.SetSelectedGameObject(null);
     }
 
