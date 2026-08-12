@@ -62,12 +62,6 @@ TextureImporter:
   - first:
       213: 2356247714062747767
     second: spider walking spritesheet_19
-  - first:
-      213: -3102925102131739128
-    second: spider walking spritesheet_20
-  - first:
-      213: -778523864915078382
-    second: spider walking spritesheet_21
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -166,12 +160,12 @@ TextureImporter:
       name: spider walking spritesheet_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 843
-        width: 188
-        height: 141
+        x: 0
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +182,12 @@ TextureImporter:
       name: spider walking spritesheet_1
       rect:
         serializedVersion: 2
-        x: 229
-        y: 847
-        width: 179
-        height: 135
+        x: 256
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -210,12 +204,12 @@ TextureImporter:
       name: spider walking spritesheet_2
       rect:
         serializedVersion: 2
-        x: 424
-        y: 840
-        width: 183
-        height: 146
+        x: 512
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -232,12 +226,12 @@ TextureImporter:
       name: spider walking spritesheet_3
       rect:
         serializedVersion: 2
-        x: 630
-        y: 835
-        width: 197
-        height: 155
+        x: 768
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,12 +248,12 @@ TextureImporter:
       name: spider walking spritesheet_4
       rect:
         serializedVersion: 2
-        x: 859
-        y: 843
-        width: 200
-        height: 147
+        x: 1024
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -276,12 +270,12 @@ TextureImporter:
       name: spider walking spritesheet_5
       rect:
         serializedVersion: 2
-        x: 21
-        y: 620
-        width: 201
-        height: 149
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -298,12 +292,12 @@ TextureImporter:
       name: spider walking spritesheet_6
       rect:
         serializedVersion: 2
-        x: 253
-        y: 621
-        width: 198
-        height: 155
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -320,12 +314,12 @@ TextureImporter:
       name: spider walking spritesheet_7
       rect:
         serializedVersion: 2
-        x: 473
-        y: 625
-        width: 183
-        height: 147
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -342,12 +336,12 @@ TextureImporter:
       name: spider walking spritesheet_8
       rect:
         serializedVersion: 2
-        x: 671
-        y: 630
-        width: 180
-        height: 137
+        x: 768
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -364,12 +358,12 @@ TextureImporter:
       name: spider walking spritesheet_9
       rect:
         serializedVersion: 2
-        x: 865
-        y: 628
-        width: 188
-        height: 141
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -386,12 +380,12 @@ TextureImporter:
       name: spider walking spritesheet_10
       rect:
         serializedVersion: 2
-        x: 69
-        y: 339
-        width: 140
-        height: 187
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -408,12 +402,12 @@ TextureImporter:
       name: spider walking spritesheet_11
       rect:
         serializedVersion: 2
-        x: 275
-        y: 345
-        width: 136
-        height: 179
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -430,12 +424,12 @@ TextureImporter:
       name: spider walking spritesheet_12
       rect:
         serializedVersion: 2
-        x: 469
-        y: 346
-        width: 147
-        height: 183
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -452,12 +446,12 @@ TextureImporter:
       name: spider walking spritesheet_13
       rect:
         serializedVersion: 2
-        x: 661
-        y: 336
-        width: 155
-        height: 197
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -474,12 +468,12 @@ TextureImporter:
       name: spider walking spritesheet_14
       rect:
         serializedVersion: 2
-        x: 863
-        y: 334
-        width: 148
-        height: 200
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -496,12 +490,12 @@ TextureImporter:
       name: spider walking spritesheet_15
       rect:
         serializedVersion: 2
-        x: 116
-        y: 315
-        width: 19
-        height: 7
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -518,12 +512,12 @@ TextureImporter:
       name: spider walking spritesheet_16
       rect:
         serializedVersion: 2
-        x: 946
-        y: 287
-        width: 19
-        height: 8
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -540,12 +534,12 @@ TextureImporter:
       name: spider walking spritesheet_17
       rect:
         serializedVersion: 2
-        x: 70
-        y: 76
-        width: 148
-        height: 200
+        x: 512
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -562,12 +556,12 @@ TextureImporter:
       name: spider walking spritesheet_18
       rect:
         serializedVersion: 2
-        x: 264
-        y: 77
-        width: 156
-        height: 197
+        x: 768
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -584,12 +578,12 @@ TextureImporter:
       name: spider walking spritesheet_19
       rect:
         serializedVersion: 2
-        x: 465
-        y: 81
-        width: 147
-        height: 183
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -602,55 +596,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: spider walking spritesheet_20
-      rect:
-        serializedVersion: 2
-        x: 670
-        y: 85
-        width: 136
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8068bc24f0230f4d0800000000000000
-      internalID: -3102925102131739128
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spider walking spritesheet_21
-      rect:
-        serializedVersion: 2
-        x: 872
-        y: 84
-        width: 140
-        height: 187
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 213929e6ba02235f0800000000000000
-      internalID: -778523864915078382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bf7a30d470b510e4ca78a85811c8a90c
     internalID: 0
     vertices: []
     indices: 
@@ -658,7 +608,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       spider walking spritesheet_0: 1483472107231776678
       spider walking spritesheet_1: -4411991805120911224
@@ -673,8 +625,6 @@ TextureImporter:
       spider walking spritesheet_18: -5494632827227325199
       spider walking spritesheet_19: 2356247714062747767
       spider walking spritesheet_2: 6589421175779620078
-      spider walking spritesheet_20: -3102925102131739128
-      spider walking spritesheet_21: -778523864915078382
       spider walking spritesheet_3: -7670620446475751364
       spider walking spritesheet_4: 4947719245102986267
       spider walking spritesheet_5: 5693632072732999068

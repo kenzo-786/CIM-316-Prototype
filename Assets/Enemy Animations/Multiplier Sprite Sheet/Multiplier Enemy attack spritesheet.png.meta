@@ -26,9 +26,6 @@ TextureImporter:
   - first:
       213: -6487292122464401220
     second: Multiplier Enemy attack spritesheet_7
-  - first:
-      213: -7867805964071867744
-    second: Multiplier Enemy attack spritesheet_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,12 +124,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 864
-        width: 206
-        height: 179
+        x: 0
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,12 +146,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_1
       rect:
         serializedVersion: 2
-        x: 310
-        y: 814
-        width: 214
-        height: 229
+        x: 256
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,12 +168,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_2
       rect:
         serializedVersion: 2
-        x: 38
-        y: 570
-        width: 206
-        height: 179
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,12 +190,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_3
       rect:
         serializedVersion: 2
-        x: 327
-        y: 570
-        width: 214
-        height: 229
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,12 +212,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_4
       rect:
         serializedVersion: 2
-        x: 1071
-        y: 709
-        width: 9
-        height: 12
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -237,12 +234,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_5
       rect:
         serializedVersion: 2
-        x: 43
-        y: 310
-        width: 179
-        height: 206
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -259,12 +256,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_6
       rect:
         serializedVersion: 2
-        x: 332
-        y: 306
-        width: 229
-        height: 214
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -281,12 +278,12 @@ TextureImporter:
       name: Multiplier Enemy attack spritesheet_7
       rect:
         serializedVersion: 2
-        x: 53
-        y: 42
-        width: 179
-        height: 206
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -299,33 +296,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Multiplier Enemy attack spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 287
-        y: 43
-        width: 229
-        height: 214
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0aaebcd3920ffc290800000000000000
-      internalID: -7867805964071867744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b87bd7416341af14e90fddf44833a3c5
     internalID: 0
     vertices: []
     indices: 
@@ -333,7 +308,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Multiplier Enemy attack spritesheet_0: 3836963437160708258
       Multiplier Enemy attack spritesheet_1: -4828145027776554491
@@ -343,7 +320,6 @@ TextureImporter:
       Multiplier Enemy attack spritesheet_5: -278568894689378314
       Multiplier Enemy attack spritesheet_6: -6096687087209455237
       Multiplier Enemy attack spritesheet_7: -6487292122464401220
-      Multiplier Enemy attack spritesheet_8: -7867805964071867744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -7847,12 +7847,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6492756627722979712, guid: c1fc5c97ad434e248818846e46b481d9, type: 3}
+  m_Sprite: {fileID: -7085591707913155917, guid: c9d2bb52ce202fa4faeff883232b4bab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.39, y: 1.87}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7867,7 +7867,7 @@ Animator:
   m_GameObject: {fileID: 1839325597}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9053a25ea33d0ba4fa69e59d95b6b9cf, type: 2}
+  m_Controller: {fileID: 9100000, guid: 67910c407b65e884c9f58993479dbbf2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9021,15 +9021,96 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
   soundEffects:
-  - id: 
+  - id: ui_hover
+    clip: {fileID: 8300000, guid: cb24b6ce66871df42bcf4f4edf5702df, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: ui_confirm
+    clip: {fileID: 8300000, guid: 3d39ef26606c9eb4cb0a078956b52e19, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: level_up
+    clip: {fileID: 8300000, guid: b8300694393ad404f883966d829c260a, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: upgrade_pick
+    clip: {fileID: 8300000, guid: 8e392fae3d33a5e48ac694f9b61004ad, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: game_over
+    clip: {fileID: 8300000, guid: 824f91287c2953540a672e1e7869fe83, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: player_hurt
+    clip: {fileID: 8300000, guid: aa27608b26ea0cc4abdab627b094cdcf, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: player_heal
+    clip: {fileID: 8300000, guid: 70c3358078b66f64c8b2f88ffff76ea5, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: player_revive
+    clip: {fileID: 8300000, guid: 40a7c92f0e2a204479224239d02acc20, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: enemy_hit
     clip: {fileID: 0}
-    volume: 0
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: enemy_death
+    clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: heavy_enemy_death
+    clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
+    volume: 1
+    pitchMin: 2
+    pitchMax: 3
+  - id: enemy_split
+    clip: {fileID: 8300000, guid: f0e9a43c9f7cea844b9e9e7b1fd56466, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: wave_warning
+    clip: {fileID: 8300000, guid: cd0fb1a16be3ab646aa0253a87412ded, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: room_clear
+    clip: {fileID: 8300000, guid: 2ee34dd9f72fa4c4abe85927b5638f98, type: 3}
+    volume: 1
     pitchMin: 0
     pitchMax: 0
+  - id: door_open
+    clip: {fileID: 8300000, guid: 67180ba24401de748baca467342db438, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: xp_magnet
+    clip: {fileID: 8300000, guid: d9a6243c41433e54f8482d34b167f008, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
   musicTracks:
-  - id: 
-    clip: {fileID: 0}
-    volume: 0
+  - id: menu_music
+    clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
+    volume: 1
+  - id: battle_music
+    clip: {fileID: 8300000, guid: e2c055b268108d440814811692248500, type: 3}
+    volume: 1
+  - id: 'boss_music '
+    clip: {fileID: 8300000, guid: c4d0db03bbd67464b9d9161ea3caa266, type: 3}
+    volume: 1
   sceneMusic:
   - sceneName: 
     musicId: 

@@ -229,10 +229,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 931
-        width: 41
-        height: 49
+        x: 0
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,10 +251,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 886
-        width: 121
-        height: 146
+        x: 256
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,10 +273,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 931
-        width: 43
-        height: 50
+        x: 512
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,10 +295,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_3
       rect:
         serializedVersion: 2
-        x: 262
-        y: 886
-        width: 185
-        height: 145
+        x: 768
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,10 +317,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_4
       rect:
         serializedVersion: 2
-        x: 481
-        y: 867
-        width: 121
-        height: 181
+        x: 1024
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,10 +339,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_5
       rect:
         serializedVersion: 2
-        x: 630
-        y: 886
-        width: 154
-        height: 145
+        x: 0
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -361,10 +361,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_6
       rect:
         serializedVersion: 2
-        x: 778
-        y: 950
-        width: 48
-        height: 50
+        x: 256
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -383,10 +383,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_7
       rect:
         serializedVersion: 2
-        x: 838
-        y: 931
-        width: 42
-        height: 50
+        x: 512
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -405,10 +405,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_8
       rect:
         serializedVersion: 2
-        x: 881
-        y: 886
-        width: 121
-        height: 145
+        x: 768
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,10 +427,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_9
       rect:
         serializedVersion: 2
-        x: 1002
-        y: 931
-        width: 42
-        height: 50
+        x: 1024
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_10
       rect:
         serializedVersion: 2
-        x: 37
-        y: 721
-        width: 41
-        height: 49
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -471,10 +471,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_11
       rect:
         serializedVersion: 2
-        x: 79
-        y: 676
-        width: 121
-        height: 146
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -493,10 +493,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_12
       rect:
         serializedVersion: 2
-        x: 200
-        y: 721
-        width: 43
-        height: 50
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,10 +515,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_13
       rect:
         serializedVersion: 2
-        x: 262
-        y: 676
-        width: 185
-        height: 145
+        x: 768
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -537,10 +537,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_14
       rect:
         serializedVersion: 2
-        x: 481
-        y: 657
-        width: 121
-        height: 181
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -559,10 +559,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_15
       rect:
         serializedVersion: 2
-        x: 630
-        y: 676
-        width: 154
-        height: 145
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -581,10 +581,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_16
       rect:
         serializedVersion: 2
-        x: 778
-        y: 740
-        width: 48
-        height: 50
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -603,10 +603,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_17
       rect:
         serializedVersion: 2
-        x: 838
-        y: 721
-        width: 42
-        height: 50
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -625,10 +625,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_18
       rect:
         serializedVersion: 2
-        x: 881
-        y: 676
-        width: 121
-        height: 145
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -647,10 +647,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_19
       rect:
         serializedVersion: 2
-        x: 1002
-        y: 721
-        width: 42
-        height: 50
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -669,10 +669,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_20
       rect:
         serializedVersion: 2
-        x: 107
-        y: 575
-        width: 49
-        height: 41
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -691,10 +691,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_21
       rect:
         serializedVersion: 2
-        x: 263
-        y: 424
-        width: 145
-        height: 185
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -713,10 +713,10 @@ TextureImporter:
       name: Spinning Enemy attack spritesheet_22
       rect:
         serializedVersion: 2
-        x: 661
-        y: 468
-        width: 145
-        height: 154
+        x: 512
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -731,627 +731,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_23
-      rect:
-        serializedVersion: 2
-        x: 914
-        y: 588
-        width: 50
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a298eb829dd80f130800000000000000
-      internalID: 3598532066100021546
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_24
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 453
-        width: 146
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 301ea704e017f0260800000000000000
-      internalID: 7065990646392873219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_25
-      rect:
-        serializedVersion: 2
-        x: 441
-        y: 462
-        width: 181
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9e2d7af2ee752ef70800000000000000
-      internalID: 9215024468066816745
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_26
-      rect:
-        serializedVersion: 2
-        x: 725
-        y: 426
-        width: 50
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 660d512bc169c6570800000000000000
-      internalID: 8461302849913344102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_27
-      rect:
-        serializedVersion: 2
-        x: 869
-        y: 466
-        width: 145
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d943005ace997bf90800000000000000
-      internalID: -6937907459281374051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_28
-      rect:
-        serializedVersion: 2
-        x: 914
-        y: 424
-        width: 50
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 55fea7de7cc3ee040800000000000000
-      internalID: 4678743892264939349
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_29
-      rect:
-        serializedVersion: 2
-        x: 107
-        y: 410
-        width: 50
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 19469d10455cf4b30800000000000000
-      internalID: 4273851535996839057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_30
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 340
-        width: 50
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 56433c7156e7380b0800000000000000
-      internalID: -5727595328429673371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_31
-      rect:
-        serializedVersion: 2
-        x: 271
-        y: 193
-        width: 145
-        height: 185
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29f1debd5828640c0800000000000000
-      internalID: -4591839258625630318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_32
-      rect:
-        serializedVersion: 2
-        x: 449
-        y: 223
-        width: 181
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7f3d33a21e2bad910800000000000000
-      internalID: 1862998076016546807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_33
-      rect:
-        serializedVersion: 2
-        x: 657
-        y: 191
-        width: 145
-        height: 154
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6ce42d619943ee680800000000000000
-      internalID: -8723977596052549946
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_34
-      rect:
-        serializedVersion: 2
-        x: 688
-        y: 339
-        width: 50
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f477615243666f340800000000000000
-      internalID: 4897214018958554959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_35
-      rect:
-        serializedVersion: 2
-        x: 864
-        y: 222
-        width: 145
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6c817e65c07495540800000000000000
-      internalID: 4997103379867441350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_36
-      rect:
-        serializedVersion: 2
-        x: 914
-        y: 343
-        width: 50
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ad9c90371e38ecb30800000000000000
-      internalID: 4309526897761044954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_37
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 219
-        width: 146
-        height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 30cd97455cee93460800000000000000
-      internalID: 7222066008758541315
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_38
-      rect:
-        serializedVersion: 2
-        x: 914
-        y: 179
-        width: 50
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 36a438eb037f2fdd0800000000000000
-      internalID: -2453627058236732829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_39
-      rect:
-        serializedVersion: 2
-        x: 110
-        y: 177
-        width: 49
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: acac8ce206c5dcef0800000000000000
-      internalID: -86311249678644534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_40
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 23
-        width: 131
-        height: 135
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 859054418764ef500800000000000000
-      internalID: 431860095824234840
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_41
-      rect:
-        serializedVersion: 2
-        x: 273
-        y: 24
-        width: 129
-        height: 138
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29f245354d520bf00800000000000000
-      internalID: 1130445100331315090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_42
-      rect:
-        serializedVersion: 2
-        x: 470
-        y: 27
-        width: 133
-        height: 134
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b253445add42a0920800000000000000
-      internalID: 2957216639701234987
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_43
-      rect:
-        serializedVersion: 2
-        x: 837
-        y: 884
-        width: 208
-        height: 149
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7dea72a39f51b9b4aabc2cf68921dca2
-      internalID: 1429408344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 886
-        width: 205
-        height: 152
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b0dc8ca6ddbb154a9fc35df44e9237b
-      internalID: 16044533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_44
-      rect:
-        serializedVersion: 2
-        x: 262
-        y: 886
-        width: 186
-        height: 145
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 094680439487e7e469337adac857aa3b
-      internalID: 1875983163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_45
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 866
-        width: 121
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf3f54960a10ae048990cddc345fece6
-      internalID: -1249244596
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_46
-      rect:
-        serializedVersion: 2
-        x: 630
-        y: 886
-        width: 197
-        height: 145
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0fd71d190be1d54686f8c8983bf5054
-      internalID: -145062263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_47
-      rect:
-        serializedVersion: 2
-        x: 837
-        y: 883
-        width: 208
-        height: 157
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c39b608dfead69442959bab7764ee1e7
-      internalID: -1960283018
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_48
-      rect:
-        serializedVersion: 2
-        x: 836
-        y: 882
-        width: 209
-        height: 147
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a19d7fb72788dd4ba9e26666a6c8467
-      internalID: 1740954508
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spinning Enemy attack spritesheet_49
-      rect:
-        serializedVersion: 2
-        x: 662
-        y: 425
-        width: 146
-        height: 197
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17d342116c3d4dc46a7ab3fbd903a012
-      internalID: -98966312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9bae104e57568a54a98efd2df95783da
+    spriteID: b1e31aeabb7ae4745a2d26595d6d784d
     internalID: 0
     vertices: []
     indices: 
@@ -1359,9 +743,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Spinning Enemy attack spritesheet_: 16044533
       Spinning Enemy attack spritesheet_0: -5773257337323660709
       Spinning Enemy attack spritesheet_1: 883527624611751114
       Spinning Enemy attack spritesheet_10: -7429004461512043688
@@ -1378,35 +763,8 @@ TextureImporter:
       Spinning Enemy attack spritesheet_20: 3157581180727777606
       Spinning Enemy attack spritesheet_21: -3440935174440483668
       Spinning Enemy attack spritesheet_22: -4767811416888860190
-      Spinning Enemy attack spritesheet_23: 3598532066100021546
-      Spinning Enemy attack spritesheet_24: 7065990646392873219
-      Spinning Enemy attack spritesheet_25: 9215024468066816745
-      Spinning Enemy attack spritesheet_26: 8461302849913344102
-      Spinning Enemy attack spritesheet_27: -6937907459281374051
-      Spinning Enemy attack spritesheet_28: 4678743892264939349
-      Spinning Enemy attack spritesheet_29: 4273851535996839057
       Spinning Enemy attack spritesheet_3: -7565833244362421674
-      Spinning Enemy attack spritesheet_30: -5727595328429673371
-      Spinning Enemy attack spritesheet_31: -4591839258625630318
-      Spinning Enemy attack spritesheet_32: 1862998076016546807
-      Spinning Enemy attack spritesheet_33: -8723977596052549946
-      Spinning Enemy attack spritesheet_34: 4897214018958554959
-      Spinning Enemy attack spritesheet_35: 4997103379867441350
-      Spinning Enemy attack spritesheet_36: 4309526897761044954
-      Spinning Enemy attack spritesheet_37: 7222066008758541315
-      Spinning Enemy attack spritesheet_38: -2453627058236732829
-      Spinning Enemy attack spritesheet_39: -86311249678644534
       Spinning Enemy attack spritesheet_4: -1327484445811278519
-      Spinning Enemy attack spritesheet_40: 431860095824234840
-      Spinning Enemy attack spritesheet_41: 1130445100331315090
-      Spinning Enemy attack spritesheet_42: 2957216639701234987
-      Spinning Enemy attack spritesheet_43: 1429408344
-      Spinning Enemy attack spritesheet_44: 1875983163
-      Spinning Enemy attack spritesheet_45: -1249244596
-      Spinning Enemy attack spritesheet_46: -145062263
-      Spinning Enemy attack spritesheet_47: -1960283018
-      Spinning Enemy attack spritesheet_48: 1740954508
-      Spinning Enemy attack spritesheet_49: -98966312
       Spinning Enemy attack spritesheet_5: 4702860654554151115
       Spinning Enemy attack spritesheet_6: 4867396523930970963
       Spinning Enemy attack spritesheet_7: -7005954675253182736
