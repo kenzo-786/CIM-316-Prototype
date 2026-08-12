@@ -25,17 +25,20 @@ public class RunStatusUI : MonoBehaviour
 
     private void FindReferences()
     {
-        if (health == null)
-            health = FindObjectOfType<Health>();
-
         if (movement == null)
             movement = FindObjectOfType<PlayerMovement>();
 
-        if (stats == null)
-            stats = FindObjectOfType<PlayerStats>();
+        if (movement != null)
+        {
+            if (health == null)
+                health = movement.GetComponent<Health>();
 
-        if (inventory == null)
-            inventory = FindObjectOfType<PlayerUpgradeInventory>();
+            if (stats == null)
+                stats = movement.GetComponent<PlayerStats>();
+
+            if (inventory == null)
+                inventory = movement.GetComponent<PlayerUpgradeInventory>();
+        }
     }
 
     private void UpdateStats()
@@ -51,28 +54,22 @@ public class RunStatusUI : MonoBehaviour
 
         StringBuilder builder = new StringBuilder();
 
-        builder.AppendLine("CURRENT STATS");
+        builder.AppendLine("<b>CURRENT STATS</b>");
         builder.AppendLine();
         builder.AppendLine("Health: " + Mathf.CeilToInt(health.CurrentHealth) + " / " + Mathf.CeilToInt(health.MaxHealth));
         builder.AppendLine("Move Speed: " + movement.EffectiveMoveSpeed.ToString("0.0"));
-        builder.AppendLine("Damage: x" + stats.GetDamageMultiplier().ToString("0.00"));
-        builder.AppendLine("Attack Speed: x" + stats.GetAttackSpeedMultiplier().ToString("0.00"));
-        builder.AppendLine("Crit Chance: " + (stats.CritChance * 100f).ToString("0") + "%");
-        builder.AppendLine("Headshot Chance: " + (stats.HeadshotChance * 100f).ToString("0") + "%");
+        builder.AppendLine("Damage: x" + stats.GetDamageMultiplier().ToString("0.00") + "   Attack: x" + stats.GetAttackSpeedMultiplier().ToString("0.00"));
+        builder.AppendLine("Crit: " + (stats.CritChance * 100f).ToString("0") + "%   Headshot: " + (stats.HeadshotChance * 100f).ToString("0") + "%");
         builder.AppendLine("One-Shot Chance: " + (stats.OneShotChance * 100f).ToString("0") + "%");
         builder.AppendLine();
-        builder.AppendLine("PROJECTILES");
+        builder.AppendLine("<b>PROJECTILES</b>");
         builder.AppendLine();
-        builder.AppendLine("Side Projectiles: " + stats.SideProjectiles);
-        builder.AppendLine("Back Projectiles: " + stats.BackProjectiles);
-        builder.AppendLine("Pierce: " + stats.PierceCount);
-        builder.AppendLine("Enemy Bounce: " + stats.EnemyBounceCount);
-        builder.AppendLine("Wall Bounce: " + stats.WallBounceCount);
+        builder.AppendLine("Side: " + stats.SideProjectiles + "   Back: " + stats.BackProjectiles + "   Pierce: " + stats.PierceCount);
+        builder.AppendLine("Enemy Bounce: " + stats.EnemyBounceCount + "   Wall Bounce: " + stats.WallBounceCount);
         builder.AppendLine();
-        builder.AppendLine("SURVIVAL");
+        builder.AppendLine("<b>SURVIVAL</b>");
         builder.AppendLine();
-        builder.AppendLine("Extra Lives: " + stats.ExtraLives);
-        builder.AppendLine("Heal On Kill: " + (stats.HealOnKillPercent * 100f).ToString("0") + "%");
+        builder.AppendLine("Extra Lives: " + stats.ExtraLives + "   Heal On Kill: " + (stats.HealOnKillPercent * 100f).ToString("0") + "%");
 
         statsText.text = builder.ToString();
     }
@@ -84,13 +81,13 @@ public class RunStatusUI : MonoBehaviour
 
         if (inventory == null || inventory.TakenUpgrades.Count == 0)
         {
-            upgradesText.text = "UPGRADES TAKEN\n\nNo upgrades selected yet.";
+            upgradesText.text = "<b>UPGRADES TAKEN</b>\n\nNo upgrades selected yet.";
             return;
         }
 
         StringBuilder builder = new StringBuilder();
 
-        builder.AppendLine("UPGRADES TAKEN");
+        builder.AppendLine("<b>UPGRADES TAKEN</b>");
         builder.AppendLine();
 
         foreach (UpgradeData upgrade in inventory.TakenUpgrades)

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8901815528011600232}
   - component: {fileID: 155877684525813468}
   - component: {fileID: 8787842649661319898}
-  - component: {fileID: 3714670075213071762}
   - component: {fileID: -6511899977613598675}
   - component: {fileID: -7591177609644863618}
   - component: {fileID: -875991957220261733}
@@ -200,18 +199,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3714670075213071762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360867081428378876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee26fe7fae0519469e8f1111ea16ba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimScript
 --- !u!114 &-6511899977613598675
 MonoBehaviour:
   m_ObjectHideFlags: 0
