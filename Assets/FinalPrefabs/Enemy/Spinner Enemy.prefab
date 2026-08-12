@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4885505113677699512}
   - component: {fileID: -8102205241708294937}
   - component: {fileID: -7335337224086198307}
+  - component: {fileID: -8597092778390826363}
   m_Layer: 7
   m_Name: Spinner Enemy
   m_TagString: Enemy
@@ -225,6 +226,31 @@ MonoBehaviour:
   squashAmount: 0.12
   spinDegrees: 140
   fadeSprites: 1
+--- !u!114 &-8597092778390826363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e3125b3c5087b44a76df0edd0ea071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathFeedback
+  renderers: []
+  fadeSprites: 1
+  deathDuration: 0.25
+  deathEffectPrefab: {fileID: 0}
+  deathSoundId: enemy_death
+  heavyDeath: 0
+  heavyDeathEffectPrefab: {fileID: 0}
+  heavyDeathSoundId: heavy_enemy_death
+  heavyShakeIntensity: 0.12
+  heavyShakeDuration: 0.1
+  splitDeath: 0
+  splitEffectPrefab: {fileID: 0}
+  splitSoundId: enemy_split
 --- !u!1 &4449168858460803674
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +347,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.42, y: 0.42, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8219061172087984139}
