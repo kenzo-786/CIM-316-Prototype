@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5c951ac-4ded-486b-8087-05a043fa212f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CharacterSelect.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CharacterSelect.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Character Selection/CharacterSelectionButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Character Selection/CharacterSelectionButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,7 @@
       <workItem from="1783415942914" duration="671000" />
       <workItem from="1783962245115" duration="766000" />
       <workItem from="1786542260234" duration="6927000" />
-      <workItem from="1786564694784" duration="4187000" />
+      <workItem from="1786564694784" duration="4653000" />
     </task>
     <servers />
   </component>
