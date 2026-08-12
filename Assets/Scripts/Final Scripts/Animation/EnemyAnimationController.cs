@@ -100,6 +100,16 @@ public class EnemyAnimationController : MonoBehaviour
         SetBool("IsSpinning", value);
     }
 
+    public void SetWindingUp(bool value)
+    {
+        SetBool("IsWindingUp", value);
+    }
+
+    public void SetRecovering(bool value)
+    {
+        SetBool("IsRecovering", value);
+    }
+
     public void UsePhysicsMovement()
     {
         useExternalMotion = false;
