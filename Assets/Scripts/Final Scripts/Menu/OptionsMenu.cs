@@ -169,7 +169,7 @@ public class OptionsMenu : MonoBehaviour
         RectTransform buttonRect = currentButton.GetComponent<RectTransform>();
 
         selectionIcon.position = new Vector3(
-            buttonRect.position.x - buttonRect.rect.width / 2f - iconDistance,
+            buttonRect.position.x - buttonRect.rect.width / 1f - iconDistance,
             buttonRect.position.y,
             selectionIcon.position.z
         );

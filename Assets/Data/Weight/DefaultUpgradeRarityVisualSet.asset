@@ -15,7 +15,7 @@ MonoBehaviour:
   common:
     rarity: 0
     tint: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
-    cardBackground: {fileID: -1459958703885751333, guid: d8139dd1e36f5e94487014809e828bd4, type: 3}
+    cardBackground: {fileID: 3631770666227609699, guid: dc24a66d2c80b754dbf9beacd10296f0, type: 3}
   rare:
     rarity: 1
     tint: {r: 0, g: 0.09308498, b: 0.5283019, a: 0}
