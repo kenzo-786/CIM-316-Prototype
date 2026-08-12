@@ -1035,7 +1035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &146018071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,9 +1235,9 @@ RectTransform:
   - {fileID: 381118741}
   m_Father: {fileID: 77054307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1080, y: -275}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 390, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &162643117
@@ -1836,7 +1836,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba4bbdfbea54274ea1c006cb632f67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  playButton: {fileID: 0}
+  optionsButton: {fileID: 0}
+  creditsButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  creditsBackButton: {fileID: 0}
+  selectionIcon: {fileID: 0}
+  iconDistance: 75
   creditsPanel: {fileID: 0}
+  optionsPanel: {fileID: 0}
+  creditsBackNormalColor: {r: 1, g: 1, b: 1, a: 1}
+  creditsBackHoverColor: {r: 0, g: 0, b: 1, a: 1}
+  popScale: 1.05
+  popSpeed: 0.08
 --- !u!1 &231638111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,9 +3310,9 @@ RectTransform:
   - {fileID: 1747917778}
   m_Father: {fileID: 77054307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -275}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 390, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351711680
@@ -5791,6 +5803,9 @@ MonoBehaviour:
   movement: {fileID: 0}
   stats: {fileID: 0}
   inventory: {fileID: 0}
+  backButton: {fileID: 0}
+  popScale: 1.05
+  popSpeed: 0.08
 --- !u!1 &942629395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6047,9 +6062,9 @@ RectTransform:
   - {fileID: 653865494}
   m_Father: {fileID: 77054307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 650, y: -275}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 390, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981407441
@@ -9345,14 +9360,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   roomSequence:
-  - {fileID: 11400000, guid: 4ff2023cc74b4da49a0de519430d6a40, type: 2}
   - {fileID: 11400000, guid: 7e1a0d9c6bf7a5b42a0c7b2284462ea5, type: 2}
-  - {fileID: 11400000, guid: 9c8a30ccec259074fb643a3491d57d86, type: 2}
+  - {fileID: 11400000, guid: 4ff2023cc74b4da49a0de519430d6a40, type: 2}
   - {fileID: 11400000, guid: d1fdd4e15b4d6c640a9e01baff39a4e3, type: 2}
   - {fileID: 11400000, guid: 0f6ee74d14cdfb74db58b33d7c998304, type: 2}
   - {fileID: 11400000, guid: de9242b52e784474ab1a28bd5329fbcf, type: 2}
   - {fileID: 11400000, guid: 634384f6297a17944bcd7907469589f5, type: 2}
   - {fileID: 11400000, guid: 7aaeb07f60c0e8041bd39814784b6407, type: 2}
+  - {fileID: 11400000, guid: 9c8a30ccec259074fb643a3491d57d86, type: 2}
   runConfig: {fileID: 0}
   totalRooms: 1
   autoLoadFirstRoom: 1
@@ -10584,94 +10599,114 @@ MonoBehaviour:
   soundEffects:
   - id: ui_hover
     clip: {fileID: 8300000, guid: cb24b6ce66871df42bcf4f4edf5702df, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: ui_confirm
     clip: {fileID: 8300000, guid: 3d39ef26606c9eb4cb0a078956b52e19, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: level_up
     clip: {fileID: 8300000, guid: b8300694393ad404f883966d829c260a, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: upgrade_pick
     clip: {fileID: 8300000, guid: 8e392fae3d33a5e48ac694f9b61004ad, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: game_over
     clip: {fileID: 8300000, guid: 824f91287c2953540a672e1e7869fe83, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: player_hurt
     clip: {fileID: 8300000, guid: aa27608b26ea0cc4abdab627b094cdcf, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: player_heal
     clip: {fileID: 8300000, guid: 70c3358078b66f64c8b2f88ffff76ea5, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: player_revive
     clip: {fileID: 8300000, guid: 40a7c92f0e2a204479224239d02acc20, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: enemy_hit
-    clip: {fileID: 0}
-    volume: 1
+    clip: {fileID: 8300000, guid: 92c2e6e7ae101944a8611535d46353ef, type: 3}
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: heavy_enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 2
     pitchMax: 3
   - id: enemy_split
     clip: {fileID: 8300000, guid: f0e9a43c9f7cea844b9e9e7b1fd56466, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: wave_warning
     clip: {fileID: 8300000, guid: cd0fb1a16be3ab646aa0253a87412ded, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: room_clear
     clip: {fileID: 8300000, guid: 2ee34dd9f72fa4c4abe85927b5638f98, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 0
     pitchMax: 0
   - id: door_open
     clip: {fileID: 8300000, guid: 67180ba24401de748baca467342db438, type: 3}
-    volume: 1
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   - id: xp_magnet
     clip: {fileID: 8300000, guid: d9a6243c41433e54f8482d34b167f008, type: 3}
+    volume: 0.5
+    pitchMin: 1
+    pitchMax: 1
+  - id: 'eraser_fire '
+    clip: {fileID: 8300000, guid: e883456f8ceab294a92cdff3e4f101cc, type: 3}
     volume: 1
+    pitchMin: 1
+    pitchMax: 1
+  - id: projectile_wall_hit
+    clip: {fileID: 8300000, guid: 8676346a88639d14ebb051cc2299579d, type: 3}
+    volume: 0.5
+    pitchMin: 1
+    pitchMax: 1
+  - id: ruler_fire
+    clip: {fileID: 8300000, guid: e883456f8ceab294a92cdff3e4f101cc, type: 3}
+    volume: 0.5
+    pitchMin: 1
+    pitchMax: 1
+  - id: ruler_hit
+    clip: {fileID: 8300000, guid: ae05a65f373b5a64084ff6b8319b2a27, type: 3}
+    volume: 0.5
     pitchMin: 1
     pitchMax: 1
   musicTracks:
   - id: menu_music
     clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
-    volume: 1
+    volume: 0.5
   - id: battle_music
     clip: {fileID: 8300000, guid: e2c055b268108d440814811692248500, type: 3}
-    volume: 1
+    volume: 0.5
   - id: 'boss_music '
     clip: {fileID: 8300000, guid: c4d0db03bbd67464b9d9161ea3caa266, type: 3}
-    volume: 1
+    volume: 0.5
   sceneMusic:
   - sceneName: 
     musicId: 
