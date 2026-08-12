@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a5c951ac-4ded-486b-8087-05a043fa212f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainMenuUI/Scripts/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainMenuUI/Scripts/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +16,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/MainMenuUI/Scripts/OptionsMenu.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -39,7 +43,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../Downloads/DeadlineDungeonBuild\Major project 1.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../Downloads/Build_A_Deadline_Dungeon\Major project 1.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\hoiit\Downloads\DeadlineDungeonBuild" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -103,6 +107,7 @@
       <workItem from="1783283003347" duration="1852000" />
       <workItem from="1783415942914" duration="671000" />
       <workItem from="1783962245115" duration="766000" />
+      <workItem from="1786542260234" duration="1939000" />
     </task>
     <servers />
   </component>

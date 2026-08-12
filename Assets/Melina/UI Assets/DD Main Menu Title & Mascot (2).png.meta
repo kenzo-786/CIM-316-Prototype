@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 26be7c3b44016d64890c1577e6695bcb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9117833283775925030
+    second: DD Main Menu Title & Mascot (2)_0
+  - first:
+      213: 6667171310301005403
+    second: DD Main Menu Title & Mascot (2)_1
+  - first:
+      213: -5532355755249755339
+    second: DD Main Menu Title & Mascot (2)_2
+  - first:
+      213: 8402480620796935389
+    second: DD Main Menu Title & Mascot (2)_3
+  - first:
+      213: -294839183525046797
+    second: DD Main Menu Title & Mascot (2)_4
+  - first:
+      213: -6235121357064678616
+    second: DD Main Menu Title & Mascot (2)_5
+  - first:
+      213: 1166412578682156387
+    second: DD Main Menu Title & Mascot (2)_6
+  - first:
+      213: 4996666332889645306
+    second: DD Main Menu Title & Mascot (2)_7
+  - first:
+      213: 7673579699807226950
+    second: DD Main Menu Title & Mascot (2)_8
+  - first:
+      213: 2748831857020408593
+    second: DD Main Menu Title & Mascot (2)_9
+  - first:
+      213: 3444074213436591837
+    second: DD Main Menu Title & Mascot (2)_10
+  - first:
+      213: 5120504956731962463
+    second: DD Main Menu Title & Mascot (2)_11
+  - first:
+      213: 3373103160480785121
+    second: DD Main Menu Title & Mascot (2)_12
+  - first:
+      213: 7979981681126219324
+    second: DD Main Menu Title & Mascot (2)_13
+  - first:
+      213: 2283128163714301859
+    second: DD Main Menu Title & Mascot (2)_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_0
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 847
+        width: 243
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad47d4fcfe2f67180800000000000000
+      internalID: -9117833283775925030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_1
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 869
+        width: 110
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b56ca278bfc868c50800000000000000
+      internalID: 6667171310301005403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_2
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 869
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53b104590cf1933b0800000000000000
+      internalID: -5532355755249755339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_3
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 869
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddc74ba3b9b9b9470800000000000000
+      internalID: 8402480620796935389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_4
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 869
+        width: 35
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f59f10235588ebf0800000000000000
+      internalID: -294839183525046797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_5
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 869
+        width: 110
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82355bc29266879a0800000000000000
+      internalID: -6235121357064678616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_6
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 869
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365b5e57f0eef2010800000000000000
+      internalID: 1166412578682156387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_7
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 739
+        width: 245
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af08a096e89b75540800000000000000
+      internalID: 4996666332889645306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_8
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 761
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64c88a2a4180e7a60800000000000000
+      internalID: 7673579699807226950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_9
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 761
+        width: 110
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1139af09200d52620800000000000000
+      internalID: 2748831857020408593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_10
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 761
+        width: 109
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde88f7ef3fcbcf20800000000000000
+      internalID: 3444074213436591837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_11
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 761
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54b2a8e020bf0740800000000000000
+      internalID: 5120504956731962463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_12
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 761
+        width: 109
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e26437f37bafce20800000000000000
+      internalID: 3373103160480785121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_13
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 223
+        width: 192
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e17a92f079ebe60800000000000000
+      internalID: 7979981681126219324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DD Main Menu Title & Mascot (2)_14
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 0
+        width: 1013
+        height: 685
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af71e6e7fc4faf10800000000000000
+      internalID: 2283128163714301859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DD Main Menu Title & Mascot (2)_0: -9117833283775925030
+      DD Main Menu Title & Mascot (2)_1: 6667171310301005403
+      DD Main Menu Title & Mascot (2)_10: 3444074213436591837
+      DD Main Menu Title & Mascot (2)_11: 5120504956731962463
+      DD Main Menu Title & Mascot (2)_12: 3373103160480785121
+      DD Main Menu Title & Mascot (2)_13: 7979981681126219324
+      DD Main Menu Title & Mascot (2)_14: 2283128163714301859
+      DD Main Menu Title & Mascot (2)_2: -5532355755249755339
+      DD Main Menu Title & Mascot (2)_3: 8402480620796935389
+      DD Main Menu Title & Mascot (2)_4: -294839183525046797
+      DD Main Menu Title & Mascot (2)_5: -6235121357064678616
+      DD Main Menu Title & Mascot (2)_6: 1166412578682156387
+      DD Main Menu Title & Mascot (2)_7: 4996666332889645306
+      DD Main Menu Title & Mascot (2)_8: 7673579699807226950
+      DD Main Menu Title & Mascot (2)_9: 2748831857020408593
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
