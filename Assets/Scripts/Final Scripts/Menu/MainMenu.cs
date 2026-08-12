@@ -11,8 +11,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button creditsButton;
+    [SerializeField] private Button upgradesButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button creditsBackButton;
+    [SerializeField] private Button upgradesBackButton;
 
     [Header("Selection Icon")]
     [SerializeField] private RectTransform selectionIcon;
@@ -21,10 +23,15 @@ public class MainMenu : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject upgradesPanel;
 
     [Header("Credits Back Button")]
     [SerializeField] private Color creditsBackNormalColor = Color.white;
     [SerializeField] private Color creditsBackHoverColor = Color.blue;
+    
+    [Header("Upgrades Back Button")]
+    [SerializeField] private Color upgradesBackNormalColor = Color.white;
+    [SerializeField] private Color upgradesBackHoverColor = Color.blue;
 
     [Header("Button Pop")]
     [SerializeField] private float popScale = 1.05f;
@@ -41,21 +48,26 @@ public class MainMenu : MonoBehaviour
     {
         creditsPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        upgradesPanel.SetActive(false);
 
         RegisterButton(playButton);
         RegisterButton(optionsButton);
         RegisterButton(creditsButton);
+        RegisterButton(upgradesButton);
         RegisterButton(quitButton);
         RegisterButton(creditsBackButton);
+        RegisterButton(upgradesBackButton);
 
-        currentButton = null;
+        currentButton = playButton;
         hoveredButton = null;
 
-        selectionIcon.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(
+            playButton.gameObject
+        );
 
-        SetCreditsBackColor(creditsBackNormalColor);
+        selectionIcon.gameObject.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null);
+        UpdateSelectionIcon();
     }
 
     void Update()
@@ -63,6 +75,12 @@ public class MainMenu : MonoBehaviour
         if (creditsPanel != null && creditsPanel.activeSelf)
         {
             HandleCreditsBackHover();
+            return;
+        }
+
+        if (upgradesPanel != null && upgradesPanel.activeSelf)
+        {
+            HandleUpgradesBackHover();
             return;
         }
 
@@ -98,6 +116,7 @@ public class MainMenu : MonoBehaviour
             if (button == playButton ||
                 button == optionsButton ||
                 button == creditsButton ||
+                button == upgradesButton ||
                 button == quitButton)
             {
                 newHoveredButton = button;
@@ -105,19 +124,125 @@ public class MainMenu : MonoBehaviour
             }
         }
 
-        if (newHoveredButton != hoveredButton)
+        if (newHoveredButton != null &&
+            newHoveredButton != currentButton)
         {
             hoveredButton = newHoveredButton;
-
-            if (hoveredButton != null)
-            {
-                SelectButton(hoveredButton);
-            }
-            else
-            {
-                selectionIcon.gameObject.SetActive(false);
-            }
+            SelectButton(newHoveredButton);
         }
+        else if (newHoveredButton == null)
+        {
+            hoveredButton = null;
+        }
+    }
+
+    private void HandleKeyboardNavigation()
+    {
+        if (Input.GetKeyDown(KeyCode.W) ||
+            Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            SelectPreviousButton();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) ||
+            Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            SelectNextButton();
+        }
+    }
+
+    private void RegisterButton(Button button)
+    {
+        if (button != null)
+        {
+            originalScales[button] =
+                button.transform.localScale;
+        }
+    }
+
+    private void SelectButton(Button button)
+    {
+        if (button == null)
+            return;
+
+        if (currentButton == button)
+            return;
+
+        currentButton = button;
+
+        EventSystem.current.SetSelectedGameObject(
+            button.gameObject
+        );
+
+        selectionIcon.gameObject.SetActive(true);
+
+        UpdateSelectionIcon();
+        PlayPop(button);
+    }
+
+    private void SelectNextButton()
+    {
+        if (currentButton == playButton)
+        {
+            SelectButton(optionsButton);
+        }
+        else if (currentButton == optionsButton)
+        {
+            SelectButton(creditsButton);
+        }
+        else if (currentButton == creditsButton)
+        {
+            SelectButton(upgradesButton);
+        }
+        else if (currentButton == upgradesButton)
+        {
+            SelectButton(quitButton);
+        }
+        else
+        {
+            SelectButton(playButton);
+        }
+    }
+
+    private void SelectPreviousButton()
+    {
+        if (currentButton == playButton)
+        {
+            SelectButton(quitButton);
+        }
+        else if (currentButton == optionsButton)
+        {
+            SelectButton(playButton);
+        }
+        else if (currentButton == creditsButton)
+        {
+            SelectButton(optionsButton);
+        }
+        else if (currentButton == upgradesButton)
+        {
+            SelectButton(creditsButton);
+        }
+        else
+        {
+            SelectButton(upgradesButton);
+        }
+    }
+
+    private void UpdateSelectionIcon()
+    {
+        if (currentButton == null)
+            return;
+
+        RectTransform buttonRect =
+            currentButton.GetComponent<RectTransform>();
+
+        selectionIcon.position = new Vector3(
+            buttonRect.position.x -
+            buttonRect.rect.width / 2f -
+            iconDistance,
+            buttonRect.position.y,
+            selectionIcon.position.z
+        );
     }
 
     private void HandleCreditsBackHover()
@@ -176,113 +301,60 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void HandleKeyboardNavigation()
+    private void HandleUpgradesBackHover()
     {
-        if (Input.GetKeyDown(KeyCode.W) ||
-            Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            SelectPreviousButton();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S) ||
-            Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            SelectNextButton();
-        }
-    }
-
-    private void RegisterButton(Button button)
-    {
-        if (button != null)
-        {
-            originalScales[button] =
-                button.transform.localScale;
-        }
-    }
-
-    private void SelectButton(Button button)
-    {
-        if (button == null)
+        if (EventSystem.current == null ||
+            upgradesBackButton == null)
             return;
 
-        if (currentButton == button)
-            return;
+        PointerEventData pointerData =
+            new PointerEventData(EventSystem.current);
 
-        currentButton = button;
+        pointerData.position = Input.mousePosition;
 
-        EventSystem.current.SetSelectedGameObject(
-            button.gameObject
+        List<RaycastResult> results =
+            new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(
+            pointerData,
+            results
         );
 
-        selectionIcon.gameObject.SetActive(true);
+        bool hoveringBack = false;
 
-        UpdateSelectionIcon();
-        PlayPop(button);
-    }
+        foreach (RaycastResult result in results)
+        {
+            Button button =
+                result.gameObject.GetComponentInParent<Button>();
 
-    private void SelectNextButton()
-    {
-        if (currentButton == null)
-        {
-            SelectButton(playButton);
+            if (button == upgradesBackButton)
+            {
+                hoveringBack = true;
+                break;
+            }
         }
-        else if (currentButton == playButton)
-        {
-            SelectButton(optionsButton);
-        }
-        else if (currentButton == optionsButton)
-        {
-            SelectButton(creditsButton);
-        }
-        else if (currentButton == creditsButton)
-        {
-            SelectButton(quitButton);
-        }
-        else
-        {
-            SelectButton(playButton);
-        }
-    }
 
-    private void SelectPreviousButton()
-    {
-        if (currentButton == null)
+        if (hoveringBack)
         {
-            SelectButton(playButton);
-        }
-        else if (currentButton == playButton)
-        {
-            SelectButton(quitButton);
-        }
-        else if (currentButton == optionsButton)
-        {
-            SelectButton(playButton);
-        }
-        else if (currentButton == creditsButton)
-        {
-            SelectButton(optionsButton);
-        }
-        else
-        {
-            SelectButton(creditsButton);
-        }
-    }
+            if (hoveredButton != upgradesBackButton)
+            {
+                hoveredButton = upgradesBackButton;
 
-    private void UpdateSelectionIcon()
-    {
-        if (currentButton == null)
-            return;
+                SetUpgradesBackColor(
+                    upgradesBackHoverColor
+                );
 
-        RectTransform buttonRect =
-            currentButton.GetComponent<RectTransform>();
+                PlayPop(upgradesBackButton);
+            }
+        }
+        else if (hoveredButton == upgradesBackButton)
+        {
+            hoveredButton = null;
 
-        selectionIcon.position = new Vector3(
-            buttonRect.position.x -
-            buttonRect.rect.width / 2f -
-            iconDistance,
-            buttonRect.position.y,
-            selectionIcon.position.z
-        );
+            SetUpgradesBackColor(
+                upgradesBackNormalColor
+            );
+        }
     }
 
     private void SetCreditsBackColor(Color color)
@@ -299,6 +371,22 @@ public class MainMenu : MonoBehaviour
         colors.pressedColor = color;
 
         creditsBackButton.colors = colors;
+    }
+    
+    private void SetUpgradesBackColor(Color color)
+    {
+        if (upgradesBackButton == null)
+            return;
+
+        ColorBlock colors =
+            upgradesBackButton.colors;
+
+        colors.normalColor = color;
+        colors.highlightedColor = color;
+        colors.selectedColor = color;
+        colors.pressedColor = color;
+
+        upgradesBackButton.colors = colors;
     }
 
     private void PlayPop(Button button)
@@ -384,16 +472,20 @@ public class MainMenu : MonoBehaviour
 
         creditsPanel.SetActive(false);
 
-        currentButton = null;
+        currentButton = playButton;
         hoveredButton = null;
 
-        selectionIcon.gameObject.SetActive(false);
+        selectionIcon.gameObject.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(
+            playButton.gameObject
+        );
+
+        UpdateSelectionIcon();
 
         SetCreditsBackColor(
             creditsBackNormalColor
         );
-
-        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenOptions()
@@ -412,12 +504,50 @@ public class MainMenu : MonoBehaviour
     {
         optionsPanel.SetActive(false);
 
+        currentButton = playButton;
+        hoveredButton = null;
+
+        selectionIcon.gameObject.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(
+            playButton.gameObject
+        );
+
+        UpdateSelectionIcon();
+    }
+
+    public void OpenUpgrades()
+    {
+        upgradesPanel.SetActive(true);
+
         currentButton = null;
         hoveredButton = null;
 
         selectionIcon.gameObject.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void CloseUpgrades()
+    {
+        PlayPop(upgradesBackButton);
+
+        upgradesPanel.SetActive(false);
+
+        currentButton = playButton;
+        hoveredButton = null;
+
+        selectionIcon.gameObject.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(
+            playButton.gameObject
+        );
+
+        UpdateSelectionIcon();
+
+        SetCreditsBackColor(
+            upgradesBackNormalColor
+        );
     }
 
     public void QuitGame()
