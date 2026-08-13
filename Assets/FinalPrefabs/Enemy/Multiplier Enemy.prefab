@@ -106,8 +106,9 @@ MonoBehaviour:
   separationPadding: 0.18
   obstacleProbeDistance: 0.65
   obstacleProbeRadius: 0.25
-  wallAvoidanceStrength: 1.1
-  movementSkin: 0.03
+  wallFollowStrength: 1.35
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.15
   maxSplitGenerations: 2
   childSpawnRadius: 1.25
   childScaleMultiplier: 0.75
@@ -382,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 7173021307443188756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.98, y: 0, z: 0}
+  m_LocalPosition: {x: -0.01, y: 1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

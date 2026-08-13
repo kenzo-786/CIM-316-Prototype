@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 254302265832457433}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22, y: 0, z: 0}
+  m_LocalPosition: {x: -0.08, y: 2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -281,8 +281,9 @@ MonoBehaviour:
   separationPadding: 0.18
   obstacleProbeDistance: 0.65
   obstacleProbeRadius: 0.25
-  wallAvoidanceStrength: 1.1
-  movementSkin: 0.03
+  wallFollowStrength: 1.35
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.15
   jumpCooldown: 2.5
   jumpWindup: 0.38
   attackAnimationDuration: 0.667

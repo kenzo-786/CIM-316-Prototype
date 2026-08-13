@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4916523865661575225}
   - component: {fileID: 9006761284316507964}
-  - component: {fileID: 921361165893984353}
+  - component: {fileID: 7274693854454879255}
   m_Layer: 12
   m_Name: Desk 1
   m_TagString: Obstacle
@@ -92,8 +92,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!60 &921361165893984353
-PolygonCollider2D:
+--- !u!61 &7274693854454879255
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,26 +136,5 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.45, y: 0.42}
-      - {x: 0.42, y: 0.66999996}
-      - {x: 0.29, y: 0.87}
-      - {x: 0.19999999, y: 0.91999996}
-      - {x: -0.35999998, y: 0.91999996}
-      - {x: -0.41, y: 0.9}
-      - {x: -0.58, y: 0.62}
-      - {x: -0.57, y: 0.39}
-      - {x: -1.14, y: 0.39999998}
-      - {x: -1.1899999, y: 0.37}
-      - {x: -1.1899999, y: -0.85999995}
-      - {x: -1.06, y: -0.91999996}
-      - {x: -0.96999997, y: -0.91999996}
-      - {x: -0.95, y: -0.84999996}
-      - {x: 0.95, y: -0.84999996}
-      - {x: 1.01, y: -0.91999996}
-      - {x: 1.13, y: -0.91999996}
-      - {x: 1.1899999, y: -0.81}
-      - {x: 1.1899999, y: 0.35}
-      - {x: 1.14, y: 0.39999998}
-  m_UseDelaunayMesh: 1
+  m_Size: {x: 2.38, y: 1.84}
+  m_EdgeRadius: 0

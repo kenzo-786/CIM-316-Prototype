@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a78d286bc79bd943ab4e91dd417708f, type: 3}
+  m_Name: R11_W1
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  delayBeforeWave: 1.5
+  enemies:
+  - enemyData: {fileID: 11400000, guid: a2ff06cd0c06a9441bf161296b5da6c0, type: 2}
+    count: 2
+    delayBetweenSpawns: 0.30
+  - enemyData: {fileID: 11400000, guid: 9e9ac8bf0442c244699de6b221470c0b, type: 2}
+    count: 1
+    delayBetweenSpawns: 0.30
+  - enemyData: {fileID: 11400000, guid: fbf3cdb146c5b144a9db7e95fda8823e, type: 2}
+    count: 2
+    delayBetweenSpawns: 0.30

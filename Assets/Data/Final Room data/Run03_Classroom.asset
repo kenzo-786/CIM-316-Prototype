@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7afa0265f469104982d6c0e25a04ebb, type: 3}
+  m_Name: Run03_Classroom
+  m_EditorClassIdentifier: Assembly-CSharp::RoomData
+  roomName: Room 03 - Classroom
+  roomType: 0
+  layoutPrefab: {fileID: 6824032912967098769, guid: 071a83090f1a4c94dac61ffb768e0b7e, type: 3}
+  waves:
+  - {fileID: 11400000, guid: 48dd06cacb82422ba34f6f2658e9f71c, type: 2}

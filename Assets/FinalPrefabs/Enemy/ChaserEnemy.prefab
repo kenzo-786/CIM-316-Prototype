@@ -129,9 +129,10 @@ MonoBehaviour:
   separationStrength: 2.25
   separationPadding: 0.18
   obstacleProbeDistance: 0.8
-  obstacleProbeRadius: 0.3
-  wallAvoidanceStrength: 1.5
-  movementSkin: 0.03
+  obstacleProbeRadius: 0.22
+  wallFollowStrength: 1.35
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.15
   attackWindup: 0.25
   telegraph: {fileID: 0}
   animationController: {fileID: 3073118785041871523}

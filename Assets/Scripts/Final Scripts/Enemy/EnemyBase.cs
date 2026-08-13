@@ -15,8 +15,11 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Min(0f)] private float separationRadius = 1.4f;
     [SerializeField, Min(0f)] private float separationStrength = 2.25f;
     [SerializeField, Min(0f)] private float separationPadding = 0.18f;
-    [SerializeField, Min(0f)] private float obstacleProbeDistance = 0.8f;
-    [SerializeField, Min(0f)] private float wallAvoidanceStrength = 1.5f;
+    [SerializeField, Min(0f)] private float obstacleProbeDistance = 1.1f;
+    [SerializeField, Min(0f)] private float obstacleProbeRadius = 0.22f;
+    [SerializeField, Min(0f)] private float wallFollowStrength = 1.35f;
+    [SerializeField, Min(0f)] private float wallFollowMemory = 0.65f;
+    [SerializeField, Min(0f)] private float wallClearanceProbeDistance = 1.15f;
 
     protected Rigidbody2D rb;
     protected Health health;
@@ -28,6 +31,8 @@ public abstract class EnemyBase : MonoBehaviour
     private Collider2D bodyCollider;
     private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
     private float collisionRadius = 0.4f;
+    private Vector2 wallFollowDirection;
+    private float wallFollowUntil;
 
     public event Action<EnemyBase> OnEnemyDied;
 
@@ -91,6 +96,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void OnEnable()
     {
         isDead = false;
+        wallFollowUntil = 0f;
 
         if (health != null)
             health.OnDied += HandleDied;
@@ -107,6 +113,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyData = data;
         target = playerTarget;
         isDead = false;
+        wallFollowUntil = 0f;
 
         if (enemyData != null && health != null)
             health.SetMaxHealth(enemyData.maxHealth, true);
@@ -167,6 +174,27 @@ public abstract class EnemyBase : MonoBehaviour
         FaceDirection(steeringDirection);
     }
 
+    protected bool HasClearPathTo(Vector2 worldPosition)
+    {
+        if (obstacleLayer.value == 0)
+            return true;
+
+        Vector2 direction = worldPosition - rb.position;
+        float distance = direction.magnitude;
+
+        if (distance <= 0.01f)
+            return true;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            rb.position,
+            direction.normalized,
+            distance,
+            obstacleLayer
+        );
+
+        return hit.collider == null;
+    }
+
     protected Vector2 GetSteeredDirection(Vector2 desiredDirection)
     {
         Vector2 desired = desiredDirection.normalized;
@@ -175,47 +203,95 @@ public abstract class EnemyBase : MonoBehaviour
             return Vector2.zero;
 
         Vector2 separation = CalculateSeparation();
-        Vector2 steering = desired + separation * separationStrength;
+        Vector2 normalSteering = desired + separation * separationStrength;
 
-        if (steering.sqrMagnitude <= 0.0001f)
-            steering = desired;
+        if (normalSteering.sqrMagnitude <= 0.0001f)
+            normalSteering = desired;
 
-        steering.Normalize();
+        normalSteering.Normalize();
 
         if (obstacleLayer.value == 0 || obstacleProbeDistance <= 0f)
-            return steering;
+            return normalSteering;
 
-        RaycastHit2D obstacleHit = Physics2D.Raycast(
+        float probeRadius = Mathf.Clamp(
+            Mathf.Min(obstacleProbeRadius, collisionRadius * 0.75f),
+            0.08f,
+            0.45f
+        );
+
+        RaycastHit2D obstacleHit = Physics2D.CircleCast(
             rb.position,
-            steering,
+            probeRadius,
+            normalSteering,
             obstacleProbeDistance,
             obstacleLayer
         );
 
         if (obstacleHit.collider == null)
-            return steering;
+        {
+            wallFollowUntil = 0f;
+            return normalSteering;
+        }
 
-        Vector2 left = new Vector2(-steering.y, steering.x);
-        Vector2 right = -left;
+        if (Time.time < wallFollowUntil)
+        {
+            return BuildWallFollowDirection(
+                desired,
+                separation,
+                wallFollowDirection
+            );
+        }
 
-        float leftClearance = GetObstacleClearance(left);
-        float rightClearance = GetObstacleClearance(right);
+        Vector2 wallNormal = obstacleHit.normal;
 
-        Vector2 sideDirection;
+        if (wallNormal.sqrMagnitude <= 0.0001f)
+            wallNormal = -normalSteering;
 
-        if (Mathf.Approximately(leftClearance, rightClearance))
-            sideDirection = GetInstanceID() % 2 == 0 ? left : right;
+        Vector2 firstSide = new Vector2(
+            -wallNormal.y,
+            wallNormal.x
+        ).normalized;
+
+        Vector2 secondSide = -firstSide;
+
+        Vector2 firstCandidate = (
+            firstSide + wallNormal * 0.35f
+        ).normalized;
+
+        Vector2 secondCandidate = (
+            secondSide + wallNormal * 0.35f
+        ).normalized;
+
+        float firstScore = ScoreWallFollowDirection(
+            firstCandidate,
+            desired
+        );
+
+        float secondScore = ScoreWallFollowDirection(
+            secondCandidate,
+            desired
+        );
+
+        if (Mathf.Approximately(firstScore, secondScore))
+        {
+            wallFollowDirection = GetInstanceID() % 2 == 0
+                ? firstCandidate
+                : secondCandidate;
+        }
         else
-            sideDirection = leftClearance > rightClearance ? left : right;
+        {
+            wallFollowDirection = firstScore > secondScore
+                ? firstCandidate
+                : secondCandidate;
+        }
 
-        Vector2 redirected =
-            desired * 0.2f +
-            sideDirection * wallAvoidanceStrength +
-            separation * separationStrength;
+        wallFollowUntil = Time.time + wallFollowMemory;
 
-        return redirected.sqrMagnitude > 0.0001f
-            ? redirected.normalized
-            : sideDirection;
+        return BuildWallFollowDirection(
+            desired,
+            separation,
+            wallFollowDirection
+        );
     }
 
     protected void StopMoving()
@@ -266,18 +342,44 @@ public abstract class EnemyBase : MonoBehaviour
         visual.flipX = direction.x < 0f;
     }
 
-    private float GetObstacleClearance(Vector2 direction)
+    private Vector2 BuildWallFollowDirection(
+        Vector2 desired,
+        Vector2 separation,
+        Vector2 followDirection
+    )
+    {
+        Vector2 result =
+            followDirection * wallFollowStrength +
+            desired * 0.05f +
+            separation * separationStrength;
+
+        return result.sqrMagnitude > 0.0001f
+            ? result.normalized
+            : followDirection;
+    }
+
+    private float ScoreWallFollowDirection(
+        Vector2 candidateDirection,
+        Vector2 desiredDirection
+    )
     {
         RaycastHit2D hit = Physics2D.Raycast(
             rb.position,
-            direction,
-            obstacleProbeDistance,
+            candidateDirection,
+            wallClearanceProbeDistance,
             obstacleLayer
         );
 
-        return hit.collider == null
-            ? obstacleProbeDistance
+        float clearance = hit.collider == null
+            ? wallClearanceProbeDistance
             : hit.distance;
+
+        float desiredAlignment = Mathf.Max(
+            0f,
+            Vector2.Dot(candidateDirection, desiredDirection)
+        );
+
+        return clearance + desiredAlignment * 0.35f;
     }
 
     private Vector2 CalculateSeparation()
@@ -331,7 +433,9 @@ public abstract class EnemyBase : MonoBehaviour
             if (distance >= influenceRadius)
                 continue;
 
-            float strength = 1f - Mathf.Clamp01(distance / influenceRadius);
+            float strength = 1f - Mathf.Clamp01(
+                distance / influenceRadius
+            );
 
             separation += difference.normalized * strength;
         }

@@ -253,9 +253,10 @@ MonoBehaviour:
   separationStrength: 2.25
   separationPadding: 0.18
   obstacleProbeDistance: 0.8
-  obstacleProbeRadius: 0.3
-  wallAvoidanceStrength: 1.5
-  movementSkin: 0.03
+  obstacleProbeRadius: 0.22
+  wallFollowStrength: 1.35
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.15
   preferredRange: 9
   rangeTolerance: 1.5
   strafeSpeedMultiplier: 0.8
@@ -373,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 3869288733246219631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0, z: 0}
+  m_LocalPosition: {x: -1.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

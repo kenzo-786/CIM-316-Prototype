@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8219061172087984139}
   - component: {fileID: 2304114965193295206}
-  - component: {fileID: 8901815528011600232}
   - component: {fileID: 155877684525813468}
   - component: {fileID: -8249810434064032203}
   - component: {fileID: -3705751283142895445}
@@ -18,6 +17,7 @@ GameObject:
   - component: {fileID: -8102205241708294937}
   - component: {fileID: -7335337224086198307}
   - component: {fileID: -8597092778390826363}
+  - component: {fileID: 551758679568457586}
   m_Layer: 7
   m_Name: Spinner Enemy
   m_TagString: Enemy
@@ -69,43 +69,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &8901815528011600232
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360867081428378876}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.025337934, y: -0.04222977}
-  m_Size: {x: 1.9966228, y: 2.5236495}
-  m_Direction: 0
 --- !u!114 &155877684525813468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,18 +102,19 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 7168
-  separationRadius: 1.4
-  separationStrength: 2.25
+  separationRadius: 1.3
+  separationStrength: 1.5
   separationPadding: 0.18
-  obstacleProbeDistance: 0.8
-  obstacleProbeRadius: 0.3
-  wallAvoidanceStrength: 1.5
-  movementSkin: 0.03
+  obstacleProbeDistance: 1.5
+  obstacleProbeRadius: 0.25
+  wallFollowStrength: 1.8
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.6
   normalMoveDurationMin: 2
   normalMoveDurationMax: 3.25
   windupDuration: 1.33
   spinDuration: 1.4
-  recoverDuration: 0.85
+  recoverDuration: 1.1
   spinCooldown: 4
   spinSpeedMultiplier: 2.15
   spinDamageMultiplier: 1.3
@@ -263,6 +227,42 @@ MonoBehaviour:
   splitDeath: 0
   splitEffectPrefab: {fileID: 0}
   splitSoundId: enemy_split
+--- !u!58 &551758679568457586
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360867081428378876}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0054165125, y: -0.10833144}
+  m_Radius: 1.0254079
 --- !u!1 &4449168858460803674
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ Transform:
   m_GameObject: {fileID: 4449168858460803674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.8, z: 0}
+  m_LocalPosition: {x: 0, y: 1.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -435,7 +435,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1653703676554481591, guid: 1e7b87ffdfdbf1946897a57035d4dbeb, type: 3}
+  m_Sprite: {fileID: -5773257337323660709, guid: 74fe420da19c13f4b83df5aabe9ac10c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
