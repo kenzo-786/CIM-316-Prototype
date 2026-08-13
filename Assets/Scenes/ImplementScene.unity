@@ -8851,6 +8851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1830737059}
+  - component: {fileID: 1830737060}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -8883,6 +8884,28 @@ Transform:
   - {fileID: 1760222147}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830737060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830737058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cfafd98ec32f34d9c8ed24ac0ee055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MetaProgressionManager
+  upgrades:
+  - {fileID: 11400000, guid: 8c66cb19a00b0c0498457f4d5db2807b, type: 2}
+  - {fileID: 11400000, guid: aa181914432742549b01300ffc8bc4e3, type: 2}
+  - {fileID: 11400000, guid: b346e7de9cfd6d64c8dee93d50ea520a, type: 2}
+  - {fileID: 11400000, guid: 6864fec6e1027384b99d47cbe0de9c2e, type: 2}
+  creditsPerClearedRoom: 1
+  eliteRoomBonus: 2
+  bossRoomBonus: 7
+  finalRoomBonus: 10
+  runVictoryBonus: 15
 --- !u!1 &1839325597
 GameObject:
   m_ObjectHideFlags: 0

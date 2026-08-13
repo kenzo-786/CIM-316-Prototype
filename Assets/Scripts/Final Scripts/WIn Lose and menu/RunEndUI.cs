@@ -28,6 +28,8 @@ public class RunEndUI : MonoBehaviour
 
         if (root != null)
             root.SetActive(false);
+
+        EnsureTextReferences();
     }
 
     private void OnEnable()
@@ -110,6 +112,8 @@ public class RunEndUI : MonoBehaviour
         if (root != null)
             root.SetActive(true);
 
+        EnsureTextReferences();
+
         if (titleText != null)
         {
             titleText.text = won
@@ -152,6 +156,44 @@ public class RunEndUI : MonoBehaviour
             roomManager.FinalRoomsCleared,
             won
         );
+    }
+
+    private void EnsureTextReferences()
+    {
+        if (root == null)
+            return;
+
+        if (titleText == null)
+            titleText = root.GetComponentInChildren<TMP_Text>(true);
+
+        if (bodyText != null)
+            return;
+
+        GameObject bodyObject = new GameObject(
+            "Run End Summary",
+            typeof(RectTransform),
+            typeof(TextMeshProUGUI)
+        );
+
+        bodyObject.transform.SetParent(root.transform, false);
+
+        RectTransform rect = bodyObject.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = new Vector2(20f, -42f);
+        rect.sizeDelta = new Vector2(640f, 360f);
+
+        TextMeshProUGUI text = bodyObject.GetComponent<TextMeshProUGUI>();
+        text.font = titleText != null && titleText.font != null
+            ? titleText.font
+            : TMP_Settings.defaultFontAsset;
+        text.fontSize = 30f;
+        text.alignment = TextAlignmentOptions.Center;
+        text.enableWordWrapping = true;
+        text.color = Color.white;
+        text.raycastTarget = false;
+        bodyText = text;
     }
 
     public void Restart()

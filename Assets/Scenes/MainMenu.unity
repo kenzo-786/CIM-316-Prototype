@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d1b5b2d8f4f4b44a81765891cfaf65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MetaProgressionUI
+  displayFont: {fileID: 11400000, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
   creditsText: {fileID: 0}
   messageText: {fileID: 0}
   upgradeButtons: []

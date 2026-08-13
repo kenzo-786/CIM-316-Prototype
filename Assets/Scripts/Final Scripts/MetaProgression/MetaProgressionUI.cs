@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MetaProgressionUI : MonoBehaviour
 {
+    [SerializeField] private TMP_FontAsset displayFont;
     [SerializeField] private TMP_Text creditsText;
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private MetaUpgradeButton[] upgradeButtons;
@@ -98,7 +99,7 @@ public class MetaProgressionUI : MonoBehaviour
 
         RectTransform panel = transform as RectTransform;
 
-        if (panel == null || TMP_Settings.defaultFontAsset == null)
+        if (panel == null || ActiveFont == null)
             return;
 
         GameObject contentObject = new GameObject(
@@ -193,7 +194,7 @@ public class MetaProgressionUI : MonoBehaviour
         GameObject textObject = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI));
         textObject.transform.SetParent(parent, false);
         TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
-        text.font = TMP_Settings.defaultFontAsset;
+        text.font = ActiveFont;
         text.text = value;
         text.fontSize = fontSize;
         text.alignment = alignment;
@@ -215,4 +216,9 @@ public class MetaProgressionUI : MonoBehaviour
         rect.offsetMin = offsetMin;
         rect.offsetMax = offsetMax;
     }
+
+    private TMP_FontAsset ActiveFont =>
+        displayFont != null
+            ? displayFont
+            : TMP_Settings.defaultFontAsset;
 }
