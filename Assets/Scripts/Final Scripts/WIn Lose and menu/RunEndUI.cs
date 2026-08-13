@@ -12,14 +12,19 @@ public class RunEndUI : MonoBehaviour
     [SerializeField] private GameObject root;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text bodyText;
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     private bool ended;
     private Coroutine deathCheckRoutine;
 
     private void Awake()
     {
-        if (playerDeathAnimation == null && playerHealth != null)
-            playerDeathAnimation = playerHealth.GetComponent<PlayerDeathAnimation>();
+        if (playerDeathAnimation == null &&
+            playerHealth != null)
+        {
+            playerDeathAnimation =
+                playerHealth.GetComponent<PlayerDeathAnimation>();
+        }
 
         if (root != null)
             root.SetActive(false);
@@ -46,39 +51,47 @@ public class RunEndUI : MonoBehaviour
     private void HandlePlayerDied()
     {
         if (deathCheckRoutine == null)
-            deathCheckRoutine = StartCoroutine(CheckDeathAfterRevive());
+            deathCheckRoutine =
+                StartCoroutine(CheckDeathAfterRevive());
     }
 
     private IEnumerator CheckDeathAfterRevive()
     {
         yield return null;
 
-        if (playerHealth == null || !playerHealth.IsDead)
+        if (playerHealth == null ||
+            !playerHealth.IsDead)
         {
             deathCheckRoutine = null;
             yield break;
         }
 
         if (playerDeathAnimation != null)
-            yield return playerDeathAnimation.WaitForFinalDeath();
+        {
+            yield return
+                playerDeathAnimation.WaitForFinalDeath();
+        }
 
-        if (playerHealth != null && playerHealth.IsDead)
+        if (playerHealth != null &&
+            playerHealth.IsDead)
+        {
             ShowLose();
+        }
 
         deathCheckRoutine = null;
     }
 
     private void ShowWin()
     {
-        Show("Run Complete", "You cleared the dungeon.", true);
+        Show(true);
     }
 
     private void ShowLose()
     {
-        Show("Run Lost", "You were defeated.", false);
+        Show(false);
     }
 
-    private void Show(string title, string body, bool won)
+    private void Show(bool won)
     {
         if (ended)
             return;
@@ -87,28 +100,50 @@ public class RunEndUI : MonoBehaviour
 
         int creditsEarned = GrantStudyCredits(won);
 
+        int totalCredits =
+            MetaProgressionManager.Instance != null
+                ? MetaProgressionManager.Instance.StudyCredits
+                : 0;
+
         Time.timeScale = 0f;
 
         if (root != null)
             root.SetActive(true);
 
         if (titleText != null)
-            titleText.text = title;
+        {
+            titleText.text = won
+                ? "RUN COMPLETE"
+                : "RUN LOST";
+        }
 
         if (bodyText != null)
         {
-            bodyText.text = body +
-                "\n\nRooms Cleared: " +
-                (roomManager != null ? roomManager.ClearedRoomCount : 0) +
-                "\nStudy Credits Earned: " +
-                creditsEarned;
+            int roomsCleared =
+                roomManager != null
+                    ? roomManager.ClearedRoomCount
+                    : 0;
+
+            bodyText.text =
+                (won
+                    ? "The dungeon is cleared."
+                    : "The deadline remains undefeated.") +
+                "\n\nROOMS CLEARED\n" +
+                roomsCleared +
+                "\n\nSTUDY CREDITS EARNED\n+" +
+                creditsEarned +
+                "\n\nTOTAL STUDY CREDITS\n" +
+                totalCredits;
         }
     }
 
     private int GrantStudyCredits(bool won)
     {
-        if (MetaProgressionManager.Instance == null || roomManager == null)
+        if (MetaProgressionManager.Instance == null ||
+            roomManager == null)
+        {
             return 0;
+        }
 
         return MetaProgressionManager.Instance.GrantRunRewards(
             roomManager.ClearedRoomCount,
@@ -122,12 +157,26 @@ public class RunEndUI : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public void Quit()
     {
         Time.timeScale = 1f;
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

@@ -5,16 +5,17 @@ using UnityEngine;
 public class RulerSlashWeapon :PlayerWeaponBase
 {
     [Header("Melee Slash")]
-    [SerializeField] private Transform slashPoint;
-    [SerializeField] private float slashRadius = 1.2f;
+    [SerializeField] private float meleeForwardDistance = 0.8f;
+    [SerializeField] private float meleeRadius = 0.9f;
     [SerializeField] private LayerMask enemyLayer;
 
     [Header("Ranged Slash Wave")]
     [SerializeField] private GameObject slashWavePrefab;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private float slashWaveSpeed = 11f;
-    [SerializeField] private float slashWaveLifetime = 3f;
+    [SerializeField] private float waveSpawnForwardDistance = 0.8f;
+    [SerializeField] private float slashWaveSpeed = 10f;
+    [SerializeField] private float slashWaveLifetime = 2.4f;
     [SerializeField] private float homingTurnSpeed = 360f;
+    [SerializeField, Range(0f, 1f)] private float waveDamageMultiplier = 0.65f;
 
     [Header("Base Projectile Modifiers")]
     [SerializeField] private int basePierceCount;
@@ -28,23 +29,27 @@ public class RulerSlashWeapon :PlayerWeaponBase
     protected override void Attack(Vector2 direction)
     {
         if (direction == Vector2.zero)
-            direction = transform.right;
+            direction = Vector2.right;
 
         direction.Normalize();
 
-        DoMeleeSlash();
-        FireWavePattern(direction, AttackTarget);
+        DamageRoll damageRoll = GetFinalDamageRoll();
+
+        DoMeleeSlash(direction, damageRoll);
+        FireWavePattern(direction, AttackTarget, damageRoll);
     }
 
-    private void DoMeleeSlash()
+    private void DoMeleeSlash(
+        Vector2 direction,
+        DamageRoll damageRoll)
     {
-        Vector3 center = slashPoint != null
-            ? slashPoint.position
-            : transform.position;
+        Vector2 center =
+            (Vector2)transform.position +
+            direction * meleeForwardDistance;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             center,
-            slashRadius,
+            meleeRadius,
             enemyLayer
         );
 
@@ -64,13 +69,11 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
             damagedEnemies.Add(damageable);
 
-            DamageRoll damageRoll = GetFinalDamageRoll();
-
             damageable.TakeDamage(
                 new DamageInfo(
                     damageRoll.damage,
                     gameObject,
-                    hit.transform.position,
+                    hit.ClosestPoint(center),
                     damageRoll.damageType
                 )
             );
@@ -79,7 +82,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
     private void FireWavePattern(
         Vector2 direction,
-        Transform target)
+        Transform target,
+        DamageRoll damageRoll)
     {
         if (slashWavePrefab == null)
             return;
@@ -105,7 +109,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
                 FireWaveVolley(
                     direction,
                     target,
-                    sideShots
+                    sideShots,
+                    damageRoll
                 );
             }
             else
@@ -115,7 +120,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
                         direction,
                         target,
                         sideShots,
-                        delay
+                        delay,
+                        damageRoll
                     )
                 );
             }
@@ -126,28 +132,32 @@ public class RulerSlashWeapon :PlayerWeaponBase
         Vector2 direction,
         Transform target,
         int sideShots,
-        float delay)
+        float delay,
+        DamageRoll damageRoll)
     {
         yield return new WaitForSeconds(delay);
 
         FireWaveVolley(
             direction,
             target,
-            sideShots
+            sideShots,
+            damageRoll
         );
     }
 
     private void FireWaveVolley(
         Vector2 direction,
         Transform target,
-        int sideShots)
+        int sideShots,
+        DamageRoll damageRoll)
     {
         if (sideShots <= 1)
         {
             SpawnSlashWave(
                 direction,
                 Vector2.zero,
-                target
+                target,
+                damageRoll
             );
 
             return;
@@ -157,7 +167,9 @@ public class RulerSlashWeapon :PlayerWeaponBase
             new Vector2(-direction.y, direction.x);
 
         float startOffset =
-            -(sideShots - 1) * sideOffset * 0.5f;
+            -(sideShots - 1) *
+            sideOffset *
+            0.5f;
 
         for (int i = 0; i < sideShots; i++)
         {
@@ -168,7 +180,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
             SpawnSlashWave(
                 direction,
                 offset,
-                target
+                target,
+                damageRoll
             );
         }
     }
@@ -176,13 +189,16 @@ public class RulerSlashWeapon :PlayerWeaponBase
     private void SpawnSlashWave(
         Vector2 direction,
         Vector2 offset,
-        Transform target)
+        Transform target,
+        DamageRoll damageRoll)
     {
-        Vector3 spawnPosition = firePoint != null
-            ? firePoint.position
-            : transform.position;
-
-        spawnPosition += (Vector3)offset;
+        Vector3 spawnPosition =
+            transform.position +
+            (Vector3)(
+                direction *
+                waveSpawnForwardDistance
+            ) +
+            (Vector3)offset;
 
         GameObject waveObject =
             ProjectilePoolProvider.Instance != null
@@ -217,11 +233,9 @@ public class RulerSlashWeapon :PlayerWeaponBase
             baseWallBounceCount +
             (stats != null ? stats.WallBounceCount : 0);
 
-        DamageRoll damageRoll = GetFinalDamageRoll();
-
         wave.Launch(
             direction,
-            damageRoll.damage,
+            damageRoll.damage * waveDamageMultiplier,
             slashWaveSpeed,
             slashWaveLifetime,
             pierce,
@@ -239,11 +253,20 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 center = slashPoint != null
-            ? slashPoint.position
-            : transform.position;
-
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(center, slashRadius);
+
+        Vector2 direction =
+            Application.isPlaying
+                ? transform.right
+                : Vector2.right;
+
+        Vector2 center =
+            (Vector2)transform.position +
+            direction * meleeForwardDistance;
+
+        Gizmos.DrawWireSphere(
+            center,
+            meleeRadius
+        );
     }
 }
