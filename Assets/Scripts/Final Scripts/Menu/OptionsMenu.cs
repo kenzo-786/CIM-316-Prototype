@@ -12,11 +12,15 @@ public class OptionsMenu : MonoBehaviour
 
     [Header("Selection Icon")]
     [SerializeField] private RectTransform selectionIcon;
-    [SerializeField] private float iconDistance = 75f;
+    [SerializeField] private float iconGap = 12f;
 
     [Header("Content")]
     [SerializeField] private GameObject controlsInfo;
-    [SerializeField] private GameObject volumeSlider;
+    [SerializeField] private GameObject volumeContent;
+
+    [Header("Content Animation")]
+    [SerializeField] private float contentMoveDistance = 40f;
+    [SerializeField] private float contentAnimationSpeed = 10f;
 
     [Header("Button Pop")]
     [SerializeField] private float popScale = 1.05f;
@@ -24,11 +28,35 @@ public class OptionsMenu : MonoBehaviour
 
     private Button currentButton;
     private Button hoveredButton;
+
     private Coroutine popCoroutine;
+    private Coroutine contentCoroutine;
 
-    private Dictionary<Button, Vector3> originalScales = new Dictionary<Button, Vector3>();
+    private Dictionary<Button, Vector3> originalScales =
+        new Dictionary<Button, Vector3>();
 
-    void Start()
+    private RectTransform controlsRect;
+    private RectTransform volumeRect;
+
+    private Vector2 controlsOriginalPosition;
+    private Vector2 volumeOriginalPosition;
+
+    private void Awake()
+    {
+        if (controlsInfo != null)
+        {
+            controlsRect = controlsInfo.GetComponent<RectTransform>();
+            controlsOriginalPosition = controlsRect.anchoredPosition;
+        }
+
+        if (volumeContent != null)
+        {
+            volumeRect = volumeContent.GetComponent<RectTransform>();
+            volumeOriginalPosition = volumeRect.anchoredPosition;
+        }
+    }
+
+    private void Start()
     {
         RegisterButton(controlsButton);
         RegisterButton(volumeButton);
@@ -36,15 +64,20 @@ public class OptionsMenu : MonoBehaviour
         currentButton = null;
         hoveredButton = null;
 
-        selectionIcon.gameObject.SetActive(false);
+        if (selectionIcon != null)
+            selectionIcon.gameObject.SetActive(false);
 
-        controlsInfo.SetActive(false);
-        volumeSlider.SetActive(false);
+        if (controlsInfo != null)
+            controlsInfo.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (volumeContent != null)
+            volumeContent.SetActive(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
     }
 
-    void Update()
+    private void Update()
     {
         HandleMouseHover();
         HandleKeyboardNavigation();
@@ -55,19 +88,25 @@ public class OptionsMenu : MonoBehaviour
         if (EventSystem.current == null)
             return;
 
-        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        PointerEventData pointerData =
+            new PointerEventData(EventSystem.current);
+
         pointerData.position = Input.mousePosition;
 
-        List<RaycastResult> results = new List<RaycastResult>();
+        List<RaycastResult> results =
+            new List<RaycastResult>();
+
         EventSystem.current.RaycastAll(pointerData, results);
 
         Button newHoveredButton = null;
 
         foreach (RaycastResult result in results)
         {
-            Button button = result.gameObject.GetComponentInParent<Button>();
+            Button button =
+                result.gameObject.GetComponentInParent<Button>();
 
-            if (button == controlsButton || button == volumeButton)
+            if (button == controlsButton ||
+                button == volumeButton)
             {
                 newHoveredButton = button;
                 break;
@@ -79,35 +118,60 @@ public class OptionsMenu : MonoBehaviour
             hoveredButton = newHoveredButton;
 
             if (hoveredButton != null)
-            {
                 SelectButton(hoveredButton);
-            }
-            else
-            {
-                selectionIcon.gameObject.SetActive(false);
-            }
         }
     }
 
     private void HandleKeyboardNavigation()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W) ||
+            Input.GetKeyDown(KeyCode.UpArrow))
         {
             SelectPreviousButton();
         }
 
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.S) ||
+            Input.GetKeyDown(KeyCode.DownArrow))
         {
             SelectNextButton();
         }
     }
 
+    private void SelectNextButton()
+    {
+        if (currentButton == null)
+        {
+            SelectButton(controlsButton);
+            return;
+        }
+
+        if (currentButton == controlsButton)
+            SelectButton(volumeButton);
+        else
+            SelectButton(controlsButton);
+    }
+
+    private void SelectPreviousButton()
+    {
+        if (currentButton == null)
+        {
+            SelectButton(controlsButton);
+            return;
+        }
+
+        if (currentButton == controlsButton)
+            SelectButton(volumeButton);
+        else
+            SelectButton(controlsButton);
+    }
+
     private void RegisterButton(Button button)
     {
-        if (button != null)
-        {
-            originalScales[button] = button.transform.localScale;
-        }
+        if (button == null)
+            return;
+
+        originalScales[button] =
+            button.transform.localScale;
     }
 
     private void SelectButton(Button button)
@@ -120,72 +184,142 @@ public class OptionsMenu : MonoBehaviour
 
         currentButton = button;
 
-        EventSystem.current.SetSelectedGameObject(button.gameObject);
-
-        selectionIcon.gameObject.SetActive(true);
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(
+                button.gameObject
+            );
+        }
 
         UpdateSelectionIcon();
         UpdateContent();
         PlayPop(button);
     }
 
-    private void SelectNextButton()
-    {
-        if (currentButton == null)
-        {
-            SelectButton(controlsButton);
-        }
-        else if (currentButton == controlsButton)
-        {
-            SelectButton(volumeButton);
-        }
-        else
-        {
-            SelectButton(controlsButton);
-        }
-    }
-
-    private void SelectPreviousButton()
-    {
-        if (currentButton == null)
-        {
-            SelectButton(controlsButton);
-        }
-        else if (currentButton == controlsButton)
-        {
-            SelectButton(volumeButton);
-        }
-        else
-        {
-            SelectButton(controlsButton);
-        }
-    }
-
     private void UpdateSelectionIcon()
     {
-        if (currentButton == null)
+        if (currentButton == null ||
+            selectionIcon == null)
             return;
 
-        RectTransform buttonRect = currentButton.GetComponent<RectTransform>();
+        RectTransform buttonRect =
+            currentButton.GetComponent<RectTransform>();
 
-        selectionIcon.position = new Vector3(
-            buttonRect.position.x - buttonRect.rect.width / 1f - iconDistance,
-            buttonRect.position.y,
-            selectionIcon.position.z
-        );
+        if (buttonRect == null)
+            return;
+
+        selectionIcon.gameObject.SetActive(true);
+
+        Vector3[] corners = new Vector3[4];
+        buttonRect.GetWorldCorners(corners);
+
+        float leftX = corners[0].x;
+        float centerY = (corners[0].y + corners[1].y) / 2f;
+
+        Vector3 iconPosition = selectionIcon.position;
+
+        iconPosition.x = leftX - iconGap;
+        iconPosition.y = centerY;
+
+        selectionIcon.position = iconPosition;
     }
 
     private void UpdateContent()
     {
         if (currentButton == controlsButton)
+            ShowControls();
+        else if (currentButton == volumeButton)
+            ShowVolume();
+    }
+
+    private void ShowControls()
+    {
+        StopContentAnimation();
+
+        if (controlsInfo != null)
         {
             controlsInfo.SetActive(true);
-            volumeSlider.SetActive(false);
+
+            controlsRect.anchoredPosition =
+                controlsOriginalPosition +
+                Vector2.right * contentMoveDistance;
+
+            contentCoroutine =
+                StartCoroutine(
+                    AnimateContent(
+                        controlsRect,
+                        controlsOriginalPosition
+                    )
+                );
         }
-        else if (currentButton == volumeButton)
-        {
+
+        if (volumeContent != null)
+            volumeContent.SetActive(false);
+    }
+
+    private void ShowVolume()
+    {
+        StopContentAnimation();
+
+        if (controlsInfo != null)
             controlsInfo.SetActive(false);
-            volumeSlider.SetActive(true);
+
+        if (volumeContent != null)
+        {
+            volumeContent.SetActive(true);
+
+            volumeRect.anchoredPosition =
+                volumeOriginalPosition +
+                Vector2.right * contentMoveDistance;
+
+            contentCoroutine =
+                StartCoroutine(
+                    AnimateContent(
+                        volumeRect,
+                        volumeOriginalPosition
+                    )
+                );
+        }
+    }
+
+    private IEnumerator AnimateContent(
+        RectTransform content,
+        Vector2 targetPosition)
+    {
+        Vector2 startPosition =
+            content.anchoredPosition;
+
+        float time = 0f;
+
+        while (time < 1f)
+        {
+            time +=
+                Time.unscaledDeltaTime *
+                contentAnimationSpeed;
+
+            float t =
+                Mathf.SmoothStep(0f, 1f, time);
+
+            content.anchoredPosition =
+                Vector2.Lerp(
+                    startPosition,
+                    targetPosition,
+                    t
+                );
+
+            yield return null;
+        }
+
+        content.anchoredPosition = targetPosition;
+        contentCoroutine = null;
+    }
+
+    private void StopContentAnimation()
+    {
+        if (contentCoroutine != null)
+        {
+            StopCoroutine(contentCoroutine);
+            contentCoroutine = null;
         }
     }
 
@@ -194,13 +328,22 @@ public class OptionsMenu : MonoBehaviour
         if (popCoroutine != null)
             StopCoroutine(popCoroutine);
 
-        popCoroutine = StartCoroutine(PopButton(button));
+        popCoroutine =
+            StartCoroutine(
+                PopButton(button)
+            );
     }
 
     private IEnumerator PopButton(Button button)
     {
-        Vector3 originalScale = originalScales[button];
-        Vector3 enlargedScale = originalScale * popScale;
+        if (!originalScales.ContainsKey(button))
+            yield break;
+
+        Vector3 originalScale =
+            originalScales[button];
+
+        Vector3 enlargedScale =
+            originalScale * popScale;
 
         float time = 0f;
 
@@ -208,11 +351,12 @@ public class OptionsMenu : MonoBehaviour
         {
             time += Time.unscaledDeltaTime;
 
-            button.transform.localScale = Vector3.Lerp(
-                originalScale,
-                enlargedScale,
-                time / popSpeed
-            );
+            button.transform.localScale =
+                Vector3.Lerp(
+                    originalScale,
+                    enlargedScale,
+                    time / popSpeed
+                );
 
             yield return null;
         }
@@ -223,16 +367,38 @@ public class OptionsMenu : MonoBehaviour
         {
             time += Time.unscaledDeltaTime;
 
-            button.transform.localScale = Vector3.Lerp(
-                enlargedScale,
-                originalScale,
-                time / popSpeed
-            );
+            button.transform.localScale =
+                Vector3.Lerp(
+                    enlargedScale,
+                    originalScale,
+                    time / popSpeed
+                );
 
             yield return null;
         }
 
         button.transform.localScale = originalScale;
+        popCoroutine = null;
+    }
+
+    public void OpenOptions()
+    {
+        gameObject.SetActive(true);
+
+        currentButton = null;
+        hoveredButton = null;
+
+        if (selectionIcon != null)
+            selectionIcon.gameObject.SetActive(false);
+
+        if (controlsInfo != null)
+            controlsInfo.SetActive(false);
+
+        if (volumeContent != null)
+            volumeContent.SetActive(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseOptions()
@@ -240,11 +406,20 @@ public class OptionsMenu : MonoBehaviour
         currentButton = null;
         hoveredButton = null;
 
-        selectionIcon.gameObject.SetActive(false);
+        StopContentAnimation();
 
-        controlsInfo.SetActive(false);
-        volumeSlider.SetActive(false);
+        if (selectionIcon != null)
+            selectionIcon.gameObject.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (controlsInfo != null)
+            controlsInfo.SetActive(false);
+
+        if (volumeContent != null)
+            volumeContent.SetActive(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        gameObject.SetActive(false);
     }
 }
