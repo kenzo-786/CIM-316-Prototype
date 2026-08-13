@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -176,21 +176,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9393178}
   m_CullTransparentMesh: 1
---- !u!114 &9393182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9393178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5d1b5b2d8f4f4b44a81765891cfaf65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MetaProgressionUI
-  creditsText: {fileID: 0}
-  messageText: {fileID: 0}
-  upgradeButtons: []
 --- !u!224 &9393181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -211,6 +196,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9393182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9393178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d1b5b2d8f4f4b44a81765891cfaf65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MetaProgressionUI
+  creditsText: {fileID: 0}
+  messageText: {fileID: 0}
+  upgradeButtons: []
 --- !u!1 &34019150
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +616,7 @@ RectTransform:
   - {fileID: 735598667}
   - {fileID: 1912283119}
   - {fileID: 1153859280}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1197,6 +1197,149 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426248086}
   m_CullTransparentMesh: 1
+--- !u!1 &443668414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443668415}
+  - component: {fileID: 443668417}
+  - component: {fileID: 443668416}
+  m_Layer: 0
+  m_Name: Volume Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &443668415
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443668414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 124388602}
+  - {fileID: 883795110}
+  - {fileID: 2094637181}
+  - {fileID: 1798960516}
+  - {fileID: 470229869}
+  - {fileID: 1238172560}
+  m_Father: {fileID: 1312644480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &443668416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443668414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &443668417
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443668414}
+  m_CullTransparentMesh: 1
 --- !u!1 &470229868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1371,7 @@ RectTransform:
   m_Children:
   - {fileID: 1039633959}
   - {fileID: 921471210}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2421,106 +2564,127 @@ MonoBehaviour:
     volume: 0.28
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ui_confirm
     clip: {fileID: 8300000, guid: e41672f57169d2346b8ac92b22e23d37, type: 3}
     volume: 0.38
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: level_up
     clip: {fileID: 8300000, guid: b8300694393ad404f883966d829c260a, type: 3}
     volume: 0.48
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: upgrade_pick
     clip: {fileID: 8300000, guid: 8e392fae3d33a5e48ac694f9b61004ad, type: 3}
     volume: 0.38
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: game_over
     clip: {fileID: 8300000, guid: 824f91287c2953540a672e1e7869fe83, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_hurt
     clip: {fileID: 8300000, guid: aa27608b26ea0cc4abdab627b094cdcf, type: 3}
     volume: 0.46
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_heal
     clip: {fileID: 8300000, guid: 70c3358078b66f64c8b2f88ffff76ea5, type: 3}
     volume: 0.35
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_revive
     clip: {fileID: 8300000, guid: 40a7c92f0e2a204479224239d02acc20, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: enemy_hit
     clip: {fileID: 8300000, guid: 92c2e6e7ae101944a8611535d46353ef, type: 3}
     volume: 0.24
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: heavy_enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
     volume: 0.38
     pitchMin: 0.78
     pitchMax: 0.88
+    cooldown: 0.04
   - id: enemy_split
     clip: {fileID: 8300000, guid: f0e9a43c9f7cea844b9e9e7b1fd56466, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: wave_warning
     clip: {fileID: 8300000, guid: cd0fb1a16be3ab646aa0253a87412ded, type: 3}
     volume: 0.34
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: room_clear
     clip: {fileID: 8300000, guid: 2ee34dd9f72fa4c4abe85927b5638f98, type: 3}
     volume: 0.45
     pitchMin: 0.9
     pitchMax: 1.05
+    cooldown: 0.04
   - id: door_open
     clip: {fileID: 8300000, guid: 67180ba24401de748baca467342db438, type: 3}
     volume: 0.35
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: xp_magnet
     clip: {fileID: 8300000, guid: d9a6243c41433e54f8482d34b167f008, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: eraser_fire
     clip: {fileID: 8300000, guid: 10f6bb17e3d99cd46be42545d93f5eda, type: 3}
     volume: 0.32
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: projectile_wall_hit
     clip: {fileID: 8300000, guid: 8676346a88639d14ebb051cc2299579d, type: 3}
     volume: 0.22
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ruler_fire
     clip: {fileID: 8300000, guid: e883456f8ceab294a92cdff3e4f101cc, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ruler_hit
     clip: {fileID: 8300000, guid: ae05a65f373b5a64084ff6b8319b2a27, type: 3}
     volume: 0.28
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: run_victory
     clip: {fileID: 8300000, guid: 44d81bc9a381afd45b32c1d64319f8fa, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   musicTracks:
   - id: menu_music
     clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
@@ -2536,6 +2700,8 @@ MonoBehaviour:
     musicId: 
     fadeDuration: 0
   sfxPoolSize: 16
+  musicMix: 0.5
+  sfxMix: 0.55
   musicSource: {fileID: 0}
 --- !u!1 &735598666
 GameObject:
@@ -2754,7 +2920,7 @@ RectTransform:
   - {fileID: 34019151}
   - {fileID: 1372165950}
   - {fileID: 911905706}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3419,7 +3585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1061706322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3459,7 +3625,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Movement- WASD '
+  m_text: 'Movement- WASD keys
+
+
+    To Aim- Use Mouse
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
   m_sharedMaterial: {fileID: -5080205164045443190, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
@@ -3920,7 +4092,7 @@ RectTransform:
   m_Children:
   - {fileID: 1144426759}
   - {fileID: 695911556}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4233,13 +4405,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 124388602}
-  - {fileID: 883795110}
-  - {fileID: 2094637181}
-  - {fileID: 1798960516}
-  - {fileID: 470229869}
-  - {fileID: 1238172560}
   - {fileID: 1727675941}
+  - {fileID: 443668415}
   m_Father: {fileID: 1438650406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5198,9 +5365,11 @@ MonoBehaviour:
   controlsButton: {fileID: 1694593005}
   volumeButton: {fileID: 1312644483}
   selectionIcon: {fileID: 150227075}
-  iconDistance: 100
+  iconGap: 75
   controlsInfo: {fileID: 1061706321}
-  volumeSlider: {fileID: 124388600}
+  volumeContent: {fileID: 443668414}
+  contentMoveDistance: 40
+  contentAnimationSpeed: 10
   popScale: 1.05
   popSpeed: 0.08
 --- !u!114 &1438650408
@@ -6531,7 +6700,7 @@ RectTransform:
   m_Children:
   - {fileID: 1308668781}
   - {fileID: 1325288390}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7066,7 +7235,7 @@ RectTransform:
   - {fileID: 899768359}
   - {fileID: 1863407784}
   - {fileID: 1462053699}
-  m_Father: {fileID: 1312644480}
+  m_Father: {fileID: 443668415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7131,7 +7300,3 @@ SceneRoots:
   - {fileID: 1770998500}
   - {fileID: 1711268425}
   - {fileID: 1419545526}
-
-
-
-
