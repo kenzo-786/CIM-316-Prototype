@@ -109,10 +109,20 @@ public class SpinnerEnemy : EnemyBase
             lastTargetDirection = toPlayer.normalized;
 
         float distanceToPlayer = toPlayer.magnitude;
-        Vector2 movementDirection = GetWalkingDirection(toPlayer, distanceToPlayer);
+        bool hasClearPath = HasClearPathTo(target.position);
+
+        Vector2 movementDirection = hasClearPath
+            ? GetWalkingDirection(toPlayer, distanceToPlayer)
+            : toPlayer.normalized;
 
         MoveInDirection(movementDirection);
         animationController?.SetMovementDirection(movementDirection);
+
+        if (!hasClearPath)
+        {
+            stateTimer = Mathf.Max(stateTimer, 0.25f);
+            return;
+        }
 
         if (stateTimer > 0f || !CanStartSpin(distanceToPlayer))
             return;
@@ -132,9 +142,13 @@ public class SpinnerEnemy : EnemyBase
         if (stateTimer > 0f)
             return;
 
-        float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+        float distanceToPlayer = Vector2.Distance(
+            rb.position,
+            target.position
+        );
 
-        if (distanceToPlayer > maximumSpinStartDistance * 1.25f)
+        if (!HasClearPathTo(target.position) ||
+            distanceToPlayer > maximumSpinStartDistance * 1.25f)
         {
             EnterState(SpinnerState.Walking);
             return;
@@ -149,16 +163,28 @@ public class SpinnerEnemy : EnemyBase
         animationController?.SetWindingUp(false);
         animationController?.SetRecovering(false);
 
+        if (!HasClearPathTo(target.position))
+        {
+            EnterState(SpinnerState.Recovering);
+            return;
+        }
+
         Vector2 directionToPlayer = (Vector2)target.position - rb.position;
 
         if (directionToPlayer.sqrMagnitude > 0.0001f)
         {
             lastTargetDirection = directionToPlayer.normalized;
-            MoveInDirection(directionToPlayer, spinSpeedMultiplier);
+
+            MoveInDirection(
+                directionToPlayer,
+                spinSpeedMultiplier
+            );
+
             animationController?.SetMovementDirection(directionToPlayer);
         }
 
-        if (IsTargetInRange(AttackRange) && Time.time >= nextSpinHitTime)
+        if (IsTargetInRange(AttackRange) &&
+            Time.time >= nextSpinHitTime)
         {
             nextSpinHitTime = Time.time + spinHitCooldown;
 
@@ -180,24 +206,40 @@ public class SpinnerEnemy : EnemyBase
 
         Vector2 retreatDirection = -lastTargetDirection;
 
-        MoveInDirection(retreatDirection, recoveryRetreatSpeedMultiplier);
+        MoveInDirection(
+            retreatDirection,
+            recoveryRetreatSpeedMultiplier
+        );
+
         animationController?.SetMovementDirection(retreatDirection);
 
         if (stateTimer <= 0f)
             EnterState(SpinnerState.Walking);
     }
 
-    private Vector2 GetWalkingDirection(Vector2 toPlayer, float distanceToPlayer)
+    private Vector2 GetWalkingDirection(
+        Vector2 toPlayer,
+        float distanceToPlayer
+    )
     {
+        if (distanceToPlayer <= 0.0001f)
+            return Vector2.zero;
+
         if (distanceToPlayer < preferredDistance * 0.65f)
             return -toPlayer.normalized;
 
         if (distanceToPlayer > preferredDistance * 1.2f)
             return toPlayer.normalized;
 
-        Vector2 sideDirection = new Vector2(-toPlayer.y, toPlayer.x).normalized * orbitDirection;
+        Vector2 sideDirection = new Vector2(
+            -toPlayer.y,
+            toPlayer.x
+        ).normalized * orbitDirection;
 
-        return (toPlayer.normalized * 0.25f + sideDirection * orbitStrength).normalized;
+        return (
+            toPlayer.normalized * 0.25f +
+            sideDirection * orbitStrength
+        ).normalized;
     }
 
     private bool CanStartSpin(float distanceToPlayer)
@@ -214,8 +256,13 @@ public class SpinnerEnemy : EnemyBase
         switch (state)
         {
             case SpinnerState.Walking:
-                stateTimer = Random.Range(normalMoveDurationMin, normalMoveDurationMax);
+                stateTimer = Random.Range(
+                    normalMoveDurationMin,
+                    normalMoveDurationMax
+                );
+
                 orbitDirection = Random.value < 0.5f ? -1f : 1f;
+
                 animationController?.SetSpinning(false);
                 animationController?.SetWindingUp(false);
                 animationController?.SetRecovering(false);
@@ -223,37 +270,34 @@ public class SpinnerEnemy : EnemyBase
 
             case SpinnerState.Windup:
                 stateTimer = windupDuration;
+
                 animationController?.SetSpinning(false);
                 animationController?.SetWindingUp(true);
                 animationController?.SetRecovering(false);
 
-                if (telegraph != null)
-                    telegraph.Begin(windupDuration);
-
+                telegraph?.Begin(windupDuration);
                 break;
 
             case SpinnerState.Spinning:
                 stateTimer = spinDuration;
                 nextSpinAllowedTime = Time.time + spinCooldown;
                 nextSpinHitTime = Time.time + spinHitStartDelay;
+
                 animationController?.SetWindingUp(false);
                 animationController?.SetSpinning(true);
                 animationController?.SetRecovering(false);
 
-                if (telegraph != null)
-                    telegraph.End();
-
+                telegraph?.End();
                 break;
 
             case SpinnerState.Recovering:
                 stateTimer = recoverDuration;
+
                 animationController?.SetSpinning(false);
                 animationController?.SetWindingUp(false);
                 animationController?.SetRecovering(true);
 
-                if (telegraph != null)
-                    telegraph.End();
-
+                telegraph?.End();
                 break;
         }
     }

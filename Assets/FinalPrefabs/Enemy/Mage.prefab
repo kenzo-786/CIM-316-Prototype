@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 783359211893841095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.088, y: 0.12, z: 0}
+  m_LocalPosition: {x: 0.03, y: 1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -197,9 +197,10 @@ MonoBehaviour:
   separationStrength: 2.25
   separationPadding: 0.18
   obstacleProbeDistance: 0.8
-  obstacleProbeRadius: 0.3
-  wallAvoidanceStrength: 1.5
-  movementSkin: 0.03
+  obstacleProbeRadius: 0.22
+  wallFollowStrength: 1.35
+  wallFollowMemory: 0.65
+  wallClearanceProbeDistance: 1.15
   preferredRange: 7
   projectileCount: 3
   spreadAngle: 25

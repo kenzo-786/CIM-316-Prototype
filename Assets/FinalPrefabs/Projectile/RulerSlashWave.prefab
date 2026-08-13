@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2936604520430115119}
   - component: {fileID: 2034927009381036956}
   - component: {fileID: 2484536988813529914}
-  - component: {fileID: 2097162488416297372}
+  - component: {fileID: 6515256359250560100}
   m_Layer: 8
   m_Name: RulerSlashWave
   m_TagString: Projectile
@@ -176,8 +176,8 @@ MonoBehaviour:
     m_Bits: 7168
   defaultHomingTurnSpeed: 360
   bounceSearchRadius: 8
---- !u!60 &2097162488416297372
-PolygonCollider2D:
+--- !u!58 &6515256359250560100
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,30 +210,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.2630908, y: 0.31351468}
-      - {x: 0.05076158, y: 0.3246786}
-      - {x: -0.1332311, y: 0.31747726}
-      - {x: -0.29057997, y: 0.20757537}
-      - {x: -0.36100864, y: 0.06595516}
-      - {x: -0.3600252, y: 0.049586456}
-      - {x: -0.24655461, y: 0.048289657}
-      - {x: -0.14566469, y: 0.11760829}
-      - {x: 0.10652345, y: 0.11441051}
-      - {x: 0.19932275, y: 0.026082717}
-      - {x: 0.25727698, y: -0.14431444}
-      - {x: 0.4919852, y: -0.3176546}
-      - {x: 0.47749135, y: 0.0914018}
-      - {x: 0.3926814, y: 0.22329718}
-  m_UseDelaunayMesh: 1
+  m_Offset: {x: 0.06787175, y: -0.03257841}
+  m_Radius: 0.39728516
