@@ -247,7 +247,8 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
         wave.SetHomingTarget(
             target,
-            homingTurnSpeed
+            homingTurnSpeed,
+            false
         );
     }
 

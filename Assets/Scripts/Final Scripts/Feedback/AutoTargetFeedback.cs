@@ -97,56 +97,37 @@ public class AutoTargetFeedback : MonoBehaviour
         }
     }
 
-    private Vector3 GetMarkerPosition(
-        Transform target)
+    private Vector3 GetMarkerPosition(Transform target)
     {
-        EnemyBase enemy =
-            target.GetComponentInParent<EnemyBase>();
+        EnemyBase enemy = target.GetComponentInParent<EnemyBase>();
 
-        Transform targetRoot =
-            enemy != null
-                ? enemy.transform
-                : target;
-
-        TargetMarkerAnchor anchor =
-            targetRoot.GetComponentInChildren
-                <TargetMarkerAnchor>(true);
-
-        if (anchor != null)
-        {
-            return anchor.Position;
-        }
+        Transform targetRoot = enemy != null
+            ? enemy.transform
+            : target;
 
         SpriteRenderer[] renderers =
-            targetRoot.GetComponentsInChildren
-                <SpriteRenderer>();
+            targetRoot.GetComponentsInChildren<SpriteRenderer>();
 
         bool foundRenderer = false;
         Bounds combinedBounds = new Bounds();
 
-        foreach (SpriteRenderer spriteRenderer
-                 in renderers)
+        foreach (SpriteRenderer spriteRenderer in renderers)
         {
             if (spriteRenderer == null ||
                 !spriteRenderer.enabled ||
-                !spriteRenderer.gameObject
-                    .activeInHierarchy)
+                !spriteRenderer.gameObject.activeInHierarchy)
             {
                 continue;
             }
 
             if (!foundRenderer)
             {
-                combinedBounds =
-                    spriteRenderer.bounds;
-
+                combinedBounds = spriteRenderer.bounds;
                 foundRenderer = true;
             }
             else
             {
-                combinedBounds.Encapsulate(
-                    spriteRenderer.bounds
-                );
+                combinedBounds.Encapsulate(spriteRenderer.bounds);
             }
         }
 

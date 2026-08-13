@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -4467,6 +4467,7 @@ GameObject:
   - component: {fileID: 627999371}
   - component: {fileID: 627999370}
   - component: {fileID: 627999369}
+  - component: {fileID: 627999373}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -4483,7 +4484,7 @@ RectTransform:
   m_GameObject: {fileID: 627999367}
   m_LocalRotation: {x: -0, y: -0, z: 0.70287097, w: 0.7113175}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5581677, y: 0.5581677, z: 0.5581677}
+  m_LocalScale: {x: 0.40240905, y: 0.40240905, z: 0.40240905}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 338457057}
@@ -4491,7 +4492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.316}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -254, y: -148}
+  m_AnchoredPosition: {x: 672, y: -397}
   m_SizeDelta: {x: 148.1258, y: 1573.005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &627999369
@@ -4602,6 +4603,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627999367}
   m_CullTransparentMesh: 1
+--- !u!114 &627999373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627999367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fdcb6eef32a1f4089eabf2837dd3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverPop
+  hoverScale: 1.05
+  popSpeed: 0.08
 --- !u!1 &638322223
 GameObject:
   m_ObjectHideFlags: 0
@@ -4787,6 +4802,7 @@ GameObject:
   - component: {fileID: 671978828}
   - component: {fileID: 671978827}
   - component: {fileID: 671978826}
+  - component: {fileID: 671978830}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -4803,7 +4819,7 @@ RectTransform:
   m_GameObject: {fileID: 671978824}
   m_LocalRotation: {x: -0, y: -0, z: 0.70287097, w: 0.7113175}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5581677, y: 0.5581677, z: 0.5581677}
+  m_LocalScale: {x: 0.40240905, y: 0.40240905, z: 0.40240905}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1966215234}
@@ -4811,7 +4827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.316}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -510, y: 30}
+  m_AnchoredPosition: {x: -627, y: -375}
   m_SizeDelta: {x: 148.1258, y: 652.6046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &671978826
@@ -4922,6 +4938,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671978824}
   m_CullTransparentMesh: 1
+--- !u!114 &671978830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671978824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fdcb6eef32a1f4089eabf2837dd3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverPop
+  hoverScale: 1.05
+  popSpeed: 0.08
 --- !u!1 &688791082
 GameObject:
   m_ObjectHideFlags: 0
@@ -5685,7 +5715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &949279172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10345,7 +10375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2144491376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10424,106 +10454,127 @@ MonoBehaviour:
     volume: 0.28
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ui_confirm
     clip: {fileID: 8300000, guid: 3d39ef26606c9eb4cb0a078956b52e19, type: 3}
     volume: 0.38
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: level_up
     clip: {fileID: 8300000, guid: b8300694393ad404f883966d829c260a, type: 3}
     volume: 0.48
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: upgrade_pick
     clip: {fileID: 8300000, guid: 8e392fae3d33a5e48ac694f9b61004ad, type: 3}
     volume: 0.38
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: game_over
     clip: {fileID: 8300000, guid: 824f91287c2953540a672e1e7869fe83, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_hurt
     clip: {fileID: 8300000, guid: aa27608b26ea0cc4abdab627b094cdcf, type: 3}
     volume: 0.46
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_heal
     clip: {fileID: 8300000, guid: 70c3358078b66f64c8b2f88ffff76ea5, type: 3}
     volume: 0.35
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: player_revive
     clip: {fileID: 8300000, guid: 40a7c92f0e2a204479224239d02acc20, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: enemy_hit
     clip: {fileID: 8300000, guid: 92c2e6e7ae101944a8611535d46353ef, type: 3}
     volume: 0.24
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: heavy_enemy_death
     clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
     volume: 0.38
     pitchMin: 0.78
     pitchMax: 0.88
+    cooldown: 0.04
   - id: enemy_split
     clip: {fileID: 8300000, guid: f0e9a43c9f7cea844b9e9e7b1fd56466, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: wave_warning
     clip: {fileID: 8300000, guid: cd0fb1a16be3ab646aa0253a87412ded, type: 3}
     volume: 0.34
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: room_clear
     clip: {fileID: 8300000, guid: 2ee34dd9f72fa4c4abe85927b5638f98, type: 3}
     volume: 0.45
     pitchMin: 0.83
     pitchMax: 0.84
+    cooldown: 0.04
   - id: door_open
     clip: {fileID: 8300000, guid: 67180ba24401de748baca467342db438, type: 3}
     volume: 0.35
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: xp_magnet
     clip: {fileID: 8300000, guid: d9a6243c41433e54f8482d34b167f008, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: eraser_fire
     clip: {fileID: 8300000, guid: 10f6bb17e3d99cd46be42545d93f5eda, type: 3}
     volume: 0.32
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: projectile_wall_hit
     clip: {fileID: 8300000, guid: 8676346a88639d14ebb051cc2299579d, type: 3}
     volume: 0.22
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ruler_fire
     clip: {fileID: 8300000, guid: e883456f8ceab294a92cdff3e4f101cc, type: 3}
     volume: 0.3
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: ruler_hit
     clip: {fileID: 8300000, guid: ae05a65f373b5a64084ff6b8319b2a27, type: 3}
     volume: 0.28
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   - id: run_victory
     clip: {fileID: 8300000, guid: 44d81bc9a381afd45b32c1d64319f8fa, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
+    cooldown: 0.04
   musicTracks:
   - id: menu_music
     clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
@@ -10539,6 +10590,8 @@ MonoBehaviour:
     musicId: 
     fadeDuration: 0
   sfxPoolSize: 16
+  musicMix: 0.5
+  sfxMix: 0.55
   musicSource: {fileID: 0}
 --- !u!1 &5024460484983561391
 GameObject:
@@ -10605,7 +10658,3 @@ SceneRoots:
   - {fileID: 242738780}
   - {fileID: 146018074}
   - {fileID: 1426210185}
-
-
-
-

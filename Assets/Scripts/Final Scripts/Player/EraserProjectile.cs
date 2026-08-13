@@ -36,6 +36,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
     private Transform homingTarget;
     private float homingTurnSpeed;
     private bool despawning;
+    private bool allowHomingBehindTarget;
 
     private void Awake()
     {
@@ -88,6 +89,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         DamageType projectileDamageType)
     {
         direction = launchDirection.normalized;
+        allowHomingBehindTarget = true;
 
         if (direction == Vector2.zero)
             direction = Vector2.right;
@@ -121,10 +123,12 @@ public class EraserProjectile : MonoBehaviour, IPoolable
 
     public void SetHomingTarget(
         Transform target,
-        float turnSpeed)
+        float turnSpeed,
+        bool allowTargetBehind = true)
     {
         homingTarget = target;
         homingEnabled = target != null;
+        allowHomingBehindTarget = allowTargetBehind;
 
         homingTurnSpeed = turnSpeed > 0f
             ? turnSpeed
@@ -159,6 +163,14 @@ public class EraserProjectile : MonoBehaviour, IPoolable
             direction,
             desiredDirection
         );
+        
+        if (!allowHomingBehindTarget &&
+            Vector2.Dot(direction, desiredDirection) <= 0f)
+        {
+            homingTarget = null;
+            homingEnabled = false;
+            return;
+        }
 
         float maximumTurn =
             homingTurnSpeed * Time.fixedDeltaTime;
@@ -434,8 +446,10 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         homingTarget = null;
         homingTurnSpeed = defaultHomingTurnSpeed;
         despawning = false;
+        allowHomingBehindTarget = true;
 
         damagedTargets.Clear();
+        
     }
 
     private void Despawn()
