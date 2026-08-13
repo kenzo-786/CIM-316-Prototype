@@ -3,25 +3,24 @@ using UnityEngine;
 
 public static class FeedbackEventBus 
 {
-    public static event Action<Vector3, float, bool> OnDamageNumberRequested;
+    public static event Action<Vector3, float, DamageType> OnDamageNumberRequested;
     public static event Action<Vector3, float> OnHealingNumberRequested;
     public static event Action<Vector3, string, Color> OnWorldTextRequested;
     public static event Action<Vector3, float, float> OnScreenShakeRequested;
     public static event Action<string, Vector3> OnSoundRequested;
     public static event Action<GameObject, Vector3> OnEffectRequested;
 
-    public static void ReportDamage(Vector3 position, float amount, bool critical = false)
+    public static void ReportDamage(
+        Vector3 position,
+        float amount,
+        DamageType damageType = DamageType.Normal)
     {
-        OnDamageNumberRequested?.Invoke(position, amount, critical);
+        OnDamageNumberRequested?.Invoke(position, amount, damageType);
     }
 
-    public static void ReportHealing(
-       Vector3 position,
-       float amount)
+    public static void ReportHealing(Vector3 position, float amount)
     {
-        OnHealingNumberRequested?.Invoke(
-            position,
-            amount);
+        OnHealingNumberRequested?.Invoke(position, amount);
     }
 
     public static void ReportWorldText(
@@ -32,13 +31,13 @@ public static class FeedbackEventBus
         if (string.IsNullOrWhiteSpace(message))
             return;
 
-        OnWorldTextRequested?.Invoke(
-            position,
-            message,
-            color);
+        OnWorldTextRequested?.Invoke(position, message, color);
     }
 
-    public static void RequestScreenShake(float intensity, float duration, Vector3 sourcePosition)
+    public static void RequestScreenShake(
+        float intensity,
+        float duration,
+        Vector3 sourcePosition)
     {
         OnScreenShakeRequested?.Invoke(sourcePosition, intensity, duration);
     }

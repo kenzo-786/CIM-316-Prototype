@@ -4,28 +4,17 @@ using UnityEngine;
 public class EnemyHitFeedback : MonoBehaviour
 {
     [Header("Local Feedback")]
-    [SerializeField]
-    private HitFlash hitFlash;
+    [SerializeField] private HitFlash hitFlash;
 
     [Header("Global Feedback")]
-    [SerializeField]
-    private GameObject hitEffectPrefab;
-
-    [SerializeField]
-    private string hitSoundId = "enemy_hit";
-
-    [SerializeField]
-    private bool showDamageNumber = true;
+    [SerializeField] private GameObject hitEffectPrefab;
+    [SerializeField] private string hitSoundId = "enemy_hit";
+    [SerializeField] private bool showDamageNumber = true;
 
     [Header("Camera Shake")]
-    [SerializeField]
-    private bool enableCameraShake;
-
-    [SerializeField, Min(0f)]
-    private float shakeIntensity = 0.02f;
-
-    [SerializeField, Min(0f)]
-    private float shakeDuration = 0.03f;
+    [SerializeField] private bool enableCameraShake;
+    [SerializeField, Min(0f)] private float shakeIntensity = 0.02f;
+    [SerializeField, Min(0f)] private float shakeDuration = 0.03f;
 
     private Health health;
 
@@ -40,26 +29,18 @@ public class EnemyHitFeedback : MonoBehaviour
     private void OnEnable()
     {
         if (health != null)
-        {
-            health.OnDamaged +=
-                HandleDamaged;
-        }
+            health.OnDamaged += HandleDamaged;
     }
 
     private void OnDisable()
     {
         if (health != null)
-        {
-            health.OnDamaged -=
-                HandleDamaged;
-        }
+            health.OnDamaged -= HandleDamaged;
     }
 
-    private void HandleDamaged(
-        DamageInfo damageInfo)
+    private void HandleDamaged(DamageInfo damageInfo)
     {
-        Vector3 hitPosition =
-            damageInfo.hitPoint;
+        Vector3 hitPosition = damageInfo.hitPoint;
 
         if (hitFlash != null)
             hitFlash.Play();
@@ -68,26 +49,23 @@ public class EnemyHitFeedback : MonoBehaviour
         {
             FeedbackEventBus.ReportDamage(
                 hitPosition,
-                damageInfo.damage);
+                damageInfo.damage,
+                damageInfo.damageType
+            );
         }
 
-        FeedbackEventBus.SpawnEffect(
-            hitEffectPrefab,
-            hitPosition);
-
-        FeedbackEventBus.PlaySound(
-            hitSoundId,
-            hitPosition);
+        FeedbackEventBus.SpawnEffect(hitEffectPrefab, hitPosition);
+        FeedbackEventBus.PlaySound(hitSoundId, hitPosition);
 
         if (enableCameraShake &&
             shakeIntensity > 0f &&
             shakeDuration > 0f)
         {
-            FeedbackEventBus
-                .RequestScreenShake(
-                    shakeIntensity,
-                    shakeDuration,
-                    hitPosition);
+            FeedbackEventBus.RequestScreenShake(
+                shakeIntensity,
+                shakeDuration,
+                hitPosition
+            );
         }
     }
 }

@@ -20,21 +20,17 @@ public class PlayerStats : MonoBehaviour
 
     public float DamageMultiplier { get; private set; } = 1f;
     public float AttackSpeedMultiplier { get; private set; } = 1f;
-
     public float CritChance { get; private set; }
     public float HeadshotChance { get; private set; }
     public float OneShotChance { get; private set; }
-
     public float LowHealthDamageBonus { get; private set; }
     public float LowHealthAttackSpeedBonus { get; private set; }
-
     public int SideProjectiles { get; private set; }
     public int BackProjectiles { get; private set; }
     public int PierceCount { get; private set; }
     public int EnemyBounceCount { get; private set; }
     public int WallBounceCount { get; private set; }
     public int ExtraLives { get; private set; }
-
     public float HealOnKillPercent { get; private set; }
 
     private void Awake()
@@ -48,20 +44,25 @@ public class PlayerStats : MonoBehaviour
         RestoreMovementAfterRage();
     }
 
-    public float RollDamage(float baseDamage)
+    public DamageRoll RollDamageResult(float baseDamage)
     {
         if (Random.value < OneShotChance)
-            return 999999f;
+            return new DamageRoll(999999f, DamageType.OneShot);
 
-        float finalDamage =
-            baseDamage * GetDamageMultiplier();
+        float finalDamage = baseDamage * GetDamageMultiplier();
 
         if (Random.value < HeadshotChance)
-            finalDamage *= headshotMultiplier;
-        else if (Random.value < CritChance)
-            finalDamage *= critMultiplier;
+            return new DamageRoll(finalDamage * headshotMultiplier, DamageType.Headshot);
 
-        return finalDamage;
+        if (Random.value < CritChance)
+            return new DamageRoll(finalDamage * critMultiplier, DamageType.Critical);
+
+        return new DamageRoll(finalDamage, DamageType.Normal);
+    }
+
+    public float RollDamage(float baseDamage)
+    {
+        return RollDamageResult(baseDamage).damage;
     }
 
     public float GetDamageMultiplier()
@@ -107,14 +108,12 @@ public class PlayerStats : MonoBehaviour
 
     public void AddHeadshotChance(float value)
     {
-        HeadshotChance =
-            Mathf.Clamp01(HeadshotChance + value);
+        HeadshotChance = Mathf.Clamp01(HeadshotChance + value);
     }
 
     public void AddOneShotChance(float value)
     {
-        OneShotChance =
-            Mathf.Clamp01(OneShotChance + value);
+        OneShotChance = Mathf.Clamp01(OneShotChance + value);
     }
 
     public void AddLowHealthDamage(float value)
@@ -124,8 +123,7 @@ public class PlayerStats : MonoBehaviour
 
     public void AddLowHealthAttackSpeed(float value)
     {
-        LowHealthAttackSpeedBonus +=
-            Mathf.Max(0f, value);
+        LowHealthAttackSpeedBonus += Mathf.Max(0f, value);
     }
 
     public void AddSideProjectiles(int value)
@@ -160,8 +158,7 @@ public class PlayerStats : MonoBehaviour
 
     public void AddHealOnKill(float value)
     {
-        HealOnKillPercent =
-            Mathf.Clamp01(HealOnKillPercent + value);
+        HealOnKillPercent = Mathf.Clamp01(HealOnKillPercent + value);
     }
 
     public bool TryUseExtraLife()
@@ -183,7 +180,6 @@ public class PlayerStats : MonoBehaviour
         {
             StopCoroutine(rageRoutine);
             rageRoutine = null;
-
             RestoreMovementAfterRage();
         }
 
@@ -204,27 +200,18 @@ public class PlayerStats : MonoBehaviour
         float moveSpeedBoost)
     {
         rageActive = true;
-
-        rageDamageMultiplier =
-            Mathf.Max(1f, damageBoost);
-
-        rageAttackSpeedMultiplier =
-            Mathf.Max(1f, attackSpeedBoost);
+        rageDamageMultiplier = Mathf.Max(1f, damageBoost);
+        rageAttackSpeedMultiplier = Mathf.Max(1f, attackSpeedBoost);
 
         if (movement != null)
         {
-            movementSpeedBeforeRage =
-                movement.MoveSpeed;
-
+            movementSpeedBeforeRage = movement.MoveSpeed;
             movement.SetMoveSpeed(
-                movementSpeedBeforeRage *
-                Mathf.Max(1f, moveSpeedBoost)
+                movementSpeedBeforeRage * Mathf.Max(1f, moveSpeedBoost)
             );
         }
 
-        yield return new WaitForSeconds(
-            Mathf.Max(0f, duration)
-        );
+        yield return new WaitForSeconds(Mathf.Max(0f, duration));
 
         RestoreMovementAfterRage();
         rageRoutine = null;
@@ -233,11 +220,7 @@ public class PlayerStats : MonoBehaviour
     private void RestoreMovementAfterRage()
     {
         if (rageActive && movement != null)
-        {
-            movement.SetMoveSpeed(
-                movementSpeedBeforeRage
-            );
-        }
+            movement.SetMoveSpeed(movementSpeedBeforeRage);
 
         rageActive = false;
         rageDamageMultiplier = 1f;
@@ -249,8 +232,6 @@ public class PlayerStats : MonoBehaviour
         if (health == null || health.MaxHealth <= 0f)
             return false;
 
-        return
-            health.CurrentHealth / health.MaxHealth <=
-            lowHealthThreshold;
+        return health.CurrentHealth / health.MaxHealth <= lowHealthThreshold;
     }
 }

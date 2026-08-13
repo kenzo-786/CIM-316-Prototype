@@ -5,32 +5,18 @@ using UnityEngine;
 public class DamageNumber : MonoBehaviour , IPoolable
 {
     [Header("References")]
-    [SerializeField]
-    private TMP_Text text;
+    [SerializeField] private TMP_Text text;
 
     [Header("Movement")]
-    [SerializeField]
-    private float lifetime = 0.65f;
-
-    [SerializeField]
-    private float floatSpeed = 1.2f;
+    [SerializeField] private float lifetime = 0.65f;
+    [SerializeField] private float floatSpeed = 1.2f;
 
     [Header("Colors")]
-    [SerializeField]
-    private Color normalColor =
-        Color.white;
-
-    [SerializeField]
-    private Color criticalColor =
-        Color.yellow;
-
-    [SerializeField]
-    private Color healingColor =
-        new Color(
-            0.25f,
-            1f,
-            0.35f,
-            1f);
+    [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color criticalColor = Color.yellow;
+    [SerializeField] private Color headshotColor = new Color(1f, 0.25f, 0.1f, 1f);
+    [SerializeField] private Color oneShotColor = new Color(0.8f, 0.25f, 1f, 1f);
+    [SerializeField] private Color healingColor = new Color(0.25f, 1f, 0.35f, 1f);
 
     private Coroutine routine;
     private float baseFontSize;
@@ -38,57 +24,50 @@ public class DamageNumber : MonoBehaviour , IPoolable
     private void Awake()
     {
         if (text == null)
-        {
-            text =
-                GetComponentInChildren<TMP_Text>();
-        }
+            text = GetComponentInChildren<TMP_Text>();
 
         if (text != null)
             baseFontSize = text.fontSize;
     }
 
-    public void Show(
-        float amount,
-        bool critical)
+    public void Show(float amount, DamageType damageType)
     {
-        string value =
-            Mathf.CeilToInt(amount)
-                .ToString();
+        string value = Mathf.CeilToInt(amount).ToString();
+        Color color = normalColor;
+        float sizeMultiplier = 1f;
 
-        Color color =
-            critical
-                ? criticalColor
-                : normalColor;
+        switch (damageType)
+        {
+            case DamageType.Critical:
+                value = "CRIT " + value;
+                color = criticalColor;
+                sizeMultiplier = 1.2f;
+                break;
 
-        float sizeMultiplier =
-            critical ? 1.15f : 1f;
+            case DamageType.Headshot:
+                value = "HEADSHOT " + value;
+                color = headshotColor;
+                sizeMultiplier = 1.35f;
+                break;
 
-        ShowText(
-            value,
-            color,
-            sizeMultiplier);
+            case DamageType.OneShot:
+                value = "EXECUTE";
+                color = oneShotColor;
+                sizeMultiplier = 1.55f;
+                break;
+        }
+
+        ShowText(value, color, sizeMultiplier);
     }
 
     public void ShowHealing(float amount)
     {
-        string value =
-            "+" +
-            Mathf.CeilToInt(amount);
-
-        ShowText(
-            value,
-            healingColor,
-            1f);
+        ShowText("+" + Mathf.CeilToInt(amount), healingColor, 1f);
     }
 
-    public void ShowMessage(
-        string message,
-        Color color)
+    public void ShowMessage(string message, Color color)
     {
-        ShowText(
-            message,
-            color,
-            1.2f);
+        ShowText(message, color, 1.2f);
     }
 
     private void ShowText(
@@ -100,18 +79,13 @@ public class DamageNumber : MonoBehaviour , IPoolable
         {
             text.text = message;
             text.color = color;
-
-            text.fontSize =
-                baseFontSize *
-                sizeMultiplier;
+            text.fontSize = baseFontSize * sizeMultiplier;
         }
 
         if (routine != null)
             StopCoroutine(routine);
 
-        routine =
-            StartCoroutine(
-                FloatRoutine());
+        routine = StartCoroutine(FloatRoutine());
     }
 
     public void OnSpawnedFromPool()
@@ -133,18 +107,11 @@ public class DamageNumber : MonoBehaviour , IPoolable
 
         while (timer < lifetime)
         {
-            timer +=
-                Time.unscaledDeltaTime;
-
-            transform.position +=
-                Vector3.up *
-                floatSpeed *
-                Time.unscaledDeltaTime;
-
+            timer += Time.unscaledDeltaTime;
+            transform.position += Vector3.up * floatSpeed * Time.unscaledDeltaTime;
             yield return null;
         }
 
-        PooledProjectileUtility.Despawn(
-            gameObject);
+        PooledProjectileUtility.Despawn(gameObject);
     }
 }

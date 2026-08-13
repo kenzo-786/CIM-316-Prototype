@@ -64,11 +64,14 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
             damagedEnemies.Add(damageable);
 
+            DamageRoll damageRoll = GetFinalDamageRoll();
+
             damageable.TakeDamage(
                 new DamageInfo(
-                    GetFinalDamage(),
+                    damageRoll.damage,
                     gameObject,
-                    hit.transform.position
+                    hit.transform.position,
+                    damageRoll.damageType
                 )
             );
         }
@@ -99,7 +102,11 @@ public class RulerSlashWeapon :PlayerWeaponBase
 
             if (delay <= 0f)
             {
-                FireWaveVolley(direction, target, sideShots);
+                FireWaveVolley(
+                    direction,
+                    target,
+                    sideShots
+                );
             }
             else
             {
@@ -123,7 +130,11 @@ public class RulerSlashWeapon :PlayerWeaponBase
     {
         yield return new WaitForSeconds(delay);
 
-        FireWaveVolley(direction, target, sideShots);
+        FireWaveVolley(
+            direction,
+            target,
+            sideShots
+        );
     }
 
     private void FireWaveVolley(
@@ -154,7 +165,11 @@ public class RulerSlashWeapon :PlayerWeaponBase
                 perpendicular *
                 (startOffset + i * sideOffset);
 
-            SpawnSlashWave(direction, offset, target);
+            SpawnSlashWave(
+                direction,
+                offset,
+                target
+            );
         }
     }
 
@@ -182,9 +197,10 @@ public class RulerSlashWeapon :PlayerWeaponBase
                     Quaternion.identity
                 );
 
-        RulerSlashWave wave = waveObject != null
-            ? waveObject.GetComponent<RulerSlashWave>()
-            : null;
+        RulerSlashWave wave =
+            waveObject != null
+                ? waveObject.GetComponent<RulerSlashWave>()
+                : null;
 
         if (wave == null)
             return;
@@ -201,15 +217,18 @@ public class RulerSlashWeapon :PlayerWeaponBase
             baseWallBounceCount +
             (stats != null ? stats.WallBounceCount : 0);
 
+        DamageRoll damageRoll = GetFinalDamageRoll();
+
         wave.Launch(
             direction,
-            GetFinalDamage(),
+            damageRoll.damage,
             slashWaveSpeed,
             slashWaveLifetime,
             pierce,
             enemyBounce,
             wallBounce,
-            gameObject
+            gameObject,
+            damageRoll.damageType
         );
 
         wave.SetHomingTarget(

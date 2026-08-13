@@ -56,14 +56,19 @@ public abstract class PlayerWeaponBase : MonoBehaviour
         permanentDamageMultiplier = Mathf.Max(0.1f, value);
     }
 
-    protected float GetFinalDamage()
+    protected DamageRoll GetFinalDamageRoll()
     {
         float damage = baseDamage * permanentDamageMultiplier;
 
         if (stats == null)
-            return damage;
+            return new DamageRoll(damage, DamageType.Normal);
 
-        return stats.RollDamage(damage);
+        return stats.RollDamageResult(damage);
+    }
+
+    protected float GetFinalDamage()
+    {
+        return GetFinalDamageRoll().damage;
     }
 
     protected abstract void Attack(Vector2 aimDirection);

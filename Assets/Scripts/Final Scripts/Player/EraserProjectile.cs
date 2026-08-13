@@ -18,23 +18,20 @@ public class EraserProjectile : MonoBehaviour, IPoolable
     [SerializeField] private float defaultHomingTurnSpeed = 360f;
     [SerializeField] private float bounceSearchRadius = 8f;
 
-    private readonly HashSet<IDamageable>
-        damagedTargets =
-            new HashSet<IDamageable>();
+    private readonly HashSet<IDamageable> damagedTargets =
+        new HashSet<IDamageable>();
 
     private Rigidbody2D rb;
     private float damage;
     private float speed;
     private float lifetime;
     private float lifeTimer;
-
     private int pierceLeft;
     private int enemyBouncesLeft;
     private int wallBouncesLeft;
-
     private Vector2 direction;
     private GameObject owner;
-
+    private DamageType damageType;
     private bool homingEnabled;
     private Transform homingTarget;
     private float homingTurnSpeed;
@@ -43,11 +40,9 @@ public class EraserProjectile : MonoBehaviour, IPoolable
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
         rb.gravityScale = 0f;
         rb.collisionDetectionMode =
             CollisionDetectionMode2D.Continuous;
-
         rb.interpolation =
             RigidbodyInterpolation2D.Interpolate;
     }
@@ -89,7 +84,8 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         int pierceCount,
         int enemyBounceCount,
         int wallBounceCount,
-        GameObject projectileOwner)
+        GameObject projectileOwner,
+        DamageType projectileDamageType)
     {
         direction = launchDirection.normalized;
 
@@ -107,21 +103,16 @@ public class EraserProjectile : MonoBehaviour, IPoolable
             : defaultLifetime;
 
         pierceLeft = Mathf.Max(0, pierceCount);
-
-        enemyBouncesLeft =
-            Mathf.Max(0, enemyBounceCount);
-
-        wallBouncesLeft =
-            Mathf.Max(0, wallBounceCount);
+        enemyBouncesLeft = Mathf.Max(0, enemyBounceCount);
+        wallBouncesLeft = Mathf.Max(0, wallBounceCount);
 
         owner = projectileOwner;
+        damageType = projectileDamageType;
         lifeTimer = 0f;
         despawning = false;
-
         homingEnabled = false;
         homingTarget = null;
-        homingTurnSpeed =
-            defaultHomingTurnSpeed;
+        homingTurnSpeed = defaultHomingTurnSpeed;
 
         damagedTargets.Clear();
 
@@ -152,43 +143,34 @@ public class EraserProjectile : MonoBehaviour, IPoolable
 
         if (!IsHomingTargetValid(homingTarget))
         {
-            // Continue travelling forward instead of
-            // suddenly selecting a different target.
             homingTarget = null;
             homingEnabled = false;
             return;
         }
 
         Vector2 desiredDirection =
-            ((Vector2)homingTarget.position -
-             rb.position).normalized;
+            ((Vector2)homingTarget.position - rb.position)
+            .normalized;
 
         if (desiredDirection == Vector2.zero)
             return;
 
-        float signedAngle =
-            Vector2.SignedAngle(
-                direction,
-                desiredDirection
-            );
+        float signedAngle = Vector2.SignedAngle(
+            direction,
+            desiredDirection
+        );
 
         float maximumTurn =
-            homingTurnSpeed *
-            Time.fixedDeltaTime;
+            homingTurnSpeed * Time.fixedDeltaTime;
 
-        float appliedTurn =
-            Mathf.Clamp(
-                signedAngle,
-                -maximumTurn,
-                maximumTurn
-            );
+        float appliedTurn = Mathf.Clamp(
+            signedAngle,
+            -maximumTurn,
+            maximumTurn
+        );
 
         Vector3 rotated =
-            Quaternion.Euler(
-                0f,
-                0f,
-                appliedTurn
-            ) * direction;
+            Quaternion.Euler(0f, 0f, appliedTurn) * direction;
 
         direction = new Vector2(
             rotated.x,
@@ -198,8 +180,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         ApplyDirection();
     }
 
-    private bool IsHomingTargetValid(
-        Transform target)
+    private bool IsHomingTargetValid(Transform target)
     {
         if (target == null ||
             !target.gameObject.activeInHierarchy)
@@ -231,19 +212,12 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         HandleHit(other, null);
     }
 
-    private void OnCollisionEnter2D(
-        Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (despawning ||
-            IsOwner(collision.collider))
-        {
+        if (despawning || IsOwner(collision.collider))
             return;
-        }
 
-        HandleHit(
-            collision.collider,
-            collision
-        );
+        HandleHit(collision.collider, collision);
     }
 
     private void HandleHit(
@@ -253,28 +227,20 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         if (other == null)
             return;
 
-        if (IsInLayer(
-            other.gameObject.layer,
-            enemyLayer))
+        if (IsInLayer(other.gameObject.layer, enemyLayer))
         {
             HitEnemy(other);
             return;
         }
 
-        if (IsInLayer(
-            other.gameObject.layer,
-            wallLayer))
-        {
+        if (IsInLayer(other.gameObject.layer, wallLayer))
             HitWall(other, collision);
-        }
     }
 
-    private void HitEnemy(
-        Collider2D enemyCollider)
+    private void HitEnemy(Collider2D enemyCollider)
     {
         IDamageable damageable =
-            enemyCollider
-                .GetComponentInParent<IDamageable>();
+            enemyCollider.GetComponentInParent<IDamageable>();
 
         if (damageable == null ||
             damagedTargets.Contains(damageable))
@@ -290,7 +256,8 @@ public class EraserProjectile : MonoBehaviour, IPoolable
                 owner != null
                     ? owner
                     : gameObject,
-                transform.position
+                transform.position,
+                damageType
             )
         );
 
@@ -304,10 +271,8 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         if (pierceLeft > 0)
         {
             pierceLeft--;
-
             homingTarget = null;
             homingEnabled = false;
-
             return;
         }
 
@@ -333,10 +298,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
             normal = -direction;
 
         SetDirection(
-            Vector2.Reflect(
-                direction,
-                normal
-            ).normalized
+            Vector2.Reflect(direction, normal).normalized
         );
     }
 
@@ -350,8 +312,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
             );
 
         EnemyBase closestEnemy = null;
-        float closestDistanceSquared =
-            float.MaxValue;
+        float closestDistanceSquared = float.MaxValue;
 
         foreach (Collider2D hit in hits)
         {
@@ -384,15 +345,10 @@ public class EraserProjectile : MonoBehaviour, IPoolable
                  (Vector2)transform.position)
                 .sqrMagnitude;
 
-            if (distanceSquared >=
-                closestDistanceSquared)
-            {
+            if (distanceSquared >= closestDistanceSquared)
                 continue;
-            }
 
-            closestDistanceSquared =
-                distanceSquared;
-
+            closestDistanceSquared = distanceSquared;
             closestEnemy = enemy;
         }
 
@@ -413,8 +369,7 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         SetDirection(nextDirection);
     }
 
-    private void SetDirection(
-        Vector2 newDirection)
+    private void SetDirection(Vector2 newDirection)
     {
         direction = newDirection == Vector2.zero
             ? Vector2.right
@@ -439,17 +394,14 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         if (collision != null &&
             collision.contactCount > 0)
         {
-            return collision
-                .GetContact(0)
-                .normal;
+            return collision.GetContact(0).normal;
         }
 
         Vector2 closestPoint =
             wall.ClosestPoint(transform.position);
 
-        return
-            ((Vector2)transform.position -
-             closestPoint).normalized;
+        return ((Vector2)transform.position - closestPoint)
+            .normalized;
     }
 
     private bool IsOwner(Collider2D other)
@@ -457,17 +409,13 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         if (owner == null || other == null)
             return false;
 
-        return
-            other.transform.root ==
-            owner.transform.root;
+        return other.transform.root ==
+               owner.transform.root;
     }
 
-    private bool IsInLayer(
-        int layer,
-        LayerMask mask)
+    private bool IsInLayer(int layer, LayerMask mask)
     {
-        return
-            (mask.value & (1 << layer)) != 0;
+        return (mask.value & (1 << layer)) != 0;
     }
 
     private void ResetRuntimeState()
@@ -476,21 +424,17 @@ public class EraserProjectile : MonoBehaviour, IPoolable
         speed = 0f;
         lifetime = 0f;
         lifeTimer = 0f;
-
         pierceLeft = 0;
         enemyBouncesLeft = 0;
         wallBouncesLeft = 0;
-
         direction = Vector2.zero;
         owner = null;
-
+        damageType = DamageType.Normal;
         homingEnabled = false;
         homingTarget = null;
-
-        homingTurnSpeed =
-            defaultHomingTurnSpeed;
-
+        homingTurnSpeed = defaultHomingTurnSpeed;
         despawning = false;
+
         damagedTargets.Clear();
     }
 
@@ -500,9 +444,6 @@ public class EraserProjectile : MonoBehaviour, IPoolable
             return;
 
         despawning = true;
-
-        PooledProjectileUtility.Despawn(
-            gameObject
-        );
+        PooledProjectileUtility.Despawn(gameObject);
     }
 }

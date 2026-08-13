@@ -43,9 +43,7 @@ public class EraserThrowWeapon : PlayerWeaponBase
             (stats != null ? stats.BackProjectiles : 0)
         );
 
-        for (int repeat = 0;
-             repeat < repeatShots;
-             repeat++)
+        for (int repeat = 0; repeat < repeatShots; repeat++)
         {
             float delay = repeat * backToBackDelay;
 
@@ -85,12 +83,11 @@ public class EraserThrowWeapon : PlayerWeaponBase
         );
     }
 
-    private System.Collections.IEnumerator
-        FireProjectileVolleyDelayed(
-            Vector2 direction,
-            Transform target,
-            int sideShots,
-            float delay)
+    private System.Collections.IEnumerator FireProjectileVolleyDelayed(
+        Vector2 direction,
+        Transform target,
+        int sideShots,
+        float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -163,8 +160,7 @@ public class EraserThrowWeapon : PlayerWeaponBase
 
         EraserProjectile projectile =
             projectileObject != null
-                ? projectileObject
-                    .GetComponent<EraserProjectile>()
+                ? projectileObject.GetComponent<EraserProjectile>()
                 : null;
 
         if (projectile == null)
@@ -176,25 +172,24 @@ public class EraserThrowWeapon : PlayerWeaponBase
 
         int enemyBounce =
             baseEnemyBounceCount +
-            (stats != null
-                ? stats.EnemyBounceCount
-                : 0);
+            (stats != null ? stats.EnemyBounceCount : 0);
 
         int wallBounce =
             baseWallBounceCount +
-            (stats != null
-                ? stats.WallBounceCount
-                : 0);
+            (stats != null ? stats.WallBounceCount : 0);
+
+        DamageRoll damageRoll = GetFinalDamageRoll();
 
         projectile.Launch(
             direction,
-            GetFinalDamage(),
+            damageRoll.damage,
             projectileSpeed,
             projectileLifetime,
             pierce,
             enemyBounce,
             wallBounce,
-            gameObject
+            gameObject,
+            damageRoll.damageType
         );
 
         projectile.SetHomingTarget(
