@@ -545,7 +545,7 @@ public class MainMenu : MonoBehaviour
 
         UpdateSelectionIcon();
 
-        SetCreditsBackColor(
+        SetUpgradesBackColor(
             upgradesBackNormalColor
         );
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Emergency_Revive
   m_EditorClassIdentifier: Assembly-CSharp::MetaUpgradeData
   upgradeId: meta_revive
-  upgradeName: Meta Upgrade
-  description: 
+  upgradeName: Emergency Revive
+  description: Start each run with one extra life.
   icon: {fileID: 0}
   upgradeType: 3
   maxLevel: 1

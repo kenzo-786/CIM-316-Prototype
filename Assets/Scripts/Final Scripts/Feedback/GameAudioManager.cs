@@ -14,6 +14,7 @@ public class GameAudioManager : MonoBehaviour
         [Range(0f, 1f)] public float volume = 1f;
         [Range(0.1f, 3f)] public float pitchMin = 1f;
         [Range(0.1f, 3f)] public float pitchMax = 1f;
+        [Min(0f)] public float cooldown = 0.04f;
     }
 
     [Serializable]
@@ -42,10 +43,13 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private MusicEntry[] musicTracks;
     [SerializeField] private SceneMusicEntry[] sceneMusic;
     [SerializeField, Min(1)] private int sfxPoolSize = 16;
+    [SerializeField, Range(0f, 1f)] private float musicMix = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float sfxMix = 0.55f;
     [SerializeField] private AudioSource musicSource;
 
     private readonly Dictionary<string, SoundEffectEntry> soundsById = new Dictionary<string, SoundEffectEntry>();
     private readonly Dictionary<string, MusicEntry> musicById = new Dictionary<string, MusicEntry>();
+    private readonly Dictionary<string, float> lastPlayTimeById = new Dictionary<string, float>();
     private readonly List<SfxSlot> sfxSlots = new List<SfxSlot>();
 
     private Coroutine musicRoutine;
@@ -127,12 +131,12 @@ public class GameAudioManager : MonoBehaviour
         }
 
         if (musicSource != null)
-            musicSource.volume = musicBaseVolume * musicMultiplier * musicFadeMultiplier;
+            musicSource.volume = musicBaseVolume * musicMultiplier * musicMix * musicFadeMultiplier;
 
         foreach (SfxSlot slot in sfxSlots)
         {
             if (slot.source != null)
-                slot.source.volume = slot.baseVolume * sfxMultiplier;
+                slot.source.volume = slot.baseVolume * sfxMultiplier * sfxMix;
         }
     }
 
@@ -173,7 +177,7 @@ public class GameAudioManager : MonoBehaviour
             foreach (SoundEffectEntry sound in soundEffects)
             {
                 if (sound != null && !string.IsNullOrWhiteSpace(sound.id))
-                    soundsById[sound.id] = sound;
+                    soundsById[sound.id.Trim()] = sound;
             }
         }
 
@@ -182,7 +186,7 @@ public class GameAudioManager : MonoBehaviour
             foreach (MusicEntry music in musicTracks)
             {
                 if (music != null && !string.IsNullOrWhiteSpace(music.id))
-                    musicById[music.id] = music;
+                    musicById[music.id.Trim()] = music;
             }
         }
     }
@@ -252,13 +256,28 @@ public class GameAudioManager : MonoBehaviour
         if (string.IsNullOrWhiteSpace(id))
             return;
 
-        if (!soundsById.TryGetValue(id, out SoundEffectEntry sound) || sound.clip == null)
+        string normalizedId = id.Trim();
+
+        if (!soundsById.TryGetValue(normalizedId, out SoundEffectEntry sound) || sound.clip == null)
+        {
+            Debug.LogWarning("GameAudioManager is missing a clip for sound id: " + normalizedId, this);
             return;
+        }
+
+        float cooldown = Mathf.Max(0.04f, sound.cooldown);
+
+        if (cooldown > 0f &&
+            lastPlayTimeById.TryGetValue(normalizedId, out float lastPlayTime) &&
+            Time.unscaledTime < lastPlayTime + cooldown)
+        {
+            return;
+        }
 
         SfxSlot slot = GetAvailableSfxSlot();
         if (slot == null || slot.source == null)
             return;
 
+        lastPlayTimeById[normalizedId] = Time.unscaledTime;
         AudioSource source = slot.source;
         source.Stop();
         source.transform.position = position;
@@ -294,16 +313,21 @@ public class GameAudioManager : MonoBehaviour
         if (string.IsNullOrWhiteSpace(id))
             return;
 
-        if (!musicById.TryGetValue(id, out MusicEntry music) || music.clip == null)
-            return;
+        string normalizedId = id.Trim();
 
-        if (currentMusicId == id && musicSource != null && musicSource.isPlaying)
+        if (!musicById.TryGetValue(normalizedId, out MusicEntry music) || music.clip == null)
+        {
+            Debug.LogWarning("GameAudioManager is missing a track for music id: " + normalizedId, this);
+            return;
+        }
+
+        if (currentMusicId == normalizedId && musicSource != null && musicSource.isPlaying)
             return;
 
         if (musicRoutine != null)
             StopCoroutine(musicRoutine);
 
-        musicRoutine = StartCoroutine(SwitchMusicRoutine(id, music, fadeDuration));
+        musicRoutine = StartCoroutine(SwitchMusicRoutine(normalizedId, music, fadeDuration));
     }
 
     private void StopMusicInternal(float fadeDuration)

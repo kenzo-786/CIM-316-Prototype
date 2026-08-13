@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Training_Damage
   m_EditorClassIdentifier: Assembly-CSharp::MetaUpgradeData
   upgradeId: meta_damage
-  upgradeName: Meta Upgrade
-  description: 
+  upgradeName: Damage Training
+  description: Deal +5% weapon damage per rank.
   icon: {fileID: 0}
   upgradeType: 1
   maxLevel: 5

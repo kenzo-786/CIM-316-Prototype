@@ -23,7 +23,10 @@ public class EnemyHitFeedback : MonoBehaviour
         health = GetComponent<Health>();
 
         if (hitFlash == null)
-            hitFlash = GetComponent<HitFlash>();
+            hitFlash = GetComponentInChildren<HitFlash>(true);
+
+        if (hitFlash == null)
+            hitFlash = gameObject.AddComponent<HitFlash>();
     }
 
     private void OnEnable()
@@ -40,7 +43,9 @@ public class EnemyHitFeedback : MonoBehaviour
 
     private void HandleDamaged(DamageInfo damageInfo)
     {
-        Vector3 hitPosition = damageInfo.hitPoint;
+        Vector3 hitPosition = damageInfo.hitPoint == Vector2.zero
+            ? transform.position
+            : damageInfo.hitPoint;
 
         if (hitFlash != null)
             hitFlash.Play();

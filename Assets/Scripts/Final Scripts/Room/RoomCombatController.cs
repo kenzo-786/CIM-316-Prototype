@@ -16,6 +16,7 @@ public class RoomCombatController : MonoBehaviour
 
     private readonly List<EnemyBase> aliveEnemies = new List<EnemyBase>();
     private readonly List<ExperienceGem> droppedGems = new List<ExperienceGem>();
+    private readonly List<EnemySpawnEntry> pendingSpawns = new List<EnemySpawnEntry>();
 
     private RoomData currentRoomData;
     private RoomLayout currentLayout;
@@ -168,33 +169,7 @@ public class RoomCombatController : MonoBehaviour
                 totalWaves
             );
 
-            if (wave.enemies != null)
-            {
-                foreach (EnemySpawnEntry entry in wave.enemies)
-                {
-                    if (entry == null || entry.enemyData == null)
-                    {
-                        continue;
-                    }
-
-                    for (int i = 0; i < entry.count; i++)
-                    {
-                        if (!combatRunning)
-                        {
-                            yield break;
-                        }
-
-                        SpawnEnemy(entry.enemyData);
-
-                        if (entry.delayBetweenSpawns > 0f)
-                        {
-                            yield return new WaitForSeconds(
-                                entry.delayBetweenSpawns
-                            );
-                        }
-                    }
-                }
-            }
+            yield return SpawnWaveEnemies(wave);
 
             yield return new WaitUntil(
                 () => !combatRunning || aliveEnemies.Count == 0
@@ -207,6 +182,48 @@ public class RoomCombatController : MonoBehaviour
         }
 
         FinishRoomCombat();
+    }
+
+    private IEnumerator SpawnWaveEnemies(WaveData wave)
+    {
+        if (wave.enemies == null)
+        {
+            yield break;
+        }
+
+        pendingSpawns.Clear();
+
+        foreach (EnemySpawnEntry entry in wave.enemies)
+        {
+            if (entry == null || entry.enemyData == null)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < entry.count; i++)
+            {
+                pendingSpawns.Add(entry);
+            }
+        }
+
+        while (pendingSpawns.Count > 0)
+        {
+            if (!combatRunning)
+            {
+                yield break;
+            }
+
+            int index = UnityEngine.Random.Range(0, pendingSpawns.Count);
+            EnemySpawnEntry entry = pendingSpawns[index];
+            pendingSpawns.RemoveAt(index);
+
+            SpawnEnemy(entry.enemyData);
+
+            if (pendingSpawns.Count > 0 && entry.delayBetweenSpawns > 0f)
+            {
+                yield return new WaitForSeconds(entry.delayBetweenSpawns);
+            }
+        }
     }
 
     private int CountValidWaves()

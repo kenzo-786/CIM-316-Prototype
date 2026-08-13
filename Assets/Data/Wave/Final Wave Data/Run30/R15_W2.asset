@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a78d286bc79bd943ab4e91dd417708f, type: 3}
   m_Name: R15_W2
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
-  delayBeforeWave: 1.8
+  delayBeforeWave: 0.8
   enemies:
   - enemyData: {fileID: 11400000, guid: 0a750fe9c407a6941bc7fb217166f58e, type: 2}
     count: 1
-    delayBetweenSpawns: 0.30
+    delayBetweenSpawns: 0.16
   - enemyData: {fileID: 11400000, guid: fbf3cdb146c5b144a9db7e95fda8823e, type: 2}
     count: 2
-    delayBetweenSpawns: 0.30
+    delayBetweenSpawns: 0.16
+

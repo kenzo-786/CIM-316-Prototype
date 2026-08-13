@@ -28,6 +28,20 @@ public class MetaUpgradeButton : MonoBehaviour
             button.onClick.RemoveListener(Purchase);
     }
 
+    public void ConfigureRuntime(
+        Button runtimeButton,
+        TMP_Text runtimeNameText,
+        TMP_Text runtimeDescriptionText,
+        TMP_Text runtimeLevelText,
+        TMP_Text runtimeCostText)
+    {
+        button = runtimeButton;
+        nameText = runtimeNameText;
+        descriptionText = runtimeDescriptionText;
+        levelText = runtimeLevelText;
+        costText = runtimeCostText;
+    }
+
     public void Setup(MetaUpgradeData data, MetaProgressionUI ui)
     {
         upgrade = data;

@@ -26,6 +26,7 @@ public class EnemyDeathFeedback : MonoBehaviour
     [SerializeField] private string splitSoundId = "enemy_split";
 
     private Color[] originalColors;
+    private Coroutine fadeRoutine;
     private bool played;
 
     public float DeathDuration => deathDuration;
@@ -34,7 +35,7 @@ public class EnemyDeathFeedback : MonoBehaviour
     {
         if (renderers == null || renderers.Length == 0)
         {
-            renderers = GetComponentsInChildren<SpriteRenderer>();
+            renderers = GetComponentsInChildren<SpriteRenderer>(true);
         }
 
         originalColors = new Color[renderers.Length];
@@ -45,6 +46,44 @@ public class EnemyDeathFeedback : MonoBehaviour
             {
                 originalColors[i] = renderers[i].color;
             }
+        }
+    }
+
+    private void OnEnable()
+    {
+        played = false;
+
+        if (renderers == null || renderers.Length == 0)
+            renderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (originalColors == null || originalColors.Length != renderers.Length)
+            originalColors = new Color[renderers.Length];
+
+        if (renderers == null || originalColors == null)
+            return;
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i] != null)
+                originalColors[i] = renderers[i].color;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (fadeRoutine != null)
+        {
+            StopCoroutine(fadeRoutine);
+            fadeRoutine = null;
+        }
+
+        if (renderers == null || originalColors == null)
+            return;
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i] != null && i < originalColors.Length)
+                renderers[i].color = originalColors[i];
         }
     }
 
@@ -80,7 +119,7 @@ public class EnemyDeathFeedback : MonoBehaviour
 
         if (fadeSprites && deathDuration > 0f)
         {
-            StartCoroutine(FadeRoutine());
+            fadeRoutine = StartCoroutine(FadeRoutine());
         }
     }
 
@@ -107,5 +146,7 @@ public class EnemyDeathFeedback : MonoBehaviour
 
             yield return null;
         }
+
+        fadeRoutine = null;
     }
 }

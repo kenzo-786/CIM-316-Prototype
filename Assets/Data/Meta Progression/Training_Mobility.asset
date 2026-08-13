@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Training_Mobility
   m_EditorClassIdentifier: Assembly-CSharp::MetaUpgradeData
   upgradeId: meta_mobility
-  upgradeName: Meta Upgrade
-  description: 
+  upgradeName: Mobility Training
+  description: Start each run with +0.15 movement speed per rank.
   icon: {fileID: 0}
   upgradeType: 2
   maxLevel: 4

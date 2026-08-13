@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Training_Vitality
   m_EditorClassIdentifier: Assembly-CSharp::MetaUpgradeData
   upgradeId: meta_vitality
-  upgradeName: Meta Upgrade
-  description: 
+  upgradeName: Vitality Training
+  description: Start each run with +5 maximum health per rank.
   icon: {fileID: 0}
   upgradeType: 0
   maxLevel: 5

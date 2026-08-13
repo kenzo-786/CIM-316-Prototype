@@ -72,6 +72,9 @@ public abstract class EnemyBase : MonoBehaviour
         deathAnimation = GetComponent<CodeDeathAnimation>();
         bodyCollider = GetComponent<Collider2D>();
 
+        if (deathFeedback == null)
+            deathFeedback = gameObject.AddComponent<EnemyDeathFeedback>();
+
         if (visual == null)
             visual = GetComponentInChildren<SpriteRenderer>();
 

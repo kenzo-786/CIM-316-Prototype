@@ -67,13 +67,13 @@ public class SpiderAmbushEnemy : EnemyBase
             bodyCollider = GetComponent<Collider2D>();
 
         if (visuals == null || visuals.Length == 0)
-            visuals = GetComponentsInChildren<SpriteRenderer>();
+            visuals = GetComponentsInChildren<SpriteRenderer>(true);
 
         if (telegraph == null)
             telegraph = GetComponent<EnemyTelegraphFeedback>();
 
         if (animationController == null)
-            animationController = GetComponentInChildren<EnemyAnimationController>();
+            animationController = GetComponentInChildren<EnemyAnimationController>(true);
 
         if (bodyCollider != null)
         {
@@ -82,14 +82,14 @@ public class SpiderAmbushEnemy : EnemyBase
         }
 
         bodyRadius = Mathf.Max(bodyRadius, 0.25f);
-        roomBounds = FindObjectOfType<RoomBounds>();
+        RefreshRoomBounds();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        roomBounds = FindObjectOfType<RoomBounds>();
+        RefreshRoomBounds();
         hasLastVanishPosition = false;
 
         BeginSpawnReveal();
@@ -102,7 +102,7 @@ public class SpiderAmbushEnemy : EnemyBase
     {
         base.Initialize(data, playerTarget);
 
-        roomBounds = FindObjectOfType<RoomBounds>();
+        RefreshRoomBounds();
         hasLastVanishPosition = false;
 
         BeginSpawnReveal();
@@ -350,10 +350,9 @@ public class SpiderAmbushEnemy : EnemyBase
 
     private Vector2 FindSafeAmbushPosition()
     {
-        if (roomBounds == null)
-            return rb.position;
+        RefreshRoomBounds();
 
-        for (int attempt = 0; attempt < 32; attempt++)
+        for (int attempt = 0; attempt < 48; attempt++)
         {
             Vector2 direction =
                 Random.insideUnitCircle.normalized;
@@ -370,75 +369,88 @@ public class SpiderAmbushEnemy : EnemyBase
                 (Vector2)target.position +
                 direction * distance;
 
-            candidate = ClampInsideRoom(candidate);
-
-            if (Vector2.Distance(
-                    candidate,
-                    target.position
-                ) < emergeDistanceMin * 0.65f)
-            {
-                continue;
-            }
-
-            if (hasLastVanishPosition &&
-                Vector2.Distance(
-                    candidate,
-                    lastVanishPosition
-                ) < minimumReemergeDistance)
-            {
-                continue;
-            }
-
-            float requiredClearance =
-                spawnClearance + bodyRadius;
-
-            bool blocked = Physics2D.OverlapCircle(
-                candidate,
-                requiredClearance,
-                blockedLayer
-            );
-
-            if (!blocked)
-                return candidate;
+            if (IsValidAmbushPosition(candidate))
+                return ClampInsideRoom(candidate);
         }
 
-        for (int attempt = 0; attempt < 20; attempt++)
+        for (int attempt = 0; attempt < 32; attempt++)
         {
-            Vector2 candidate = ClampInsideRoom(
-                roomBounds.GetRandomPoint()
-            );
+            Vector2 candidate = roomBounds != null
+                ? roomBounds.GetRandomPoint()
+                : (Vector2)target.position + Random.insideUnitCircle.normalized * emergeDistanceMax;
 
-            bool closeToLastPosition =
-                hasLastVanishPosition &&
-                Vector2.Distance(
-                    candidate,
-                    lastVanishPosition
-                ) < minimumReemergeDistance;
-
-            bool blocked = Physics2D.OverlapCircle(
-                candidate,
-                spawnClearance + bodyRadius,
-                blockedLayer
-            );
-
-            if (!closeToLastPosition && !blocked)
-                return candidate;
+            if (IsValidAmbushPosition(candidate))
+                return ClampInsideRoom(candidate);
         }
 
-        Vector2 fallbackDirection =
-            hasLastVanishPosition
-                ? ((Vector2)target.position -
-                   lastVanishPosition).normalized
-                : Vector2.right;
+        return FindBestFallbackPosition();
+    }
 
-        if (fallbackDirection == Vector2.zero)
-            fallbackDirection = Vector2.right;
+    private void RefreshRoomBounds()
+    {
+        if (roomBounds == null || !roomBounds.isActiveAndEnabled)
+            roomBounds = FindObjectOfType<RoomBounds>();
+    }
 
-        return ClampInsideRoom(
-            (Vector2)target.position +
-            fallbackDirection *
-            emergeDistanceMax
-        );
+    private bool IsValidAmbushPosition(Vector2 candidate)
+    {
+        candidate = ClampInsideRoom(candidate);
+
+        if (Vector2.Distance(candidate, target.position) < emergeDistanceMin * 0.7f)
+            return false;
+
+        if (hasLastVanishPosition &&
+            Vector2.Distance(candidate, lastVanishPosition) < minimumReemergeDistance)
+        {
+            return false;
+        }
+
+        return !Physics2D.OverlapCircle(candidate, spawnClearance + bodyRadius, blockedLayer);
+    }
+
+    private Vector2 FindBestFallbackPosition()
+    {
+        Vector2 playerPosition = target != null ? target.position : transform.position;
+        Vector2 awayFromLast = hasLastVanishPosition
+            ? (playerPosition - lastVanishPosition).normalized
+            : Vector2.right;
+
+        if (awayFromLast.sqrMagnitude < 0.0001f)
+            awayFromLast = Vector2.right;
+
+        Vector2[] directions =
+        {
+            awayFromLast,
+            new Vector2(-awayFromLast.y, awayFromLast.x),
+            new Vector2(awayFromLast.y, -awayFromLast.x),
+            -awayFromLast,
+            Vector2.right,
+            Vector2.left,
+            Vector2.up,
+            Vector2.down
+        };
+
+        Vector2 best = ClampInsideRoom(playerPosition + awayFromLast * emergeDistanceMax);
+        float bestScore = float.NegativeInfinity;
+
+        foreach (Vector2 direction in directions)
+        {
+            Vector2 candidate = ClampInsideRoom(playerPosition + direction.normalized * emergeDistanceMax);
+            float score = hasLastVanishPosition
+                ? Vector2.Distance(candidate, lastVanishPosition)
+                : 0f;
+
+            if (Physics2D.OverlapCircle(candidate, spawnClearance + bodyRadius, blockedLayer))
+                score -= 1000f;
+
+            if (score > bestScore)
+            {
+                bestScore = score;
+                best = candidate;
+            }
+        }
+
+        return best;
     }
 
     private Vector2 ClampInsideRoom(Vector2 point)
