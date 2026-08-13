@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5c951ac-4ded-486b-8087-05a043fa212f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Deadline Dungeon BGM and SFX/SFX/Button hover.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Deadline Dungeon BGM and SFX/SFX/Button hover.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/BabySpider.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/BabySpider.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/ChaserEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/ChaserEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Laser Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Laser Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Mage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Mage.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Multiplier Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Multiplier Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Shooter Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Shooter Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Spider.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Spider.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/SpiderBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/SpiderBoss.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Spinner Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Spinner Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Tank Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/Tank Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/TutorialDummy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Enemy/TutorialDummy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Feedback/DamageNumberPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Feedback/DamageNumberPrefab.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Projectile/RulerSlashWave.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Projectile/RulerSlashWave.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CharacterSelect.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CharacterSelect.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +124,7 @@
       <workItem from="1783415942914" duration="671000" />
       <workItem from="1783962245115" duration="766000" />
       <workItem from="1786542260234" duration="6927000" />
-      <workItem from="1786564694784" duration="4653000" />
+      <workItem from="1786564694784" duration="5843000" />
     </task>
     <servers />
   </component>

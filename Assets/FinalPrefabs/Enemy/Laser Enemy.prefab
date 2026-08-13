@@ -65,9 +65,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &8901815528011600232
 CapsuleCollider2D:
@@ -249,11 +249,13 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 7168
-  separationRadius: 1.1
-  separationStrength: 1.35
-  obstacleProbeDistance: 0.65
-  obstacleProbeRadius: 0.25
-  wallAvoidanceStrength: 1.1
+  separationRadius: 1.4
+  separationStrength: 2.25
+  separationPadding: 0.18
+  obstacleProbeDistance: 0.8
+  obstacleProbeRadius: 0.3
+  wallAvoidanceStrength: 1.5
+  movementSkin: 0.03
   preferredRange: 9
   rangeTolerance: 1.5
   strafeSpeedMultiplier: 0.8
@@ -518,4 +520,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationController
   movementBody: {fileID: 2304114965193295206}
   health: {fileID: 155877684525813468}
+  visual: {fileID: 0}
   movingThreshold: 0.05

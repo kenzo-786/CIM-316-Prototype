@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -5080205164045443190, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,8 +108,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
+  m_sharedMaterial: {fileID: -5080205164045443190, guid: 002d21638b9b48142870b2ab850e8a88, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -141,9 +141,9 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 1.8
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -232,6 +232,9 @@ MonoBehaviour:
   floatSpeed: 1.2
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   criticalColor: {r: 1, g: 0.29837823, b: 0.015686274, a: 1}
+  headshotColor: {r: 1, g: 0.25, b: 0.1, a: 1}
+  oneShotColor: {r: 0.8, g: 0.25, b: 1, a: 1}
+  healingColor: {r: 0.25, g: 1, b: 0.35, a: 1}
 --- !u!114 &3938054363874564159
 MonoBehaviour:
   m_ObjectHideFlags: 0

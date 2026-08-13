@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 315686368634830486}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.23636363, z: 1.1818181}
+  m_LocalPosition: {x: 0.0677, y: 0.0451, z: 0}
+  m_LocalScale: {x: 0.15639542, y: 0.20081705, z: 1.1818181}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2936604520430115119}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4176362632249098406, guid: 2b4f8282ea75169488a0cf15c016188a, type: 3}
+  m_Sprite: {fileID: 2333170918532292223, guid: 7df2cdfd5e879dc478db741c4466186a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2936604520430115119}
   - component: {fileID: 2034927009381036956}
   - component: {fileID: 2484536988813529914}
-  - component: {fileID: 8166889179935063475}
+  - component: {fileID: 2097162488416297372}
   m_Layer: 8
   m_Name: RulerSlashWave
   m_TagString: Projectile
@@ -167,14 +167,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RulerSlashWave
   defaultSpeed: 11
   defaultLifetime: 3
+  rotateToDirection: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   wallLayer:
     serializedVersion: 2
     m_Bits: 7168
-  rotateToDirection: 1
---- !u!60 &8166889179935063475
+  defaultHomingTurnSpeed: 360
+  bounceSearchRadius: 8
+--- !u!60 &2097162488416297372
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +206,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -220,15 +222,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.10917631, y: 0.78671527}
-      - {x: -0.34307623, y: 0.80642486}
-      - {x: -0.5065156, y: 0.7938597}
-      - {x: -0.58592534, y: 0.74397314}
-      - {x: -0.33847982, y: 0.5227065}
-      - {x: 0.12451345, y: -0.044483244}
-      - {x: 0.37267917, y: -0.8264563}
-      - {x: 0.5355501, y: -0.7900223}
-      - {x: 0.5201725, y: -0.29451466}
-      - {x: 0.50000966, y: -0.16071928}
-      - {x: 0.40496087, y: 0.36125234}
+    - - {x: 0.2630908, y: 0.31351468}
+      - {x: 0.05076158, y: 0.3246786}
+      - {x: -0.1332311, y: 0.31747726}
+      - {x: -0.29057997, y: 0.20757537}
+      - {x: -0.36100864, y: 0.06595516}
+      - {x: -0.3600252, y: 0.049586456}
+      - {x: -0.24655461, y: 0.048289657}
+      - {x: -0.14566469, y: 0.11760829}
+      - {x: 0.10652345, y: 0.11441051}
+      - {x: 0.19932275, y: 0.026082717}
+      - {x: 0.25727698, y: -0.14431444}
+      - {x: 0.4919852, y: -0.3176546}
+      - {x: 0.47749135, y: 0.0914018}
+      - {x: 0.3926814, y: 0.22329718}
   m_UseDelaunayMesh: 1
