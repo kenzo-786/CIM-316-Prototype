@@ -4974,6 +4974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 695120764}
   - component: {fileID: 695120765}
+  - component: {fileID: 695120766}
   m_Layer: 0
   m_Name: RoomCombatController
   m_TagString: Untagged
@@ -5012,6 +5013,22 @@ MonoBehaviour:
   playerExperience: {fileID: 242738775}
   difficultySettings: {fileID: 11400000, guid: 807b6139690fa6c408657dbbcda80df3, type: 2}
   playerWeaponController: {fileID: 242738771}
+--- !u!114 &695120766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695120763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26f0eeed67e6a34b9c206f221ce6aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomCombatAudioFeedback
+  combatController: {fileID: 695120765}
+  waveWarningSoundId: wave_warning
+  roomClearSoundId: room_clear
+  xpMagnetSoundId: xp_magnet
 --- !u!1 &746033713
 GameObject:
   m_ObjectHideFlags: 0
@@ -9119,7 +9136,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 634384f6297a17944bcd7907469589f5, type: 2}
   - {fileID: 11400000, guid: 7aaeb07f60c0e8041bd39814784b6407, type: 2}
   runConfig: {fileID: 0}
-  totalRooms: 1
+  totalRooms: 30
   autoLoadFirstRoom: 1
   activeRoomRoot: {fileID: 372891551}
   player: {fileID: 242738780}
@@ -10016,6 +10033,7 @@ GameObject:
   - component: {fileID: 2100944908}
   - component: {fileID: 2100944907}
   - component: {fileID: 2100944909}
+  - component: {fileID: 2100944910}
   m_Layer: 0
   m_Name: GameFlowUI
   m_TagString: Untagged
@@ -10102,6 +10120,22 @@ MonoBehaviour:
   fillImage: {fileID: 128662408}
   nameText: {fileID: 1440614999}
   fallbackBossName: The Web Keeper
+--- !u!114 &2100944910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100944905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d57e934f3f2faf42be4a67baa6859b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunEndAudioFeedback
+  roomManager: {fileID: 1851506946}
+  playerHealth: {fileID: 242738777}
+  lossSoundId: game_over
+  victorySoundId: run_victory
 --- !u!1 &2123373193
 GameObject:
   m_ObjectHideFlags: 0
