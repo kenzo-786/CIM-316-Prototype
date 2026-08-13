@@ -8,14 +8,19 @@ public class RunEndUI : MonoBehaviour
 {
     [SerializeField] private RoomManager roomManager;
     [SerializeField] private Health playerHealth;
+    [SerializeField] private PlayerDeathAnimation playerDeathAnimation;
     [SerializeField] private GameObject root;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text bodyText;
 
     private bool ended;
+    private Coroutine deathCheckRoutine;
 
     private void Awake()
     {
+        if (playerDeathAnimation == null && playerHealth != null)
+            playerDeathAnimation = playerHealth.GetComponent<PlayerDeathAnimation>();
+
         if (root != null)
             root.SetActive(false);
     }
@@ -40,15 +45,27 @@ public class RunEndUI : MonoBehaviour
 
     private void HandlePlayerDied()
     {
-        StartCoroutine(CheckDeathAfterRevive());
+        if (deathCheckRoutine == null)
+            deathCheckRoutine = StartCoroutine(CheckDeathAfterRevive());
     }
 
     private IEnumerator CheckDeathAfterRevive()
     {
         yield return null;
 
+        if (playerHealth == null || !playerHealth.IsDead)
+        {
+            deathCheckRoutine = null;
+            yield break;
+        }
+
+        if (playerDeathAnimation != null)
+            yield return playerDeathAnimation.WaitForFinalDeath();
+
         if (playerHealth != null && playerHealth.IsDead)
             ShowLose();
+
+        deathCheckRoutine = null;
     }
 
     private void ShowWin()

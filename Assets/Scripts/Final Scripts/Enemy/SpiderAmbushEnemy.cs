@@ -8,67 +8,90 @@ public class SpiderAmbushEnemy : EnemyBase
         SpawnReveal,
         Hidden,
         Telegraphing,
-        Active,
+        Pouncing,
+        Attacking,
         Vanishing
     }
 
     [Header("Initial Spawn")]
-    [SerializeField] private float spawnVisibleDuration = 1.5f;
-    [SerializeField] private float initialFlashDuration = 0.5f;
+    [SerializeField] private float spawnVisibleDuration = 1.2f;
+    [SerializeField] private float initialFlashDuration = 0.4f;
 
-    [Header("Ambush")]
-    [SerializeField] private float stationaryDelay = 0.7f;
-    [SerializeField] private float emergeDistance = 2.2f;
-    [SerializeField] private float telegraphDuration = 0.75f;
-    [SerializeField] private float attackAfterEmergingDelay = 0.2f;
+    [Header("Autonomous Hunt Cycle")]
+    [SerializeField] private float hiddenDurationMin = 1.6f;
+    [SerializeField] private float hiddenDurationMax = 2.6f;
+    [SerializeField] private float emergeDistanceMin = 2.8f;
+    [SerializeField] private float emergeDistanceMax = 4.2f;
+    [SerializeField] private float telegraphDuration = 0.65f;
+    [SerializeField] private float pounceDuration = 1.75f;
+    [SerializeField] private float pounceSpeedMultiplier = 1.4f;
+    [SerializeField] private float attackAfterEmergingDelay = 0.15f;
+
+    [Header("Attack")]
+    [SerializeField] private float attackAnimationDuration = 0.67f;
+    [SerializeField] private float attackHitDelay = 0.33f;
+    [SerializeField] private float attackHitRangeMultiplier = 1.15f;
 
     [Header("Disappearing")]
-    [SerializeField] private float vanishDistance = 5f;
-    [SerializeField] private float vanishDuration = 0.4f;
-    [SerializeField] private float flashInterval = 0.1f;
+    [SerializeField] private float vanishDuration = 0.35f;
+    [SerializeField] private float flashInterval = 0.08f;
 
-    [Header("Placement")]
+    [Header("Safe Placement")]
     [SerializeField] private float spawnClearance = 0.45f;
+    [SerializeField] private float roomEdgePadding = 1.5f;
+    [SerializeField] private float minimumReemergeDistance = 2.5f;
     [SerializeField] private LayerMask blockedLayer;
 
     [Header("References")]
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private SpriteRenderer[] visuals;
     [SerializeField] private EnemyTelegraphFeedback telegraph;
+    [SerializeField] private EnemyAnimationController animationController;
 
-    private PlayerMovement playerMovement;
     private RoomBounds roomBounds;
     private SpiderState state;
     private float stateTimer;
-    private float stationaryTimer;
     private float attackReadyTime;
-    private float nextAttackTime;
+    private float attackHitTime;
+    private float bodyRadius;
+    private bool attackDamageApplied;
+    private bool hasLastVanishPosition;
+    private Vector2 lastVanishPosition;
+    private Vector2 lastAttackDirection = Vector2.down;
 
     protected override void Awake()
     {
         base.Awake();
 
         if (bodyCollider == null)
-        {
             bodyCollider = GetComponent<Collider2D>();
-        }
 
         if (visuals == null || visuals.Length == 0)
-        {
             visuals = GetComponentsInChildren<SpriteRenderer>();
-        }
 
         if (telegraph == null)
-        {
             telegraph = GetComponent<EnemyTelegraphFeedback>();
+
+        if (animationController == null)
+            animationController = GetComponentInChildren<EnemyAnimationController>();
+
+        if (bodyCollider != null)
+        {
+            Bounds bounds = bodyCollider.bounds;
+            bodyRadius = Mathf.Max(bounds.extents.x, bounds.extents.y);
         }
 
+        bodyRadius = Mathf.Max(bodyRadius, 0.25f);
         roomBounds = FindObjectOfType<RoomBounds>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        roomBounds = FindObjectOfType<RoomBounds>();
+        hasLastVanishPosition = false;
+
         BeginSpawnReveal();
     }
 
@@ -79,11 +102,8 @@ public class SpiderAmbushEnemy : EnemyBase
     {
         base.Initialize(data, playerTarget);
 
-        playerMovement = playerTarget != null
-            ? playerTarget.GetComponent<PlayerMovement>()
-            : null;
-
         roomBounds = FindObjectOfType<RoomBounds>();
+        hasLastVanishPosition = false;
 
         BeginSpawnReveal();
     }
@@ -91,9 +111,7 @@ public class SpiderAmbushEnemy : EnemyBase
     protected override void TickEnemy()
     {
         if (target == null)
-        {
             return;
-        }
 
         switch (state)
         {
@@ -109,8 +127,12 @@ public class SpiderAmbushEnemy : EnemyBase
                 TickTelegraph();
                 break;
 
-            case SpiderState.Active:
-                TickActive();
+            case SpiderState.Pouncing:
+                TickPouncing();
+                break;
+
+            case SpiderState.Attacking:
+                TickAttacking();
                 break;
 
             case SpiderState.Vanishing:
@@ -122,158 +144,187 @@ public class SpiderAmbushEnemy : EnemyBase
     private void TickSpawnReveal()
     {
         StopMoving();
+        animationController?.SetStationary();
 
         stateTimer -= Time.fixedDeltaTime;
 
         if (stateTimer <= initialFlashDuration)
-        {
             SetVisuals(IsFlashVisible());
-        }
         else
-        {
             SetVisuals(true);
-        }
 
         if (stateTimer <= 0f)
-        {
             EnterHidden();
-        }
     }
 
     private void TickHidden()
     {
         StopMoving();
+        animationController?.SetStationary();
 
-        if (IsPlayerMoving())
-        {
-            stationaryTimer = 0f;
-            return;
-        }
+        stateTimer -= Time.fixedDeltaTime;
 
-        stationaryTimer += Time.fixedDeltaTime;
-
-        if (stationaryTimer >= stationaryDelay)
-        {
+        if (stateTimer <= 0f)
             BeginTelegraph();
-        }
     }
 
     private void TickTelegraph()
     {
         StopMoving();
+        animationController?.SetStationary();
 
         stateTimer -= Time.fixedDeltaTime;
         SetVisuals(IsFlashVisible());
 
-        if (IsPlayerMoving())
+        if (stateTimer <= 0f)
+            BeginPounce();
+    }
+
+    private void TickPouncing()
+    {
+        stateTimer -= Time.fixedDeltaTime;
+
+        Vector2 directionToPlayer =
+            (Vector2)target.position - rb.position;
+
+        if (directionToPlayer.sqrMagnitude > 0.0001f)
         {
-            BeginVanishing();
+            lastAttackDirection = directionToPlayer.normalized;
+
+            MoveInDirection(
+                directionToPlayer,
+                pounceSpeedMultiplier
+            );
+
+            animationController?.SetMovementDirection(
+                directionToPlayer
+            );
+        }
+
+        if (Time.time >= attackReadyTime &&
+            IsTargetInRange(AttackRange))
+        {
+            BeginAttack();
             return;
         }
 
         if (stateTimer <= 0f)
-        {
-            BecomeActive();
-        }
+            BeginVanishing();
     }
 
-    private void TickActive()
+    private void TickAttacking()
     {
-        SetVisuals(true);
-        SetBodyCollider(true);
-
-        float distance =
-            Vector2.Distance(
-                transform.position,
-                target.position
-            );
-
-        if (distance > vanishDistance)
-        {
-            BeginVanishing();
-            return;
-        }
-
-        if (!IsTargetInRange(AttackRange))
-        {
-            MoveToward(target.position);
-            return;
-        }
-
         StopMoving();
-        TryAttack();
+        animationController?.SetStationary();
+        animationController?.SetFacingDirection(
+            lastAttackDirection
+        );
+
+        stateTimer -= Time.fixedDeltaTime;
+
+        if (!attackDamageApplied &&
+            Time.time >= attackHitTime)
+        {
+            attackDamageApplied = true;
+
+            if (IsTargetInRange(
+                    AttackRange *
+                    attackHitRangeMultiplier
+                ))
+            {
+                DamageTarget(
+                    ContactDamage,
+                    target.position
+                );
+            }
+        }
+
+        if (stateTimer <= 0f)
+            BeginVanishing();
     }
 
     private void TickVanishing()
     {
         StopMoving();
+        animationController?.SetStationary();
 
         stateTimer -= Time.fixedDeltaTime;
         SetVisuals(IsFlashVisible());
 
         if (stateTimer <= 0f)
-        {
             EnterHidden();
-        }
     }
 
     private void BeginSpawnReveal()
     {
         state = SpiderState.SpawnReveal;
         stateTimer = spawnVisibleDuration;
-        stationaryTimer = 0f;
 
         SetVisuals(true);
         SetBodyCollider(true);
+        animationController?.SetStationary();
     }
 
     private void EnterHidden()
     {
         state = SpiderState.Hidden;
-        stationaryTimer = 0f;
 
-        if (telegraph != null)
-        {
-            telegraph.End();
-        }
+        stateTimer = Random.Range(
+            hiddenDurationMin,
+            hiddenDurationMax
+        );
+
+        telegraph?.End();
 
         SetVisuals(false);
         SetBodyCollider(false);
         StopMoving();
+        animationController?.SetStationary();
     }
 
     private void BeginTelegraph()
     {
         state = SpiderState.Telegraphing;
         stateTimer = telegraphDuration;
-        stationaryTimer = 0f;
 
-        transform.position = FindAmbushPosition();
-
-        if (telegraph != null)
-        {
-            telegraph.Begin(telegraphDuration);
-        }
+        transform.position = FindSafeAmbushPosition();
 
         SetBodyCollider(false);
         SetVisuals(true);
         StopMoving();
+        animationController?.SetStationary();
+
+        if (telegraph != null)
+            telegraph.Begin(telegraphDuration);
     }
 
-    private void BecomeActive()
+    private void BeginPounce()
     {
-        state = SpiderState.Active;
-
+        state = SpiderState.Pouncing;
+        stateTimer = pounceDuration;
         attackReadyTime =
             Time.time + attackAfterEmergingDelay;
 
-        if (telegraph != null)
-        {
-            telegraph.End();
-        }
+        telegraph?.End();
 
         SetVisuals(true);
         SetBodyCollider(true);
+    }
+
+    private void BeginAttack()
+    {
+        state = SpiderState.Attacking;
+        stateTimer = attackAnimationDuration;
+        attackHitTime = Time.time + attackHitDelay;
+        attackDamageApplied = false;
+
+        StopMoving();
+
+        animationController?.SetStationary();
+        animationController?.SetFacingDirection(
+            lastAttackDirection
+        );
+        animationController?.PlayAttack();
     }
 
     private void BeginVanishing()
@@ -284,90 +335,149 @@ public class SpiderAmbushEnemy : EnemyBase
             return;
         }
 
+        lastVanishPosition = rb.position;
+        hasLastVanishPosition = true;
+
         state = SpiderState.Vanishing;
         stateTimer = vanishDuration;
 
-        if (telegraph != null)
-        {
-            telegraph.End();
-        }
+        telegraph?.End();
 
         SetBodyCollider(false);
         StopMoving();
+        animationController?.SetStationary();
     }
 
-    private void TryAttack()
+    private Vector2 FindSafeAmbushPosition()
     {
-        if (Time.time < attackReadyTime ||
-            Time.time < nextAttackTime)
-        {
-            return;
-        }
+        if (roomBounds == null)
+            return rb.position;
 
-        nextAttackTime = Time.time + AttackCooldown;
-
-        DamageTarget(
-            ContactDamage,
-            target.position
-        );
-    }
-
-    private Vector2 FindAmbushPosition()
-    {
-        for (int attempt = 0; attempt < 12; attempt++)
+        for (int attempt = 0; attempt < 32; attempt++)
         {
             Vector2 direction =
                 Random.insideUnitCircle.normalized;
 
             if (direction == Vector2.zero)
-            {
                 direction = Vector2.right;
-            }
 
-            Vector2 point =
+            float distance = Random.Range(
+                emergeDistanceMin,
+                emergeDistanceMax
+            );
+
+            Vector2 candidate =
                 (Vector2)target.position +
-                direction *
-                emergeDistance;
+                direction * distance;
 
-            if (roomBounds != null)
+            candidate = ClampInsideRoom(candidate);
+
+            if (Vector2.Distance(
+                    candidate,
+                    target.position
+                ) < emergeDistanceMin * 0.65f)
             {
-                point = roomBounds.ClampPoint(point);
+                continue;
             }
+
+            if (hasLastVanishPosition &&
+                Vector2.Distance(
+                    candidate,
+                    lastVanishPosition
+                ) < minimumReemergeDistance)
+            {
+                continue;
+            }
+
+            float requiredClearance =
+                spawnClearance + bodyRadius;
 
             bool blocked = Physics2D.OverlapCircle(
-                point,
-                spawnClearance,
+                candidate,
+                requiredClearance,
                 blockedLayer
             );
 
             if (!blocked)
-            {
-                return point;
-            }
+                return candidate;
         }
 
-        Vector2 fallback =
-            (Vector2)target.position +
-            Vector2.right *
-            emergeDistance;
+        for (int attempt = 0; attempt < 20; attempt++)
+        {
+            Vector2 candidate = ClampInsideRoom(
+                roomBounds.GetRandomPoint()
+            );
 
-        return roomBounds != null
-            ? roomBounds.ClampPoint(fallback)
-            : fallback;
+            bool closeToLastPosition =
+                hasLastVanishPosition &&
+                Vector2.Distance(
+                    candidate,
+                    lastVanishPosition
+                ) < minimumReemergeDistance;
+
+            bool blocked = Physics2D.OverlapCircle(
+                candidate,
+                spawnClearance + bodyRadius,
+                blockedLayer
+            );
+
+            if (!closeToLastPosition && !blocked)
+                return candidate;
+        }
+
+        Vector2 fallbackDirection =
+            hasLastVanishPosition
+                ? ((Vector2)target.position -
+                   lastVanishPosition).normalized
+                : Vector2.right;
+
+        if (fallbackDirection == Vector2.zero)
+            fallbackDirection = Vector2.right;
+
+        return ClampInsideRoom(
+            (Vector2)target.position +
+            fallbackDirection *
+            emergeDistanceMax
+        );
     }
 
-    private bool IsPlayerMoving()
+    private Vector2 ClampInsideRoom(Vector2 point)
     {
-        return playerMovement != null &&
-               playerMovement.IsMoving;
+        if (roomBounds == null)
+            return point;
+
+        float halfWidth = Mathf.Max(
+            0.1f,
+            roomBounds.Size.x * 0.5f -
+            roomEdgePadding -
+            bodyRadius
+        );
+
+        float halfHeight = Mathf.Max(
+            0.1f,
+            roomBounds.Size.y * 0.5f -
+            roomEdgePadding -
+            bodyRadius
+        );
+
+        return new Vector2(
+            Mathf.Clamp(
+                point.x,
+                roomBounds.Center.x - halfWidth,
+                roomBounds.Center.x + halfWidth
+            ),
+            Mathf.Clamp(
+                point.y,
+                roomBounds.Center.y - halfHeight,
+                roomBounds.Center.y + halfHeight
+            )
+        );
     }
 
     private bool IsFlashVisible()
     {
         if (flashInterval <= 0f)
-        {
             return true;
-        }
 
         return Mathf.FloorToInt(
             Time.time / flashInterval
@@ -377,24 +487,18 @@ public class SpiderAmbushEnemy : EnemyBase
     private void SetVisuals(bool visible)
     {
         if (visuals == null)
-        {
             return;
-        }
 
         foreach (SpriteRenderer spriteRenderer in visuals)
         {
             if (spriteRenderer != null)
-            {
                 spriteRenderer.enabled = visible;
-            }
         }
     }
 
     private void SetBodyCollider(bool enabled)
     {
         if (bodyCollider != null)
-        {
             bodyCollider.enabled = enabled;
-        }
     }
 }

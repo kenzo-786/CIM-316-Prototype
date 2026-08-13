@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5361194750650453217}
   - component: {fileID: 9087683941637932783}
   - component: {fileID: 685378809407015876}
+  - component: {fileID: 5384934711487840479}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 539137069814358607}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0341, y: 2.0341, z: 2.0341}
+  m_LocalScale: {x: 3.2, y: 3.2, z: 3.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 411101394563079071}
@@ -127,6 +128,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5384934711487840479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539137069814358607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b377c8d91247b40bbe028a10415c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAnimationController
+  health: {fileID: 5722811367900567735}
+  idleVisual: {fileID: 7972390815734667182}
+  idleBobHeight: 0.04
+  idleBobSpeed: 2.2
 --- !u!1 &581797052277596721
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +379,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: -0.036887646, y: 0.23608065}
-  m_Radius: 1.5697448
+  m_Radius: 2.1
 --- !u!114 &5722811367900567735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,10 +409,10 @@ MonoBehaviour:
   visual: {fileID: 9087683941637932783}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 7168
   separationRadius: 1.1
   separationStrength: 1.35
   obstacleProbeDistance: 0.65
@@ -406,6 +423,7 @@ MonoBehaviour:
   projectileOrigin: {fileID: 4174662584181176044}
   telegraph: {fileID: 4625191451619448092}
   roomBounds: {fileID: 0}
+  bossAnimation: {fileID: 0}
   webProjectileData: {fileID: 11400000, guid: 6fd1046f29f05a544bb33f62e04a4189, type: 2}
   groundHazardPrefab: {fileID: 3533487475765909412, guid: adc52148530be1d4fb83318eb8c38bed, type: 3}
   webTrapPrefab: {fileID: 501501117457965803, guid: 9b8413e34c966794e9a41ce6989ac8a3, type: 3}
@@ -425,12 +443,12 @@ MonoBehaviour:
   recoveryDuration: 0.75
   windupScaleAmount: 0.08
   fangRaiseDistance: 0.35
-  webFanWindup: 0.8
+  webFanWindup: 0.83
   webFanSpread: 70
   phaseOneProjectileCount: 5
   phaseTwoProjectileCount: 7
   phaseThreeProjectileCount: 9
-  venomWindup: 0.75
+  venomWindup: 0.89
   phaseOneVenomCount: 2
   laterPhaseVenomCount: 3
   venomTelegraphDuration: 1.25
@@ -440,7 +458,7 @@ MonoBehaviour:
   venomPlacementRadius: 4
   venomPredictionTime: 0.6
   venomClearance: 1.3
-  webTrapWindup: 0.7
+  webTrapWindup: 0.95
   phaseTwoTrapCount: 2
   phaseThreeTrapCount: 3
   webTrapDuration: 5
@@ -476,7 +494,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2160148140219872733}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 067434e815efb374cad6f694689f6975, type: 3}
   m_Name: 

@@ -18,6 +18,7 @@ public class SpiderBossEnemy : EnemyBase
     [SerializeField] private Transform projectileOrigin;
     [SerializeField] private EnemyTelegraphFeedback telegraph;
     [SerializeField] private RoomBounds roomBounds;
+    [SerializeField] private BossAnimationController bossAnimation;
 
     [Header("Attack Prefabs")]
     [SerializeField] private EnemyProjectileData webProjectileData;
@@ -117,6 +118,11 @@ public class SpiderBossEnemy : EnemyBase
         if (roomBounds == null)
         {
             roomBounds = FindObjectOfType<RoomBounds>();
+        }
+
+        if (bossAnimation == null)
+        {
+            bossAnimation = GetComponentInChildren<BossAnimationController>();
         }
     }
 
@@ -314,6 +320,7 @@ public class SpiderBossEnemy : EnemyBase
 
     private IEnumerator PerformWebFan(int phase)
     {
+        bossAnimation?.PlayWebFan();
         yield return PlayCodeTelegraph(
             webFanWindup,
             false
@@ -419,6 +426,7 @@ public class SpiderBossEnemy : EnemyBase
 
     private IEnumerator PerformVenomAttack(int phase)
     {
+        bossAnimation?.PlayVenomCircles();
         yield return PlayCodeTelegraph(
             venomWindup,
             true
@@ -483,6 +491,7 @@ public class SpiderBossEnemy : EnemyBase
 
     private IEnumerator PerformWebTrapAttack(int phase)
     {
+        bossAnimation?.PlayWebTraps();
         yield return PlayCodeTelegraph(
             webTrapWindup,
             false
@@ -542,6 +551,7 @@ public class SpiderBossEnemy : EnemyBase
 
     private IEnumerator PerformEggSummon(int eggCount)
     {
+        bossAnimation?.PlaySummon();
         yield return PlayCodeTelegraph(
             eggSummonWindup,
             false
