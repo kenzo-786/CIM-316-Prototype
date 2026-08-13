@@ -62,8 +62,8 @@ Transform:
   m_GameObject: {fileID: 594593256665627340}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7070483, w: 0.70716524}
-  m_LocalPosition: {x: 16.031, y: -0.18429993, z: 0}
-  m_LocalScale: {x: 1.1333, y: 1.6338372, z: 1}
+  m_LocalPosition: {x: 16.031, y: -0.18426, z: 0}
+  m_LocalScale: {x: 1.1899649, y: 1.6338372, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5977191400161273791}
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7426911895622511632, guid: 9331bf32ebdcbeb468ce5796d5827f5b, type: 3}
-  m_Color: {r: 0.8679245, g: 0.8432475, b: 0.020469915, a: 1}
+  m_Color: {r: 0.5031446, g: 0.5031446, b: 0.5031446, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   solidCollider: {fileID: 4396908180553527473}
   triggerCollider: {fileID: 3438914691743830544}
   visual: {fileID: 3245487966285280939}
-  closedColor: {r: 0.45, g: 0.12, b: 0.12, a: 1}
-  openColor: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+  closedColor: {r: 0.8980392, g: 0.36078432, b: 0.36078432, a: 1}
+  openColor: {r: 0.23137255, g: 0.7176471, b: 0.3529412, a: 1}
   openSoundId: door_open
 --- !u!1 &915436514046894070
 GameObject:

@@ -4469,7 +4469,7 @@ GameObject:
   - component: {fileID: 627999369}
   - component: {fileID: 627999373}
   m_Layer: 5
-  m_Name: Quit Button
+  m_Name: Return to Main Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4492,7 +4492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.316}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 672, y: -397}
+  m_AnchoredPosition: {x: 673, y: -340}
   m_SizeDelta: {x: 148.1258, y: 1573.005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &627999369
@@ -4553,9 +4553,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 231186836}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 231186828}
+        m_TargetAssemblyTypeName: RunEndUI, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4827,7 +4827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.316}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -627, y: -375}
+  m_AnchoredPosition: {x: -626, y: -318}
   m_SizeDelta: {x: 148.1258, y: 652.6046}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &671978826

@@ -19,4 +19,4 @@ MonoBehaviour:
   maxHealth: 110
   moveSpeed: 5.2
   weaponType: 0
-  firingMode: 2
+  firingMode: 1
