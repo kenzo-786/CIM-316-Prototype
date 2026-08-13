@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -11,14 +11,18 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject root;
     [SerializeField] private GameObject menuContent;
     [SerializeField] private GameObject statusContent;
+    [SerializeField] private GameObject settingsContent;
     [SerializeField] private RunStatusUI runStatusUI;
+    [SerializeField] private SettingsMenuBinder settingsMenuBinder;
 
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button runStatusButton;
+    [SerializeField] private Button settingsButton;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button statusBackButton;
+    [SerializeField] private Button settingsBackButton;
 
     [Header("Selection Icon")]
     [SerializeField] private RectTransform selectionIcon;
@@ -34,28 +38,27 @@ public class PauseMenu : MonoBehaviour
 
     private bool[] previousActiveStates;
     private bool paused;
-
     private Button currentButton;
     private Button hoveredButton;
-
     private Coroutine popCoroutine;
 
-    private Dictionary<Button, Vector3> originalScales =
+    private readonly Dictionary<Button, Vector3> originalScales =
         new Dictionary<Button, Vector3>();
 
     private void Awake()
     {
-        previousActiveStates =
-            new bool[hideWhilePaused.Length];
+        previousActiveStates = new bool[hideWhilePaused.Length];
 
         if (root != null)
             root.SetActive(false);
 
         RegisterButton(resumeButton);
         RegisterButton(runStatusButton);
+        RegisterButton(settingsButton);
         RegisterButton(restartButton);
         RegisterButton(quitButton);
         RegisterButton(statusBackButton);
+        RegisterButton(settingsBackButton);
 
         ShowMenuContent();
 
@@ -73,10 +76,19 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        if (statusContent != null &&
-            statusContent.activeSelf)
+        if (statusContent != null && statusContent.activeSelf)
         {
-            HandleStatusBackHover();
+            HandleSubmenuBackHover(statusBackButton);
+
+            if (Input.GetKeyDown(pauseKey))
+                ShowMenuContent();
+
+            return;
+        }
+
+        if (settingsContent != null && settingsContent.activeSelf)
+        {
+            HandleSubmenuBackHover(settingsBackButton);
 
             if (Input.GetKeyDown(pauseKey))
                 ShowMenuContent();
@@ -104,10 +116,7 @@ public class PauseMenu : MonoBehaviour
         List<RaycastResult> results =
             new List<RaycastResult>();
 
-        EventSystem.current.RaycastAll(
-            pointerData,
-            results
-        );
+        EventSystem.current.RaycastAll(pointerData, results);
 
         Button newHoveredButton = null;
 
@@ -118,6 +127,7 @@ public class PauseMenu : MonoBehaviour
 
             if (button == resumeButton ||
                 button == runStatusButton ||
+                button == settingsButton ||
                 button == restartButton ||
                 button == quitButton)
             {
@@ -138,10 +148,9 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void HandleStatusBackHover()
+    private void HandleSubmenuBackHover(Button backButton)
     {
-        if (EventSystem.current == null ||
-            statusBackButton == null)
+        if (EventSystem.current == null || backButton == null)
             return;
 
         PointerEventData pointerData =
@@ -152,10 +161,7 @@ public class PauseMenu : MonoBehaviour
         List<RaycastResult> results =
             new List<RaycastResult>();
 
-        EventSystem.current.RaycastAll(
-            pointerData,
-            results
-        );
+        EventSystem.current.RaycastAll(pointerData, results);
 
         bool hoveringBack = false;
 
@@ -164,22 +170,19 @@ public class PauseMenu : MonoBehaviour
             Button button =
                 result.gameObject.GetComponentInParent<Button>();
 
-            if (button == statusBackButton)
+            if (button == backButton)
             {
                 hoveringBack = true;
                 break;
             }
         }
 
-        if (hoveringBack)
+        if (hoveringBack && hoveredButton != backButton)
         {
-            if (hoveredButton != statusBackButton)
-            {
-                hoveredButton = statusBackButton;
-                PlayPop(statusBackButton);
-            }
+            hoveredButton = backButton;
+            PlayPop(backButton);
         }
-        else if (hoveredButton == statusBackButton)
+        else if (!hoveringBack && hoveredButton == backButton)
         {
             hoveredButton = null;
         }
@@ -203,25 +206,18 @@ public class PauseMenu : MonoBehaviour
     private void RegisterButton(Button button)
     {
         if (button != null)
-        {
-            originalScales[button] =
-                button.transform.localScale;
-        }
+            originalScales[button] = button.transform.localScale;
     }
 
     private void SelectButton(Button button)
     {
-        if (button == null)
-            return;
-
-        if (currentButton == button)
+        if (button == null || currentButton == button)
             return;
 
         currentButton = button;
 
-        EventSystem.current.SetSelectedGameObject(
-            button.gameObject
-        );
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
 
         if (selectionIcon != null)
             selectionIcon.gameObject.SetActive(true);
@@ -233,47 +229,34 @@ public class PauseMenu : MonoBehaviour
     private void SelectNextButton()
     {
         if (currentButton == resumeButton)
-        {
             SelectButton(runStatusButton);
-        }
         else if (currentButton == runStatusButton)
-        {
+            SelectButton(settingsButton);
+        else if (currentButton == settingsButton)
             SelectButton(restartButton);
-        }
         else if (currentButton == restartButton)
-        {
             SelectButton(quitButton);
-        }
         else
-        {
             SelectButton(resumeButton);
-        }
     }
 
     private void SelectPreviousButton()
     {
         if (currentButton == resumeButton)
-        {
             SelectButton(quitButton);
-        }
         else if (currentButton == runStatusButton)
-        {
             SelectButton(resumeButton);
-        }
-        else if (currentButton == restartButton)
-        {
+        else if (currentButton == settingsButton)
             SelectButton(runStatusButton);
-        }
+        else if (currentButton == restartButton)
+            SelectButton(settingsButton);
         else
-        {
             SelectButton(restartButton);
-        }
     }
 
     private void UpdateSelectionIcon()
     {
-        if (currentButton == null ||
-            selectionIcon == null)
+        if (currentButton == null || selectionIcon == null)
             return;
 
         RectTransform buttonRect =
@@ -296,8 +279,7 @@ public class PauseMenu : MonoBehaviour
         if (popCoroutine != null)
             StopCoroutine(popCoroutine);
 
-        popCoroutine =
-            StartCoroutine(PopButton(button));
+        popCoroutine = StartCoroutine(PopButton(button));
     }
 
     private IEnumerator PopButton(Button button)
@@ -305,11 +287,8 @@ public class PauseMenu : MonoBehaviour
         if (!originalScales.ContainsKey(button))
             yield break;
 
-        Vector3 originalScale =
-            originalScales[button];
-
-        Vector3 enlargedScale =
-            originalScale * popScale;
+        Vector3 originalScale = originalScales[button];
+        Vector3 enlargedScale = originalScale * popScale;
 
         float time = 0f;
 
@@ -343,8 +322,7 @@ public class PauseMenu : MonoBehaviour
             yield return null;
         }
 
-        button.transform.localScale =
-            originalScale;
+        button.transform.localScale = originalScale;
     }
 
     public void TogglePause()
@@ -365,19 +343,36 @@ public class PauseMenu : MonoBehaviour
         if (menuContent != null)
             menuContent.SetActive(false);
 
+        if (settingsContent != null)
+            settingsContent.SetActive(false);
+
         if (statusContent != null)
             statusContent.SetActive(true);
 
-        if (selectionIcon != null)
-            selectionIcon.gameObject.SetActive(false);
-
-        currentButton = null;
-        hoveredButton = null;
-
-        EventSystem.current.SetSelectedGameObject(null);
+        HideSelection();
 
         if (runStatusUI != null)
             runStatusUI.Refresh();
+    }
+
+    public void ShowSettings()
+    {
+        if (!paused)
+            return;
+
+        if (menuContent != null)
+            menuContent.SetActive(false);
+
+        if (statusContent != null)
+            statusContent.SetActive(false);
+
+        if (settingsContent != null)
+            settingsContent.SetActive(true);
+
+        HideSelection();
+
+        if (settingsMenuBinder != null)
+            settingsMenuBinder.Refresh();
     }
 
     public void ShowMenuContent()
@@ -388,15 +383,22 @@ public class PauseMenu : MonoBehaviour
         if (statusContent != null)
             statusContent.SetActive(false);
 
+        if (settingsContent != null)
+            settingsContent.SetActive(false);
+
         currentButton = resumeButton;
         hoveredButton = null;
 
         if (selectionIcon != null)
             selectionIcon.gameObject.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(
-            resumeButton.gameObject
-        );
+        if (EventSystem.current != null &&
+            resumeButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(
+                resumeButton.gameObject
+            );
+        }
 
         UpdateSelectionIcon();
     }
@@ -404,6 +406,12 @@ public class PauseMenu : MonoBehaviour
     public void CloseStatus()
     {
         PlayPop(statusBackButton);
+        ShowMenuContent();
+    }
+
+    public void CloseSettings()
+    {
+        PlayPop(settingsBackButton);
         ShowMenuContent();
     }
 
@@ -427,15 +435,25 @@ public class PauseMenu : MonoBehaviour
 #endif
     }
 
+    private void HideSelection()
+    {
+        currentButton = null;
+        hoveredButton = null;
+
+        if (selectionIcon != null)
+            selectionIcon.gameObject.SetActive(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
+
     private void SetPaused(bool value)
     {
         paused = value;
 
         if (paused)
         {
-            for (int i = 0;
-                 i < hideWhilePaused.Length;
-                 i++)
+            for (int i = 0; i < hideWhilePaused.Length; i++)
             {
                 if (hideWhilePaused[i] == null)
                     continue;
@@ -450,9 +468,7 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-            for (int i = 0;
-                 i < hideWhilePaused.Length;
-                 i++)
+            for (int i = 0; i < hideWhilePaused.Length; i++)
             {
                 if (hideWhilePaused[i] != null &&
                     previousActiveStates[i])
@@ -467,7 +483,8 @@ public class PauseMenu : MonoBehaviour
             currentButton = null;
             hoveredButton = null;
 
-            EventSystem.current.SetSelectedGameObject(null);
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(null);
 
             if (root != null)
                 root.SetActive(false);

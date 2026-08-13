@@ -36,6 +36,12 @@ public class DamageNumberSpawner : MonoBehaviour
         float amount,
         DamageType damageType)
     {
+        if (GameSettingsManager.Instance != null &&
+            !GameSettingsManager.Instance.Settings.damageNumbers)
+        {
+            return;
+        }
+
         DamageNumber number = Spawn(position);
 
         if (number != null)
@@ -44,6 +50,12 @@ public class DamageNumberSpawner : MonoBehaviour
 
     private void SpawnHealing(Vector3 position, float amount)
     {
+        if (GameSettingsManager.Instance != null &&
+            !GameSettingsManager.Instance.Settings.damageNumbers)
+        {
+            return;
+        }
+
         DamageNumber number = Spawn(position);
 
         if (number != null)
