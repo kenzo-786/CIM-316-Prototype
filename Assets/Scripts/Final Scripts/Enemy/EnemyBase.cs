@@ -12,11 +12,13 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Movement Steering")]
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField, Min(0f)] private float separationRadius = 1.1f;
-    [SerializeField, Min(0f)] private float separationStrength = 1.35f;
-    [SerializeField, Min(0f)] private float obstacleProbeDistance = 0.65f;
-    [SerializeField, Min(0f)] private float obstacleProbeRadius = 0.25f;
-    [SerializeField, Min(0f)] private float wallAvoidanceStrength = 1.1f;
+    [SerializeField, Min(0f)] private float separationRadius = 1.4f;
+    [SerializeField, Min(0f)] private float separationStrength = 2.25f;
+    [SerializeField, Min(0f)] private float separationPadding = 0.18f;
+    [SerializeField, Min(0f)] private float obstacleProbeDistance = 0.8f;
+    [SerializeField, Min(0f)] private float obstacleProbeRadius = 0.3f;
+    [SerializeField, Min(0f)] private float wallAvoidanceStrength = 1.5f;
+    [SerializeField, Min(0f)] private float movementSkin = 0.03f;
 
     protected Rigidbody2D rb;
     protected Health health;
@@ -26,6 +28,7 @@ public abstract class EnemyBase : MonoBehaviour
     private EnemyDeathFeedback deathFeedback;
     private CodeDeathAnimation deathAnimation;
     private RoomDifficultySnapshot currentDifficulty = RoomDifficultySnapshot.Default;
+    private float bodyRadius = 0.4f;
 
     public event Action<EnemyBase> OnEnemyDied;
 
@@ -33,6 +36,7 @@ public abstract class EnemyBase : MonoBehaviour
     public Transform Target => target;
     public RoomDifficultySnapshot CurrentDifficulty => currentDifficulty;
     public bool IsDead => isDead;
+    public float BodyRadius => bodyRadius;
 
     protected float MoveSpeed =>
         enemyData != null
@@ -65,6 +69,29 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (visual == null)
             visual = GetComponentInChildren<SpriteRenderer>();
+
+        if (enemyLayer.value == 0)
+            enemyLayer = LayerMask.GetMask("Enemy");
+
+        if (obstacleLayer.value == 0)
+            obstacleLayer = LayerMask.GetMask(
+                "Wall",
+                "Door",
+                "Obstacle"
+            );
+
+        Collider2D bodyCollider = GetComponent<Collider2D>();
+
+        if (bodyCollider != null)
+        {
+            Bounds bounds = bodyCollider.bounds;
+            bodyRadius = Mathf.Max(
+                bounds.extents.x,
+                bounds.extents.y
+            );
+        }
+
+        bodyRadius = Mathf.Max(bodyRadius, 0.2f);
     }
 
     protected virtual void OnEnable()
@@ -81,7 +108,9 @@ public abstract class EnemyBase : MonoBehaviour
             health.OnDied -= HandleDied;
     }
 
-    public virtual void Initialize(EnemyData data, Transform playerTarget)
+    public virtual void Initialize(
+        EnemyData data,
+        Transform playerTarget)
     {
         enemyData = data;
         target = playerTarget;
@@ -91,14 +120,16 @@ public abstract class EnemyBase : MonoBehaviour
             health.SetMaxHealth(enemyData.maxHealth, true);
     }
 
-    public virtual void ApplyDifficulty(RoomDifficultySnapshot difficulty)
+    public virtual void ApplyDifficulty(
+        RoomDifficultySnapshot difficulty)
     {
         currentDifficulty = difficulty;
 
         if (enemyData != null && health != null)
         {
             health.SetMaxHealth(
-                enemyData.maxHealth * currentDifficulty.healthMultiplier,
+                enemyData.maxHealth *
+                currentDifficulty.healthMultiplier,
                 true
             );
         }
@@ -124,7 +155,9 @@ public abstract class EnemyBase : MonoBehaviour
         MoveInDirection(rb.position - worldPosition);
     }
 
-    protected void MoveInDirection(Vector2 direction, float speedMultiplier = 1f)
+    protected void MoveInDirection(
+        Vector2 direction,
+        float speedMultiplier = 1f)
     {
         if (direction.sqrMagnitude <= 0.0001f)
         {
@@ -134,18 +167,23 @@ public abstract class EnemyBase : MonoBehaviour
 
         Vector2 steeringDirection = GetSteeredDirection(direction);
 
-        rb.MovePosition(
-            rb.position +
-            steeringDirection *
+        if (steeringDirection.sqrMagnitude <= 0.0001f)
+        {
+            StopMoving();
+            return;
+        }
+
+        float moveDistance =
             MoveSpeed *
             speedMultiplier *
-            Time.fixedDeltaTime
-        );
+            Time.fixedDeltaTime;
 
+        MoveWithCollision(steeringDirection, moveDistance);
         FaceDirection(steeringDirection);
     }
 
-    protected Vector2 GetSteeredDirection(Vector2 desiredDirection)
+    protected Vector2 GetSteeredDirection(
+        Vector2 desiredDirection)
     {
         Vector2 desired = desiredDirection.normalized;
 
@@ -153,62 +191,78 @@ public abstract class EnemyBase : MonoBehaviour
             return Vector2.zero;
 
         Vector2 separation = CalculateSeparation();
-        Vector2 steering = desired + separation * separationStrength;
+
+        Vector2 steering =
+            desired +
+            separation * separationStrength;
 
         if (steering.sqrMagnitude <= 0.0001f)
             steering = desired;
 
         steering.Normalize();
 
-        if (obstacleLayer.value != 0 && obstacleProbeDistance > 0f)
+        if (obstacleLayer.value == 0 ||
+            obstacleProbeDistance <= 0f)
         {
-            RaycastHit2D hit = Physics2D.CircleCast(
-                rb.position,
-                obstacleProbeRadius,
-                steering,
-                obstacleProbeDistance,
-                obstacleLayer
-            );
-
-            if (hit.collider != null)
-            {
-                Vector2 left = new Vector2(-hit.normal.y, hit.normal.x);
-                Vector2 right = -left;
-
-                Vector2 sideStep =
-                    Vector2.Dot(left, desired) >
-                    Vector2.Dot(right, desired)
-                        ? left
-                        : right;
-
-                steering = (
-                    desired * 0.25f +
-                    sideStep * wallAvoidanceStrength +
-                    separation * separationStrength
-                ).normalized;
-            }
+            return steering;
         }
 
-        return steering;
+        RaycastHit2D hit = Physics2D.CircleCast(
+            rb.position,
+            obstacleProbeRadius,
+            steering,
+            obstacleProbeDistance,
+            obstacleLayer
+        );
+
+        if (hit.collider == null)
+            return steering;
+
+        Vector2 left =
+            new Vector2(-hit.normal.y, hit.normal.x);
+
+        Vector2 right = -left;
+
+        Vector2 sideStep =
+            Vector2.Dot(left, desired) >
+            Vector2.Dot(right, desired)
+                ? left
+                : right;
+
+        Vector2 redirected =
+            desired * 0.2f +
+            sideStep * wallAvoidanceStrength +
+            separation * separationStrength;
+
+        return redirected.sqrMagnitude > 0.0001f
+            ? redirected.normalized
+            : sideStep;
     }
 
     protected void StopMoving()
     {
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
     }
 
     protected bool IsTargetInRange(float range)
     {
         return target != null &&
-               Vector2.Distance(transform.position, target.position) <= range;
+               Vector2.Distance(
+                   transform.position,
+                   target.position
+               ) <= range;
     }
 
-    protected void DamageTarget(float damage, Vector2 hitPoint)
+    protected void DamageTarget(
+        float damage,
+        Vector2 hitPoint)
     {
         if (target == null || damage <= 0f)
             return;
 
-        IDamageable damageable = target.GetComponent<IDamageable>();
+        IDamageable damageable =
+            target.GetComponent<IDamageable>();
 
         if (damageable != null)
         {
@@ -227,57 +281,147 @@ public abstract class EnemyBase : MonoBehaviour
         if (hit == null)
             return null;
 
-        IDamageable damageable = hit.GetComponent<IDamageable>();
+        IDamageable damageable =
+            hit.GetComponent<IDamageable>();
 
         if (damageable == null)
-            damageable = hit.GetComponentInParent<IDamageable>();
+            damageable =
+                hit.GetComponentInParent<IDamageable>();
 
         return damageable;
     }
 
     protected void FaceDirection(Vector2 direction)
     {
-        if (visual == null || Mathf.Abs(direction.x) < 0.01f)
+        if (visual == null ||
+            Mathf.Abs(direction.x) < 0.01f)
+        {
             return;
+        }
 
         visual.flipX = direction.x < 0f;
     }
 
-    private Vector2 CalculateSeparation()
+    private void MoveWithCollision(
+        Vector2 direction,
+        float distance)
     {
-        if (enemyLayer.value == 0 || separationRadius <= 0f)
-            return Vector2.zero;
+        if (rb == null || distance <= 0f)
+            return;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(
+        if (obstacleLayer.value == 0)
+        {
+            rb.MovePosition(
+                rb.position + direction * distance
+            );
+
+            return;
+        }
+
+        RaycastHit2D hit = Physics2D.CircleCast(
             rb.position,
-            separationRadius,
-            enemyLayer
+            bodyRadius,
+            direction,
+            distance + movementSkin,
+            obstacleLayer
         );
 
-        HashSet<EnemyBase> checkedEnemies = new HashSet<EnemyBase>();
+        if (hit.collider == null)
+        {
+            rb.MovePosition(
+                rb.position + direction * distance
+            );
+
+            return;
+        }
+
+        float safeDistance = Mathf.Max(
+            0f,
+            hit.distance - movementSkin
+        );
+
+        if (safeDistance > 0f)
+        {
+            rb.MovePosition(
+                rb.position +
+                direction * safeDistance
+            );
+        }
+    }
+
+    private Vector2 CalculateSeparation()
+    {
+        if (enemyLayer.value == 0 ||
+            separationRadius <= 0f)
+        {
+            return Vector2.zero;
+        }
+
+        float searchRadius = Mathf.Max(
+            separationRadius,
+            bodyRadius * 2f + separationPadding
+        );
+
+        Collider2D[] hits =
+            Physics2D.OverlapCircleAll(
+                rb.position,
+                searchRadius,
+                enemyLayer
+            );
+
+        HashSet<EnemyBase> checkedEnemies =
+            new HashSet<EnemyBase>();
+
         Vector2 separation = Vector2.zero;
 
         foreach (Collider2D hit in hits)
         {
-            EnemyBase other = hit.GetComponentInParent<EnemyBase>();
+            EnemyBase other =
+                hit.GetComponentInParent<EnemyBase>();
 
-            if (other == null || other == this || other.IsDead || !checkedEnemies.Add(other))
+            if (other == null ||
+                other == this ||
+                other.IsDead ||
+                !checkedEnemies.Add(other))
+            {
                 continue;
+            }
 
-            Vector2 difference = rb.position - (Vector2)other.transform.position;
+            Vector2 difference =
+                rb.position -
+                (Vector2)other.transform.position;
+
             float distance = difference.magnitude;
 
             if (distance <= 0.001f)
             {
-                difference = GetInstanceID() > other.GetInstanceID()
-                    ? Vector2.right
-                    : Vector2.left;
+                difference =
+                    GetInstanceID() > other.GetInstanceID()
+                        ? Vector2.right
+                        : Vector2.left;
 
                 distance = 0.001f;
             }
 
-            float strength = 1f - Mathf.Clamp01(distance / separationRadius);
-            separation += difference.normalized * strength;
+            float influenceRadius = Mathf.Max(
+                searchRadius,
+                bodyRadius +
+                other.BodyRadius +
+                separationPadding
+            );
+
+            if (distance >= influenceRadius)
+                continue;
+
+            float strength =
+                1f -
+                Mathf.Clamp01(
+                    distance / influenceRadius
+                );
+
+            separation +=
+                difference.normalized *
+                strength;
         }
 
         return separation;
@@ -305,7 +449,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void DisablePhysicalBody()
     {
-        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+        Collider2D[] colliders =
+            GetComponentsInChildren<Collider2D>();
 
         foreach (Collider2D bodyCollider in colliders)
             bodyCollider.enabled = false;
@@ -329,7 +474,10 @@ public abstract class EnemyBase : MonoBehaviour
             delay = deathFeedback.DeathDuration;
 
         if (deathAnimation != null)
-            delay = Mathf.Max(delay, deathAnimation.Duration);
+            delay = Mathf.Max(
+                delay,
+                deathAnimation.Duration
+            );
 
         Destroy(gameObject, delay);
     }

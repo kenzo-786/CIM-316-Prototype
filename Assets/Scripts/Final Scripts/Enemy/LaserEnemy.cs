@@ -32,7 +32,6 @@ public class LaserEnemy : EnemyBase
     [SerializeField] private EnemyAnimationController animationController;
 
     private LineRenderer line;
-    private RoomBounds roomBounds;
     private LaserState state;
     private Vector2 fireDirection = Vector2.right;
     private float stateTimer;
@@ -49,27 +48,25 @@ public class LaserEnemy : EnemyBase
         line.useWorldSpace = true;
         line.enabled = false;
 
-        roomBounds = FindObjectOfType<RoomBounds>();
-
         if (telegraph == null)
             telegraph = GetComponent<EnemyTelegraphFeedback>();
 
         if (animationController == null)
-            animationController = GetComponentInChildren<EnemyAnimationController>();
-    }
-
-    public override void Initialize(EnemyData data, Transform playerTarget)
-    {
-        base.Initialize(data, playerTarget);
-        roomBounds = FindObjectOfType<RoomBounds>();
+        {
+            animationController =
+                GetComponentInChildren<EnemyAnimationController>();
+        }
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        strafeDirection = Random.value < 0.5f ? -1 : 1;
-        nextStrafeChangeTime = Time.time + strafeChangeInterval;
+        strafeDirection =
+            Random.value < 0.5f ? -1 : 1;
+
+        nextStrafeChangeTime =
+            Time.time + strafeChangeInterval;
 
         if (line != null)
             line.enabled = false;
@@ -114,7 +111,10 @@ public class LaserEnemy : EnemyBase
                 if (stateTimer > aimLockDuration)
                     UpdateDirectionToPlayer();
 
-                animationController?.SetFacingDirection(fireDirection);
+                animationController?.SetFacingDirection(
+                    fireDirection
+                );
+
                 DrawLaserPreview();
 
                 if (stateTimer <= 0f)
@@ -125,7 +125,11 @@ public class LaserEnemy : EnemyBase
             case LaserState.Firing:
                 StopMoving();
                 animationController?.SetStationary();
-                animationController?.SetFacingDirection(fireDirection);
+
+                animationController?.SetFacingDirection(
+                    fireDirection
+                );
+
                 DrawLaserFire();
 
                 if (!damageApplied)
@@ -148,7 +152,9 @@ public class LaserEnemy : EnemyBase
 
     private void MaintainDistanceAndStrafe()
     {
-        Vector2 toPlayer = (Vector2)target.position - rb.position;
+        Vector2 toPlayer =
+            (Vector2)target.position - rb.position;
+
         float distance = toPlayer.magnitude;
 
         if (distance <= 0.01f)
@@ -161,11 +167,16 @@ public class LaserEnemy : EnemyBase
         if (Time.time >= nextStrafeChangeTime)
         {
             strafeDirection *= -1;
-            nextStrafeChangeTime = Time.time + strafeChangeInterval;
+
+            nextStrafeChangeTime =
+                Time.time + strafeChangeInterval;
         }
 
         Vector2 radial = toPlayer.normalized;
-        Vector2 sideways = new Vector2(-radial.y, radial.x) * strafeDirection;
+
+        Vector2 sideways =
+            new Vector2(-radial.y, radial.x) *
+            strafeDirection;
 
         float correction = 0f;
 
@@ -174,20 +185,31 @@ public class LaserEnemy : EnemyBase
         else if (distance > preferredRange + rangeTolerance)
             correction = 1f;
 
-        Vector2 movement = (sideways + radial * correction * distanceCorrectionStrength).normalized;
+        Vector2 movement =
+            (
+                sideways +
+                radial *
+                correction *
+                distanceCorrectionStrength
+            ).normalized;
 
-        Vector2 destination = rb.position + movement * MoveSpeed * strafeSpeedMultiplier * Time.fixedDeltaTime;
+        MoveInDirection(
+            movement,
+            strafeSpeedMultiplier
+        );
 
-        if (roomBounds != null)
-            destination = roomBounds.ClampPoint(destination);
-
-        rb.MovePosition(destination);
-        animationController?.SetMovementDirection(movement);
+        animationController?.SetMovementDirection(
+            movement
+        );
     }
 
     private void UpdateDirectionToPlayer()
     {
-        Vector2 direction = ((Vector2)target.position - rb.position).normalized;
+        Vector2 direction =
+            (
+                (Vector2)target.position -
+                rb.position
+            ).normalized;
 
         if (direction != Vector2.zero)
             fireDirection = direction;
@@ -199,14 +221,25 @@ public class LaserEnemy : EnemyBase
         line.startWidth = laserWidth * 0.45f;
         line.endWidth = laserWidth * 0.45f;
 
-        bool aimLocked = stateTimer <= aimLockDuration;
-        float chargeProgress = 1f - Mathf.Clamp01(stateTimer / chargeDuration);
+        bool aimLocked =
+            stateTimer <= aimLockDuration;
+
+        float chargeProgress =
+            1f -
+            Mathf.Clamp01(
+                stateTimer / chargeDuration
+            );
 
         float alpha = aimLocked
             ? 0.95f
-            : Mathf.Lerp(0.2f, 0.75f, chargeProgress);
+            : Mathf.Lerp(
+                0.2f,
+                0.75f,
+                chargeProgress
+            );
 
-        Color color = new Color(1f, 0f, 0f, alpha);
+        Color color =
+            new Color(1f, 0f, 0f, alpha);
 
         line.startColor = color;
         line.endColor = color;
@@ -228,7 +261,13 @@ public class LaserEnemy : EnemyBase
     private void SetLinePositions()
     {
         Vector3 start = transform.position;
-        Vector3 end = start + (Vector3)(fireDirection * laserLength);
+
+        Vector3 end =
+            start +
+            (Vector3)(
+                fireDirection *
+                laserLength
+            );
 
         line.SetPosition(0, start);
         line.SetPosition(1, end);
@@ -238,16 +277,37 @@ public class LaserEnemy : EnemyBase
     {
         damageApplied = true;
 
-        Vector2 center = rb.position + fireDirection * laserLength * 0.5f;
-        Vector2 size = new Vector2(laserLength, laserWidth);
+        Vector2 center =
+            rb.position +
+            fireDirection *
+            laserLength *
+            0.5f;
 
-        float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+        Vector2 size =
+            new Vector2(
+                laserLength,
+                laserWidth
+            );
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(center, size, angle, playerLayer);
+        float angle =
+            Mathf.Atan2(
+                fireDirection.y,
+                fireDirection.x
+            ) *
+            Mathf.Rad2Deg;
+
+        Collider2D[] hits =
+            Physics2D.OverlapBoxAll(
+                center,
+                size,
+                angle,
+                playerLayer
+            );
 
         foreach (Collider2D hit in hits)
         {
-            IDamageable damageable = GetDamageable(hit);
+            IDamageable damageable =
+                GetDamageable(hit);
 
             if (damageable != null)
             {
@@ -272,35 +332,23 @@ public class LaserEnemy : EnemyBase
             case LaserState.Aiming:
                 line.enabled = false;
                 stateTimer = aimDuration;
-
-                if (telegraph != null)
-                    telegraph.End();
-
+                telegraph?.End();
                 break;
 
             case LaserState.Charging:
                 stateTimer = chargeDuration;
-
-                if (telegraph != null)
-                    telegraph.Begin(chargeDuration);
-
+                telegraph?.Begin(chargeDuration);
                 break;
 
             case LaserState.Firing:
                 stateTimer = fireDuration;
-
-                if (telegraph != null)
-                    telegraph.End();
-
+                telegraph?.End();
                 break;
 
             case LaserState.Cooldown:
                 line.enabled = false;
                 stateTimer = cooldownDuration;
-
-                if (telegraph != null)
-                    telegraph.End();
-
+                telegraph?.End();
                 break;
         }
     }
