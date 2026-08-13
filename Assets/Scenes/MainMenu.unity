@@ -2401,13 +2401,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
   soundEffects:
   - id: ui_hover
-    clip: {fileID: 8300000, guid: 3e0602eab01af0644b818eae19b692cf, type: 3}
+    clip: {fileID: 8300000, guid: e41672f57169d2346b8ac92b22e23d37, type: 3}
     volume: 1
     pitchMin: 1
     pitchMax: 1
   - id: ui_confirm
-    clip: {fileID: 8300000, guid: 3d39ef26606c9eb4cb0a078956b52e19, type: 3}
-    volume: 0.5
+    clip: {fileID: 8300000, guid: e41672f57169d2346b8ac92b22e23d37, type: 3}
+    volume: 1
     pitchMin: 1
     pitchMax: 1
   - id: level_up
