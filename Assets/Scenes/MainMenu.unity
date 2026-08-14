@@ -2688,7 +2688,7 @@ MonoBehaviour:
     cooldown: 0.04
   musicTracks:
   - id: menu_music
-    clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
+    clip: {fileID: 8300000, guid: 57112c42533f5934bbc6d240012dbc6a, type: 3}
     volume: 0.42
   - id: battle_music
     clip: {fileID: 8300000, guid: e2c055b268108d440814811692248500, type: 3}
@@ -2697,8 +2697,17 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c4d0db03bbd67464b9d9161ea3caa266, type: 3}
     volume: 0.52
   sceneMusic:
-  - sceneName: 
-    musicId: 
+  - sceneName: MainMenu
+    musicId: menu_music
+    fadeDuration: 0
+  - sceneName: CharacterSelect
+    musicId: menu_music
+    fadeDuration: 0
+  - sceneName: TutorialScene
+    musicId: battle_music
+    fadeDuration: 0
+  - sceneName: ImplementScene
+    musicId: battle_music
     fadeDuration: 0
   sfxPoolSize: 16
   musicMix: 0.5

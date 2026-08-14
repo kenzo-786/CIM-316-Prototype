@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -1507,9 +1507,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunEndUI
   roomManager: {fileID: 1851506946}
   playerHealth: {fileID: 242738777}
+  playerDeathAnimation: {fileID: 0}
   root: {fileID: 2144491375}
   titleText: {fileID: 1973598858}
   bodyText: {fileID: 780988883}
+  mainMenuSceneName: MainMenu
 --- !u!114 &231186830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1968,16 +1970,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RulerSlashWeapon
   baseDamage: 10
   baseCooldown: 0.5
-  slashPoint: {fileID: 2054565442}
-  slashRadius: 1.2
+  meleeForwardDistance: 0.8
+  meleeRadius: 0.9
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   slashWavePrefab: {fileID: 2745813293723392955, guid: 970dfb0e995efe94098c86b96971c273, type: 3}
-  firePoint: {fileID: 746033714}
+  waveSpawnForwardDistance: 0.8
   slashWaveSpeed: 11
   slashWaveLifetime: 3
   homingTurnSpeed: 360
+  waveDamageMultiplier: 0.65
   basePierceCount: 0
   baseEnemyBounceCount: 0
   baseWallBounceCount: 0
@@ -4384,7 +4387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &852252406
 Transform:
   m_ObjectHideFlags: 0
@@ -4412,15 +4415,159 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ac1c99b090dff4fb4d8aab36a91f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
-  soundEffects: []
+  soundEffects:
+  - id: ui_hover
+    clip: {fileID: 8300000, guid: e41672f57169d2346b8ac92b22e23d37, type: 3}
+    volume: 0.28
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: ui_confirm
+    clip: {fileID: 8300000, guid: e41672f57169d2346b8ac92b22e23d37, type: 3}
+    volume: 0.38
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: level_up
+    clip: {fileID: 8300000, guid: b8300694393ad404f883966d829c260a, type: 3}
+    volume: 0.48
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: upgrade_pick
+    clip: {fileID: 8300000, guid: 8e392fae3d33a5e48ac694f9b61004ad, type: 3}
+    volume: 0.38
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: game_over
+    clip: {fileID: 8300000, guid: 824f91287c2953540a672e1e7869fe83, type: 3}
+    volume: 0.55
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: player_hurt
+    clip: {fileID: 8300000, guid: aa27608b26ea0cc4abdab627b094cdcf, type: 3}
+    volume: 0.46
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: player_heal
+    clip: {fileID: 8300000, guid: 70c3358078b66f64c8b2f88ffff76ea5, type: 3}
+    volume: 0.35
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: player_revive
+    clip: {fileID: 8300000, guid: 40a7c92f0e2a204479224239d02acc20, type: 3}
+    volume: 0.55
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: enemy_hit
+    clip: {fileID: 8300000, guid: 92c2e6e7ae101944a8611535d46353ef, type: 3}
+    volume: 0.24
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: enemy_death
+    clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
+    volume: 0.3
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: heavy_enemy_death
+    clip: {fileID: 8300000, guid: c720c366d07d30744bfb2ce05869e465, type: 3}
+    volume: 0.38
+    pitchMin: 0.78
+    pitchMax: 0.88
+    cooldown: 0.04
+  - id: enemy_split
+    clip: {fileID: 8300000, guid: f0e9a43c9f7cea844b9e9e7b1fd56466, type: 3}
+    volume: 0.3
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: wave_warning
+    clip: {fileID: 8300000, guid: cd0fb1a16be3ab646aa0253a87412ded, type: 3}
+    volume: 0.34
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: room_clear
+    clip: {fileID: 8300000, guid: 2ee34dd9f72fa4c4abe85927b5638f98, type: 3}
+    volume: 0.45
+    pitchMin: 0.9
+    pitchMax: 1.05
+    cooldown: 0.04
+  - id: door_open
+    clip: {fileID: 8300000, guid: 67180ba24401de748baca467342db438, type: 3}
+    volume: 0.35
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: xp_magnet
+    clip: {fileID: 8300000, guid: d9a6243c41433e54f8482d34b167f008, type: 3}
+    volume: 0.3
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: eraser_fire
+    clip: {fileID: 8300000, guid: 10f6bb17e3d99cd46be42545d93f5eda, type: 3}
+    volume: 0.32
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: projectile_wall_hit
+    clip: {fileID: 8300000, guid: 8676346a88639d14ebb051cc2299579d, type: 3}
+    volume: 0.22
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: ruler_fire
+    clip: {fileID: 8300000, guid: e883456f8ceab294a92cdff3e4f101cc, type: 3}
+    volume: 0.3
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
+  - id: ruler_hit
+    clip: {fileID: 8300000, guid: ae05a65f373b5a64084ff6b8319b2a27, type: 3}
+    volume: 0.28
+    pitchMin: 1
+    pitchMax: 1
+    cooldown: 0.04
   - id: run_victory
     clip: {fileID: 8300000, guid: 44d81bc9a381afd45b32c1d64319f8fa, type: 3}
     volume: 0.55
     pitchMin: 1
     pitchMax: 1
-  musicTracks: []
-  sceneMusic: []
+    cooldown: 0.04
+  musicTracks:
+  - id: menu_music
+    clip: {fileID: 8300000, guid: edc22cb76d54a1140b69b86f2b6cd39a, type: 3}
+    volume: 0.42
+  - id: battle_music
+    clip: {fileID: 8300000, guid: e2c055b268108d440814811692248500, type: 3}
+    volume: 0.46
+  - id: 'boss_music '
+    clip: {fileID: 8300000, guid: c4d0db03bbd67464b9d9161ea3caa266, type: 3}
+    volume: 0.52
+  sceneMusic:
+  - sceneName: MainMenu
+    musicId: menu_music
+    fadeDuration: 0
+  - sceneName: CharacterSelect
+    musicId: menu_music
+    fadeDuration: 0
+  - sceneName: TutorialScene
+    musicId: battle_music
+    fadeDuration: 0
+  - sceneName: ImplementScene
+    musicId: battle_music
+    fadeDuration: 0
   sfxPoolSize: 16
+  musicMix: 0.5
+  sfxMix: 0.55
   musicSource: {fileID: 0}
 --- !u!1 &859712858
 GameObject:
@@ -8358,9 +8505,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunEndUI
   roomManager: {fileID: 1851506946}
   playerHealth: {fileID: 242738777}
+  playerDeathAnimation: {fileID: 0}
   root: {fileID: 2144491375}
   titleText: {fileID: 1973598858}
   bodyText: {fileID: 0}
+  mainMenuSceneName: MainMenu
 --- !u!114 &2100944908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8376,12 +8525,16 @@ MonoBehaviour:
   root: {fileID: 164736389}
   menuContent: {fileID: 0}
   statusContent: {fileID: 0}
+  settingsContent: {fileID: 0}
   runStatusUI: {fileID: 0}
+  settingsMenuBinder: {fileID: 0}
   resumeButton: {fileID: 0}
   runStatusButton: {fileID: 0}
+  settingsButton: {fileID: 0}
   restartButton: {fileID: 0}
   quitButton: {fileID: 0}
   statusBackButton: {fileID: 0}
+  settingsBackButton: {fileID: 0}
   selectionIcon: {fileID: 0}
   iconDistance: 75
   popScale: 1.05
@@ -8705,7 +8858,3 @@ SceneRoots:
   - {fileID: 1426210185}
   - {fileID: 2140239221}
   - {fileID: 694596414}
-
-
-
-

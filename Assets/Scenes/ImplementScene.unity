@@ -10586,8 +10586,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c4d0db03bbd67464b9d9161ea3caa266, type: 3}
     volume: 0.52
   sceneMusic:
-  - sceneName: 
-    musicId: 
+  - sceneName: ImplementScene
+    musicId: battle_music
     fadeDuration: 0
   sfxPoolSize: 16
   musicMix: 0.5
