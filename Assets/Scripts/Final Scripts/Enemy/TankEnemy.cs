@@ -12,8 +12,8 @@ public class TankEnemy : EnemyBase
 
     [Header("Tank")]
     [SerializeField] private float jumpCooldown = 2.5f;
-    [SerializeField] private float jumpWindup = 0.38f;
-    [SerializeField] private float attackAnimationDuration = 0.667f;
+    [SerializeField] private float jumpWindup = 0.65f;
+    [SerializeField] private float attackAnimationDuration = 0.38f;
     [SerializeField] private float recoverDuration = 0.5f;
     [SerializeField] private float landingRadius = 1.5f;
     [SerializeField] private float landingDamageMultiplier = 2f;
@@ -29,7 +29,7 @@ public class TankEnemy : EnemyBase
     private Vector2 attackDirection = Vector2.down;
     private bool landed;
 
-    private float JumpDuration => Mathf.Max(0.05f, attackAnimationDuration - jumpWindup);
+    private float JumpDuration => Mathf.Max(0.05f, attackAnimationDuration);
 
     protected override void Awake()
     {
@@ -140,12 +140,10 @@ public class TankEnemy : EnemyBase
         StopMoving();
         animationController?.SetStationary();
         animationController?.SetFacingDirection(attackDirection);
-        animationController?.PlayAttack();
-
         if (telegraph != null)
         {
             telegraph.BeginAtPosition(
-                attackAnimationDuration,
+                jumpWindup + JumpDuration,
                 jumpEnd,
                 landingRadius * 2f
             );
@@ -158,6 +156,7 @@ public class TankEnemy : EnemyBase
         stateTimer = 0f;
         landed = false;
         jumpStart = rb.position;
+        animationController?.PlayAttack();
     }
 
     private void Land()

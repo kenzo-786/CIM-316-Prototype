@@ -285,8 +285,8 @@ MonoBehaviour:
   wallFollowMemory: 0.65
   wallClearanceProbeDistance: 1.15
   jumpCooldown: 2.5
-  jumpWindup: 0.38
-  attackAnimationDuration: 0.667
+  jumpWindup: 0.65
+  attackAnimationDuration: 0.38
   recoverDuration: 0.5
   landingRadius: 1.5
   landingDamageMultiplier: 2

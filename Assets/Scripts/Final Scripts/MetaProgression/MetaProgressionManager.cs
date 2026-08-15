@@ -28,7 +28,13 @@ public class MetaProgressionManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
+            return;
+        }
+
+        if (!IsDedicatedHost())
+        {
+            CreateDedicatedHost();
             return;
         }
 
@@ -36,6 +42,29 @@ public class MetaProgressionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         StudyCredits = PlayerPrefs.GetInt(CreditsKey, 0);
+    }
+
+    private bool IsDedicatedHost()
+    {
+        return transform.parent == null &&
+               transform.childCount == 0 &&
+               GetComponents<Component>().Length == 2;
+    }
+
+    private void CreateDedicatedHost()
+    {
+        GameObject host = new GameObject("MetaProgressionManager");
+        MetaProgressionManager persistentManager =
+            host.AddComponent<MetaProgressionManager>();
+
+        persistentManager.upgrades = upgrades;
+        persistentManager.creditsPerClearedRoom = creditsPerClearedRoom;
+        persistentManager.eliteRoomBonus = eliteRoomBonus;
+        persistentManager.bossRoomBonus = bossRoomBonus;
+        persistentManager.finalRoomBonus = finalRoomBonus;
+        persistentManager.runVictoryBonus = runVictoryBonus;
+
+        Destroy(this);
     }
 
     public int GetLevel(MetaUpgradeData upgrade)
