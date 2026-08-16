@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a5c951ac-4ded-486b-8087-05a043fa212f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom_1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/FinalBossRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/FinalBossRoom.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Hallway.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Hallway.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area_1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TutorialScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TutorialScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/CreditsPanel/CreditsScroller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/CreditsPanel/CreditsScroller.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +20,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Final Scripts/Character Selection/ButtonHoverPop.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Final Scripts/Character Selection/CharacterSelectionUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Final Scripts/CreditsPanel/CreditsHoverEffect.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -117,7 +112,7 @@
       <workItem from="1786542260234" duration="6927000" />
       <workItem from="1786564694784" duration="9560000" />
       <workItem from="1786838927246" duration="3000" />
-      <workItem from="1786838941318" duration="2647000" />
+      <workItem from="1786838941318" duration="4590000" />
     </task>
     <servers />
   </component>

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CreditsScroller : MonoBehaviour
 {
-    [SerializeField] private float scrollSpeed = 30f;
+    [SerializeField] private float scrollSpeed = 35f;
 
     private RectTransform rectTransform;
 

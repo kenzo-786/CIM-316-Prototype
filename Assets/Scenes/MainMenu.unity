@@ -946,7 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd0553839ddd3343ad923f33d536dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CreditsScroller
-  scrollSpeed: 50
+  scrollSpeed: 85
 --- !u!1 &314852171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameSettingsManager
   settings:
     masterVolume: 1
-    musicVolume: 0.8
+    musicVolume: 0.646
     sfxVolume: 0.9
     fullscreen: 1
     screenShake: 1
