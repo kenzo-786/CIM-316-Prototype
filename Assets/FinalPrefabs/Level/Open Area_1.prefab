@@ -303,6 +303,7 @@ MonoBehaviour:
   closedColor: {r: 0.8980392, g: 0.36078432, b: 0.36078432, a: 1}
   openColor: {r: 0.23137255, g: 0.7176471, b: 0.3529412, a: 1}
   openSoundId: door_open
+  visualFeedback: {fileID: 0}
 --- !u!1 &915436514046894070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,7 +1808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8805427060634750470, guid: 8894805b4a2af3544b50ff4b551c8609, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 8805427060634750470, guid: 8894805b4a2af3544b50ff4b551c8609, type: 3}
       propertyPath: m_LocalPosition.y

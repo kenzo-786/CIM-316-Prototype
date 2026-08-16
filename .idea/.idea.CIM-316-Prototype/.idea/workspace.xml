@@ -7,16 +7,13 @@
     <list default="true" id="a5c951ac-4ded-486b-8087-05a043fa212f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CIM-316-Prototype/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Classroom_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/FinalBossRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/FinalBossRoom.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Hallway.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Hallway.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Lab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Lab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Locker.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Locker.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Parking.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Parking.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/TutorialRoom.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FinalPrefabs/Level/Open Area_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ImplementScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Enemy/EnemyProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Enemy/EnemyProjectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Feedback/AutoTargetFeedback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Feedback/AutoTargetFeedback.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Player/EraserProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Final Scripts/Player/EraserProjectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TutorialScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TutorialScene.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +116,8 @@
       <workItem from="1783962245115" duration="766000" />
       <workItem from="1786542260234" duration="6927000" />
       <workItem from="1786564694784" duration="9560000" />
+      <workItem from="1786838927246" duration="3000" />
+      <workItem from="1786838941318" duration="2647000" />
     </task>
     <servers />
   </component>

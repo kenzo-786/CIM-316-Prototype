@@ -144,6 +144,7 @@ MonoBehaviour:
   closedColor: {r: 0.899371, g: 0.3591827, b: 0.3591827, a: 1}
   openColor: {r: 0.23137255, g: 0.7176471, b: 0.3529412, a: 1}
   openSoundId: door_open
+  visualFeedback: {fileID: 0}
 --- !u!1 &753633481963426732
 GameObject:
   m_ObjectHideFlags: 0

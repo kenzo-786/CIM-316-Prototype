@@ -147,6 +147,7 @@ MonoBehaviour:
   closedColor: {r: 0.8980392, g: 0.36078432, b: 0.36078432, a: 1}
   openColor: {r: 0.23137255, g: 0.7176471, b: 0.3529412, a: 1}
   openSoundId: door_open
+  visualFeedback: {fileID: 0}
 --- !u!1 &915436514046894070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,23 +1701,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.8038262
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.8038262
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.8038262
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13244867
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00092345476
+      value: -0.00092345
       objectReference: {fileID: 0}
     - target: {fileID: 4241383708706284209, guid: 8b01be482a1a4c74ebe818ba11ce77e3, type: 3}
       propertyPath: m_LocalPosition.z

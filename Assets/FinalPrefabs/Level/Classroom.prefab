@@ -147,6 +147,7 @@ MonoBehaviour:
   closedColor: {r: 0.8980392, g: 0.36078432, b: 0.36078432, a: 1}
   openColor: {r: 0.22772036, g: 0.7169812, b: 0.35243386, a: 1}
   openSoundId: door_open
+  visualFeedback: {fileID: 0}
 --- !u!1 &915436514046894070
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +993,7 @@ Transform:
   m_GameObject: {fileID: 5568101553583229128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1524,7 +1525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4916523865661575225, guid: 3ba76e647ebecd54c9086afae59c33a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: 4916523865661575225, guid: 3ba76e647ebecd54c9086afae59c33a2, type: 3}
       propertyPath: m_LocalPosition.y
